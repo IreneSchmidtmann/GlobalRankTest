@@ -1,0 +1,23 @@
+---
+title: "Examine distribution of Mann Whitney statistics under non-null distribution"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+This file was created `r date()`.
+
+## Purpose
+- Determine distribution of Mann Whitney statistics under non-null distribution
+- Simulate for settings relevant for HI-PEITHO
+
+
+```{r Dummy help}
+print("first commit")
+```
