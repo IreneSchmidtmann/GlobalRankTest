@@ -17,7 +17,65 @@ This file was created `r date()`.
 - Determine distribution of Mann Whitney statistics under non-null distribution
 - Simulate for settings relevant for HI-PEITHO
 
+Set parameters:
+```{r Set parameters}
+n0 <- 48                           # sample size in reference group
+n1 <- 96                           # sample size in treatment group
+n <- n0 + n1                       # total sample size
+p0 <- 0.02                         # mortality in reference group at time t=1
+q0 <- 1 - p0                       # survival in reference group at time t=1
+lambda0 <- -log(q0)                # hazard in reference group
+mu0 <- 0.3                         # expected RV/LV reduction in reference group
+sigma <- 0.1                       # common variance
+epsilon <- 0.05                    # non-inferiority margin for quantitative endpoint
+HR <- 1                            # hazard ratio
 
-```{r Dummy help}
-print("first commit")
+lambda1 <- HR * lambda0            # hazard in treatment group
+q1 <- exp(-lambda1)                # survival in treatment group at time t=1
+p1 <- 1 - q1                       # mortality in treatment group at time t=1
+mu1 <- mu0 - epsilon               # expected RV/LV reduction in treatment group unter (non-inferiority) null hypothesis H0
+delta <- 0                         # expected difference in RV/LV reduction m0 - m1 under alternative hypothesis H1
+effectsize <- (mu0 - mu1) / sigma  # effect size
 ```
+
+### Chosen parameters
+#### General
+- sample size in reference group $n_0 =$ `r n0`
+- sample size in treatment group $n_1 =$ `r n1`
+- total sample size  $n =$ `r n`
+
+#### Survival endpoint
+- mortality in reference group at time t=1: $p_0(1) =$ `r p0`, i. e. survival $q_0(1)=$ `r q0`
+- therefore, hazard in reference group $\lambda_0 =$ `r lambda0`
+- hazard ratio HR = `r HR`
+- therefore, hazard in reference group $\lambda_1 =$ `r lambda1`, and hence
+- mortality in reference group at time t=1: $p_1(1) =$ `r p1`, i. e. survival $q_1(1)=$ `r q1`
+
+#### Quantitative endpoint
+- expected RV/LV reduction in reference group $\mu_0 =$ `r mu0 `
+- expected RV/LV reduction in treatment group under null hypothesis $H_0: \mu_1 =$ `r mu1 `
+- common standard deviation $\sigma =$ `r sigma `
+- hence effect size under null hypothesis: $\frac{\mu_0 - \mu_1}{\sigma} =$ `r effectsize`
+- non-inferiority margin $\epsilon =$ `r epsilon `
+- effect size under 
+
+
+```{r}
+# Generate random samples
+set.seed(123)
+# 1. Survival endpoint (only if there is mortality)
+if (p0 > 0){
+  t0 <- -log(runif(n0, 0, 1)) / lambda0
+  t1 <- -log(runif(n1, 0, 1)) / lambda1
+  t <- c(t0, t1)
+}
+# 2. Quantitave endpoint
+x0 <- rnorm(n0, mean=mu0, sd=sigma)
+x1 <- rnorm(n1, mean=mu1, sd=sigma)
+x <- c(x0, x1)
+
+# Observations with events up to time t=1
+t0[t0 < 1]
+
+```
+
