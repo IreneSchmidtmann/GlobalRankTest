@@ -22,20 +22,20 @@ Set parameters:
 n0 <- 48                           # sample size in reference group
 n1 <- 96                           # sample size in treatment group
 n <- n0 + n1                       # total sample size
-p0 <- 0.02                         # mortality in reference group at time t=1
+p0 <- 0.2                          # mortality in reference group at time t=1
 q0 <- 1 - p0                       # survival in reference group at time t=1
 lambda0 <- -log(q0)                # hazard in reference group
-mu0 <- 0.3                         # expected RV/LV reduction in reference group
+mu0 <- 0.3                         # expected mean in reference group
 sigma <- 0.1                       # common variance
 epsilon <- 0.05                    # non-inferiority margin for quantitative endpoint
 HR <- 1                            # hazard ratio
+delta0 <- epsilon                  # expected mean difference (mu0 - mu1) under alternative null hypothesis H0
+delta1 <- 0                        # assumed mean difference  (mu0 - mu1) under alternative hypothesis H1
 
 lambda1 <- HR * lambda0            # hazard in treatment group
 q1 <- exp(-lambda1)                # survival in treatment group at time t=1
 p1 <- 1 - q1                       # mortality in treatment group at time t=1
-mu1 <- mu0 - epsilon               # expected RV/LV reduction in treatment group unter (non-inferiority) null hypothesis H0
-delta <- 0                         # expected difference in RV/LV reduction m0 - m1 under alternative hypothesis H1
-effectsize <- (mu0 - mu1) / sigma  # effect size
+mu1 <- mu0 - delta0                # expected mean in treatment group unter (non-inferiority) null hypothesis H0
 ```
 
 ### Chosen parameters
@@ -52,15 +52,19 @@ effectsize <- (mu0 - mu1) / sigma  # effect size
 - mortality in reference group at time t=1: $p_1(1) =$ `r p1`, i. e. survival $q_1(1)=$ `r q1`
 
 #### Quantitative endpoint
-- expected RV/LV reduction in reference group $\mu_0 =$ `r mu0 `
-- expected RV/LV reduction in treatment group under null hypothesis $H_0: \mu_1 =$ `r mu1 `
+- expected mean in reference group $\mu_0 =$ `r mu0 `
+- expected mean in treatment group under null hypothesis $H_0: \mu_1 =$ `r mu1 `
 - common standard deviation $\sigma =$ `r sigma `
-- hence effect size under null hypothesis: $\frac{\mu_0 - \mu_1}{\sigma} =$ `r effectsize`
-- non-inferiority margin $\epsilon =$ `r epsilon `
-- effect size under 
+- non-inferiority margin $\varepsilon =$ `r epsilon `
+- difference between group means under null hypothesis:  $\delta_0 =$ `r delta0 `
+- hence effect size under null hypothesis: $\frac{\mu_0 - \mu_1}{\sigma} =$ `r delta0/sigma `
+- difference between group means under alternative hypothesis:  $\delta_1 =$ `r delta1 `
 
 
 ```{r}
+# group indicator
+g <- rep(0:1, c(n0, n1))
+
 # Generate random samples
 set.seed(123)
 # 1. Survival endpoint (only if there is mortality)
@@ -68,14 +72,35 @@ if (p0 > 0){
   t0 <- -log(runif(n0, 0, 1)) / lambda0
   t1 <- -log(runif(n1, 0, 1)) / lambda1
   t <- c(t0, t1)
+  # identify indices relating to events (i.e. t <= 1)
+  event_BOOLEAN <- t <= 1                 # vector of length n which indicates (TRUE/FALSE) whether events has occured up to time t=1
+  events <- which(event_BOOLEAN == TRUE)  # vector containing the indices j of t for which t[j] <= 1 (length = # events)
+  # number of events
+  n_events <- length(events)
+  # rank event times
+  t_rank <- rank(t[events])
+  # compute rank sums for groups
+  rank_sum_t0 <- sum(t_rank[g[events] == 0])
+  rank_sum_t1 <- sum(t_rank[g[events] == 1])
+}else{
+  n_events <- 0
+  event_BOOLEAN <- rep(FALSE, n)
 }
+
 # 2. Quantitave endpoint
 x0 <- rnorm(n0, mean=mu0, sd=sigma)
 x1 <- rnorm(n1, mean=mu1, sd=sigma)
 x <- c(x0, x1)
+# identify indices for which quantitative endpoint is observed (i.e. no terminal event)
+no_events <- which(event_BOOLEAN == FALSE) # vector containing the indices j of X for which t[j] > 1, i.e. quantitative endpoint is observed
+# rank quantitative endpoint and add number of events to ranks within observable x-values
+x_rank <- rank(x[no_events]) + n_events
+rank_sum_x0 <- sum(x_rank[g[no_events] == 0])
+rank_sum_x1 <- sum(x_rank[g[no_events] == 1])
 
 # Observations with events up to time t=1
-t0[t0 < 1]
+# t0[t0 <= 1]
+# t1[t1 <= 1]
 
 ```
 
