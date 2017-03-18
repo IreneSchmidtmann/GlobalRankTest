@@ -14,93 +14,238 @@ knitr::opts_chunk$set(echo = TRUE)
 This file was created `r date()`.
 
 ## Purpose
-- Determine distribution of Mann Whitney statistics under non-null distribution
+- Determine distribution of Mann Whitney statistics under non-null distribution using formula from paper by
+Matsouaka and Betensky (Stat Med 2014, DOI: 10.1002/sim.6355)
 - Simulate for settings relevant for HI-PEITHO
 
 Set parameters:
 ```{r Set parameters}
-n0 <- 48                           # sample size in reference group
-n1 <- 96                           # sample size in treatment group
-n <- n0 + n1                       # total sample size
-p0 <- 0.2                          # mortality in reference group at time t=1
-q0 <- 1 - p0                       # survival in reference group at time t=1
-lambda0 <- -log(q0)                # hazard in reference group
-mu0 <- 0.3                         # expected mean in reference group
-sigma <- 0.1                       # common variance
-epsilon <- 0.05                    # non-inferiority margin for quantitative endpoint
-HR <- 1                            # hazard ratio
-delta0 <- epsilon                  # expected mean difference (mu0 - mu1) under alternative null hypothesis H0
-delta1 <- 0                        # assumed mean difference  (mu0 - mu1) under alternative hypothesis H1
+n_0 <- 48                   # sample size in reference group
+n_1 <- 96                   # sample size in treatment group
+n <- n_0 + n_1              # total sample size
+tau <- 1                    # time tau at which quantitative endpoint is determined
+p_0 <- 0.2                  # mortality in reference group at time tau
+q_0 <- 1 - p_0              # survival in reference group at time tau
+lambda_0 <- -log(q_0) / tau # hazard in reference group
+mu_0 <- 0.3                 # expected mean in reference group
+sigma <- 0.1                # common variance
+epsilon <- 0.05             # non-inferiority margin for quantitative endpoint
+HR <- 1                     # hazard ratio
+delta_0 <- epsilon          # mean difference (mu_0 - mu_1) under non-inferiority null hypothesis H0
+delta_1 <- 0                # assumed mean difference  (mu_0 - mu_1) under (non-inferiority) alternative hypothesis H1
 
-lambda1 <- HR * lambda0            # hazard in treatment group
-q1 <- exp(-lambda1)                # survival in treatment group at time t=1
-p1 <- 1 - q1                       # mortality in treatment group at time t=1
-mu1 <- mu0 - delta0                # expected mean in treatment group unter (non-inferiority) null hypothesis H0
+lambda_1 <- HR * lambda_0   # hazard in treatment group
+q_1 <- exp(-lambda_1)       # survival in treatment group at time tau
+p_1 <- 1 - q_1              # mortality in treatment group at time tau
+mu_1 <- mu_0 - delta_0      # mean in treatment group under (non-inferiority) null hypothesis H0
 ```
-
 ### Chosen parameters
 #### General
-- sample size in reference group $n_0 =$ `r n0`
-- sample size in treatment group $n_1 =$ `r n1`
-- total sample size  $n =$ `r n`
+Parameter | Value   | Description
+--------  | ------  | --------------------------------------------------
+$n_0$     | `r n_0` | sample size in reference group
+$n_1$     | `r n_1` | sample size in treatment group 
+$n$       | `r n`   | total sample size
+$\tau$    | `r tau` | time at which quantitative endpoint is determined
+
 
 #### Survival endpoint
-- mortality in reference group at time t=1: $p_0(1) =$ `r p0`, i. e. survival $q_0(1)=$ `r q0`
-- therefore, hazard in reference group $\lambda_0 =$ `r lambda0`
-- hazard ratio HR = `r HR`
-- therefore, hazard in reference group $\lambda_1 =$ `r lambda1`, and hence
-- mortality in reference group at time t=1: $p_1(1) =$ `r p1`, i. e. survival $q_1(1)=$ `r q1`
+Assume exponential distribution
+
+Parameter     | Value        | Description
+--------      | ------------ | --------------------------------------------------------------------------
+$p_0$         | `r p_0`      | mortality in reference group at time $\tau =$ `r tau`
+$q_0$         | `r q_0`      | survival in reference group at time $\tau =$ `r tau` (derived from $p_0$)
+$\lambda_0$   | `r lambda_0` | hazard in reference group (derived from $p_0$)
+$\mathit{HR}$ | `r HR`       | hazard ratio
+$\lambda_1$   | `r lambda_1` | hazard in treatment group (derived from $\lambda_0$ and HR)
+$p_1$         | `r p_0`      | mortality in treatment group at time $\tau =$ `r tau` (derived from $\lambda_1$)
+$q_1$         | `r q_0`      | survival in treatment group at time $\tau =$ `r tau` (derived from $p_1$)
 
 #### Quantitative endpoint
-- expected mean in reference group $\mu_0 =$ `r mu0 `
-- expected mean in treatment group under null hypothesis $H_0: \mu_1 =$ `r mu1 `
-- common standard deviation $\sigma =$ `r sigma `
-- non-inferiority margin $\varepsilon =$ `r epsilon `
-- difference between group means under null hypothesis:  $\delta_0 =$ `r delta0 `
-- hence effect size under null hypothesis: $\frac{\mu_0 - \mu_1}{\sigma} =$ `r delta0/sigma `
-- difference between group means under alternative hypothesis:  $\delta_1 =$ `r delta1 `
+Assume normal distribution with common variance
 
+Parameter     | Value        | Description
+--------      | ------------ | --------------------------------------------------------------------------
+$\mu_0$       | `r mu_0 `    | expected mean in reference group
+$\mu_1$       | `r mu_1 `    | mean in treatment group under (non-inferiority) null hypothesis
+$\sigma$      | `r sigma `   | common standard deviation
+$\varepsilon$ | `r epsilon ` | non-inferiority margin 
+$\delta_0$    | `r delta_0 ` | difference between group means under null hypothesis
+$\frac{\mu_0 - \mu_1}{\sigma}$ | `r delta_0/sigma ` | effect size unter null hypothesis
+$\delta_1$    | `r delta_1 ` | assumed mean difference  ($\mu_0 - \mu_1$) under (non-inferiority) alternative hypothesis
+
+## Theoretical considerations
+### Determining E(U) and var(U) according to the formula from Matsouaka and Betensky
+#### Notation
+Symbol     | Description
+---------- | -----------------------------------------------------------------------------------------
+$t_{0k}$   | time to event for k-th individal in reference group
+$t_{1l}$   | time to event for l-th individal in treatment group
+$x_{0k}$   | value of quantitative endpoint for k-th individal in reference group
+$x_{1l}$   | value of quantitative endpoint for l-th individal in treatment group
+$d_{0k}$   | event indicator for k-th individal in reference group, i.e. $d_{0k}=1$ if $t_{0k} < \tau$, 0 otherwise
+$d_{1l}$   | event indicator for l-th individal in treatment group, i.e. $d_{1l}=1$ if $t_{1l} < \tau$, 0 otherwise
+$f_{i}(t)$ | probability density function of time to event random variable in group $i$
+$F_{i}(t)$ | distribution function of time to event random variable in group $i$
+$S_{i}(t)$ | survivor function of time to event random variable in group $i$
+
+So $p_i = P(d_{ik} = 1) = P(t_{ik} < \tau)= F_i(\tau), q_i = S_i(\tau), i=0, 1$ and 
+
+Formula by Matsouaka and Betensky:
+
+$\mu_u = E(U) = p_0 * p_1 * \pi_{t1} + p_0 * q_1 + q_0 * q_1 * \pi_{x1} = \pi_{U1}$
+
+$\sigma_u^2 = var(U) = (n_0 * n_1)^{-1} * (\pi_{U1} * (1 - \pi_{U1}) +
+                                         (n_0 - 1) * (\pi_{U2} - \pi_{U1}^2) + 
+                                         (n_1 - 1) * (\pi_{U3} - \pi_{U1}^2))$
+                                         
+where
+
+$\pi_{U1} = p_0 * p_1 * \pi_{t1} + p_0 * q_1 + q_0 * q_1 * \pi_{x1}$
+
+$\pi_{U2} = p_0^2 * q_1 + p_0^2 * p_1 * \pi_{t2} + 2 * p_0 * q_0 * q_1 * \pi_{x1} + q_0^2 * q_1 * \pi_{x2}$
+
+$\pi_{U3} = p_0 * q_1^2 + p_0 * p_1^2 * \pi_{t3} + 2 * p_0 * p_1 * q_1 * \pi_{t1} + q_0 * q_1^2 * \pi_{x3}$
+
+and
+
+$\pi_{t1} = P(t_{0k} < t_{1l} | d_{0k} = d_{1l} = 1)$
+
+$\pi_{t2} = P(t_{0k} < t_{1l}, t_{0k'} < t_{1l} | d_{0k} = d_{0k'} = d_{1l} = 1)$
+
+$\pi_{t3} = P(t_{0k} < t_{1l}, t_{0k} < t_{1l'} | d_{0k} = d_{1l} = d_{1l'} =1)$
+
+$\pi_{x1} = P(x_{0k} < x_{1l})$
+
+$\pi_{x2} = P(x_{0k} < x_{1l}, x_{0k'} < x_{1l})$
+
+$\pi_{x3} = P(x_{0k} < x_{1l}, x_{0k} < x_{1l'})$
+
+Express $\pi_{t1}$, $\pi_{t2}$ and $\pi_{t3}$ in terms of the pdf, cdf, $p_0$, and $p_1$:
+
+\begin{eqnarray*}
+  \pi_{t1} & = & \frac{P(t_{0k} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)}
+= \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\int_u^\tau f_1(v)dv du  \\
+& = &  \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\left( F_1(\tau) - F_1(u)\right)du
+= \frac{1}{p_0 p_1}\left( p_0 p_1 - \int_0^\tau f_0(u)F_1(u) du \right) \\
+\\
+\pi_{t2} & = &\frac{P(max(t_{0k}, t_{0k'}) < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{0k'} < \tau)P(t_{1l} < \tau)}
+  =   \frac{1}{p_0^2 p_1}\int_0^\tau 2f_0(u) F_0(u)\int_u^\tau f_1(v)dv du \\
+& = & \frac{1}{p_0^2 p_1}\int_0^\tau 2f_0(u) F_0(u) (F_1(\tau) - F_1(u)) du 
+  =   \frac{1}{p_0^2 p_1}\left(p_1 \int_0^\tau 2 f_0(u) F_0(u) du - \int_0^\tau 2 f_0(u) F_0(u) F_1(u) du \right) \\
+& = & \frac{1}{p_0^2 p_1}\left(p_1 F_0^2(u)|_0^\tau - F_0^2(u) F_1(u)|_0^\tau + \int_0^\tau F_0^2(u) f_1(u)du) \right)
+  =   \frac{1}{p_0^2 p_1}\int_0^\tau F_0^2(u) f_1(u)du) \\
+\\
+\pi_{t3} & = &\frac{P(t_{0k}  < t_{1l} < t_{1l'} < \tau) + P(t_{0k}  < t_{1l'} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)}
+  =   \frac{2 P(t_{0k}  < t_{1l} < t_{1l'} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)} \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) \int_v^\tau f_1(w) dw dv du
+  =   \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) (F_1(\tau) - F_1(v)) dv du \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \left(p_1 (F_1(\tau) - F_1(u)) - \frac{1}{2}(F_1^2(\tau) - F_1^2(u)) \right)du \\
+& = & \frac{1}{p_0 p_1^2}\left(p_0 p_1^2 - 2 p_1 \int_0^\tau f_0(u) F_1(u) du +  \int_0^\tau f_0(u) F_1^2(u) du \right)
+\end{eqnarray*}
+
+Now make use of the fact that $t_{ik} \sim exp(\lambda_i)$, i. e. $f_i(t) = \lambda_i e^{-\lambda_i t}$ and 
+$F_i(t) = 1- e^{-\lambda_i t}$.
+
+\begin{eqnarray*} 
+\pi_{t1} & = & \frac{1}{p_0 p_1}\left( p_0 p_1 - \int_0^\tau \lambda_0 e^{-\lambda_0 u} (1- e^{-\lambda_1 u})du \right) 
+= \frac{1}{p_0 p_1}\left(
+                         p_0 p_1 - p_0
+                         - \frac{\lambda_0}{\lambda_0 + \lambda_1} ( e^{-(\lambda_0 + \lambda_1)\tau}  - 1)
+                   \right) \\
+& = & \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( q_0 q_1  - 1) \right)
+= \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( p_0 p_1  - p_0 - p_1)
+                   \right) \\
+\\
+\pi_{t2} & = & \frac{1}{p_0^2 p_1}\int_0^\tau (1 - e^{-\lambda_0 u})^2 \lambda_1 e^{-\lambda_1 u} du
+  = \frac{1}{p_0^2 p_1}\left(
+                        \int_0^\tau \lambda_1 e^{-\lambda_0 u} du 
+                          - 2 \lambda_1 \int_0^\tau \lambda_1 e^{-(\lambda_0 + \lambda_1) u} du
+                          + \lambda_1 \int_0^\tau \lambda_1 e^{-(2\lambda_0 + \lambda_1) u} du
+                      \right) \\
+& = & \frac{1}{p_0^2 p_1}\left(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (e^{-(\lambda_0 + \lambda1)\tau} - 1) - \frac{\lambda_1}{2\lambda_0 + \lambda_1} (e^{-(2\lambda_0 + \lambda1)\tau} - 1)
+                      \right) \\
+                     
+& = & \frac{1}{p_0^2 p_1}\left(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (q_0 q_1 - 1) - \frac{\lambda_1}{2\lambda_0 + \lambda_1}(q_0^2 q_1 - 1)
+                         \right) \\
+
+& = & \frac{1}{p_0^2 p_1}\left(p_1 + \frac{2}{1 + \mathit{HR}} (q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0^2 q_1 - 1)
+                      \right) \\
+\pi_{t3} & = & \frac{1}{p_0 p_1^2}\left(p_0 p_1^2 - 2 p_1 \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})du + \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})^2du
+                                  \right) \\
+& = & \frac{1}{p_0 p_1^2}\left(p_0 p_1^2 - 2p_1(p_0 + \frac{\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1)) + (p_0 + \frac{2\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1)
+- \frac{\lambda_0}{\lambda_0 + 2\lambda_1}(e^{-(\lambda_0 + 2\lambda_1)\tau}) - 1) 
+                         \right) \\
+& = & \frac{1}{p_0 p_1^2}\left( p_0 p_1^2 - 2 p_0 p_1 + p_0
++ \frac{2}{1 + \mathit{HR}} (1 - p_1) (q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1)
+                         \right) \\
+& = & \frac{1}{p_0 p_1^2}\left( p_0 q_1^2 + \frac{2}{1 + \mathit{HR}}q_1(q_0 q_1 - 1)
+- \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1)
+                         \right) \\
+\end{eqnarray*}
 
 ```{r}
 # group indicator
-g <- rep(0:1, c(n0, n1))
+g <- rep(0:1, c(n_0, n_1))
 
 # Generate random samples
 set.seed(123)
 # 1. Survival endpoint (only if there is mortality)
-if (p0 > 0){
-  t0 <- -log(runif(n0, 0, 1)) / lambda0
-  t1 <- -log(runif(n1, 0, 1)) / lambda1
-  t <- c(t0, t1)
-  # identify indices relating to events (i.e. t <= 1)
-  event_BOOLEAN <- t <= 1                 # vector of length n which indicates (TRUE/FALSE) whether events has occured up to time t=1
-  events <- which(event_BOOLEAN == TRUE)  # vector containing the indices j of t for which t[j] <= 1 (length = # events)
-  # number of events
-  n_events <- length(events)
-  # rank event times
-  t_rank <- rank(t[events])
-  # compute rank sums for groups
-  rank_sum_t0 <- sum(t_rank[g[events] == 0])
-  rank_sum_t1 <- sum(t_rank[g[events] == 1])
-}else{
-  n_events <- 0
-  event_BOOLEAN <- rep(FALSE, n)
+if (p_0 > 0) {
+  t_0 <- -log(runif(n_0, 0, 1)) / lambda_0
+  t_1 <- -log(runif(n_1, 0, 1)) / lambda_1
+  t <- c(t_0, t_1)
 }
-
 # 2. Quantitave endpoint
-x0 <- rnorm(n0, mean=mu0, sd=sigma)
-x1 <- rnorm(n1, mean=mu1, sd=sigma)
-x <- c(x0, x1)
-# identify indices for which quantitative endpoint is observed (i.e. no terminal event)
-no_events <- which(event_BOOLEAN == FALSE) # vector containing the indices j of X for which t[j] > 1, i.e. quantitative endpoint is observed
-# rank quantitative endpoint and add number of events to ranks within observable x-values
-x_rank <- rank(x[no_events]) + n_events
-rank_sum_x0 <- sum(x_rank[g[no_events] == 0])
-rank_sum_x1 <- sum(x_rank[g[no_events] == 1])
+x_0 <- rnorm(n_0, mean = mu_0, sd = sigma)
+x_1 <- rnorm(n_1, mean = mu_1, sd = sigma)
+x <- c(x_0, x_1)
 
-# Observations with events up to time t=1
-# t0[t0 <= 1]
-# t1[t1 <= 1]
+# 3. Combine endpoints into untied worst-rank adjusted values: y
+eta <- min(x, na.rm = TRUE) - 1 - tau
+y <- ifelse(t <= tau, eta + t, x) 
+# compute rank sums and U statistics 
+ranks <- rank(y)
+R_0 <- sum(ranks[g == 0])
+R_1 <- sum(ranks[g == 1])
+U_0 <- R_0 - n_0 * (n_0 + 1) / 2
+U_1 <- R_1 - n_1 * (n_0 + 1) / 2
+
+# 4. Determine expectation and variance of U_0
+# mu_u = E(U) = p_0 * p_1 * pi_t1 + p_0 * q_1 + q_0 * q_1 * pi_x1 = pi_U1
+# sigma_u = var(U) = (n_0 * n_1)^(-1) * [pi_U1 * (1 - pi_U1) + 
+#                                        (n0 - 1) * (pi_U2 - pi_U1^2) +
+#                                        (n1 - 1) * (pi_U3 - pi_U1^2)] 
+# where 
+# pi_U2 = p_0^2 * q_1
+# p_1 * pi_t1 + p
+
+# 
+#   # identify indices relating to events (i.e. tau <= 1)
+#   event_BOOLEAN <- t <= 1                 # vector of length n which indicates (TRUE/FALSE) whether events has occured up to time tau=1
+#   events <- which(event_BOOLEAN == TRUE)  # vector containing the indices j of t for which t[j] <= 1 (length = # events)
+#   # number of events
+#   n_events <- length(events)
+#   # rank event times
+#   t_rank <- rank(t[events])
+#   # compute rank sums for groups 
+#   rank_sum_t_0 <- sum(t_rank[g[events] == 0])
+#   rank_sum_t_1 <- sum(t_rank[g[events] == 1])
+# }else{
+#   n_events <- 0
+#   event_BOOLEAN <- rep(FALSE, n)
+# }
+# 
+# # identify indices for which quantitative endpoint is observed (i.e. no terminal event)
+# no_events <- which(event_BOOLEAN == FALSE) # vector containing the indices j of X for which t[j] > 1, i.e. quantitative endpoint is observed
+# # rank quantitative endpoint and add number of events to ranks within observable x-values
+# x_rank <- rank(x[no_events]) + n_events
+# rank_sum_x_0 <- sum(x_rank[g[no_events] == 0])
+# rank_sum_x_1 <- sum(x_rank[g[no_events] == 1])
+# 
+# # Observations with events up to time tau=1
+# # t_0[t_0 <= 1]
+# # t_1[t_1 <= 1]
 
 ```
-
