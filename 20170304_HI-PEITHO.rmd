@@ -18,87 +18,57 @@ This file was created `r date()`.
 Matsouaka and Betensky (Stat Med 2014, DOI: 10.1002/sim.6355)
 - Simulate for settings relevant for HI-PEITHO
 
-
-
-Set parameters:
-```{r Set parameters}
-n_0 <- 48                   # sample size in reference group
-n_1 <- 96                   # sample size in treatment group
-n <- n_0 + n_1              # total sample size
-tau <- 1                    # time tau at which quantitative endpoint is determined
-p_0 <- 0.2                  # mortality in reference group at time tau
-q_0 <- 1 - p_0              # survival in reference group at time tau
-lambda_0 <- -log(q_0) / tau # hazard in reference group
-mu_0 <- 0.3                 # expected mean in reference group
-sigma <- 0.1                # common variance
-epsilon <- 0.05             # non-inferiority margin for quantitative endpoint
-HR <- 1                     # hazard ratio
-delta_0 <- -epsilon         # mean difference (mu_1 - mu_0) under non-inferiority null hypothesis H0
-delta_1 <- 0                # assumed mean difference (mu_1 - mu_0) under (non-inferiority) alternative hypothesis H1
-
-lambda_1 <- HR * lambda_0   # hazard in treatment group
-q_1 <- exp(-lambda_1)       # survival in treatment group at time tau
-p_1 <- 1 - q_1              # mortality in treatment group at time tau
-mu_1 <- mu_0 + delta_0      # mean in treatment group under (non-inferiority) null hypothesis H0
-```
-### Chosen parameters
-#### General
-Parameter | Value   | Description
---------  | ------  | --------------------------------------------------
-$n_0$     | `r n_0` | sample size in reference group
-$n_1$     | `r n_1` | sample size in treatment group 
-$n$       | `r n`   | total sample size
-$\tau$    | `r tau` | time at which quantitative endpoint is determined
-
-
-#### Survival endpoint
-Assume exponential distribution
-
-Parameter     | Value        | Description
---------      | ------------ | --------------------------------------------------------------------------
-$p_0$         | `r p_0`      | mortality in reference group at time $\tau =$ `r tau`
-$q_0$         | `r q_0`      | survival in reference group at time $\tau =$ `r tau` (derived from $p_0$)
-$\lambda_0$   | `r lambda_0` | hazard in reference group (derived from $p_0$)
-$\mathit{HR}$ | `r HR`       | hazard ratio
-$\lambda_1$   | `r lambda_1` | hazard in treatment group (derived from $\lambda_0$ and HR)
-$p_1$         | `r p_0`      | mortality in treatment group at time $\tau =$ `r tau` (derived from $\lambda_1$)
-$q_1$         | `r q_0`      | survival in treatment group at time $\tau =$ `r tau` (derived from $p_1$)
-
-#### Quantitative endpoint
-Assume normal distribution with common variance
-
-Parameter     | Value        | Description
---------      | ------------ | --------------------------------------------------------------------------
-$\mu_0$       | `r mu_0 `    | expected mean in reference group
-$\mu_1$       | `r mu_1 `    | mean in treatment group 
-$\sigma$      | `r sigma `   | common standard deviation
-$\varepsilon$ | `r epsilon ` | non-inferiority margin 
-$\delta_0$    | `r delta_0 ` | difference between group means under null hypothesis
-$\frac{\mu_1 - \mu_0}{\sigma}$ | `r delta_0/sigma ` | effect size unter null hypothesis
-$\delta_1$    | `r delta_1 ` | assumed mean difference  ($\mu_1 - \mu_0$) under (non-inferiority) alternative hypothesis
-
 ## Theoretical considerations
 ### Determining E(U) and var(U) according to the formula from Matsouaka and Betensky
 #### Notation
-Symbol     | Description
----------- | -----------------------------------------------------------------------------------------
-$t_{0k}$   | time to event for k-th individal in reference group
-$t_{1l}$   | time to event for l-th individal in treatment group
-$x_{0k}$   | value of quantitative endpoint for k-th individal in reference group
-$x_{1l}$   | value of quantitative endpoint for l-th individal in treatment group
-$d_{0k}$   | event indicator for k-th individal in reference group, i.e. $d_{0k}=1$ if $t_{0k} < \tau$, 0 otherwise
-$d_{1l}$   | event indicator for l-th individal in treatment group, i.e. $d_{1l}=1$ if $t_{1l} < \tau$, 0 otherwise
-$f_{i}(t)$ | probability density function of time to event random variable in group $i$
-$F_{i}(t)$ | distribution function of time to event random variable in group $i$
-$S_{i}(t)$ | survivor function of time to event random variable in group $i$
-$g_{i}(x)$ | probability density function of  qantitative endpoint in group $i$
-$G_{i}(x)$ | distribution function of qantitative endpoint in group $i$
+#### General
+Symbol               | Description
+-------------------- | ---------------------------------------------------------------------------
+$i=0,1$              | denotes group, $i=0$ denotes reference group, $i=1$ denotes treatment group
+$n_i$                | sample size group in $i$
+$n = n_0 + n_1$      | total sample size
+$\tau$               | time at which quantitative endpoint is determined
+
+#### Survival endpoint
+Assuming exponential distributions for times to event.
+
+Symbol          | Description
+--------------- | --------------------------------------------------------------------------
+$t_{0k}$        | time to event for k-th individal in reference group
+$t_{1l}$        | time to event for l-th individal in treatment group
+$f_{i}(t)$      | probability density function of time to event random variable in group $i$
+$F_{i}(t)$      | distribution function of time to event random variable in group $i$
+$S_{i}(t)$      | survivor function of time to event random variable in group $i$
+$p_i$           | mortality in group $i$ at time $\tau$
+$q_i= 1 - p_i$  | survival probability in group $i$ at time $\tau$
+$d_{0k}$        | event indicator for k-th individal in reference group, i.e. $d_{0k}=1$ if $t_{0k} < \tau$, 0 otherwise
+$d_{1l}$        | event indicator for l-th individal in treatment group, i.e. $d_{1l}=1$ if $t_{1l} < \tau$, 0 otherwise
+$\lambda_i=\frac{-\log(q_i)}{\tau}$       | hazard in group $i$
+$\mathit{HR}=\frac{\lambda_1}{\lambda_0}$ | hazard ratio
+
+From these definitions it follows that $p_i = P(d_{ik} = 1) = P(t_{ik} < \tau)= F_i(\tau), q_i = S_i(\tau), i=0, 1$.
+
+#### Quantitative endpoint
+Assuming normal distributions with common variance for quantitative endpoint.
+
+Symbol        | Description
+------------- | -----------------------------------------------------------------------------------------
+$x_{0k}$      | value of quantitative endpoint for k-th individal in reference group
+$x_{1l}$      | value of quantitative endpoint for l-th individal in treatment group
+$g_{i}(x)$    | probability density function of  qantitative endpoint in group $i$
+$G_{i}(x)$    | distribution function of qantitative endpoint in group $i$
 $\varphi(x)$  | probability density function of the standard normal distribution
-$\Phi(x)$  | distribution function of the standard normal distribution
+$\Phi(x)$     | distribution function of the standard normal distribution
+$\mu_i$       | mean in group $i$
+$\sigma$      | common standard deviation
+$\delta = \mu_1 - \mu_0$       | difference between group means
+$\frac{\mu_1 - \mu_0}{\sigma}$ | effect size
 
-So $p_i = P(d_{ik} = 1) = P(t_{ik} < \tau)= F_i(\tau), q_i = S_i(\tau), i=0, 1$ and 
+Matsouaka and Betensky derive a formula for mean and variance for the global rank test statistic U with the definitions for $\tilde{X_{0k}}$ and $\tilde{X_{1l}}$ from the paper.
 
-Formula by Matsouaka and Betensky:
+$U = \frac{1}{n_0 n_1}\sum_{k=1}^{n_0}\sum_{l=1}^{n_1}I(\tilde{X_{0k}} < \tilde{X_{1l}})$
+
+Then expectation and variance are (not just for the case of identical distributions in both groups) given by:
 
 $\mu_U = E(U) = p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} = \pi_{U1}$
 
@@ -191,9 +161,9 @@ $F_i(t) = 1- e^{-\lambda_i t}$.
                          \right) \\
 \end{eqnarray*}
 
-Let $X_{0k} \sim \mathcal{N}(\mu_0, \sigma^2)$, $X_{1l} \sim \mathcal{N}(\mu_1, \sigma^2)$ and $\delta = \mu_1 - \mu_0$.
+From the above defintions follows $X_{0k} \sim \mathcal{N}(\mu_0, \sigma^2)$, $X_{1l} \sim \mathcal{N}(\mu_1, \sigma^2)$ and $\delta = \mu_1 - \mu_0$ and hence
 
-Hence $Y_{0k}:=\frac{X_{0k} - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)$ and $Y_{1l}:=\frac{X_{1l} - \mu_0}{\sigma} = \frac{X_{il} - \mu_1 + \delta}{\sigma} \sim \mathcal{N}( \frac{\delta}{\sigma}, 1)$
+$Y_{0k}:=\frac{X_{0k} - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)$ and $Y_{1l}:=\frac{X_{1l} - \mu_0}{\sigma} = \frac{X_{il} - \mu_1 + \delta}{\sigma} \sim \mathcal{N}( \frac{\delta}{\sigma}, 1)$
 
 
 Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the standard normal distribution.
@@ -203,8 +173,74 @@ Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the st
 = \int_{-\infty}^{\infty}\varphi(x)P(\frac{X_{1l} - \mu_1}{\sigma} < x - \frac{\delta}{\sigma})dx \\
 & = & \int_{-\infty}^{\infty}\varphi(x) \Phi(x - \frac{\delta}{\sigma}) dx 
 =  \int_{-\infty}^{\infty}\varphi(x + \frac{\delta}{\sigma}) \Phi(x) dx \\
-\pi_{x2} & = & P(\max(X_{0k}, X_{0k'}) < X_{1l}) = P(\max(Y_{0k}, Y_{0k'}) < Y_{1l})
+\\
+\pi_{x2} & = & P(\max(X_{0k}, X_{0k'}) < X_{1l}) = P(\max(Y_{0k}, Y_{0k'}) < Y_{1l}) \\
+& = & \int_{-\infty}^{\infty}\varphi(x + \frac{\delta}{\sigma})\Phi^2(x) dx\\
+\pi_{x3} & = & P(X_{0k} < X_{1l} < X_{1l'}) + P(X_{0k} < X_{1l'} < X_{1l}) = 2 P(X_{0k} < X_{1l} < X_{1l'}) \\
+\\
+& = & 2 \int_{-\infty}^{\infty}\varphi(x) \int_{-\infty}^{x}\varphi(y + \frac{\delta}{\sigma}) \int_{-\infty}^{y}\varphi(z + \frac{\delta}{\sigma})dz dy dx \\
+& = & 2 \int_{-\infty}^{\infty}\varphi(x) \int_{-\infty}^{x}\varphi(y + \frac{\delta}{\sigma}) \Phi(y + \frac{\delta}{\sigma}) dy dx \\
+& = & \int_{-\infty}^{\infty}\varphi(x) \Phi^2(x + \frac{\delta}{\sigma}) dx
 \end{eqnarray*}
+
+
+
+Set parameters:
+```{r Set parameters}
+n_0 <- 48                   # sample size in reference group
+n_1 <- 96                   # sample size in treatment group
+n <- n_0 + n_1              # total sample size
+tau <- 1                    # time tau at which quantitative endpoint is determined
+p_0 <- 0.2                  # mortality in reference group at time tau
+q_0 <- 1 - p_0              # survival in reference group at time tau
+lambda_0 <- -log(q_0) / tau # hazard in reference group
+mu_0 <- 0.3                 # expected mean in reference group
+sigma <- 0.1                # common variance
+epsilon <- 0.05             # non-inferiority margin for quantitative endpoint
+HR <- 1                     # hazard ratio
+delta_0 <- -epsilon         # mean difference (mu_1 - mu_0) under non-inferiority null hypothesis H0
+delta_1 <- 0                # assumed mean difference (mu_1 - mu_0) under (non-inferiority) alternative hypothesis H1
+
+lambda_1 <- HR * lambda_0   # hazard in treatment group
+q_1 <- exp(-lambda_1)       # survival in treatment group at time tau
+p_1 <- 1 - q_1              # mortality in treatment group at time tau
+mu_1 <- mu_0 + delta_0      # mean in treatment group under (non-inferiority) null hypothesis H0
+```
+### Chosen parameters
+#### General
+Parameter | Value   | Description
+--------  | ------  | --------------------------------------------------
+$n_0$     | `r n_0` | sample size in reference group
+$n_1$     | `r n_1` | sample size in treatment group 
+$n$       | `r n`   | total sample size
+$\tau$    | `r tau` | time at which quantitative endpoint is determined
+
+
+#### Survival endpoint
+Assume exponential distribution
+
+Parameter     | Value        | Description
+--------      | ------------ | --------------------------------------------------------------------------
+$p_0$         | `r p_0`      | mortality in reference group at time $\tau =$ `r tau`
+$q_0$         | `r q_0`      | survival in reference group at time $\tau =$ `r tau` (derived from $p_0$)
+$\lambda_0$   | `r lambda_0` | hazard in reference group (derived from $p_0$)
+$\mathit{HR}$ | `r HR`       | hazard ratio
+$\lambda_1$   | `r lambda_1` | hazard in treatment group (derived from $\lambda_0$ and HR)
+$p_1$         | `r p_0`      | mortality in treatment group at time $\tau =$ `r tau` (derived from $\lambda_1$)
+$q_1$         | `r q_0`      | survival in treatment group at time $\tau =$ `r tau` (derived from $p_1$)
+
+#### Quantitative endpoint
+Assume normal distribution with common variance
+
+Parameter     | Value        | Description
+--------      | ------------ | --------------------------------------------------------------------------
+$\mu_0$       | `r mu_0 `    | expected mean in reference group
+$\mu_1$       | `r mu_1 `    | mean in treatment group 
+$\sigma$      | `r sigma `   | common standard deviation
+$\varepsilon$ | `r epsilon ` | non-inferiority margin 
+$\delta_0$    | `r delta_0 ` | difference between group means under null hypothesis
+$\frac{\mu_1 - \mu_0}{\sigma}$ | `r delta_0/sigma ` | effect size unter null hypothesis
+$\delta_1$    | `r delta_1 ` | assumed mean difference  ($\mu_1 - \mu_0$) under (non-inferiority) alternative hypothesis
 
 ```{r}
 # group indicator
