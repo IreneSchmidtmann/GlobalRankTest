@@ -18,6 +18,8 @@ This file was created `r date()`.
 Matsouaka and Betensky (Stat Med 2014, DOI: 10.1002/sim.6355)
 - Simulate for settings relevant for HI-PEITHO
 
+
+
 Set parameters:
 ```{r Set parameters}
 n_0 <- 48                   # sample size in reference group
@@ -31,13 +33,13 @@ mu_0 <- 0.3                 # expected mean in reference group
 sigma <- 0.1                # common variance
 epsilon <- 0.05             # non-inferiority margin for quantitative endpoint
 HR <- 1                     # hazard ratio
-delta_0 <- epsilon          # mean difference (mu_0 - mu_1) under non-inferiority null hypothesis H0
-delta_1 <- 0                # assumed mean difference  (mu_0 - mu_1) under (non-inferiority) alternative hypothesis H1
+delta_0 <- -epsilon         # mean difference (mu_1 - mu_0) under non-inferiority null hypothesis H0
+delta_1 <- 0                # assumed mean difference (mu_1 - mu_0) under (non-inferiority) alternative hypothesis H1
 
 lambda_1 <- HR * lambda_0   # hazard in treatment group
 q_1 <- exp(-lambda_1)       # survival in treatment group at time tau
 p_1 <- 1 - q_1              # mortality in treatment group at time tau
-mu_1 <- mu_0 - delta_0      # mean in treatment group under (non-inferiority) null hypothesis H0
+mu_1 <- mu_0 + delta_0      # mean in treatment group under (non-inferiority) null hypothesis H0
 ```
 ### Chosen parameters
 #### General
@@ -68,12 +70,12 @@ Assume normal distribution with common variance
 Parameter     | Value        | Description
 --------      | ------------ | --------------------------------------------------------------------------
 $\mu_0$       | `r mu_0 `    | expected mean in reference group
-$\mu_1$       | `r mu_1 `    | mean in treatment group under (non-inferiority) null hypothesis
+$\mu_1$       | `r mu_1 `    | mean in treatment group 
 $\sigma$      | `r sigma `   | common standard deviation
 $\varepsilon$ | `r epsilon ` | non-inferiority margin 
 $\delta_0$    | `r delta_0 ` | difference between group means under null hypothesis
-$\frac{\mu_0 - \mu_1}{\sigma}$ | `r delta_0/sigma ` | effect size unter null hypothesis
-$\delta_1$    | `r delta_1 ` | assumed mean difference  ($\mu_0 - \mu_1$) under (non-inferiority) alternative hypothesis
+$\frac{\mu_1 - \mu_0}{\sigma}$ | `r delta_0/sigma ` | effect size unter null hypothesis
+$\delta_1$    | `r delta_1 ` | assumed mean difference  ($\mu_1 - \mu_0$) under (non-inferiority) alternative hypothesis
 
 ## Theoretical considerations
 ### Determining E(U) and var(U) according to the formula from Matsouaka and Betensky
@@ -89,24 +91,28 @@ $d_{1l}$   | event indicator for l-th individal in treatment group, i.e. $d_{1l}
 $f_{i}(t)$ | probability density function of time to event random variable in group $i$
 $F_{i}(t)$ | distribution function of time to event random variable in group $i$
 $S_{i}(t)$ | survivor function of time to event random variable in group $i$
+$g_{i}(x)$ | probability density function of  qantitative endpoint in group $i$
+$G_{i}(x)$ | distribution function of qantitative endpoint in group $i$
+$\varphi(x)$  | probability density function of the standard normal distribution
+$\Phi(x)$  | distribution function of the standard normal distribution
 
 So $p_i = P(d_{ik} = 1) = P(t_{ik} < \tau)= F_i(\tau), q_i = S_i(\tau), i=0, 1$ and 
 
 Formula by Matsouaka and Betensky:
 
-$\mu_u = E(U) = p_0 * p_1 * \pi_{t1} + p_0 * q_1 + q_0 * q_1 * \pi_{x1} = \pi_{U1}$
+$\mu_U = E(U) = p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} = \pi_{U1}$
 
-$\sigma_u^2 = var(U) = (n_0 * n_1)^{-1} * (\pi_{U1} * (1 - \pi_{U1}) +
-                                         (n_0 - 1) * (\pi_{U2} - \pi_{U1}^2) + 
-                                         (n_1 - 1) * (\pi_{U3} - \pi_{U1}^2))$
+$\sigma_U^2 = var(U) = (n_0 n_1)^{-1} (\pi_{U1} (1 - \pi_{U1}) +
+                                         (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + 
+                                         (n_1 - 1) (\pi_{U3} - \pi_{U1}^2))$
                                          
 where
 
-$\pi_{U1} = p_0 * p_1 * \pi_{t1} + p_0 * q_1 + q_0 * q_1 * \pi_{x1}$
+$\pi_{U1} = p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1}$
 
-$\pi_{U2} = p_0^2 * q_1 + p_0^2 * p_1 * \pi_{t2} + 2 * p_0 * q_0 * q_1 * \pi_{x1} + q_0^2 * q_1 * \pi_{x2}$
+$\pi_{U2} = p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2}$
 
-$\pi_{U3} = p_0 * q_1^2 + p_0 * p_1^2 * \pi_{t3} + 2 * p_0 * p_1 * q_1 * \pi_{t1} + q_0 * q_1^2 * \pi_{x3}$
+$\pi_{U3} = p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3}$
 
 and
 
@@ -183,6 +189,21 @@ $F_i(t) = 1- e^{-\lambda_i t}$.
 & = & \frac{1}{p_0 p_1^2}\left( p_0 q_1^2 + \frac{2}{1 + \mathit{HR}}q_1(q_0 q_1 - 1)
 - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1)
                          \right) \\
+\end{eqnarray*}
+
+Let $X_{0k} \sim \mathcal{N}(\mu_0, \sigma^2)$, $X_{1l} \sim \mathcal{N}(\mu_1, \sigma^2)$ and $\delta = \mu_1 - \mu_0$.
+
+Hence $Y_{0k}:=\frac{X_{0k} - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)$ and $Y_{1l}:=\frac{X_{1l} - \mu_0}{\sigma} = \frac{X_{il} - \mu_1 + \delta}{\sigma} \sim \mathcal{N}( \frac{\delta}{\sigma}, 1)$
+
+
+Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the standard normal distribution.
+
+\begin{eqnarray*}
+\pi_{x1} & = & P(X_{0k} < X_{1l}) = P(Y_{0k} < Y_{1l}) = \int_{-\infty}^{\infty}\varphi(x)P(Y_{1l}<x)dx
+= \int_{-\infty}^{\infty}\varphi(x)P(\frac{X_{1l} - \mu_1}{\sigma} < x - \frac{\delta}{\sigma})dx \\
+& = & \int_{-\infty}^{\infty}\varphi(x) \Phi(x - \frac{\delta}{\sigma}) dx 
+=  \int_{-\infty}^{\infty}\varphi(x + \frac{\delta}{\sigma}) \Phi(x) dx \\
+\pi_{x2} & = & P(\max(X_{0k}, X_{0k'}) < X_{1l}) = P(\max(Y_{0k}, Y_{0k'}) < Y_{1l})
 \end{eqnarray*}
 
 ```{r}
