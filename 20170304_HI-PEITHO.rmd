@@ -124,6 +124,7 @@ Express $\pi_{t1}$, $\pi_{t2}$ and $\pi_{t3}$ in terms of the pdf, cdf, $p_0$, a
 Now make use of the fact that $t_{ik} \sim exp(\lambda_i)$, i. e. $f_i(t) = \lambda_i e^{-\lambda_i t}$ and 
 $F_i(t) = 1- e^{-\lambda_i t}$.
 
+
 \begin{eqnarray*} 
 \pi_{t1} & = & \frac{1}{p_0 p_1}\left( p_0 p_1 - \int_0^\tau \lambda_0 e^{-\lambda_0 u} (1- e^{-\lambda_1 u})du \right) 
 = \frac{1}{p_0 p_1}\left(
@@ -131,8 +132,9 @@ $F_i(t) = 1- e^{-\lambda_i t}$.
                          - \frac{\lambda_0}{\lambda_0 + \lambda_1} ( e^{-(\lambda_0 + \lambda_1)\tau}  - 1)
                    \right) \\
 & = & \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( q_0 q_1  - 1) \right)
-= \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( p_0 p_1  - p_0 - p_1)
-                   \right) \\
+= \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( p_0 p_1  - p_0 - p_1)\right) \\
+& = & \frac{1}{p_0 p_1}\left(p_0 (p_1 - 1)(1-\frac{1}{1+\mathit{HR}}) + \frac{1}{1+\mathit{HR}} p_1 \right) \\
+& = & \frac{1}{p_0 p_1(1+\mathit{HR})}(p_0 (p_1 - 1)\mathit{HR} + p_1) \\
 \\
 \pi_{t2} & = & \frac{1}{p_0^2 p_1}\int_0^\tau (1 - e^{-\lambda_0 u})^2 \lambda_1 e^{-\lambda_1 u} du
   = \frac{1}{p_0^2 p_1}\left(

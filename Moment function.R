@@ -1,0 +1,33 @@
+moments <- function(p_0 = 0.2, p_1 = 0.2, mu_0 = 1, mu_1 = 0.05, sigma = 1, tau=1){
+  if (p_0 > 0 && p_1 > 0) {
+    q_0 <- 1 - p_0
+    q_1 <- 1 - p_1
+    lambda_0 <- -log(q_0) / tau
+    lambda_1 <- -log(q_1) / tau
+    HR <- lambda_1 / lambda_0
+    pi_t1 <- (p_0 * (p_1  - 1) * HR / (1 + HR) + p_1 / (1 + HR)) / (p_0 * p_1)
+    print(paste0("pi_t1 = ", pi_t1))
+    pi_t2 <- (p_1 + 2/(1 + HR) * (q_0 * q_1 - 1) - (q_0^2 * q_1 - 1) / (2 + HR) ) / (p_0^2 * p_1)
+    print(paste0("pi_t2 = ", pi_t2))
+    pi_t3 <- (p_0 * q_1^2 + 2 * q_1 * (q_0 * q_1 - 1) / (1 + HR) - (q_0 * q_1^2 - 1) / (2 + HR)) / (p_0 * p_1^2) 
+    print(paste0("pi_t3 = ", pi_t3))
+  }
+  delta <- mu_1 - mu_0
+  mu_u <- mu_0 + mu_1
+  sigma_u <- 2 * sigma
+  list(mu_u, sigma_u)
+  return(list(mean_u = mu_u, sigma_u = sigma_u))
+}
+
+mymoments <- moments(p_0 = 0, p_1 = 0, mu_0 = 0, mu_1 = 0.05, sigma = 1, tau = 1)
+print(mymoments)
+
+integrate(dnorm, -1.96, 1.96)
+integrate(dnorm, -Inf, Inf)
+
+shift <- 0.2
+integrand1 <- function(x) {
+  return(dnorm(x + shift)*pnorm(x))
+}
+
+integrate(integrand1, -Inf, Inf)
