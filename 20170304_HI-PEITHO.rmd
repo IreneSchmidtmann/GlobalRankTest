@@ -171,18 +171,16 @@ $Y_{0k}:=\frac{X_{0k} - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)$ and $Y_{1l}:=\fra
 Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the standard normal distribution.
 
 \begin{eqnarray*}
-\pi_{x1} & = & P(X_{0k} < X_{1l}) = P(Y_{0k} < Y_{1l}) = \int_{-\infty}^{\infty}\varphi(x)P(Y_{1l}<x)dx
-= \int_{-\infty}^{\infty}\varphi(x)P(\frac{X_{1l} - \mu_1}{\sigma} < x - \frac{\delta}{\sigma})dx \\
-& = & \int_{-\infty}^{\infty}\varphi(x) \Phi(x - \frac{\delta}{\sigma}) dx 
-=  \int_{-\infty}^{\infty}\varphi(x + \frac{\delta}{\sigma}) \Phi(x) dx \\
+\pi_{x1} & = & P(X_{0k} < X_{1l}) = P(Y_{0k} < Y_{1l}) \\
+& = &  \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma}) \Phi(x) dx \\
 \\
 \pi_{x2} & = & P(\max(X_{0k}, X_{0k'}) < X_{1l}) = P(\max(Y_{0k}, Y_{0k'}) < Y_{1l}) \\
-& = & \int_{-\infty}^{\infty}\varphi(x + \frac{\delta}{\sigma})\Phi^2(x) dx\\
-\pi_{x3} & = & P(X_{0k} < X_{1l} < X_{1l'}) + P(X_{0k} < X_{1l'} < X_{1l}) = 2 P(X_{0k} < X_{1l} < X_{1l'}) \\
+& = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma})\Phi^2(x) dx\\
+\pi_{x3} & = & P(X_{0k} < \min(X_{1l}, X_{1l'})) = P(Y_{0k} < \min(Y_{1l}, Y_{1l'})) \\
+& = & \int_{-\infty}^{\infty}\Phi(x) \cdot 2 \varphi(x - \frac{\delta}{\sigma}) (1 - \Phi(\frac{\delta}{\sigma}))dx\\
+& = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma}) \Phi(x) dx - \left( \Phi^2(y - \frac{\delta}{\sigma})\Phi(x)|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx\right)\\
+& = & 2\pi_{x1} - 1 + \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx \\
 \\
-& = & 2 \int_{-\infty}^{\infty}\varphi(x) \int_{-\infty}^{x}\varphi(y + \frac{\delta}{\sigma}) \int_{-\infty}^{y}\varphi(z + \frac{\delta}{\sigma})dz dy dx \\
-& = & 2 \int_{-\infty}^{\infty}\varphi(x) \int_{-\infty}^{x}\varphi(y + \frac{\delta}{\sigma}) \Phi(y + \frac{\delta}{\sigma}) dy dx \\
-& = & \int_{-\infty}^{\infty}\varphi(x) \Phi^2(x + \frac{\delta}{\sigma}) dx
 \end{eqnarray*}
 
 

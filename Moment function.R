@@ -1,4 +1,4 @@
-moments <- function(p_0 = 0.2, p_1 = 0.2, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
+moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
   if (p_0 > 0 && p_1 > 0) {
     q_0 <- 1 - p_0
     q_1 <- 1 - p_1
@@ -18,14 +18,14 @@ moments <- function(p_0 = 0.2, p_1 = 0.2, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
   shift <- delta / sigma
   
   integrand1 <- function(x) {
-    return(dnorm(x + shift)*pnorm(x))
+    return(dnorm(x - shift)*pnorm(x))
   }  
   integrand2 <- function(x) {
-    return(dnorm(x + shift)*(pnorm(x))^2)
+    return(dnorm(x - shift)*(pnorm(x))^2)
   }  
 
   integrand3 <- function(x) {
-    return(dnorm(x)*(pnorm(x + shift))^2)
+    return(dnorm(x)*(pnorm(x - shift))^2)
   }  
 
   pi_x1 <- integrate(integrand1, -Inf, Inf)$value
@@ -34,7 +34,7 @@ moments <- function(p_0 = 0.2, p_1 = 0.2, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
   pi_x2 <- integrate(integrand2, -Inf, Inf)$value
   print(paste0("pi_x2 = ", pi_x2))
 
-  pi_x3 <- integrate(integrand3, -Inf, Inf)$value
+  pi_x3 <- 2*pi_x1 - 1 + integrate(integrand3, -Inf, Inf)$value
   print(paste0("pi_x3 = ", pi_x3))
   
   mu_u <- mu_0 + mu_1
@@ -43,7 +43,7 @@ moments <- function(p_0 = 0.2, p_1 = 0.2, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
   return(list(mean_u = mu_u, sigma_u = sigma_u))
 }
 
-mymoments <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1)
+mymoments <- moments(p_0 = 0.2, p_1 = 0.2, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1)
 print(mymoments)
 
 
