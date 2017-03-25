@@ -9,7 +9,7 @@ moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
     print(paste0("pi_t1 = ", pi_t1))
     pi_t2 <- (p_1 + 2/(1 + HR) * (q_0 * q_1 - 1) - (q_0^2 * q_1 - 1) / (2 + HR) ) / (p_0^2 * p_1)
     print(paste0("pi_t2 = ", pi_t2))
-    pi_t3 <- (p_0 * q_1^2 + 2 * q_1 * (q_0 * q_1 - 1) / (1 + HR) - (q_0 * q_1^2 - 1) / (2 + HR)) / (p_0 * p_1^2) 
+    pi_t3 <- (p_0 * q_1^2 + 2 * q_1 * (q_0 * q_1 - 1) / (1 + HR) - (q_0 * q_1^2 - 1) / (1 + 2*HR)) / (p_0 * p_1^2) 
     print(paste0("pi_t3 = ", pi_t3))
   }
   delta <- mu_1 - mu_0
@@ -43,9 +43,10 @@ moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
   return(list(mean_u = mu_u, sigma_u = sigma_u))
 }
 
-mymoments <- moments(p_0 = 0.2, p_1 = 0.2, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1)
+mymoments <- moments(p_0 = 0.3, p_1 = 0.2, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1)
 print(mymoments)
 
 
 
-
+## for evaluating pi_t2 - Wolfram alpha syntax
+## integrate (1 - exp(-a_0 v)) a_1 exp(-a_1 v) from v=u to t

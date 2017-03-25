@@ -1,8 +1,8 @@
 ---
 title: "Examine distribution of Mann Whitney statistics under non-null distribution"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
   word_document: default
 ---
 
@@ -55,8 +55,8 @@ Symbol        | Description
 ------------- | -----------------------------------------------------------------------------------------
 $x_{0k}$      | value of quantitative endpoint for k-th individal in reference group
 $x_{1l}$      | value of quantitative endpoint for l-th individal in treatment group
-$g_{i}(x)$    | probability density function of  qantitative endpoint in group $i$
-$G_{i}(x)$    | distribution function of qantitative endpoint in group $i$
+$g_{i}(x)$    | probability density function of quantitative endpoint in group $i$
+$G_{i}(x)$    | distribution function of quantitative endpoint in group $i$
 $\varphi(x)$  | probability density function of the standard normal distribution
 $\Phi(x)$     | distribution function of the standard normal distribution
 $\mu_i$       | mean in group $i$
@@ -103,22 +103,23 @@ Express $\pi_{t1}$, $\pi_{t2}$ and $\pi_{t3}$ in terms of the pdf, cdf, $p_0$, a
 \begin{eqnarray*}
   \pi_{t1} & = & \frac{P(t_{0k} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)}
 = \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\int_u^\tau f_1(v)dv du  \\
-& = &  \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\left( F_1(\tau) - F_1(u)\right)du
-= \frac{1}{p_0 p_1}\left( p_0 p_1 - \int_0^\tau f_0(u)F_1(u) du \right) \\
+& = &  \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\Big( F_1(\tau) - F_1(u)\Big)du \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - \int_0^\tau f_0(u)F_1(u) du \Big) \\
 \\
-\pi_{t2} & = &\frac{P(max(t_{0k}, t_{0k'}) < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{0k'} < \tau)P(t_{1l} < \tau)}
-  =   \frac{1}{p_0^2 p_1}\int_0^\tau 2f_0(u) F_0(u)\int_u^\tau f_1(v)dv du \\
-& = & \frac{1}{p_0^2 p_1}\int_0^\tau 2f_0(u) F_0(u) (F_1(\tau) - F_1(u)) du 
-  =   \frac{1}{p_0^2 p_1}\left(p_1 \int_0^\tau 2 f_0(u) F_0(u) du - \int_0^\tau 2 f_0(u) F_0(u) F_1(u) du \right) \\
-& = & \frac{1}{p_0^2 p_1}\left(p_1 F_0^2(u)|_0^\tau - F_0^2(u) F_1(u)|_0^\tau + \int_0^\tau F_0^2(u) f_1(u)du) \right)
-  =   \frac{1}{p_0^2 p_1}\int_0^\tau F_0^2(u) f_1(u)du) \\
+\pi_{t2} & = &\frac{P(max(t_{0k}, t_{0k'}) < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{0k'} < \tau)P(t_{1l} < \tau)} \\
+& = & \frac{1}{p_0^2 p_1} \int_0^\tau 2f_0(u) F_0(u)\int_u^\tau f_1(v)dv du \\
+& = & \frac{1}{p_0^2 p_1} \int_0^\tau 2f_0(u) F_0(u) (F_1(\tau) - F_1(u)) du  \\
+& = &  \frac{1}{p_0^2 p_1} \Big(p_1 \int_0^\tau 2 f_0(u) F_0(u) du - \int_0^\tau 2 f_0(u) F_0(u) F_1(u) du \Big) \\
+& = & \frac{1}{p_0^2 p_1} \Big(p_1 F_0^2(u)|_0^\tau - F_0^2(u) F_1(u)|_0^\tau + \int_0^\tau F_0^2(u) f_1(u)du) \Big) \\
+& = & \frac{1}{p_0^2 p_1} \int_0^\tau F_0^2(u) f_1(u)du \\
 \\
-\pi_{t3} & = &\frac{P(t_{0k}  < t_{1l} < t_{1l'} < \tau) + P(t_{0k}  < t_{1l'} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)}
-  =   \frac{2 P(t_{0k}  < t_{1l} < t_{1l'} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)} \\
-& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) \int_v^\tau f_1(w) dw dv du
-  =   \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) (F_1(\tau) - F_1(v)) dv du \\
-& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \left(p_1 (F_1(\tau) - F_1(u)) - \frac{1}{2}(F_1^2(\tau) - F_1^2(u)) \right)du \\
-& = & \frac{1}{p_0 p_1^2}\left(p_0 p_1^2 - 2 p_1 \int_0^\tau f_0(u) F_1(u) du +  \int_0^\tau f_0(u) F_1^2(u) du \right)
+\pi_{t3} & = &\frac{P(t_{0k}  < t_{1l} < t_{1l'} < \tau) + P(t_{0k}  < t_{1l'} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)} \\
+& = & \frac{2 P(t_{0k}  < t_{1l} < t_{1l'} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)} \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) \int_v^\tau f_1(w) dw dv du \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) (F_1(\tau) - F_1(v)) dv du \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \Big(p_1 (F_1(\tau) - F_1(u)) - \frac{1}{2}(F_1^2(\tau) - F_1^2(u)) \Big)du \\
+& = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2 p_1 \int_0^\tau f_0(u) F_1(u) du +  \int_0^\tau f_0(u) F_1^2(u) du \Big) \\
+\\
 \end{eqnarray*}
 
 Now make use of the fact that $t_{ik} \sim exp(\lambda_i)$, i. e. $f_i(t) = \lambda_i e^{-\lambda_i t}$ and 
@@ -126,41 +127,30 @@ $F_i(t) = 1- e^{-\lambda_i t}$.
 
 
 \begin{eqnarray*} 
-\pi_{t1} & = & \frac{1}{p_0 p_1}\left( p_0 p_1 - \int_0^\tau \lambda_0 e^{-\lambda_0 u} (1- e^{-\lambda_1 u})du \right) 
-= \frac{1}{p_0 p_1}\left(
-                         p_0 p_1 - p_0
-                         - \frac{\lambda_0}{\lambda_0 + \lambda_1} ( e^{-(\lambda_0 + \lambda_1)\tau}  - 1)
-                   \right) \\
-& = & \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( q_0 q_1  - 1) \right)
-= \frac{1}{p_0 p_1}\left( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( p_0 p_1  - p_0 - p_1)\right) \\
-& = & \frac{1}{p_0 p_1}\left(p_0 (p_1 - 1)(1-\frac{1}{1+\mathit{HR}}) + \frac{1}{1+\mathit{HR}} p_1 \right) \\
+\pi_{t1} & = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - \int_0^\tau \lambda_0 e^{-\lambda_0 u} (1- e^{-\lambda_1 u})du \Big) \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - p_0 - \frac{\lambda_0}{\lambda_0 + \lambda_1} ( e^{-(\lambda_0 + \lambda_1)\tau}  - 1) \Big) \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( q_0 q_1  - 1) \Big) \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( p_0 p_1  - p_0 - p_1)\Big) \\
+& = & \frac{1}{p_0 p_1}\Big(p_0 (p_1 - 1)(1-\frac{1}{1+\mathit{HR}}) + \frac{1}{1+\mathit{HR}} p_1 \Big) \\
 & = & \frac{1}{p_0 p_1(1+\mathit{HR})}(p_0 (p_1 - 1)\mathit{HR} + p_1) \\
 \\
-\pi_{t2} & = & \frac{1}{p_0^2 p_1}\int_0^\tau (1 - e^{-\lambda_0 u})^2 \lambda_1 e^{-\lambda_1 u} du
-  = \frac{1}{p_0^2 p_1}\left(
-                        \int_0^\tau \lambda_1 e^{-\lambda_0 u} du 
-                          - 2 \lambda_1 \int_0^\tau \lambda_1 e^{-(\lambda_0 + \lambda_1) u} du
-                          + \lambda_1 \int_0^\tau \lambda_1 e^{-(2\lambda_0 + \lambda_1) u} du
-                      \right) \\
-& = & \frac{1}{p_0^2 p_1}\left(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (e^{-(\lambda_0 + \lambda1)\tau} - 1) - \frac{\lambda_1}{2\lambda_0 + \lambda_1} (e^{-(2\lambda_0 + \lambda1)\tau} - 1)
-                      \right) \\
-                     
-& = & \frac{1}{p_0^2 p_1}\left(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (q_0 q_1 - 1) - \frac{\lambda_1}{2\lambda_0 + \lambda_1}(q_0^2 q_1 - 1)
-                         \right) \\
-
-& = & \frac{1}{p_0^2 p_1}\left(p_1 + \frac{2}{1 + \mathit{HR}} (q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0^2 q_1 - 1)
-                      \right) \\
-\pi_{t3} & = & \frac{1}{p_0 p_1^2}\left(p_0 p_1^2 - 2 p_1 \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})du + \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})^2du
-                                  \right) \\
-& = & \frac{1}{p_0 p_1^2}\left(p_0 p_1^2 - 2p_1(p_0 + \frac{\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1)) + (p_0 + \frac{2\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1)
-- \frac{\lambda_0}{\lambda_0 + 2\lambda_1}(e^{-(\lambda_0 + 2\lambda_1)\tau}) - 1) 
-                         \right) \\
-& = & \frac{1}{p_0 p_1^2}\left( p_0 p_1^2 - 2 p_0 p_1 + p_0
-+ \frac{2}{1 + \mathit{HR}} (1 - p_1) (q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1)
-                         \right) \\
-& = & \frac{1}{p_0 p_1^2}\left( p_0 q_1^2 + \frac{2}{1 + \mathit{HR}}q_1(q_0 q_1 - 1)
-- \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1)
-                         \right) \\
+\pi_{t2} & = & \frac{1}{p_0^2 p_1}\int_0^\tau (1 - e^{-\lambda_0 u})^2 \lambda_1 e^{-\lambda_1 u} du \\
+& = & \frac{1}{p_0^2 p_1}\Big( \int_0^\tau \lambda_1 e^{-\lambda_0 u} du - 2 \int_0^\tau \lambda_1 e^{-(\lambda_0 + \lambda_1) u} du \\
+&   & + \int_0^\tau \lambda_1 e^{-(2\lambda_0 + \lambda_1) u} du\Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (e^{-(\lambda_0 + \lambda1)\tau} - 1) \\
+&   & - \frac{\lambda_1}{2\lambda_0 + \lambda_1} (e^{-(2\lambda_0 + \lambda1)\tau} - 1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (q_0 q_1 - 1) - \frac{\lambda_1}{2\lambda_0 + \lambda_1}(q_0^2 q_1 - 1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2}{1 + \mathit{HR}} (q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0^2 q_1 - 1) \Big) \\
+\\
+\pi_{t3} & = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2 p_1 \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})du \\
+&   & \phantom{p_0 p_1^2} + \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})^2du \Big)\\
+& = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2p_1(p_0 + \frac{\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1)) \\
+&   & \phantom{p_0 p_1^2} + p_0 + \frac{2\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1) \\
+&   & \phantom{p_0 p_1^2} - \frac{\lambda_0}{\lambda_0 + 2\lambda_1}(e^{-(\lambda_0 + 2\lambda_1)\tau}) - 1) \Big) \\
+& = & \frac{1}{p_0 p_1^2}\Big( p_0 p_1^2 - 2 p_0 p_1 + p_0 + \frac{2}{1 + \mathit{HR}} (1 - p_1) (q_0 q_1 - 1) \\
+&   & \phantom{p_0 p_1^2} - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1) \Big) \\
+& = & \frac{1}{p_0 p_1^2}\Big( p_0 q_1^2 + \frac{2}{1 + \mathit{HR}}q_1(q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1) \Big) \\
+\\
 \end{eqnarray*}
 
 From the above defintions follows $X_{0k} \sim \mathcal{N}(\mu_0, \sigma^2)$, $X_{1l} \sim \mathcal{N}(\mu_1, \sigma^2)$ and $\delta = \mu_1 - \mu_0$ and hence
@@ -178,7 +168,7 @@ Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the st
 & = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma})\Phi^2(x) dx\\
 \pi_{x3} & = & P(X_{0k} < \min(X_{1l}, X_{1l'})) = P(Y_{0k} < \min(Y_{1l}, Y_{1l'})) \\
 & = & \int_{-\infty}^{\infty}\Phi(x) \cdot 2 \varphi(x - \frac{\delta}{\sigma}) (1 - \Phi(\frac{\delta}{\sigma}))dx\\
-& = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma}) \Phi(x) dx - \left( \Phi^2(y - \frac{\delta}{\sigma})\Phi(x)|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx\right)\\
+& = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma}) \Phi(x) dx - \Big( \Phi^2(y - \frac{\delta}{\sigma})\Phi(x)|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx\Big)\\
 & = & 2\pi_{x1} - 1 + \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx \\
 \\
 \end{eqnarray*}
