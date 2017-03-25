@@ -7,7 +7,7 @@ moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
     HR <- lambda_1 / lambda_0
     pi_t1 <- (p_0 * (p_1  - 1) * HR / (1 + HR) + p_1 / (1 + HR)) / (p_0 * p_1)
     print(paste0("pi_t1 = ", pi_t1))
-    pi_t2 <- (p_1 + 2/(1 + HR) * (q_0 * q_1 - 1) - (q_0^2 * q_1 - 1) / (2 + HR) ) / (p_0^2 * p_1)
+    pi_t2 <- (p_1 - 2 * HR / (1 + HR) * (1 - q_0 * q_1) + (1 - q_0^2 * q_1) * HR / (2 + HR) ) / (p_0^2 * p_1)
     print(paste0("pi_t2 = ", pi_t2))
     pi_t3 <- (p_0 * q_1^2 + 2 * q_1 * (q_0 * q_1 - 1) / (1 + HR) - (q_0 * q_1^2 - 1) / (1 + 2*HR)) / (p_0 * p_1^2) 
     print(paste0("pi_t3 = ", pi_t3))

@@ -137,10 +137,10 @@ $F_i(t) = 1- e^{-\lambda_i t}$.
 \pi_{t2} & = & \frac{1}{p_0^2 p_1}\int_0^\tau (1 - e^{-\lambda_0 u})^2 \lambda_1 e^{-\lambda_1 u} du \\
 & = & \frac{1}{p_0^2 p_1}\Big( \int_0^\tau \lambda_1 e^{-\lambda_0 u} du - 2 \int_0^\tau \lambda_1 e^{-(\lambda_0 + \lambda_1) u} du \\
 &   & + \int_0^\tau \lambda_1 e^{-(2\lambda_0 + \lambda_1) u} du\Big) \\
-& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (e^{-(\lambda_0 + \lambda1)\tau} - 1) \\
-&   & - \frac{\lambda_1}{2\lambda_0 + \lambda_1} (e^{-(2\lambda_0 + \lambda1)\tau} - 1) \Big) \\
-& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (q_0 q_1 - 1) - \frac{\lambda_1}{2\lambda_0 + \lambda_1}(q_0^2 q_1 - 1) \Big) \\
-& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2}{1 + \mathit{HR}} (q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0^2 q_1 - 1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (e^{-(\lambda_0 + \lambda_1)\tau} - 1) \\
+&   & - \frac{\lambda_1}{2\lambda_0 + \lambda_1} (e^{-(2\lambda_0 + \lambda_1)\tau} - 1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 - \frac{2\lambda_1}{\lambda_0 + \lambda_1} (1 - q_0 q_1) + \frac{\lambda_1}{2\lambda_0 + \lambda_1}(1 - q_0^2 q_1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 - \frac{2 \mathit{HR}}{1 + \mathit{HR}} (1 - q_0 q_1) + \frac{\mathit{HR}}{2 + \mathit{HR}}(1 - q_0^2 q_1) \Big) \\
 \\
 \pi_{t3} & = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2 p_1 \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})du \\
 &   & \phantom{p_0 p_1^2} + \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})^2du \Big)\\

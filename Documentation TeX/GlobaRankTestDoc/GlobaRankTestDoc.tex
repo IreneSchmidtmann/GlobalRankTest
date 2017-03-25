@@ -1,0 +1,212 @@
+%\documentclass{beamer}
+\documentclass[xcolor=pdftex,dvipsnames,table]{beamer}
+\usepackage[ngerman]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+%\usepackage{colortbl}
+
+\definecolor{lightgray}{gray}{0.9}
+
+
+\definecolor{UniBlue}{RGB}{128,161,201}
+\definecolor{UniDarkBlue}{RGB}{0,60,118}
+\definecolor{UniRed}{RGB}{193,0,43}
+
+\title{Non-inferiority Global Rank Test} %slide 1
+\author{Irene Schmidtmann}
+\date{March 25th, 2017}
+\begin{document}
+\maketitle
+\begin{frame} %slide 2
+\frametitle{Purpose}
+Determining $E(U)$ and $var(U)$ according to the formula from Matsouaka and Betensky
+\end{frame}
+
+\begin{frame} %slide 3
+\frametitle{Notation - General}
+%
+\begin{tabular}{|lp{8cm}|lp{20cm}}\hline
+Symbol               & Description \\
+\hline
+$i=0,1$              & denotes group, \\
+                     & $i=0$ denotes reference group, \\
+										 & $i=1$ denotes treatment group \\
+$n_i$                & sample size group in $i$ \\
+$n = n_0 + n_1$      & total sample size \\
+$\tau$               & time at which quantitative endpoint is determined \\
+\hline
+\end{tabular}
+
+Assuming exponential distributions for times to event and normal distributions with common variance for quantitative endpoint.
+
+\end{frame}
+%
+\begin{frame} %slide 4
+\frametitle{Notatation - Survival endpoint}
+\begin{tabular}{|lp{8cm}|lp{20cm}}\hline
+Symbol          & Description \\
+\hline
+$t_{0k}$        & time to event for k-th individal in reference group \\
+$t_{1l}$        & time to event for l-th individal in treatment group \\
+$f_{i}(t)$      & probability density function of time to event random variable in group $i$ \\
+$F_{i}(t)$      & distribution function of time to event random variable in group $i$ \\
+$S_{i}(t)$      & survivor function of time to event random variable in group $i$ \\
+$p_i$           & mortality in group $i$ at time $\tau$ \\
+$q_i= 1 - p_i$  & survival probability in group $i$ at time $\tau$ \\
+$d_{0k}$        & event indicator for k-th individal in reference group, i.e. $d_{0k}=1$ if $t_{0k} < \tau$, 0 otherwise \\
+$d_{1l}$        & event indicator for l-th individal in treatment group, i.e. $d_{1l}=1$ if $t_{1l} < \tau$, 0 otherwise \\
+$\lambda_i=\frac{-\log(q_i)}{\tau}$       & hazard in group $i$ \\
+$\mathit{HR}=\frac{\lambda_1}{\lambda_0}$ & hazard ratio \\
+\hline
+
+\end{tabular}
+\end{frame}
+%
+\begin{frame} %slide 5
+\frametitle{Notation - Quantitative endpoint}
+\begin{tabular}{|lp{8cm}|lp{20cm}}\hline
+Symbol        & Description \\
+\hline
+$x_{0k}$      & value of quantitative endpoint for k-th individal in reference group \\
+$x_{1l}$      & value of quantitative endpoint for l-th individal in treatment group \\
+$g_{i}(x)$    & probability density function of  quantitative endpoint in group $i$ \\
+$G_{i}(x)$    & distribution function of quantitative endpoint in group $i$ \\
+$\varphi(x)$  & probability density function of the standard normal distribution \\
+$\Phi(x)$     & distribution function of the standard normal distribution \\
+$\mu_i$       & mean in group $i$ \\
+$\sigma$      & common standard deviation \\
+$\delta = \mu_1 - \mu_0$       & difference between group means \\
+$\frac{\mu_1 - \mu_0}{\sigma}$ & effect size \\
+\hline
+
+\end{tabular}
+\end{frame}
+%
+%
+\begin{frame} %slide 6
+\frametitle{Formula by Matsouaka and Betensky}
+Matsouaka and Betensky derive a formula for mean and variance for the global rank test statistic U with the definitions for $\tilde{X_{0k}}$ and $\tilde{X_{1l}}$ from the paper.\\
+
+$U = \frac{1}{n_0 n_1}\sum_{k=1}^{n_0}\sum_{l=1}^{n_1}I(\tilde{X_{0k}} < \tilde{X_{1l}})$ \\
+
+Then expectation and variance are (not just for the case of identical distributions in both groups) given by:
+
+$\mu_U = E(U) = p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} = \pi_{U1}$
+
+$\sigma_U^2 = var(U) = (n_0 n_1)^{-1} (\pi_{U1} (1 - \pi_{U1}) +
+                                         (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + 
+                                         (n_1 - 1) (\pi_{U3} - \pi_{U1}^2))$
+where
+
+$\pi_{U1} = p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1}$
+
+$\pi_{U2} = p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2}$
+
+$\pi_{U3} = p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3}$
+
+\end{frame}
+%
+\begin{frame} %slide 7
+\frametitle{Formula by Matsouaka and Betensky continued}
+and
+
+$\pi_{t1} = P(t_{0k} < t_{1l} | d_{0k} = d_{1l} = 1)$
+
+$\pi_{t2} = P(t_{0k} < t_{1l}, t_{0k'} < t_{1l} | d_{0k} = d_{0k'} = d_{1l} = 1)$
+
+$\pi_{t3} = P(t_{0k} < t_{1l}, t_{0k} < t_{1l'} | d_{0k} = d_{1l} = d_{1l'} =1)$
+
+$\pi_{x1} = P(x_{0k} < x_{1l})$
+
+$\pi_{x2} = P(x_{0k} < x_{1l}, x_{0k'} < x_{1l})$
+
+$\pi_{x3} = P(x_{0k} < x_{1l}, x_{0k} < x_{1l'})$
+\end{frame}
+
+
+\begin{frame} %slide 8
+\frametitle{Terms in detail - $\pi_{t1}$}
+\begin{eqnarray*}
+  \pi_{t1} & = & \frac{P(t_{0k} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)}
+= \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\int_u^\tau f_1(v)dv du  \\
+& = &  \frac{1}{p_0 p_1}\int_0^\tau f_0(u)\Big( F_1(\tau) - F_1(u)\Big)du \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - \int_0^\tau f_0(u)F_1(u) du \Big) \\
+\\
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame} %slide 9
+\frametitle{Terms in detail - $\pi_{t2}$}
+\begin{eqnarray*}
+\pi_{t2} & = &\frac{P(max(t_{0k}, t_{0k'}) < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{0k'} < \tau)P(t_{1l} < \tau)} \\
+& = & \frac{1}{p_0^2 p_1} \int_0^\tau 2f_0(u) F_0(u)\int_u^\tau f_1(v)dv du \\
+& = & \frac{1}{p_0^2 p_1} \int_0^\tau 2f_0(u) F_0(u) (F_1(\tau) - F_1(u)) du  \\
+& = &  \frac{1}{p_0^2 p_1} \Big(p_1 \int_0^\tau 2 f_0(u) F_0(u) du - \int_0^\tau 2 f_0(u) F_0(u) F_1(u) du \Big) \\
+& = & \frac{1}{p_0^2 p_1} \Big(p_1 F_0^2(u)|_0^\tau - F_0^2(u) F_1(u)|_0^\tau + \int_0^\tau F_0^2(u) f_1(u)du) \Big) \\
+& = & \frac{1}{p_0^2 p_1} \int_0^\tau F_0^2(u) f_1(u)du \\
+\\
+\end{eqnarray*}
+\end{frame}
+
+
+\begin{frame} %slide 10
+\frametitle{Terms in detail - $\pi_{t3}$}
+\begin{eqnarray*}
+\pi_{t3} & = &\frac{P(t_{0k}  < t_{1l} < t_{1l'} < \tau) + P(t_{0k}  < t_{1l'} < t_{1l} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)} \\
+& = & \frac{2 P(t_{0k}  < t_{1l} < t_{1l'} < \tau)}{P(t_{0k} < \tau)P(t_{1l} < \tau)P(t_{1l'} < \tau)} \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) \int_v^\tau f_1(w) dw dv du \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \int_u^\tau f_1(v) (F_1(\tau) - F_1(v)) dv du \\
+& = & \frac{2}{p_0 p_1^2}\int_0^\tau f_0(u) \Big(p_1 (F_1(\tau) - F_1(u)) - \frac{1}{2}(F_1^2(\tau) - F_1^2(u)) \Big)du \\
+& = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2 p_1 \int_0^\tau f_0(u) F_1(u) du +  \int_0^\tau f_0(u) F_1^2(u) du \Big) \\
+\\
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame} %slide 11
+\frametitle{Distribution assumptions about $\pi_{t1}, \pi_{t2}, \pi_{t3}$}
+Now make use of the fact that $t_{ik} \sim exp(\lambda_i)$, i. e. $f_i(t) = \lambda_i e^{-\lambda_i t}$ and 
+$F_i(t) = 1- e^{-\lambda_i t}$.
+\end{frame}
+
+\begin{frame} %slide 12
+\frametitle{$\pi_{t1}$}
+\begin{eqnarray*} 
+\pi_{t1} & = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - \int_0^\tau \lambda_0 e^{-\lambda_0 u} (1- e^{-\lambda_1 u})du \Big) \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - p_0 - \frac{\lambda_0}{\lambda_0 + \lambda_1} ( e^{-(\lambda_0 + \lambda_1)\tau}  - 1) \Big) \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( q_0 q_1  - 1) \Big) \\
+& = & \frac{1}{p_0 p_1}\Big( p_0 p_1 - p_0 - \frac{1}{1 + \mathit{HR}} ( p_0 p_1  - p_0 - p_1)\Big) \\
+& = & \frac{1}{p_0 p_1}\Big(p_0 (p_1 - 1)(1-\frac{1}{1+\mathit{HR}}) + \frac{1}{1+\mathit{HR}} p_1 \Big) \\
+& = & \frac{1}{p_0 p_1(1+\mathit{HR})}(p_0 (p_1 - 1)\mathit{HR} + p_1) \\
+\\
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame} %slide 13
+\frametitle{$\pi_{t2}$}
+\begin{eqnarray*} 
+\pi_{t2} & = & \frac{1}{p_0^2 p_1}\int_0^\tau (1 - e^{-\lambda_0 u})^2 \lambda_1 e^{-\lambda_1 u} du \\
+& = & \frac{1}{p_0^2 p_1}\Big( \int_0^\tau \lambda_1 e^{-\lambda_0 u} du - 2 \int_0^\tau \lambda_1 e^{-(\lambda_0 + \lambda_1) u} du \\
+&   & + \int_0^\tau \lambda_1 e^{-(2\lambda_0 + \lambda_1) u} du\Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 + \frac{2\lambda_1}{\lambda_0 + \lambda_1} (e^{-(\lambda_0 + \lambda_1)\tau} - 1) \\
+&   & - \frac{\lambda_1}{2\lambda_0 + \lambda_1} (e^{-(2\lambda_0 + \lambda_1)\tau} - 1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 - \frac{2\lambda_1}{\lambda_0 + \lambda_1} (1 - q_0 q_1) + \frac{\lambda_1}{2\lambda_0 + \lambda_1}(1 - q_0^2 q_1) \Big) \\
+& = & \frac{1}{p_0^2 p_1}\Big(p_1 - \frac{2 \mathit{HR}}{1 + \mathit{HR}} (1 - q_0 q_1) + \frac{\mathit{HR}}{2 + \mathit{HR}}(1 - q_0^2 q_1) \Big) \\
+\\
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame} %slide 14
+\frametitle{$\pi_{t3}$}
+\begin{eqnarray*} 
+\pi_{t3} & = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2 p_1 \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})du \\
+&   & \phantom{p_0 p_1^2} + \int_0^\tau \lambda_0 e^{-\lambda_0 u}(1 - e^{-\lambda_1 u})^2du \Big)\\
+& = & \frac{1}{p_0 p_1^2}\Big(p_0 p_1^2 - 2p_1(p_0 + \frac{\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1)) \\
+&   & \phantom{p_0 p_1^2} + p_0 + \frac{2\lambda_0}{\lambda_0 + \lambda_1}(e^{-(\lambda_0 + \lambda_1)\tau} - 1) \\
+&   & \phantom{p_0 p_1^2} - \frac{\lambda_0}{\lambda_0 + 2\lambda_1}(e^{-(\lambda_0 + 2\lambda_1)\tau}) - 1) \Big) \\
+& = & \frac{1}{p_0 p_1^2}\Big( p_0 p_1^2 - 2 p_0 p_1 + p_0 + \frac{2}{1 + \mathit{HR}} (1 - p_1) (q_0 q_1 - 1) \\
+&   & \phantom{p_0 p_1^2} - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1) \Big) \\
+& = & \frac{1}{p_0 p_1^2}\Big( p_0 q_1^2 + \frac{2}{1 + \mathit{HR}}q_1(q_0 q_1 - 1) - \frac{1}{2 + \mathit{HR}}(q_0 q_1^2 - 1) \Big) \\
+\\
+\end{eqnarray*}
+\end{frame}
+\end{document}
