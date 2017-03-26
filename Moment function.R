@@ -1,4 +1,5 @@
-moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
+moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau = 1, 
+                    n_0 = 50, n_1 = 50){
   if (p_0 > 0 && p_1 > 0) {
     q_0 <- 1 - p_0
     q_1 <- 1 - p_1
@@ -37,16 +38,23 @@ moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau=1){
   pi_x3 <- 2*pi_x1 - 1 + integrate(integrand3, -Inf, Inf)$value
   print(paste0("pi_x3 = ", pi_x3))
   
-  mu_u <- mu_0 + mu_1
-  sigma_u <- 2 * sigma
+  pi_u1 <- p_0 * p_1 * pi_t1 + p_0 * q_1 + q_0 * q_1 * pi_x1
+  pi_u2 <- p_0^2 * q_1 + p_0^2 * p_1 * pi_t2 + 2 * p_0 * q_0 * q_1 * pi_x1 + q_0^2 * q_1 * pi_x2
+  pi_u3 <- p_0 * q_1^2 + p_0 * p_1^2 * pi_t3 + 2 * p_0 * p_1 * q_1 * pi_t1 + q_0 * q_1^2 * pi_x3
+  
+  mu_u <- pi_u1
+  sigma_u <- sqrt((pi_u1 * (1 - pi_u1) + (n_0 - 1)*(pi_u2 - pi_u1^2) + (n_1 - 1)*(pi_u3 - pi_u1^2)) / (n_0 * n_1) )
+    
   list(mu_u, sigma_u)
   return(list(mean_u = mu_u, sigma_u = sigma_u))
 }
 
-mymoments <- moments(p_0 = 0.3, p_1 = 0.2, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1)
+mymoments <- moments(p_0 = 0.0000001, p_1 = 0.0000001, mu_0 = 0.3, mu_1 = 0.3, sigma = 1, tau = 1, 
+                     n_0 = 48, n_1 = 96)
 print(mymoments)
 
-
+z_1 <- (0.5 - mymoments$mean_u) / mymoments$sigma_u
+print(z_1)
 
 ## for evaluating pi_t2 - Wolfram alpha syntax
 ## integrate (1 - exp(-a_0 v)) a_1 exp(-a_1 v) from v=u to t

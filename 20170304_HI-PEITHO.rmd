@@ -1,8 +1,8 @@
 ---
 title: "Examine distribution of Mann Whitney statistics under non-null distribution"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
   word_document: default
 ---
 
@@ -153,12 +153,15 @@ $F_i(t) = 1- e^{-\lambda_i t}$.
 \\
 \end{eqnarray*}
 
-From the above defintions follows $X_{0k} \sim \mathcal{N}(\mu_0, \sigma^2)$, $X_{1l} \sim \mathcal{N}(\mu_1, \sigma^2)$ and $\delta = \mu_1 - \mu_0$ and hence
+For $\pi_{x1}, \pi_{x2}$ and $\pi_{x3}$ note that
+$X_{0k} \sim \mathcal{N}(\mu_0, \sigma^2)$, $X_{1l} \sim \mathcal{N}(\mu_1, \sigma^2)$ and $\delta = \mu_1 - \mu_0$ and hence
 
 $Y_{0k}:=\frac{X_{0k} - \mu_0}{\sigma} \sim \mathcal{N}(0, 1)$ and $Y_{1l}:=\frac{X_{1l} - \mu_0}{\sigma} = \frac{X_{il} - \mu_1 + \delta}{\sigma} \sim \mathcal{N}( \frac{\delta}{\sigma}, 1)$
 
 
-Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the standard normal distribution.
+Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the standard normal distribution. 
+
+The following derivation actually holds for shift alternatives - not just for the normal distribution.
 
 \begin{eqnarray*}
 \pi_{x1} & = & P(X_{0k} < X_{1l}) = P(Y_{0k} < Y_{1l}) \\
@@ -168,8 +171,8 @@ Express $\pi_{x1}$, $\pi_{x2}$ and $\pi_{x3}$ in terms of the pdf, cdf of the st
 & = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma})\Phi^2(x) dx\\
 \pi_{x3} & = & P(X_{0k} < \min(X_{1l}, X_{1l'})) = P(Y_{0k} < \min(Y_{1l}, Y_{1l'})) \\
 & = & \int_{-\infty}^{\infty}\Phi(x) \cdot 2 \varphi(x - \frac{\delta}{\sigma}) (1 - \Phi(\frac{\delta}{\sigma}))dx\\
-& = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma}) \Phi(x) dx - \Big( \Phi^2(y - \frac{\delta}{\sigma})\Phi(x)|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx\Big)\\
-& = & 2\pi_{x1} - 1 + \int_{-\infty}^{\infty} \Phi^2(y - \frac{\delta}{\sigma}) \phi(x) dx \\
+& = & \int_{-\infty}^{\infty}\varphi(x - \frac{\delta}{\sigma}) \Phi(x) dx - \Big( \Phi^2(x - \frac{\delta}{\sigma})\Phi(x)|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \Phi^2(x - \frac{\delta}{\sigma}) \varphi(x) dx\Big)\\
+& = & 2\pi_{x1} - 1 + \int_{-\infty}^{\infty} \Phi^2(x - \frac{\delta}{\sigma}) \varphi(x) dx \\
 \\
 \end{eqnarray*}
 
