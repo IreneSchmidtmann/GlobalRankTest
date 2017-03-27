@@ -1,17 +1,25 @@
 moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau = 1, 
                     n_0 = 50, n_1 = 50){
+  q_0 <- 1 - p_0
+  q_1 <- 1 - p_1
+  # Non-null mortality risk in both groups
   if (p_0 > 0 && p_1 > 0) {
-    q_0 <- 1 - p_0
-    q_1 <- 1 - p_1
     lambda_0 <- -log(q_0) / tau
     lambda_1 <- -log(q_1) / tau
     HR <- lambda_1 / lambda_0
+    print(paste0("HR = ", HR))
     pi_t1 <- (p_0 * (p_1  - 1) * HR / (1 + HR) + p_1 / (1 + HR)) / (p_0 * p_1)
     print(paste0("pi_t1 = ", pi_t1))
     pi_t2 <- (p_1 - 2 * HR / (1 + HR) * (1 - q_0 * q_1) + (1 - q_0^2 * q_1) * HR / (2 + HR) ) / (p_0^2 * p_1)
     print(paste0("pi_t2 = ", pi_t2))
     pi_t3 <- (p_0 * q_1^2 + 2 * q_1 * (q_0 * q_1 - 1) / (1 + HR) - (q_0 * q_1^2 - 1) / (1 + 2*HR)) / (p_0 * p_1^2) 
     print(paste0("pi_t3 = ", pi_t3))
+  } else{
+    # if there is no mortality risk in at least one group then the terms with 
+    # pi_t1, pi_t2, and pi_t3 vanish, i. e. 
+    pi_t1 <- 0
+    pi_t2 <- 0
+    pi_t3 <- 0
   }
   delta <- mu_1 - mu_0
   print(delta)
@@ -49,12 +57,40 @@ moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau = 1
   return(list(mean_u = mu_u, sigma_u = sigma_u))
 }
 
-mymoments <- moments(p_0 = 0.0000001, p_1 = 0.0000001, mu_0 = 0.3, mu_1 = 0.3, sigma = 1, tau = 1, 
-                     n_0 = 48, n_1 = 96)
-print(mymoments)
+# Moments under the hypothesis that both treatments are identical
+mymoments_H_id <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.3, mu_1 = 0.3, sigma = 0.1, tau = 1, 
+                          n_0 = 48, n_1 = 96)
+print(mymoments_H_id)
 
-z_1 <- (0.5 - mymoments$mean_u) / mymoments$sigma_u
-print(z_1)
 
-## for evaluating pi_t2 - Wolfram alpha syntax
-## integrate (1 - exp(-a_0 v)) a_1 exp(-a_1 v) from v=u to t
+z_1_a <- qnorm(1 - 0.0294)
+
+
+# Moments under the hypothesis that both treatments have zero mortality but 
+# differ with respect to quantitative endpoint
+mymoments_H_diff1 <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.25, mu_1 = 0.3, sigma = 0.1, tau = 1, 
+                             n_0 = 48, n_1 = 96)
+print(mymoments_H_diff1)
+# Power for ordinary one-sided Mann-Whitney test
+power_H_diff1 <- pnorm((mymoments_H_diff1$mean_u - mymoments_H_id$mean_u) / mymoments_H_diff1$sigma_u - 
+                         z_1_a * mymoments_H_id$sigma_u / mymoments_H_diff1$sigma_u )
+print(power_H_diff1)
+
+noether_power <- pnorm((mymoments_H_diff1$mean_u - mymoments_H_id$mean_u) / mymoments_H_id$sigma_u - 
+                         z_1_a )
+print(noether_power)
+
+
+# Moments under the hypothesis that both treatments have identical non-zero mortality but 
+# differ with respect to quantitative endpoint
+mymoments_H_diff2 <- moments(p_0 = 0.1, p_1 = 0.1, mu_0 = 0.3, mu_1 = 0.25, sigma = 0.1, tau = 1, 
+                             n_0 = 48, n_1 = 96)
+print(mymoments_H_diff2)
+
+# Moments under the hypothesis that both treatments differ with respect to mortality and 
+# with respect to quantitative endpoint
+mymoments_H_diff3 <- moments(p_0 = 0.1, p_1 = 0.137, mu_0 = 0.3, mu_1 = 0.25, sigma = 0.1, tau = 1, 
+                             n_0 = 48, n_1 = 96)
+print(mymoments_H_diff3)
+
+
