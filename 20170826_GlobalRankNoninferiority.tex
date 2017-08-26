@@ -1,0 +1,286 @@
+%\documentclass{beamer}
+\documentclass[xcolor=pdftex,dvipsnames,table]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[english,ngerman]{babel}
+\usepackage{etex}
+\usepackage{amsmath,amsfonts, bbm, , nicefrac, amssymb}
+\usepackage{nccfoots}
+\usepackage{cmap}
+\usepackage{lmodern}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{colortbl,booktabs}
+\usepackage{microtype}
+\usepackage{subfigure}
+%\usepackage{tikz} % pgf wird mitgeladen
+%\usetikzlibrary{arrows}
+%\usefonttheme[onlymath]{serif}
+
+\xdefinecolor{darkblue}{rgb}{0.2,0.2,0.7}
+\xdefinecolor{bleu}{rgb}{0.7,0,0}
+\xdefinecolor{mauve}{rgb}{0.7,0,0.6}
+\xdefinecolor{darkgreen}{rgb}{0.1,0.6,0.3}
+
+\usepackage{xspace}
+\newcommand{\zB}{z.\,B.\xspace}
+
+%%%%%%%%%% meine Vorlage %%%%%%%%%%%%%%%%%%%%%%%%%
+%\mode<presentation>{
+%\usetheme{Rochester}
+%\usecolortheme{dolphin}% seahorse} %
+%\useinnertheme{rounded}
+%}
+%\setbeamercolor{title in head/foot}{fg=black, bg=blue!25}
+%\setbeamertemplate{footline}                                              % Inhalt der Fu?zeile
+%{
+  %\begin{beamercolorbox}[wd=\paperwidth,ht=2.3ex,dp=1.5ex,leftskip=1.1em,rightskip=1em]{title in head/foot}
+%  \usebeamerfont{title in head/foot}
+  %\insertshorttitle\hfill\insertframenumber/23%\insertpresentationendpage - funktioniert irgendwie nicht wegen \only...
+%  \end{beamercolorbox}
+%}
+%\beamertemplatetransparentcovereddynamic 
+%\beamertemplateballitem
+%\beamertemplatenavigationsymbolsempty
+%\setbeamercolor{alerted text}{fg=red!70!black}
+%\setbeameroption{show notes}
+
+%Die zu verwendenden Farben ergeben sich aus dem Design Manual:
+%Rot: 	   R: 193; G: 0; B: 43
+%Dunkelblau: R: 0; G: 60; B: 118
+%Hellblau: 	   R: 128; G: 161; B: 201
+ \definecolor{UniBlue}{RGB}{128,161,201}
+ \definecolor{UniDarkBlue}{RGB}{0,60,118}
+ \definecolor{UniRed}{RGB}{193,0,43}
+%	\setbeamercolor{title}{fg=UniBlue}
+%%%%%%%%%%%%%%% Ulrikes Vorlage %%%%%%%%%%%%%%%%%%%%%%
+\setbeamercolor{frametitle}{bg=UniBlue, fg=UniDarkBlue}%{bg=blue!12}
+\setbeamercolor{title}{bg=UniBlue, fg=UniDarkBlue}%{bg=blue!12}
+\setbeamercolor{block}{bg=UniBlue, fg=UniDarkBlue}%{bg=blue!12}
+\setbeamercolor{framefootline}{bg=UniBlue, fg=UniDarkBlue}%{bg=blue!12}
+\setbeamercovered{transparent}
+\setbeamercolor{item}{fg=UniRed}
+\setbeamertemplate{itemize item}[square]
+%\setbeamertemplate{footline}[page number]
+%\useinnertheme{circles}\useinnertheme{rounded}
+%\setbeamercovered{transparent}
+\beamertemplatenavigationsymbolsempty
+
+\setbeamertemplate{footline}                                              % Inhalt der Fu?zeile
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.3ex,dp=1.5ex,leftskip=1.1em,rightskip=1em]{title in head/foot}
+  \usebeamerfont{title in head/foot}
+  \insertshorttitle\hfill\insertframenumber%/\insertpresentationendpage
+  \end{beamercolorbox}
+}
+\setbeamercolor{title in head/foot}{bg=UniBlue, fg=UniDarkBlue}%{bg=blue!12,fg=darkblue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\beamertemplateballitem
+
+\setbeamercolor{alerted text}{fg=UniRed}%{fg=red!70!black}
+
+\title{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence 
+of death-censored observations} %slide 1
+\author{Irene Schmidtmann\inst{1} \and 
+Stavros Konstantinides\inst{2} \and 
+Harald Binder\inst{3}}
+
+\institute[University Medical Center Johannes-Gutenberg-University Mainz] % (optional, but mostly needed)
+{
+  \inst{1}%
+  Institute for Medical Biostatistics, Epidemiology and Informatics (IMBEI)
+  \and
+  \inst{2}%
+  Center for Thrombosis and Hemostasis Mainz (CTH)\\
+University Medical Center Johannes-Gutenberg-University Mainz
+\and
+\inst{3}%
+Institute for Medical Biometry and Statistics  \\
+University of Freiburg}
+
+\date{September 1st, 2017}
+
+\titlegraphic{\includegraphics[width=8cm]{Universitaetsmedizin.jpg}}%uni-imbei.jpg}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+%\linespread{1.5}
+
+%\frame{\titlepage} 
+
+\begin{frame}[plain] %title
+\titlepage
+\end{frame}
+
+\begin{frame} %slide 2
+\frametitle{The clinical problem}
+Aim:\\
+Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCDT) in patients with high risk pulmonary embolism against standard thrombolysis
+\begin{itemize}
+	\item Primary Endpoint: reduction of RV/LV ratio 24 hours after randomization
+	\item Testing for non-inferiority as new treatment
+	\begin{itemize}
+		\item is believed to be associated with lower bleeding risk than standard thrombolysis
+		\item but not necessarily superior wrt primary endpoint
+	\end{itemize}
+	\item Problem: There is a non-negligible risk of death within 24 hours
+	\begin{itemize}
+		\item Excluding patients who die is not advisable
+		\begin{itemize}
+			\item Contradicts ITT principle
+			\item May introduce bias
+			\item Reduces Power
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} %slide 3
+\frametitle{The situation in statistical terms}
+	\begin{itemize}
+		\item Quantitative endpoint determined at time $\tau$ \\
+    $X_{01}, \ldots, X_{0n_0}$  values of quantitative endpoint in group 0 (reference)\\
+    $X_{11}, \ldots, X_{1n_1}$  values of quantitative endpoint in group 1 (treatment) \\
+		\item Events and event times \\
+		$T_{i1}, \ldots, T_{in_i}$  event times in group $i$ \\
+    $D_{ik} = \begin{cases} 1 & \mbox{if } T_{ik} < \tau \\
+                            0 & \mbox{otherwise} 
+              \end{cases}$ \\
+		$q_i = S_i(\tau) $  survival probability in group $i$ at time $\tau$ \\
+		$p_i = 1 - q_i = P(D_{ik} = 1)$  cumulative mortality in group $i$ until time $\tau$ \\
+		\item If $D_{ik} = 1, X_{ik}$ cannot be observed
+\end{itemize}
+\end{frame}
+
+\begin{frame} %slide 4
+\frametitle{A possible solution}
+	\begin{itemize}
+		\item Combine quantiative endpoint and time to event outcome by using global ranks
+		\item Assumptions
+		\begin{itemize} 
+		  \item High values of quantitative variable are beneficial
+		  \item Death is worse than any quantitative outcome
+		  \item Early death is worse than later death.
+	\end{itemize}
+	\item Introduce new variable 
+	     $\tilde{X_{ik}} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with \\
+	     $\eta = min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$
+	\item Use $\tilde{X_{ik}}$ to determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{First Test}  %slide 3
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=0.4\textwidth,height=0.4\textheight]{figure/Figure1-1} 
+
+\end{knitrout}
+\end{frame}
+
+
+\begin{frame}[fragile]{First Test}
+
+OK, let's get started with just some text:
+
+
+
+BTW, the first element of \texttt{x} is 0.1449583. (Did you notice
+the use of\texttt{ \textbackslash{}Sexpr\{\}}?)
+\end{frame}
+
+\section{Second Test}
+\begin{frame}[fragile]{Second Test}
+
+Text is nice but let's see what happens if we make a couple of plots
+in our chunk:
+
+\begin{columns}
+    \begin{column}{.5\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=4cm,height=4cm]{figure/boring-plots-part1-1} 
+
+\end{knitrout}
+    \end{column}
+    \begin{column}{.5\linewidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=4cm,height=4cm]{figure/boring-plots-pat2-1} 
+
+\end{knitrout}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Third Test}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{par}\hlstd{(}\hlkwc{las}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{mar}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{.1}\hlstd{,}\hlnum{.1}\hlstd{))}  \hlcom{# tick labels direction}
+\hlkwd{boxplot}\hlstd{(x)}
+\hlkwd{hist}\hlstd{(x,}\hlkwc{main}\hlstd{=}\hlstr{''}\hlstd{,}\hlkwc{col}\hlstd{=}\hlstr{"blue"}\hlstd{,}\hlkwc{probability}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlkwd{lines}\hlstd{(}\hlkwd{density}\hlstd{(x),}\hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=0.45\textwidth]{figure/boring-plots-1} 
+\includegraphics[width=0.45\textwidth]{figure/boring-plots-2} 
+
+\end{knitrout}
+\end{frame}
+
+\end{document}
