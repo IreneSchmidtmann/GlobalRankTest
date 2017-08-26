@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.8.18)  25 MAR 2017 23:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.8.18)  26 MAR 2017 00:18
 entering extended mode
 **GlobaRankTestDoc.tex
 
@@ -952,17 +952,25 @@ Overfull \vbox (28.48746pt too high) detected at line 211
 
 [14
 
+] [15
+
+]
+Overfull \vbox (16.55742pt too high) detected at line 238
+ []
+
+[16
+
 ]
 \tf@nav=\write6
 \tf@toc=\write7
 \tf@snm=\write8
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 239.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
 
 ("C:\Dateien\Kooperative Projekte\CTH\Konstantinides\HI-PEITHO\Global Rank Test\Documentation TeX\GlobaRankTestDoc\Globa
 RankTestDoc.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 212.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 239.
 Package rerunfilecheck Info: File `GlobaRankTestDoc.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -970,13 +978,13 @@ Package rerunfilecheck Info: File `GlobaRankTestDoc.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 239.
  ) 
 Here is how much of TeX's memory you used:
- 17012 strings out of 493706
- 322377 string characters out of 3144574
- 414520 words of memory out of 3000000
- 19894 multiletter control sequences out of 15000+200000
+ 17020 strings out of 493706
+ 322447 string characters out of 3144574
+ 414518 words of memory out of 3000000
+ 19898 multiletter control sequences out of 15000+200000
  16618 words of font info for 59 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  56i,14n,55p,424b,561s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -988,9 +996,9 @@ nts/cm/cmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cms
 nts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progr
 am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb>
-Output written on GlobaRankTestDoc.pdf (14 pages, 195683 bytes).
+Output written on GlobaRankTestDoc.pdf (16 pages, 209258 bytes).
 PDF statistics:
- 424 PDF objects out of 1000 (max. 8388607)
- 29 named destinations out of 1000 (max. 500000)
+ 475 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

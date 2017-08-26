@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=982
-NormalPos.bottom=549
+NormalPos.right=1362
+NormalPos.bottom=413
 Class=LaTeXView
 Document=GlobaRankTestDoc.tex
 
 [Frame0_View0,0]
-TopLine=227
-Cursor=9255
+TopLine=9
+Cursor=707
 
 [SessionInfo]
 FrameCount=1
