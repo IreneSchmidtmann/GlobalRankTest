@@ -136,7 +136,7 @@ Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCD
 \end{frame}
 
 \begin{frame} %slide 3
-\frametitle{The situation in statistical terms}
+\frametitle{The statistical problem}
 	\begin{itemize}
 		\item Quantitative endpoint determined at time $\tau$ \\
     $X_{01}, \ldots, X_{0n_0}$  values of quantitative endpoint in group 0 (reference)\\
@@ -156,19 +156,110 @@ Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCD
 \frametitle{A possible solution}
 	\begin{itemize}
 		\item Combine quantiative endpoint and time to event outcome by using global ranks
+          (Felker and Maisel,Circ Heart Fail. 2010, 3:643-646)
 		\item Assumptions
 		\begin{itemize} 
 		  \item High values of quantitative variable are beneficial
 		  \item Death is worse than any quantitative outcome
 		  \item Early death is worse than later death.
 	\end{itemize}
+	\item Power and sample size formulae available for classical one-sided test
+        (Matsouaka RA, Betensky RA. Statist. Med. 2015, 34:406-431)
 	\item Introduce new variable 
 	     $\tilde{X_{ik}} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with \\
 	     $\eta = min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$
-	\item Use $\tilde{X_{ik}}$ to determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic
+	\item Use $\tilde{X_{ik}}$ to determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic \\
+  $$ U = \frac{1}{n_0 n_1} \sum_{k=1}^{n_0} \sum_{l=1}^{n_1}I(\tilde{X_{0k}} < \tilde{X_{il}}) $$
 \end{itemize}
 \end{frame}
 
+\begin{frame} %slide 5
+\frametitle{Properties of $U$ - Expectation}
+\begin{eqnarray*}
+  \mu(U) & = & P(\tilde{X_{0k}} < \tilde{X_{1l}})  \mbox{ for arbitrary } \tilde{X_{0k}}, \tilde{X_{1l}} \\
+         & = & p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
+         & = & \pi_{U1}\\
+  \mbox{with}   &   & \\
+  \pi_{X1} & = & P(X_{0k} < X_{1l}) \\
+  \pi_{T1} & = & P(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1)
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame} %slide 6
+\frametitle{Properties of $U$ - variance}
+\begin{eqnarray*}
+\sigma^2(U) & = & (n_0 n_1)^{-1} \big[ \pi_{U1} (1 - \pi_{U1}) + \\
+            &   &                 (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + 
+                                  (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big] \\
+  \mbox{with} &   & \\
+  \pi_{U2} & = & P(\tilde{X_{0k}} < \tilde{X_{1l}}, \tilde{X_{0k'}} < \tilde{X_{1l}}) \\
+           & = & p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
+  \pi_{X2} & = & P(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
+  \pi_{T2} & = & P(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
+  \pi_{U3} & = & P(\tilde{X_{0k}} < \tilde{X_{1l}}, \tilde{X_{0k}} < \tilde{X_{1l'}}) \\
+           & = & p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3} \\
+  \pi_{X3} & = & P(X_{0k} < X_{1l}, X_{0k} < X_{1l'}) \\
+  \pi_{T3} & = & P(T_{0k} < T_{1l}, T_{0k} < T_{1l'} | D_{0k} = D_{1l} = D_{1l'} =1)\\
+           &   & \mbox{for arbitrary } \tilde{X_{0k}}, \tilde{X_{0k'}}, \tilde{X_{1l}}, 
+                                      \tilde{X_{1l'}}, k \ne k', l \ne l'
+\end{eqnarray*}
+\end{frame}
+
+
+\begin{frame} %slide 7
+\frametitle{Properties of $U$ - asymptotics}
+It holds that
+  $$ U^{*} = \frac{U - \mu(U)}{\sigma^2(U)} \sim \mathcal{N} (0, 1)$$ asymptotically.\\
+\vspace{0.5cm}
+The necessesary terms can be computed if assumptions about the distribution of the quantitative endpoint and 
+event times are made.
+\end{frame}
+
+\begin{frame} %slide 8
+\frametitle{Test for non-inferiority}
+\begin{itemize}
+  \item $H_0:  
+  \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) \leq \frac{1}{2} - \epsilon$ \\
+  \item $H_1:  \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) > \frac{1}{2} - \epsilon $ \\
+  \item Reject $H_0$ at level $\alpha$ if
+        $$ \frac{U - (\frac{1}{2}- \epsilon)}{\sigma_0(U)}  > z_{1-\alpha} $$ 
+        where \\
+        $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ and \\
+        $\sigma_0^2(U)$  variance under $H_0$, specifically for 
+        $ \mu_0(U) =  \frac{1}{2} - \epsilon$ 
+\end{itemize}
+\end{frame}
+
+\begin{frame} %slide 9
+\frametitle{Determine power}
+\begin{eqnarray*}
+  1 - \beta & = & P(\frac{U - \mu_0(U)}{\sigma_0(U)}  > z_{1-\alpha} \mid H_1) \\
+            & = & P \left(\frac{U - \mu_1(U)}{\sigma_1(U)}  > z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} + 
+                    \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
+            & = & \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} + \frac{\epsilon}{\sigma_1(U)}\right) \mbox{ if } \mu_1(U) = \frac{1}{2}\\
+            & = & \Phi\bigg(- z_{1-\alpha} \textstyle \sqrt{\frac{\pi_{U1} (1 - \pi_{U1}) + (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + (n_1 - 1) (\pi_{U3} - \pi_{U1}^2)}{\frac{1}{12}(n_0 + n_1 + 1)}}  \\
+            &   & + \epsilon \textstyle \sqrt{\frac{12 n_0 n_1}{n_0 + n_1 + 1}}
+            \bigg) \\
+\end{eqnarray*}
+$\Rightarrow$ For given distributions of quantitative endpoint and event times (approximate) power can be computed.
+\end{frame}
+
+\begin{frame} %slide 10+
+\frametitle{Discussion}
+\begin{itemize}
+\item A global rank test is a possible solution to some of the problems arising from censoring by death.
+\item General problems with global rank test: \\
+      Interpretation of results difficult if the treatment with better quantitative outcomes also has higher mortality \\
+\item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
+$\Rightarrow$  Considering combination of non-inferiority margins for both endpoints in detail is desirable.
+\item Heterogeneity of patients has been not taken into account. \\
+      This might be tackled by introducing shared random effects linking mortality risk and quantitative endpoint.
+\end{itemize}
+\end{frame}
+
+
+    % \item $\sigma_1^2(U)$ variance under $H_1$, specifically for 
+    %       $ \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) = \frac{1}{2}$\\
 
 
 <<echo=FALSE, results='tex'>>=
