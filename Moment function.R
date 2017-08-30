@@ -57,8 +57,17 @@ moments <- function(p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau = 1
   return(list(mean_u = mu_u, sigma_u = sigma_u))
 }
 
+# Determine power for global rank test
+# - normal one-sided test for difference epsilon = 0
+# - non-inferiority (epsilon > 0)
+  # \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) \leq \frac{1}{2} - \epsilon$ \\
+  # \item $H_1:  \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) > \frac{1}{2} - \epsilon $ \\
+  power_gr <- function(epsilon, alpha, p_0 = 0.2, p_1 = 0.3, mu_0 = 1, mu_1 = 1, sigma = 1, tau = 1,
+                     n_0 = 50, n_1 = 50){
+}
+
 # Moments under the hypothesis that both treatments are identical
-mymoments_H_id <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.3, mu_1 = 0.3, sigma = 1, tau = 1, 
+mymoments_H_id <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.3, mu_1 = 0.3, sigma = 0.1, tau = 1, 
                           n_0 = 48, n_1 = 96)
 print(mymoments_H_id)
 
@@ -69,13 +78,13 @@ z_1_a <- qnorm(0.95)
 
 # Moments under the hypothesis that both treatments have zero mortality but 
 # differ with respect to quantitative endpoint
-mymoments_H_diff1 <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1, 
+mymoments_H_diff1 <- moments(p_0 = 0, p_1 = 0, mu_0 = 0.3, mu_1 = 0.25, sigma = 0.1, tau = 1, 
                              n_0 = 48, n_1 = 96)
 print(mymoments_H_diff1)
 power_H_diff1 <- pnorm(epsilon / mymoments_H_id$sigma_u - 
                          z_1_a * mymoments_H_diff1$sigma_u / mymoments_H_id$sigma_u)
 
-
+print(power_H_diff1)
 # Moments under the hypothesis that both treatments have identical non-zero mortality but 
 # differ with respect to quantitative endpoint
 mymoments_H_diff2 <- moments(p_0 = 0.1, p_1 = 0.1, mu_0 = 0.3, mu_1 = 0.25, sigma = 1, tau = 1, 
