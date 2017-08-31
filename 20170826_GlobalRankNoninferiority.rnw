@@ -115,13 +115,13 @@ University of Freiburg}
 \begin{frame} %slide 2
 \frametitle{The clinical problem}
 Aim:\\
-Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCDT) in patients with high risk pulmonary embolism against standard thrombolysis
+Compare a new technique of administering low-dose thrombolysis in patients with high risk pulmonary embolism against standard thrombolysis
 \begin{itemize}
 	\item Primary Endpoint: reduction of RV/LV ratio 24 hours after randomization
-	\item Testing for non-inferiority as new treatment
+	\item Testing for non-inferiority 
 	\begin{itemize}
-		\item is believed to be associated with lower bleeding risk than standard thrombolysis
-		\item but not necessarily superior wrt primary endpoint
+		\item New treatment is believed to be associated with lower bleeding risk than standard thrombolysis
+		\item But new treatment not necessarily superior wrt primary endpoint
 	\end{itemize}
 	\item Problem: There is a non-negligible risk of death within 24 hours
 	\begin{itemize}
@@ -209,9 +209,9 @@ Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCD
 \begin{frame} %slide 7
 \frametitle{Properties of $U$ - asymptotics}
 It holds that
-  $$ U^{*} = \frac{U - \mu(U)}{\sigma^2(U)} \sim \mathcal{N} (0, 1)$$ asymptotically.\\
+  $$ U^{*} = \frac{U - \mu(U)}{\sigma(U)} \sim \mathcal{N} (0, 1)$$ asymptotically.\\
 \vspace{0.5cm}
-The necessesary terms can be computed if assumptions about the distribution of the quantitative endpoint and 
+$\mu(U)$ and $\sigma(U)$ can be computed if assumptions about the distribution of the quantitative endpoint and 
 event times are made.
 \end{frame}
 
@@ -222,7 +222,7 @@ event times are made.
   \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) \leq \frac{1}{2} - \epsilon$ \\
   \item $H_1:  \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) > \frac{1}{2} - \epsilon $ \\
   \item Reject $H_0$ at level $\alpha$ if
-        $$ \frac{U - (\frac{1}{2}- \epsilon)}{\sigma_0(U)}  > z_{1-\alpha} $$ 
+        $$ \frac{U - \mu_0(U)}{\sigma_0(U)}  > z_{1-\alpha} $$ 
         where \\
         $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ and \\
         $\sigma_0^2(U)$  variance under $H_0$, specifically for 
@@ -237,7 +237,7 @@ event times are made.
             & = & P \left(\frac{U - \mu_1(U)}{\sigma_1(U)}  > z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} + 
                     \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
             & = & \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} + \frac{\epsilon}{\sigma_1(U)}\right) \mbox{ if } \mu_1(U) = \frac{1}{2}\\
-            & = & \Phi\bigg(- z_{1-\alpha} \textstyle \sqrt{\frac{\pi_{U1} (1 - \pi_{U1}) + (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + (n_1 - 1) (\pi_{U3} - \pi_{U1}^2)}{\frac{1}{12}(n_0 + n_1 + 1)}}  \\
+            & = & \Phi\bigg(z_{\alpha} \textstyle \sqrt{\frac{\pi_{U1} (1 - \pi_{U1}) + (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + (n_1 - 1) (\pi_{U3} - \pi_{U1}^2)}{\frac{1}{12}(n_0 + n_1 + 1)}}  \\
             &   & + \epsilon \textstyle \sqrt{\frac{12 n_0 n_1}{n_0 + n_1 + 1}}
             \bigg) \\
 \end{eqnarray*}
@@ -245,21 +245,23 @@ $\Rightarrow$ For given distributions of quantitative endpoint and event times (
 \end{frame}
 
 \begin{frame} %slide 10
-\frametitle{Example}
+\frametitle{Application to clinical problem}
 The following assumptions are made
 \begin{itemize}
   \item Quantitative endpoints $X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ) $
+  \item Under statndard treatment mean RV/LV reduction is exptected to be 0.3 with standard deviation 0.1
   \item A difference of $0.5 \sigma$ is deemed acceptable \\
         (non-inferiority margin in parametric terms if no censoring by death occured)
   \item These assumptions correspond to parametric hypotheses \\
         $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $\\
-        $H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $
+        $H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ \\
+        with $\mu_0 = 0.3$ and $\sigma = 0.1$
   \item $p_0 = p_1 = p, T_i \sim exp(\lambda_i)$
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] %slide 11
-\frametitle{Example - determine non-inferiority margin}
+\frametitle{Application to clinical problem - Determine non-inferiority margin}
 \begin{itemize}
 \item Determine non-parametric margin $\tilde{\epsilon}$ without censoring by death such that\\
         $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\epsilon}$ \\
@@ -277,16 +279,72 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 \end{frame}
 
 
-\begin{frame}[fragile] %slide 11
-\frametitle{Example - modification of margin depending on probability of death}
+\begin{frame}[fragile] %slide 12
+\frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
+
+<<powerplot, echo=FALSE, eval=TRUE,out.width='8cm',out.height='8cm'>>=
+library(xtable)
+library(latex2exp)
+source("PowerAndMoments.R") #include functions to compute moments and power
+# explore power for specific situation described above, varying the
+# probabiliy of death
+# sample size in each group
+n_0 <- seq(1:150)
+n_1 <- 2*n_0
+# chosen probabilities of death
+chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
+
+# vector to hold sample sizes 
+samplesize_80 <- c(rep(NA, length(chosen_ps)))
+names(samplesize_80) <- as.character(chosen_ps)
+
+# matrix to hold power for all combinations of probabilities of death and sample size
+MyPower.Matrix <- matrix(rep(NA, length(n_0)*length(chosen_ps)), ncol = length(chosen_ps))
+dimnames(MyPower.Matrix)[[2]] <- as.character(chosen_ps)
+
+# vector to hold non-inferiority margins corresponding to chosen situation
+epsilon_ps <- c(rep(NA, length(chosen_ps)))
+names(epsilon_ps) <- as.character(chosen_ps)
+
+for (p in chosen_ps) {
+  MyPower <- power_gr(alpha = 0.0294, 
+                      p_0_0 = p, p_1_0 = p, p_0_1 = p, p_1_1 = p, 
+                      mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3, 
+                      sigma = 0.1, tau = 1,
+                      n_0 = n_0, n_1 = n_1,
+                      verbose = FALSE)
+   MyPower.Matrix[, as.character(p)] <- MyPower$power
+   epsilon_ps[as.character(p)] <- MyPower$epsilon
+   index <- min(which(MyPower$power >= 0.8))
+   samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
+}
+
+# plot power as function of sample size and p
+plot(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", xlab = "Total sample size", 
+     ylab = "Power", lwd = 2, lty = 1, col = "black")
+my.lt <- c(rep(c(1, 2), 3))
+my.col <- c("black", rainbow(length(chosen_ps - 1), start = 0.5, end = 0))
+for (i in seq_along(chosen_ps[2:length(chosen_ps)])) {
+  lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])], 
+        lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
+}
+legend("bottomright", title = TeX('$p_0 = p_1$'), 
+       legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2, 
+       lty = my.lt, col = my.col )
+title(main = "Power and sample size by probality of censoring by death",
+      sub = "(1:2 allocation)")
+
+@
+\end{frame}
+
+\begin{frame}[fragile] %slide 13
+\frametitle{Application to clinical problem - Modification of margin depending on probability of death}
 
 <<xtable, echo=FALSE, results="asis">>=
-multiplier <- 0.5 - pnorm(-1/sqrt(8))
-p <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
-epsilon <- (1 - p)^2 * multiplier
-results <- data.frame(p, epsilon)
 library(xtable)
-print(xtable(results, digits = c(0, 2, 4)), include.rownames = FALSE)
+library(latex2exp)
+results <- data.frame(chosen_ps, epsilon_ps, samplesize_80)
+print(xtable(results, digits = c(0, 2, 4, 0)), include.rownames = FALSE)
 @
 \end{frame}
 
@@ -294,86 +352,23 @@ print(xtable(results, digits = c(0, 2, 4)), include.rownames = FALSE)
 \frametitle{Discussion}
 \begin{itemize}
 \item A global rank test is a possible solution to some of the problems arising from censoring by death.
-\item General problems with global rank test: \\
+\item Non-inferiority margin decreases with increasing probability of death.
+\item Power decreases with increasing probability of death.
+\item General problem with global rank test: \\
       Interpretation of results difficult if the treatment with better quantitative outcomes also has higher mortality \\
-\item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
-$\Rightarrow$  Considering combination of non-inferiority margins for both endpoints in detail is desirable.
-\item Heterogeneity of patients has been not taken into account. \\
-      This might be tackled by introducing shared random effects linking mortality risk and quantitative endpoint.
+for both endpoints in detail is desirable.
 \end{itemize}
 \end{frame}
 
-
-    % \item $\sigma_1^2(U)$ variance under $H_1$, specifically for 
-    %       $ \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) = \frac{1}{2}$\\
-
-
-<<echo=FALSE, results='tex'>>=
-# load libraries
-# library(knitr)
-library(xtable)
-x <- 1:10
-@
-
-
-
-
-\begin{frame}[fragile]{First Test}  %slide 3
-<<Figure1, echo=FALSE, out.width='0.4\\textwidth', out.height = '0.4\\textheight'>>=
-plot(x)
-# print(x)
-@
-\end{frame}
-
-
-\begin{frame}[fragile]{First Test}
-
-OK, let's get started with just some text:
-
-<<echo=FALSE,results='hide'>>=
-# some setup
-options(width = 60)  # make the printing fit on the page
-set.seed(1121)   # make the results repeatable
-
-# create some random numbers
-(x = rnorm(20))  
-mean(x);var(x)  
-@
-
-BTW, the first element of \texttt{x} is \Sexpr{x[1]}. (Did you notice
-the use of\texttt{ \textbackslash{}Sexpr\{\}}?)
-\end{frame}
-
-\section{Second Test}
-\begin{frame}[fragile]{Second Test}
-
-Text is nice but let's see what happens if we make a couple of plots
-in our chunk:
-
-\begin{columns}
-    \begin{column}{.5\linewidth}
-<<boring-plots-part1,echo=FALSE,eval=TRUE,out.width='4cm',out.height='4cm'>>=
-par(las=1,mar=c(4,4,.1,.1))  # tick labels direction
-boxplot(x) 
-@
-    \end{column}
-    \begin{column}{.5\linewidth}
-<<boring-plots-pat2,echo=FALSE,eval=TRUE,out.width='4cm',out.height='4cm'>>=
-par(las=1,mar=c(4,4,.1,.1))  # tick labels direction
-hist(x,main='',col="blue",probability=TRUE) 
-lines(density(x),col="red")
-@
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Third Test}
-<<boring-plots,fig.show='hold', fig.width=3, fig.height=3,out.width='0.45\\textwidth'>>=
-par(las=1,mar=c(4,4,.1,.1))  # tick labels direction
-boxplot(x) 
-hist(x,main='',col="blue",probability=TRUE) 
-lines(density(x),col="red")
-@
+\begin{frame} %slide 10+
+\frametitle{Outlook}
+\begin{itemize}
+\item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
+$\Rightarrow$  Considering combination of non-inferiority margins \item Heterogeneity of patients has been not taken into account. \\
+      This might be tackled by introducing shared random effects linking mortality risk and quantitative endpoint.
+\item Simulations to assess the validity of the derived formula
+\item Simulations by Matsouaka and Betensky for classical test let expect adequate approximation.
+\end{itemize}
 \end{frame}
 
 \end{document}

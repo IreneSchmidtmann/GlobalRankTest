@@ -166,13 +166,13 @@ University of Freiburg}
 \begin{frame} %slide 2
 \frametitle{The clinical problem}
 Aim:\\
-Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCDT) in patients with high risk pulmonary embolism against standard thrombolysis
+Compare a new technique of administering low-dose thrombolysis in patients with high risk pulmonary embolism against standard thrombolysis
 \begin{itemize}
 	\item Primary Endpoint: reduction of RV/LV ratio 24 hours after randomization
-	\item Testing for non-inferiority as new treatment
+	\item Testing for non-inferiority 
 	\begin{itemize}
-		\item is believed to be associated with lower bleeding risk than standard thrombolysis
-		\item but not necessarily superior wrt primary endpoint
+		\item New treatment is believed to be associated with lower bleeding risk than standard thrombolysis
+		\item But new treatment not necessarily superior wrt primary endpoint
 	\end{itemize}
 	\item Problem: There is a non-negligible risk of death within 24 hours
 	\begin{itemize}
@@ -260,9 +260,9 @@ Comparing ultrasound accelerated, catheter-directed, low-dose thrombolysis (USCD
 \begin{frame} %slide 7
 \frametitle{Properties of $U$ - asymptotics}
 It holds that
-  $$ U^{*} = \frac{U - \mu(U)}{\sigma^2(U)} \sim \mathcal{N} (0, 1)$$ asymptotically.\\
+  $$ U^{*} = \frac{U - \mu(U)}{\sigma(U)} \sim \mathcal{N} (0, 1)$$ asymptotically.\\
 \vspace{0.5cm}
-The necessesary terms can be computed if assumptions about the distribution of the quantitative endpoint and 
+$\mu(U)$ and $\sigma(U)$ can be computed if assumptions about the distribution of the quantitative endpoint and 
 event times are made.
 \end{frame}
 
@@ -273,7 +273,7 @@ event times are made.
   \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) \leq \frac{1}{2} - \epsilon$ \\
   \item $H_1:  \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) > \frac{1}{2} - \epsilon $ \\
   \item Reject $H_0$ at level $\alpha$ if
-        $$ \frac{U - (\frac{1}{2}- \epsilon)}{\sigma_0(U)}  > z_{1-\alpha} $$ 
+        $$ \frac{U - \mu_0(U)}{\sigma_0(U)}  > z_{1-\alpha} $$ 
         where \\
         $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ and \\
         $\sigma_0^2(U)$  variance under $H_0$, specifically for 
@@ -288,7 +288,7 @@ event times are made.
             & = & P \left(\frac{U - \mu_1(U)}{\sigma_1(U)}  > z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} + 
                     \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
             & = & \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} + \frac{\epsilon}{\sigma_1(U)}\right) \mbox{ if } \mu_1(U) = \frac{1}{2}\\
-            & = & \Phi\bigg(- z_{1-\alpha} \textstyle \sqrt{\frac{\pi_{U1} (1 - \pi_{U1}) + (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + (n_1 - 1) (\pi_{U3} - \pi_{U1}^2)}{\frac{1}{12}(n_0 + n_1 + 1)}}  \\
+            & = & \Phi\bigg(z_{\alpha} \textstyle \sqrt{\frac{\pi_{U1} (1 - \pi_{U1}) + (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) + (n_1 - 1) (\pi_{U3} - \pi_{U1}^2)}{\frac{1}{12}(n_0 + n_1 + 1)}}  \\
             &   & + \epsilon \textstyle \sqrt{\frac{12 n_0 n_1}{n_0 + n_1 + 1}}
             \bigg) \\
 \end{eqnarray*}
@@ -296,21 +296,23 @@ $\Rightarrow$ For given distributions of quantitative endpoint and event times (
 \end{frame}
 
 \begin{frame} %slide 10
-\frametitle{Example}
+\frametitle{Application to clinical problem}
 The following assumptions are made
 \begin{itemize}
   \item Quantitative endpoints $X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ) $
+  \item Under statndard treatment mean RV/LV reduction is exptected to be 0.3 with standard deviation 0.1
   \item A difference of $0.5 \sigma$ is deemed acceptable \\
         (non-inferiority margin in parametric terms if no censoring by death occured)
   \item These assumptions correspond to parametric hypotheses \\
         $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $\\
-        $H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $
+        $H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ \\
+        with $\mu_0 = 0.3$ and $\sigma = 0.1$
   \item $p_0 = p_1 = p, T_i \sim exp(\lambda_i)$
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile] %slide 11
-\frametitle{Example - determine non-inferiority margin}
+\frametitle{Application to clinical problem - Determine non-inferiority margin}
 \begin{itemize}
 \item Determine non-parametric margin $\tilde{\epsilon}$ without censoring by death such that\\
         $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\epsilon}$ \\
@@ -328,23 +330,33 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 \end{frame}
 
 
-\begin{frame}[fragile] %slide 11
-\frametitle{Example - modification of margin depending on probability of death}
+\begin{frame}[fragile] %slide 12
+\frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=8cm,height=8cm]{figure/powerplot-1} 
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}[fragile] %slide 13
+\frametitle{Application to clinical problem - Modification of margin depending on probability of death}
 
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Wed Aug 30 23:26:53 2017
+% Thu Aug 31 11:27:09 2017
 \begin{table}[ht]
 \centering
-\begin{tabular}{rr}
+\begin{tabular}{rrr}
   \hline
-p & epsilon \\ 
+chosen\_ps & epsilon\_ps & samplesize\_80 \\ 
   \hline
-0.00 & 0.1382 \\ 
-  0.01 & 0.1354 \\ 
-  0.02 & 0.1327 \\ 
-  0.05 & 0.1247 \\ 
-  0.10 & 0.1119 \\ 
-  0.20 & 0.0884 \\ 
+0.00 & 0.1382 & 138 \\ 
+  0.01 & 0.1354 & 147 \\ 
+  0.02 & 0.1327 & 153 \\ 
+  0.05 & 0.1247 & 177 \\ 
+  0.10 & 0.1119 & 225 \\ 
+  0.20 & 0.0884 & 372 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -355,82 +367,23 @@ p & epsilon \\
 \frametitle{Discussion}
 \begin{itemize}
 \item A global rank test is a possible solution to some of the problems arising from censoring by death.
-\item General problems with global rank test: \\
+\item Non-inferiority margin decreases with increasing probability of death.
+\item Power decreases with increasing probability of death.
+\item General problem with global rank test: \\
       Interpretation of results difficult if the treatment with better quantitative outcomes also has higher mortality \\
-\item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
-$\Rightarrow$  Considering combination of non-inferiority margins for both endpoints in detail is desirable.
-\item Heterogeneity of patients has been not taken into account. \\
-      This might be tackled by introducing shared random effects linking mortality risk and quantitative endpoint.
+for both endpoints in detail is desirable.
 \end{itemize}
 \end{frame}
 
-
-    % \item $\sigma_1^2(U)$ variance under $H_1$, specifically for 
-    %       $ \mu(U) = P(\tilde{X_{0k}} < \tilde{X_{1l}}) = \frac{1}{2}$\\
-
-
-
-
-
-
-
-\begin{frame}[fragile]{First Test}  %slide 3
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=0.4\textwidth,height=0.4\textheight]{figure/Figure1-1} 
-
-\end{knitrout}
-\end{frame}
-
-
-\begin{frame}[fragile]{First Test}
-
-OK, let's get started with just some text:
-
-
-
-BTW, the first element of \texttt{x} is 0.1449583. (Did you notice
-the use of\texttt{ \textbackslash{}Sexpr\{\}}?)
-\end{frame}
-
-\section{Second Test}
-\begin{frame}[fragile]{Second Test}
-
-Text is nice but let's see what happens if we make a couple of plots
-in our chunk:
-
-\begin{columns}
-    \begin{column}{.5\linewidth}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=4cm,height=4cm]{figure/boring-plots-part1-1} 
-
-\end{knitrout}
-    \end{column}
-    \begin{column}{.5\linewidth}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=4cm,height=4cm]{figure/boring-plots-pat2-1} 
-
-\end{knitrout}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Third Test}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{par}\hlstd{(}\hlkwc{las}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{mar}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{.1}\hlstd{,}\hlnum{.1}\hlstd{))}  \hlcom{# tick labels direction}
-\hlkwd{boxplot}\hlstd{(x)}
-\hlkwd{hist}\hlstd{(x,}\hlkwc{main}\hlstd{=}\hlstr{''}\hlstd{,}\hlkwc{col}\hlstd{=}\hlstr{"blue"}\hlstd{,}\hlkwc{probability}\hlstd{=}\hlnum{TRUE}\hlstd{)}
-\hlkwd{lines}\hlstd{(}\hlkwd{density}\hlstd{(x),}\hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\includegraphics[width=0.45\textwidth]{figure/boring-plots-1} 
-\includegraphics[width=0.45\textwidth]{figure/boring-plots-2} 
-
-\end{knitrout}
+\begin{frame} %slide 10+
+\frametitle{Outlook}
+\begin{itemize}
+\item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
+$\Rightarrow$  Considering combination of non-inferiority margins \item Heterogeneity of patients has been not taken into account. \\
+      This might be tackled by introducing shared random effects linking mortality risk and quantitative endpoint.
+\item Simulations to assess the validity of the derived formula
+\item Simulations by Matsouaka and Betensky for classical test let expect adequate approximation.
+\end{itemize}
 \end{frame}
 
 \end{document}
