@@ -253,7 +253,7 @@ For given distributions of quantitative endpoint and event times (approximate) p
 The following assumptions are made
 \begin{itemize}
   \item Quantitative endpoints $X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ) $
-  \item Under statndard treatment mean RV/LV reduction is exptected to be 0.3 with standard deviation 0.1
+  \item Under standard treatment mean RV/LV reduction is exptected to be 0.3 with standard deviation 0.1
   \item A difference of $0.5 \sigma$ is deemed acceptable \\
         (non-inferiority margin in parametric terms if no censoring by death occured)
   \item These assumptions correspond to parametric hypotheses \\
@@ -270,7 +270,7 @@ The following assumptions are made
 \item Determine non-parametric margin $\tilde{\epsilon}$ without censoring by death such that\\
         $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\epsilon}$ \\
         $H_1: P(X_0 < X_1) > \frac{1}{2} - \tilde{\epsilon}$ \\
-        As $P(X_0 \leq X_1) = \Phi(\frac{\mu_1 - \mu_0}{\sqrt{2}\sigma}) < \Phi(\frac{\epsilon^{*}}{\sqrt{2\sigma}}) = \Phi(-\frac{1}{\sqrt{8}}) $ \\
+        As $P(X_0 < X_1) = \Phi(\frac{\mu_1 - \mu_0}{\sqrt{2}\sigma}) < \Phi(\frac{\epsilon^{*}}{\sqrt{2}\sigma}) = \Phi(-\frac{1}{\sqrt{8}}) $ \\
       $\frac{1}{2} - \tilde{\epsilon} = \Phi(-\frac{1}{\sqrt{8}}) $ 
       $\Rightarrow \tilde{\epsilon} \approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}, \item Determine margin $\epsilon$ for global rank test
 \begin{eqnarray*}
@@ -286,7 +286,7 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 \begin{frame}[fragile] %slide 12
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
 
-<<powerplot, echo=FALSE, eval=TRUE,out.width='8cm',out.height='8cm'>>=
+<<powerplot, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7cm'>>=
 library(xtable)
 library(latex2exp)
 source("PowerAndMoments.R") #include functions to compute moments and power
@@ -369,7 +369,6 @@ print(xtable(results, digits = c(0, 2, 3, 0)),
 \item Power decreases with increasing probability of death.
 \item General problem with global rank test: \\
       Interpretation of results difficult if the treatment with better quantitative outcomes also has higher mortality \\
-for both endpoints in detail is desirable.
 \end{itemize}
 \end{frame}
 
@@ -377,7 +376,8 @@ for both endpoints in detail is desirable.
 \frametitle{Outlook}
 \begin{itemize}
 \item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
-$\Rightarrow$  Considering combination of non-inferiority margins \item Heterogeneity of patients has been not taken into account. \\
+$\Rightarrow$  Considering combination of non-inferiority margins for both endpoints in detail is desirable.
+\item Heterogeneity of patients has been not taken into account. \\
       This might be tackled by introducing shared random effects linking mortality risk and quantitative endpoint.
 \item Simulations to assess the validity of the derived formula
 \item Simulations by Matsouaka and Betensky for classical test let expect adequate approximation.
