@@ -375,6 +375,8 @@ names(epsilon_ps) <- as.character(chosen_ps)
 # place all four graphs nicely on one or two slides
 # adapt legend (lines correpond to $p_0$, mention somewhere that $p_1 = RR * p_0$)
 # The value of RR should be displayed somewhere
+par(mfrow = c(2, 2)) # construct panel of 2x2 graphs
+
 for (RR in c(1, 1.2, 1.5, 2)) {
 for (p in chosen_ps) {
   MyPower <- power_gr(alpha = 0.0294, 
