@@ -285,7 +285,6 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 
 \begin{frame}[fragile] %slide 12
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
-
 <<powerplot, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7cm'>>=
 library(xtable)
 library(latex2exp)
