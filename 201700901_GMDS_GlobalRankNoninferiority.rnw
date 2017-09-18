@@ -1,6 +1,4 @@
-%\documentclass{beamer}
 \documentclass[xcolor=pdftex,dvipsnames,table]{beamer}
-%\includeonlyframes{slide12,slide13}
 \usepackage[english,ngerman]{babel}
 \usepackage{etex}
 \usepackage{amsmath,amsfonts, bbm, , nicefrac, amssymb}
@@ -262,19 +260,20 @@ The following assumptions are made
 \begin{itemize}
   \item Quantitative endpoints $X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ) $
   \item Under standard treatment mean RV/LV reduction is exptected to be 0.3 with standard deviation 0.1
-  \item A difference of $0.5 \sigma$ is deemed acceptable \\
-        (non-inferiority margin in parametric terms if no censoring by death occured)
-  \item $\alpha = 0.0294$ as one interim analysis is planned (Pocock group sequential design)
   \item These assumptions correspond to parametric hypotheses \\
         $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $\\
         $H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ \\
         with $\mu_0 = 0.3$ and $\sigma = 0.1$
+  \item A difference of $0.5 \sigma$ is deemed acceptable \\
+        (non-inferiority margin in parametric terms, if no censoring by death occured)
+  \item $\alpha = 0.0294$ as one interim analysis is planned (Pocock group sequential design)
+  \item power = 0.8 \\
   \item $p_1 = RR \cdot p_0 , T_i \sim exp(\lambda_i)$
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}[label = slide11b,fragile] %slide 11b
+\begin{frame}[label = slide11,fragile] %slide 11
 \frametitle{Application to clinical problem - Determine non-inferiority margin, Step 1}
 Determine non-parametric margin $\tilde{\epsilon}$ without censoring by death such that
 \begin{eqnarray*}
@@ -287,7 +286,7 @@ H_1: P(X_0 < X_1) & >     & \frac{1}{2} - \tilde{\epsilon} \\
       $\Rightarrow \tilde{\epsilon} \approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}
 \end{frame}
 
-\begin{frame}[label = slide11a,fragile] %slide 11a
+\begin{frame}[label = slide12,fragile] %slide 12
 \frametitle{Application to clinical problem - Determine non-inferiority margin, Step 2}
 Determine margin $\epsilon$ for global rank test
 \begin{eqnarray*}
@@ -304,9 +303,9 @@ For $ p_0 = p_1 = p $ this simplifies to \\
 \end{frame}
 
 
-\begin{frame}[label=slide12b,fragile] %slide 12b
+\begin{frame}[label=slide13,fragile] %slide 13
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
-<<powerplot2, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7.5cm'>>=
+<<powerplot, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7.5cm'>>=
 source("PowerAndMoments.R") #include functions to compute moments and power
 # explore power for specific situation described above, varying the
 # probabiliy of death
@@ -315,6 +314,9 @@ n_0 <- seq(1:150)
 n_1 <- 2*n_0
 # chosen probabilities of death
 chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
+
+# chosen relative risks (treatment(1)  vs control(0) under H0)
+chosen_risks <- c(1, 1.2, 1.75, 2.5)
 
 # vector to hold sample sizes 
 samplesize_80 <- c(rep(NA, length(chosen_ps)))
@@ -328,149 +330,106 @@ dimnames(MyPower.Matrix)[[2]] <- as.character(chosen_ps)
 epsilon_ps <- c(rep(NA, length(chosen_ps)))
 names(epsilon_ps) <- as.character(chosen_ps)
 
-# To dos:
-# place all four graphs nicely on one or two slides
-# adapt legend (lines correpond to $p_0$, mention somewhere that $p_1 = RR * p_0$)
-# The value of RR should be displayed somewhere
-par(mfrow = c(2, 2)) # construct panel of 2x2 graphs
+# vector of datasets to hold combination of chosen p's, computed epsilon's and sample
+# sizes for power 80%
+results <- list()
 
-for (RR in c(1, 1.2, 1.75, 2.5)) {
-for (p in chosen_ps) {
-  MyPower <- power_gr(alpha = 0.0294, 
-                      p_0_0 = p, p_1_0 = RR*p, p_0_1 = p, p_1_1 = p, 
-                      mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3, 
-                      sigma = 0.1, tau = 1,
-                      n_0 = n_0, n_1 = n_1,
-                      verbose = FALSE)
-   MyPower.Matrix[, as.character(p)] <- MyPower$power
-   epsilon_ps[as.character(p)] <- MyPower$epsilon
-   index <- min(which(MyPower$power >= 0.8))
-   samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
-}
+par(mfcol = c(2, 2)) # construct panel of 2x2 graphs
 
-# plot power as function of sample size and p
-plot(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", xlab = "Total sample size", 
-     ylab = "Power", lwd = 2, lty = 1, col = "black")
-my.lt <- c(rep(c(1, 2), 3))
-my.col <- c("black", rainbow(length(chosen_ps - 1), start = 0.5, end = 0))
-for (i in seq_along(chosen_ps[2:length(chosen_ps)])) {
-  lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])], 
-        lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
-}
-legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"), 
-       legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2, 
-       lty = my.lt, col = my.col )
-title(main = paste0("RR = ", as.character(RR)),
-      sub = "(1:2 allocation)")
+for (RR in seq_along(chosen_risks)) {
+  for (p in chosen_ps) {
+    MyPower <- power_gr(alpha = 0.0294, 
+                        p_0_0 = p, p_1_0 = chosen_risks[RR]*p, p_0_1 = p, p_1_1 = p, 
+                        mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3, 
+                        sigma = 0.1, tau = 1,
+                        n_0 = n_0, n_1 = n_1,
+                        verbose = FALSE)
+     MyPower.Matrix[, as.character(p)] <- MyPower$power
+     epsilon_ps[as.character(p)] <- MyPower$epsilon
+     index <- min(which(MyPower$power >= 0.8))
+     samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
+  }
+  results[[RR]] <- data.frame(chosen_ps, epsilon_ps, samplesize_80)
+
+
+  # plot power as function of sample size and p
+  plot(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", xlab = "Total sample size", 
+       ylab = "Power", lwd = 2, lty = 1, col = "black")
+  my.lt <- c(rep(c(1, 2), 3))
+  my.col <- c("black", rainbow(length(chosen_ps - 1), start = 0.5, end = 0))
+  for (i in seq_along(chosen_ps[2:length(chosen_ps)])) {
+    lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])], 
+          lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
+  }
+  legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"), 
+         legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2, 
+         lty = my.lt, col = my.col )
+  title(main = paste0("RR = ", as.character(chosen_risks[RR])),
+        sub = "(1:2 allocation)")
 }
 @
 \end{frame}
 
-% ---------------------------------------------------------------------------
-% The following frame was experimental to test how to display graph and table
-% ---------------------------------------------------------------------------
-% \begin{frame}
-% \frametitle{Two Column Output}
-% \begin{columns}[c]
-% 
-% \column{0.6\textwidth}
-% <<powerplot01, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7cm'>>=
-% source("PowerAndMoments.R") #include functions to compute moments and power
-% # explore power for specific situation described above, varying the
-% # probabiliy of death
-% # sample size in each group
-% n_0 <- seq(1:150)
-% n_1 <- 2*n_0
-% # chosen probabilities of death
-% chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
-% 
-% # vector to hold sample sizes 
-% samplesize_80 <- c(rep(NA, length(chosen_ps)))
-% names(samplesize_80) <- as.character(chosen_ps)
-% 
-% # matrix to hold power for all combinations of probabilities of death and sample size
-% MyPower.Matrix <- matrix(rep(NA, length(n_0)*length(chosen_ps)), ncol = length(chosen_ps))
-% dimnames(MyPower.Matrix)[[2]] <- as.character(chosen_ps)
-% 
-% # vector to hold non-inferiority margins corresponding to chosen situation
-% epsilon_ps <- c(rep(NA, length(chosen_ps)))
-% names(epsilon_ps) <- as.character(chosen_ps)
-% 
-% for (p in chosen_ps) {
-%   MyPower <- power_gr(alpha = 0.0294, 
-%                       p_0_0 = p, p_1_0 = p, p_0_1 = p, p_1_1 = p, 
-%                       mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3, 
-%                       sigma = 0.1, tau = 1,
-%                       n_0 = n_0, n_1 = n_1,
-%                       verbose = FALSE)
-%    MyPower.Matrix[, as.character(p)] <- MyPower$power
-%    epsilon_ps[as.character(p)] <- MyPower$epsilon
-%    index <- min(which(MyPower$power >= 0.8))
-%    samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
-% }
-% 
-% # plot power as function of sample size and p
-% plot(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", xlab = "Total sample size", 
-%      ylab = "Power", lwd = 2, lty = 1, col = "black")
-% my.lt <- c(rep(c(1, 2), 3))
-% my.col <- c("black", rainbow(length(chosen_ps - 1), start = 0.5, end = 0))
-% for (i in seq_along(chosen_ps[2:length(chosen_ps)])) {
-%   lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])], 
-%         lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
-% }
-% legend("bottomright", title = TeX('$p_0 = p_1$'), 
-%        legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2, 
-%        lty = my.lt, col = my.col )
-% title(main = "Power and sample size by probality of censoring by death",
-%       sub = "(1:2 allocation)")
-% 
-% @
-% 
-% \column{0.4\textwidth}
-% <<xtable01, echo=FALSE, results="asis">>=
-% results <- data.frame(chosen_ps, epsilon_ps, samplesize_80)
-% 
-% colnames(results) <- c("p", "$\\epsilon$","$n_{total}$")
-% print(xtable(results, digits = c(0, 2, 3, 0)),
-%       include.rownames = FALSE,
-%       sanitize.colnames.function = function(x){x})
-% @
-% \end{columns}
-% 
-% \end{frame}
-
-\begin{frame}[label = slide13,fragile] %slide 13
+\begin{frame}[label = slide14,fragile] %slide 14
 \frametitle{Application to clinical problem - Modification of margin and sample size depending on probability of death}
-
-<<xtable, echo=FALSE, results="asis">>=
-# To dos:
-# Table should contain columns corresponding to sample sizes needed for each choice of $p_1$
-results <- data.frame(chosen_ps, epsilon_ps, samplesize_80)
-
-colnames(results) <- c("p", "$\\epsilon$","$n_{total}$")
-print(xtable(results, digits = c(0, 2, 3, 0)),
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+RR = \Sexpr{chosen_risks[1]}
+<<xtableA, echo=FALSE, results="asis">>=
+colnames(results[[1]]) <- c("$p_0$", "$\\epsilon$","$n_{total}$")
+print(xtable(results[[1]], digits = c(0, 2, 3, 0)),
+      scalebox = 0.75,
       include.rownames = FALSE,
       sanitize.colnames.function = function(x){x})
-
-# print(xtable(dt,digits=c(5,5,5,5,5,5,5,5,5), caption = "",align = rep("c",9)), 
-#       caption.placement = "top", include.rownames = FALSE, type = "latex", 
-#       sanitize.text.function = function(x) {x})
-
 @
+RR = \Sexpr{chosen_risks[2]}
+<<xtableB, echo=FALSE, results="asis">>=
+colnames(results[[2]]) <- c("$p_0$", "$\\epsilon$","$n_{total}$")
+print(xtable(results[[2]], digits = c(0, 2, 3, 0)),
+      scalebox = 0.75,
+      include.rownames = FALSE,
+      sanitize.colnames.function = function(x){x})
+@
+\end{column}%
+\hfill%
+\begin{column}{.48\textwidth}
+RR = \Sexpr{chosen_risks[3]}
+<<xtableC, echo=FALSE, results="asis">>=
+colnames(results[[3]]) <- c("$p_0$", "$\\epsilon$","$n_{total}$")
+print(xtable(results[[3]], digits = c(0, 2, 3, 0)),
+      scalebox = 0.75,
+      include.rownames = FALSE,
+      sanitize.colnames.function = function(x){x})
+@
+RR = \Sexpr{chosen_risks[4]}
+<<xtableD, echo=FALSE, results="asis">>=
+colnames(results[[4]]) <- c("$p_0$", "$\\epsilon$","$n_{total}$")
+print(xtable(results[[4]], digits = c(0, 2, 3, 0)),
+      scalebox = 0.75,
+      include.rownames = FALSE,
+      sanitize.colnames.function = function(x){x})
+@
+\end{column}%
+\end{columns}
 \end{frame}
 
-\begin{frame}[label = slide14] %slide 14
+\begin{frame}[label = slide15] %slide 15
 \frametitle{Discussion}
 \begin{itemize}
 \item A global rank test is a possible solution to some of the problems arising from censoring by death.
-\item Non-inferiority margin decreases with increasing probability of death.
-\item Power decreases with increasing probability of death.
+\item If relative risk is small (hazard ratio $\leq$ 1.764 in clinical example)
+\begin{itemize}
+  \item Non-inferiority margins decrease with increasing probability of death.
+  \item Power decreases with increasing probability of death.
+\end{itemize}
+\item Inverse effects for large relative risks.
+
 \item General problem with global rank test: \\
       Interpretation of results difficult if the treatment with better quantitative outcomes also has higher mortality \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label = slide15] %slide 15
+\begin{frame}[label = slide16] %slide 16
 \frametitle{Outlook}
 \begin{itemize}
 \item Only one non-inferiority margin for the combined endpoint may not be appropriate. \\
