@@ -363,7 +363,7 @@ title(main = "Power and sample size by probality of censoring by death",
 
 \begin{frame}[label=slide12b,fragile] %slide 12b
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
-<<powerplot2, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7cm'>>=
+<<powerplot2, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7.5cm'>>=
 source("PowerAndMoments.R") #include functions to compute moments and power
 # explore power for specific situation described above, varying the
 # probabiliy of death
@@ -371,7 +371,6 @@ source("PowerAndMoments.R") #include functions to compute moments and power
 n_0 <- seq(1:150)
 n_1 <- 2*n_0
 # chosen probabilities of death
-chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
 
 # vector to hold sample sizes 
 samplesize_80 <- c(rep(NA, length(chosen_ps)))
@@ -391,7 +390,7 @@ names(epsilon_ps) <- as.character(chosen_ps)
 # The value of RR should be displayed somewhere
 par(mfrow = c(2, 2)) # construct panel of 2x2 graphs
 
-for (RR in c(1, 1.2, 1.5, 2)) {
+for (RR in c(1, 1.2, 1.75, 2.5)) {
 for (p in chosen_ps) {
   MyPower <- power_gr(alpha = 0.0294, 
                       p_0_0 = p, p_1_0 = RR*p, p_0_1 = p, p_1_1 = p, 
@@ -414,10 +413,10 @@ for (i in seq_along(chosen_ps[2:length(chosen_ps)])) {
   lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])], 
         lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
 }
-legend("bottomright", title = TeX('$p_1 = $ RR$ \\cdot p_0$'), 
+legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"), 
        legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2, 
        lty = my.lt, col = my.col )
-title(main = TeX('$p_1 = RR*p_0$'),
+title(main = paste0("RR = ", as.character(RR)),
       sub = "(1:2 allocation)")
 }
 @

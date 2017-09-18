@@ -315,30 +315,44 @@ The following assumptions are made
         $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $\\
         $H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ \\
         with $\mu_0 = 0.3$ and $\sigma = 0.1$
-  \item $p_0 = p_1 = p, T_i \sim exp(\lambda_i)$
+  \item $p_1 = RR \cdot p_0 , T_i \sim exp(\lambda_i)$
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label = slide11,fragile] %slide 11
-\frametitle{Application to clinical problem - Determine non-inferiority margin}
-\begin{itemize}
-\item Determine non-parametric margin $\tilde{\epsilon}$ without censoring by death such that\\
-        $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\epsilon}$ \\
-        $H_1: P(X_0 < X_1) > \frac{1}{2} - \tilde{\epsilon}$ \\
-        As $P(X_0 < X_1) = \Phi(\frac{\mu_1 - \mu_0}{\sqrt{2}\sigma}) < \Phi(\frac{\epsilon^{*}}{\sqrt{2}\sigma}) = \Phi(-\frac{1}{\sqrt{8}}) $ \\
-      $\frac{1}{2} - \tilde{\epsilon} = \Phi(-\frac{1}{\sqrt{8}}) $ 
-      $\Rightarrow \tilde{\epsilon} \approx $ 0.1382, \item Determine margin $\epsilon$ for global rank test
+
+\begin{frame}[label = slide11b,fragile] %slide 11b
+\frametitle{Application to clinical problem - Determine non-inferiority margin, Step 1}
+Determine non-parametric margin $\tilde{\epsilon}$ without censoring by death such that
 \begin{eqnarray*}
-P(\tilde{X_0}  < \tilde{X_1}) & = & p^2 P(T_1 < T_2) + p(1-p) + (1 - p)^2 P(X_0 < X_1) \\
-& < & p - \frac{1}{2}p^2 + (1-p)^2 (\frac{1}{2} - \tilde{\epsilon}) \\
-& = & \frac{1}{2} - (1-p)^2 \tilde{\epsilon}
+H_0: P(X_0 < X_1) & \leq  & \frac{1}{2} - \tilde{\epsilon} \\
+H_1: P(X_0 < X_1) & >     & \frac{1}{2} - \tilde{\epsilon} \\
 \end{eqnarray*}
-and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}})$
-\end{itemize}
+        As \\
+        $P(X_0 < X_1) = \Phi(\frac{\mu_1 - \mu_0}{\sqrt{2}\sigma}) < \Phi(\frac{\epsilon^{*}}{\sqrt{2}\sigma}) = \Phi(-\frac{1}{\sqrt{8}}) $ \\
+      $\frac{1}{2} - \tilde{\epsilon} = \Phi(-\frac{1}{\sqrt{8}}) $ 
+      $\Rightarrow \tilde{\epsilon} \approx $ 0.1382
+\end{frame}
+
+\begin{frame}[label = slide11a,fragile] %slide 11a
+\frametitle{Application to clinical problem - Determine non-inferiority margin, Step 2}
+Determine margin $\epsilon$ for global rank test
+\begin{eqnarray*}
+P(\tilde{X_0}  < \tilde{X_1}) & =    & p_0 p_1 P(T_0 < T_1) + p_0 q_1 + q_0 q_1 P(X_0 < X_1) \\
+                              & \leq & \textstyle p_0 p_1 \frac{\lambda_0}{\lambda_0 + \lambda_1} + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(\frac{1}{2} - \tilde{\epsilon}) \\
+                              & = & \frac{1}{2} - \left( (1-p_0)(1-p_1) \tilde{\epsilon} + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) \right)
+\end{eqnarray*}
+with $ \gamma = \frac{1}{2} - \frac{\lambda_0}{\lambda_0 + \lambda_1} $ \\
+and hence \\
+$$ \epsilon =  (1-p_0)(1-p_1) \Phi(-\frac{1}{\sqrt{8}}) + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) $$
+
+For $ p_0 = p_1 = p $ this simplifies to \\
+ $$\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}})$$
 \end{frame}
 
 
-\begin{frame}[label=slide12,fragile] %slide 12
+
+
+\begin{frame}[label=slide12a,fragile] %slide 12a
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -347,11 +361,11 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 \end{knitrout}
 \end{frame}
 
-\begin{frame}[label=slide12,fragile] %slide 12
+\begin{frame}[label=slide12b,fragile] %slide 12b
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=7cm,height=7cm]{figure/powerplot2-1} 
+\includegraphics[width=7cm,height=7.5cm]{figure/powerplot2-1} 
 
 \end{knitrout}
 \end{frame}
@@ -433,7 +447,7 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 \frametitle{Application to clinical problem - Modification of margin and sample size depending on probability of death}
 
 % latex table generated in R 3.4.1 by xtable 1.8-2 package
-% Sat Sep 09 18:31:45 2017
+% Mon Sep 18 12:19:58 2017
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -441,11 +455,11 @@ and hence $\epsilon = (1-p)^2 \tilde{\epsilon} = (1-p)^2 \Phi(-\frac{1}{\sqrt{8}
 p & $\epsilon$ & $n_{total}$ \\ 
   \hline
 0.00 & 0.138 & 138 \\ 
-  0.01 & 0.139 & 138 \\ 
-  0.02 & 0.140 & 135 \\ 
-  0.05 & 0.143 & 129 \\ 
-  0.10 & 0.150 & 120 \\ 
-  0.20 & 0.168 & 93 \\ 
+  0.01 & 0.141 & 135 \\ 
+  0.02 & 0.144 & 129 \\ 
+  0.05 & 0.152 & 114 \\ 
+  0.10 & 0.169 & 90 \\ 
+  0.20 & 0.209 & 57 \\ 
    \hline
 \end{tabular}
 \end{table}
