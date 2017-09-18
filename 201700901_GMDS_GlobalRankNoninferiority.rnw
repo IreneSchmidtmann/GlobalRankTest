@@ -304,63 +304,6 @@ For $ p_0 = p_1 = p $ this simplifies to \\
 \end{frame}
 
 
-
-
-\begin{frame}[label=slide12a,fragile] %slide 12a
-\frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
-<<powerplot1, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7cm'>>=
-source("PowerAndMoments.R") #include functions to compute moments and power
-# explore power for specific situation described above, varying the
-# probabiliy of death
-# sample size in each group
-n_0 <- seq(1:150)
-n_1 <- 2*n_0
-# chosen probabilities of death
-chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
-
-# vector to hold sample sizes 
-samplesize_80 <- c(rep(NA, length(chosen_ps)))
-names(samplesize_80) <- as.character(chosen_ps)
-
-# matrix to hold power for all combinations of probabilities of death and sample size
-MyPower.Matrix <- matrix(rep(NA, length(n_0)*length(chosen_ps)), ncol = length(chosen_ps))
-dimnames(MyPower.Matrix)[[2]] <- as.character(chosen_ps)
-
-# vector to hold non-inferiority margins corresponding to chosen situation
-epsilon_ps <- c(rep(NA, length(chosen_ps)))
-names(epsilon_ps) <- as.character(chosen_ps)
-
-for (p in chosen_ps) {
-  MyPower <- power_gr(alpha = 0.0294, 
-                      p_0_0 = p, p_1_0 = p, p_0_1 = p, p_1_1 = p, 
-                      mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3, 
-                      sigma = 0.1, tau = 1,
-                      n_0 = n_0, n_1 = n_1,
-                      verbose = FALSE)
-   MyPower.Matrix[, as.character(p)] <- MyPower$power
-   epsilon_ps[as.character(p)] <- MyPower$epsilon
-   index <- min(which(MyPower$power >= 0.8))
-   samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
-}
-
-# plot power as function of sample size and p
-plot(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", xlab = "Total sample size", 
-     ylab = "Power", lwd = 2, lty = 1, col = "black")
-my.lt <- c(rep(c(1, 2), 3))
-my.col <- c("black", rainbow(length(chosen_ps - 1), start = 0.5, end = 0))
-for (i in seq_along(chosen_ps[2:length(chosen_ps)])) {
-  lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])], 
-        lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
-}
-legend("bottomright", title = TeX('$p_0 = p_1$'), 
-       legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2, 
-       lty = my.lt, col = my.col )
-title(main = "Power and sample size by probality of censoring by death",
-      sub = "(1:2 allocation)")
-
-@
-\end{frame}
-
 \begin{frame}[label=slide12b,fragile] %slide 12b
 \frametitle{Application to clinical problem - Dependence of power on sample size and probability of death}
 <<powerplot2, echo=FALSE, eval=TRUE,out.width='7cm',out.height='7.5cm'>>=
@@ -371,6 +314,7 @@ source("PowerAndMoments.R") #include functions to compute moments and power
 n_0 <- seq(1:150)
 n_1 <- 2*n_0
 # chosen probabilities of death
+chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
 
 # vector to hold sample sizes 
 samplesize_80 <- c(rep(NA, length(chosen_ps)))
