@@ -197,15 +197,10 @@ of death-censored observations}
   treatment and the intention is to show that the new treatment is non-inferior to the
   standard treatment.
   
-  If 
-  
-  
+
   
   Felker and Maisel [add reference] suggested.
   
-  This is normal body text. Please note that the body text must be divided into numbered sections with
-  suitable short verbal titles. Sub-headings are allowed but not sub-subheadings. Please use sentence case in the
-  headings.
 
   \section{Thrombolyis application}
   
@@ -217,6 +212,9 @@ of death-censored observations}
   
   
   \subsection{Second level heading}
+  This is normal body text. Please note that the body text must be divided into numbered sections with
+  suitable short verbal titles. Sub-headings are allowed but not sub-subheadings. Please use sentence case in the
+  headings.
   
   This is the body text. Please note that cross-references in the body text should be shown as follows:
   (Miller, 1900), (Miller and Baker, 1900) or if three or more authors (Miller {\it{et al}}., 1900)
