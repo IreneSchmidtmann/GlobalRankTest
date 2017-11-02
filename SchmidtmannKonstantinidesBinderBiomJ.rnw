@@ -138,7 +138,6 @@ of death-censored observations}
   
   
   
-  \editor{The Editor} %% experimental
   %% maketitle must follow the abstract.
   \maketitle                   % Produces the title.
   
@@ -171,9 +170,28 @@ of death-censored observations}
   this kind of missing values from analysis does not only decrease power but may also 
   introduce bias.
   
-  Worst-rank scores have been considered e. g. by Wittes et al(1989) and Lachin (1999) 
-  to tackle this problem. Lachin (1999) have shown that 
+  Worst-rank scores have been considered e. g. by Wittes et al (1989) and Lachin (1999) 
+  to tackle this problem. Without loss of generality we assume that higher values of 
+  the quantitative outcome are more favourable than lower values. We further assume 
+  that any quantitative outcome is better than death and that earlier death is worse 
+  than later death. This leads to an obvious ordering of outcomes which motivates the 
+  definition of worst-rank scores.
+  
+  Tied worst-rank scores are obtained by allocating a rank score corresponding to a single 
+  value below the minimum observed value of the quantitative endpoint. Untied worst-rank
+  scores can be obtained, if the time of death is taken into account. The lowest rank score
+  is then allocated to the patient that has died first, subsequent deceased individuals receive 
+  ranks according to their time of death. After the deceased have bean ranked the 
+  subsequent ranks are allocated to the surviving patients according to their quantitative outcome.
 
+  Lachin (1999) has shown that such an approach is unbiased against a restricted 
+  alternative which states that the new treatment is better with respect to both, 
+  mortality and the quantitative endpoint or at least better with respect to one 
+  criterion and equal with respect to the other.
+  
+  Matsouaka and Bentensky (2015 - add reference) have derived power and sample size formulae 
+  for this case, including as special case a normally distributed quantitative endpoint and 
+  exponentially distributed times to event.
   
   We here consider the situation where a new treatment is compared to a standard 
   treatment and the intention is to show that the new treatment is non-inferior to the
@@ -183,7 +201,6 @@ of death-censored observations}
   
   
   
-  to use a global rank endpoint to overcome this problem. 
   Felker and Maisel [add reference] suggested.
   
   This is normal body text. Please note that the body text must be divided into numbered sections with
