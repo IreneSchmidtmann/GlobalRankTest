@@ -168,8 +168,8 @@ of death-censored observations}
   death may occur if a patient dies before the quantitative outcome can be
   determined. Censoring by death leads to missing values which are most unlikely
   to be missing at random. Therefore, ignoring and excluding this kind of
-  missing values from analysis does not only decrease power but may also
-  introduce bias.
+  missing values from analysis does not only decrease power but may also lead to
+  biased estimates of treatment effect.
 
   Worst-rank scores have been considered e. g. by Wittes et al (1989) and Lachin
   (1999) to tackle this problem. Without loss of generality we assume that
@@ -194,51 +194,102 @@ of death-censored observations}
 
   Another view of this approach is to consider it as a global ranking of
   multiple endpoints, e. g. some kind of event - such as death - and some
-  quantitative measurement - such as a biomarker. This approached was originally
+  quantitative measurement - such as a biomarker. This approach was originally
   suggested by O'Brien (1984) for multiple endpoints and applied in cardiology
   e. g. by Felker at al (2008) and Felker and Maisel (2010) combining several
   binary and quantitative endpoints.
-
-  Matsouaka and Bentensky (2015) have derived power and sample size formulae for
-  this case, including as special case a normally distributed quantitative
-  endpoint and exponentially distributed times to event.
 
   We here consider the situation where a new treatment is compared to a standard
   treatment and the intention is to show that the new treatment is non-inferior
   to the standard treatment when comparing a quantitative measurement that may
   be censored by death. As above this corresponds to a one-sided hypothesis.
   The alternative hypothesis in this case states that the new treatment is
-  non-inferior when compared to the standard treatment with respect to both the
-  quantitative endpoint and the mortality risk.
+  non-inferior to the standard treatment with respect to both the quantitative
+  endpoint and the mortality risk.
 
-  \section{Thrombolyis application}
-  \textit{Prof. Konstantinides: please extend, shorten or generalize as you deem
-  fit. I don't want to give away too much information but give sufficient
+  Matsouaka and Bentensky (2015) have derived power and sample size formulae for
+  the one-sided test of the null hypothesis of equality against a restricted
+  alternative as described by Lachin (1999). They present specific formulae for
+  common distributions of quantitative endpoint and time to event, amongst them
+  a normally distributed quantitative endpoint and exponentially distributed
+  time to event.
+
+  However, to the best of our knowledge, so far no power or sample size formula
+  for the Wilcoxon-Mann-Whitney test for non-inferiority in the presence of
+  death-censored observations is available.
+
+  In section 2, we present the application, a clinical trial in pulmonary
+  embolism, that motivated our methodological work. The power formulae are
+  derived in section 3. Section 4 illustrates the application of the derived
+  formula to the planned clinical trial. A discussion and concluding remarks
+  are provided in Section 5.
+
+
+  \section{Thrombolysis application}
+  \textit{Prof. Konstantinides: please change, extend, shorten or generalize as
+  you deem fit. I don't want to give away too much information but give sufficient
   background for the reader to appreciate the medical context. If appropriate,
   please indicate a paper or two that should be referenced.}
 
   The methodological considerations presented in this paper were motivated by
   planning a clinical trial studying treatment of high risk pulmonary embolism
-  patients. The standard would be to administer standard-dose systemic
+  patients.
+
+  In this trial, the standard would be to administer standard-dose systemic
   thrombolytic treatment. The new experimental treatment would be catheter
   controlled low dose thrombolysis. RV/LV diameter ratio 24 hours after the
   intervention was considered a suitable primary endpoint. Unfortunately, fatal
-  outcomes do occur in patients with this condition. Therefore taking into
-  account censoring by death of the quantitative endpoint was necessary. While
-  little difference in the primary endpoint was expected the perceived benefit
-  of the low dose thrombolysis would be lower bleeding risk.
+  outcomes do occur within hours after treatment in patients with this condition.
+  This precludes the observation of the RV/LV diameter ratio 24 hours after the
+  intervention. Therefore, taking into account censoring by death of the
+  quantitative endpoint was necessary.
 
-  This led to planning the analysis by means of a Wilcoxon-Mann-Whitney test for
-  non-inferiority in the presence of death-censored observations.
-
-and consequently the sample size
-
+  While little difference in the primary endpoint and mortality was expected,
+  the potential benefit of the low dose thrombolysis would be lower bleeding
+  risk. Therefore, as primary endpoint analysis, we chose to test for
+  non-inferiority and to apply a Wilcoxon-Mann-Whitney test for non-inferiority
+  in the presence of death-censored observations.
 
   \section{Methods}
+  Let the quantitative endpoint be determined at time $\tau (\tau > 0)$. Let
+  further $X_{01}, \ldots, X_{0n_0}$ denote the values of the quantitative endpoint
+  in the reference group with standard treatment (group 0) and $X_{11}, \ldots, X_{1n_1}$
+  the values of the quantitative endpoint in the group with the new experimental
+  treatment (group 1). The event times in group $i$ are given by
+  $T_{i1}, \ldots, T_{in_i}$. Let $D_{ik} = 1$ indicate that subject $k$ in
+  group $i$ dies before the quantitative endpoint $X_{ik}$ can be determined,
+  i. e. $D_{ik} = 1$ if $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival
+  probability in group $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$.
+  Accordingly, the cumulative mortality in group $i$ up to time $\tau$ is given
+  by $p_i = 1 - q_i = P(D_{ik} = 1)$.
+
+  Here, without loss of generality, we assume that high values of $X_{ik}$ are
+  favourable. Otherwise we could consider $-X_{ik}$. We further assume that
+  death is worse than any quantitative outcome and - in the untied worst rank
+  case - that early death is worse thant later death.
+
+  \subsection{Untied case}
+  Following Matsouka and Betensky (2015), we introduce a new variable
+  $\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
+	$\eta = min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$.
+	This variable is constructed such that all patients who die before time $\tau$
+	have lower values then the patients who survive to have the quantitative
+	endpoint $X_{ik}$ determined. The patient that dies first has the lowest
+	value, then the other deseased patients follow according to their times
+	of death. For those patients who survive, $\widetilde{X}_{ik}$ is the observed
+	value of the quantitative endpoint. The $\widetilde{X}_{ik}$ are used to
+	determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic
+	$ U = (\sum_{k=1}^{n_0}
+	  \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{il})) / n_0 n_1  $
 
   \section{Application}
 
   \section{Discussion}
+  \begin{itemize}
+  \item interpretation of conflicting results
+  \item choice of mortality rate (too high --> rather choose mortality as endpoint)
+\end{itemize}
+
 
 
   \subsection{Second level heading}
@@ -315,11 +366,11 @@ and consequently the sample size
 
   \bibitem[O'Brien(1984) O'Brien, P. C.]{bib3} O'Brien, P. C. (1984) Procedures for comparing samples with multiple endpoints. \textit{Biometrics} \textbf{40}, 1079 – 1087.
 
-\bibitem[Felker et al(2008) Felker, G. M., Anstrom, K. J., Rogers, J. G.]{bib4} Felker, G. M., Anstrom, K. J., Rogers, J. G. A. (2008) global ranking approach to end points in trials of mechanical circulatory support devices.\textit{Journal of Cardiac Failure} \textbf{14}, 368 – 372.
+\bibitem[Felker et al(2008) Felker, G. M., Anstrom, K. J., Rogers, J. G.]{bib4} Felker, G. M., Anstrom, K. J., Rogers, J. G. A. (2008) global ranking approach to end points in trials of mechanical circulatory support devices. \textit{Journal of Cardiac Failure} \textbf{14}, 368 – 372.
 
-\bibitem[Felker and Maisel(2010) Felker, g. M. and Maisel, A. S.]{bib5} Felker, G. M. and Maisel, A. S. (2010) A Global Rank End Point for Clinical Trials in Acute Heart Failure\textit{Circulation: Heart Failure} \textbf{3}, 643 - 646.
+\bibitem[Felker and Maisel(2010) Felker, G. M., Maisel, A. S.]{bib5} Felker, G. M., Maisel, A. S. (2010) A Global Rank End Point for Clinical Trials in Acute Heart Failure. \textit{Circulation: Heart Failure} \textbf{3}, 643 - 646.
 
-\bibitem[Matsouaka and Betensky(2015) Matsouaka, R. A., Betensky, R. A.]{bib6} Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for the Wilcoxon–Mann–Whitney test in the presence of death-censored observations\textit{Statistics in Medicine} \textbf{34}, 406 – 431.
+\bibitem[Matsouaka and Betensky(2015) Matsouaka, R. A., Betensky, R. A.]{bib6} Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for the Wilcoxon–Mann–Whitney test in the presence of death-censored observations. \textit{Statistics in Medicine} \textbf{34}, 406 – 431.
 
 %\bibitem[]{bib} \textit{} \textbf{}, –.
 
