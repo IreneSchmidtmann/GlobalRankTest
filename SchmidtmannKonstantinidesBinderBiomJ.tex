@@ -245,25 +245,38 @@ of death-censored observations}
   Another view of this approach is to consider it as a global ranking of
   multiple endpoints, e. g. some kind of event - such as death - and some
   quantitative measurement - such as a biomarker. This approached was originally
-  suggested by O'Brien (1984 - add reference
-  // O’Brien PC. Procedures for comparing samples with multiple endpoints.
-     Biometrics. 1984;40:1079 –1087. //) for multiple endpoints and
-  applied in cardiology by Felker and Maisel [add reference] and
+  suggested by O'Brien (1984) for multiple endpoints and applied in cardiology
+  e. g. by Felker at al (2008) and Felker and Maisel (2010) combining several
+  binary and quantitative endpoints.
 
-  Felker GM, Anstrom KJ, Rogers JG. A global ranking approach to end
-points in trials of mechanical circulatory support devices. J Card Fail.
-2008;14:368 –372.
-
-  Matsouaka and Bentensky (2015 - add reference) have derived power and sample
-  size formulae for this case, including as special case a normally distributed
-  quantitative endpoint and exponentially distributed times to event.
+  Matsouaka and Bentensky (2015) have derived power and sample size formulae for
+  this case, including as special case a normally distributed quantitative
+  endpoint and exponentially distributed times to event.
 
   We here consider the situation where a new treatment is compared to a standard
   treatment and the intention is to show that the new treatment is non-inferior
-  to the standard treatment. As in the
-
+  to the standard treatment when comparing a quantitative measurement that may
+  be censored by death. As above this corresponds to a one-sided hypothesis.
+  The alternative hypothesis in this case states that the new treatment is
+  non-inferior when compared to the standard treatment with respect to both the
+  quantitative endpoint and the mortality risk.
 
   \section{Thrombolyis application}
+  \textit{Prof. Konstantinides: please extend, shorten or generalize as you deem
+  fit. I don't want to give away too much information but give sufficient
+  background for the reader to appreciate the medical context. If appropriate,
+  please indicate a paper or two that should be referenced.}
+
+  The methodological considerations presented in this paper were motivated by
+  planning a clinical trial studying treatment of high risk pulmonary embolism
+  patients. The standard would be to administer standard-dose systemic
+  thrombolytic treatment. The new experimental treatment would be catheter
+  controlled low dose thrombolysis. RV/LV diameter ratio 24 hours after the
+  intervention was considered a suitable primary endpoint. Unfortunately, fatal
+  outcomes do occur in patients with this condition. Therefore taking into
+  account censoring by death of the quantitative endpoint was necessary. While
+  little difference in the primary endpoint was expected the perceived benefit
+  of the low dose thrombolysis would be lower bleeding risk.
 
   \section{Methods}
 
@@ -339,14 +352,21 @@ points in trials of mechanical circulatory support devices. J Card Fail.
   Please insert appendices before the references.
 
   \begin{thebibliography}{10}
-  \bibitem[Lachin(1999)Lachin, J. L]{bib1}Lachin, J. L. (1999) Worst-rank score analysis with informatively missing observations in clinical trials.  \textit{Controlled Clinical Trials} \textbf{20}, 408–422.
 
-  \bibitem[Wittes et al(1989)Wittes, J., Lakatos, E., and Probstfield, J.]{bib2}Wittes, J., Lakatos, E., and Probstfield, J. (1989) Surrogate endpoints in clinical trials: cardiovascular diseases. \textit{Statistics in Medicine} \textbf{8}, 415–425.
+  \bibitem[Lachin(1999)Lachin, J. L]{bib1}Lachin, J. L. (1999) Worst-rank score analysis with informatively missing observations in clinical trials.  \textit{Controlled Clinical Trials} \textbf{20}, 408 – 422.
 
+  \bibitem[Wittes et al(1989)Wittes, J., Lakatos, E., and Probstfield, J.]{bib2}Wittes, J., Lakatos, E., and Probstfield, J. (1989) Surrogate endpoints in clinical trials: cardiovascular diseases. \textit{Statistics in Medicine} \textbf{8}, 415 – 425.
 
-%\bibitem[Bauer and Bauer(1994)Bauer, P. and Bauer, M.M.]{bib1}Bauer, P. and  Bauer, M. M. (1994). Testing equivalence simultaneously for location and  dispersion of two normally distributed populations.  \textit{Biometrical  Journal} \textbf{36}, 643--660.
-%  \bibitem[Farrington, C. P. and Andrews, N. (2003)]{bib2}Farrington, C.P. and Andrews, N. (2003). Outbreak detection:   Application to infectious disease surveillance. In: Monitoring the Health of Populations (eds. R. Brookmeyer and D. F. Stroup), Oxford University Press, Oxford,\break 203--231.
-  \bibitem[Rencher(1998)Rencher, A.C.]{bib3}Rencher, A. C. (1998).  \textit{Multivariate Statistical Inference and Applications}. Wiley, New  York.
+  \bibitem[O'Brien(1984) O'Brien, P. C.]{bib3} O'Brien, P. C. (1984) Procedures for comparing samples with multiple endpoints. \textit{Biometrics} \textbf{40}, 1079 – 1087.
+
+\bibitem[Felker et al(2008) Felker, G. M., Anstrom, K. J., Rogers, J. G.]{bib4} Felker, G. M., Anstrom, K. J., Rogers, J. G. A. (2008) global ranking approach to end points in trials of mechanical circulatory support devices.\textit{Journal of Cardiac Failure} \textbf{14}, 368 – 372.
+
+\bibitem[Felker and Maisel(2010) Felker, g. M. and Maisel, A. S.]{bib5} Felker, G. M. and Maisel, A. S. (2010) A Global Rank End Point for Clinical Trials in Acute Heart Failure\textit{Circulation: Heart Failure} \textbf{3}, 643 - 646.
+
+\bibitem[Matsouaka and Betensky(2015) Matsouaka, R. A., Betensky, R. A.]{bib6} Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for the Wilcoxon–Mann–Whitney test in the presence of death-censored observations\textit{Statistics in Medicine} \textbf{34}, 406 – 431.
+
+%\bibitem[]{bib} \textit{} \textbf{}, –.
+
   \end{thebibliography}
   \newpage
   \phantom{aaaa}
