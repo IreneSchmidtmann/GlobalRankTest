@@ -327,29 +327,31 @@ of death-censored observations}
   death is worse than any quantitative outcome and - in the untied worst rank
   case - that early death is worse thant later death.
 
-  Following Matsouaka and Betensky (2015), we introduce a new variable
+  As Matsouaka and Betensky (2015), we introduce a new variable
   $\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
-	$\eta = min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$.
+	$\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$.
 	This variable is constructed such that all patients who die before time $\tau$
-	have lower values then the patients who survive past $\tau$ and are ranked
+	have lower values than the patients who survive past $\tau$ and are ranked
 	according to their survival times. Patients who survive past $\tau$ are ranked
 	according to their observed	value of the quantitative endpoint as for them
 	$\widetilde{X}_{ik} = {X}_{ik}$ holds.
 
 	The non-inferioriorty hypotheses are
-	$$ H_0: \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-          \leq \frac{1}{2} - \varepsilon $$
-  $$ H_1: \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-          > \frac{1}{2} - \varepsilon    $$
+  \begin{align*}
+	H_0 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+            \leq \frac{1}{2} - \varepsilon \\
+  H_1 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+            > \frac{1}{2} - \varepsilon
+  \end{align*}
 
-  with non-inferiority margin $\varepsilon > 0$ for any pair (k, l) of observations
-  from the two treatment groups.
+  with non-inferiority margin $\varepsilon > 0$ for any pair $(k, l)$ of
+  observations from the two treatment groups.
 
   \section{Power calculation}
   \label{sec:Power}
   In section~\ref{sec:PowerUntied} the power formula for the untied case is
   derived, in section~\ref{sec:PowerTied} the power formula for the tied case
-  follows. In order to
+  follows.
 
   \subsection{Untied case}
   \label{sec:PowerUntied}
@@ -359,43 +361,117 @@ of death-censored observations}
 	  \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{1l})) $.
 
 	In order to evaluate the power of the Wilcoxon-Mann-Whitney test we use the
-  standardised version of U, therefore we need the expectation $\mu(U)$ and
+  standardised version of U, therefore we need expectation $\mu(U)$ and
   variance  $\sigma^2(U)$ of U. They were derived by Matsouaka and Betensky
   (2015) and are as follows:
-  \begin{eqnarray*}
-  \mu(U) & = & \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})  \mbox{ for arbitrary }
+  \begin{align*}
+  \mu(U) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) \mbox{ for arbitrary }
                  \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
-         & = & p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
-         & = & \pi_{U1}\\
-  \mbox{with}   &   & \\
-  \pi_{X1} & = & \text{P}(X_{0k} < X_{1l}) \\
-  \pi_{T1} & = & \text{P}(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1)
-  \end{eqnarray*}
-
-  \begin{eqnarray*}
-  \sigma^2(U) & = & (n_0 n_1)^{-1} \big[ \pi_{U1} (1 - \pi_{U1}) +
+         &= p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
+         &= \pi_{U1}\\
+  \mbox{with}   \\
+  \pi_{X1} &= \text{P}(X_{0k} < X_{1l}) \\
+  \pi_{T1} &= \text{P}(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1) \\
+  % \end{align*}
+  %
+  % \begin{align*}
+  \sigma^2(U) &= (n_0 n_1)^{-1} \left\{ \pi_{U1} (1 - \pi_{U1}) +
                                     (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
-                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big] \\
-  \mbox{with} &   & \\
-  \pi_{U2} & = & \text{P}(\widetilde{X}_{0k'} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
-           & = & p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
-  \pi_{X2} & = & P(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
-  \pi_{T2} & = & P(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
-  \pi_{U3} & = & P(\widetilde{X}_{0k} < \widetilde{X}_{1l}, \widetilde{X}_{0k} < \widetilde{X}_{1l'}) \\
-           & = & p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3} \\
-  \pi_{X3} & = & P(X_{0k} < X_{1l}, X_{0k} < X_{1l'}) \\
-  \pi_{T3} & = & P(T_{0k} < T_{1l}, T_{0k} < T_{1l'} | D_{0k} = D_{1l} = D_{1l'} =1)\\
-           &   & \mbox{for arbitrary } \widetilde{X}_{0k}, \widetilde{X}_{0k'}, \widetilde{X}_{1l},
-                                      \widetilde{X}_{1l'}, k \ne k', l \ne l'
-  \end{eqnarray*}
+                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \right\} \\
+  \mbox{with} \\
+  \pi_{U2} &= \text{P}(\widetilde{X}_{0k'} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
+           &= p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
+  \pi_{X2} &= \text{P}(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
+  \pi_{T2} &= \text{P}(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
+  \pi_{U3} &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}, \widetilde{X}_{0k} < \widetilde{X}_{1l'}) \\
+           &= p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3} \\
+  \pi_{X3} &= \text{P}(X_{0k} < X_{1l}, X_{0k} < X_{1l'}) \\
+  \pi_{T3} &= \text{P}(T_{0k} < T_{1l}, T_{0k} < T_{1l'} | D_{0k} = D_{1l} = D_{1l'} =1)\\
+           &{\hphantom{=}}  \mbox{ for arbitrary } \widetilde{X}_{0k}, \widetilde{X}_{0k'}, \widetilde{X}_{1l},
+                                       \widetilde{X}_{1l'}, k \ne k', l \ne l'
+  \end{align*}
 
+  Under the null hypothesis, the Wilcoxon-Mann-Whitney statistic $U$
+  asympotically follows a normal distribution with expectation $\mu_0(U)$ and
+  variance $\sigma^2_0(U)$. $\mu(U)$ and $\sigma(U)$ under the null hypothesis
+  or under the alternative can be computed if assumptions about the
+  distributions of quantitative endpoint and event time are made. When
+  determining the power, we consider the boundary of the null hypothesis, i. e.
+  $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+          = \frac{1}{2} - \varepsilon$
 
-  Under the null hypothesis, U asympotically follows a normal distribution with
-  expectation $\mu_0(U)$ and variance $\sigma^2_0(U)$.
+  For power calcuation note, that when using the asymptotic distribution of $U$, $H_0$ is rejected at
+  level $\alpha$ if $(U - \mu_0(U)) / \sigma_0(U) > z_{1 - \alpha}$ where
+  $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the $(1 - \alpha)$-percentile of the
+  normal distribution.
+
+  The power of the test for a specific alternative, where $\mu(U)) = \mu_1(U))$
+  and $\sigma(U) = \sigma_1(U)$, is given by
+  \begin{align*}
+    1 - \beta &= \text{P} \left(\frac{U - \mu_0(U)}{\sigma_0(U)}  >
+                                   z_{1-\alpha} \mid H_1 \right) \\
+              &= \text{P} \left(\frac{U - \mu_1(U)}{\sigma_1(U)}  >
+                                   z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
+                                   \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
+              &= \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} -
+                              \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
+              &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
+                              \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right)
+  \end{align*}
+
+  If the specific alternative considered is equivalence of treatments, i. e.
+  $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
+  we have $\mu_1(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
+  and $\sigma^2_1(U) = (n_0 + n_1)(n_0 + n_1 +1) /(12 n_0 n_1)$. The power is
+  then given by
+  \begin{align*}
+  1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
+                              \frac{\varepsilon}{\sigma_1(U)} \right) \\
+            &= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{U1} (1 - \pi_{U1}) +
+                                    (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
+                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big\}}{(n_0 + n_1)(n_0 + n_1 +1)}} \right.\\
+            &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{(n_0 + n_1)(n_0 + n_1 +1)}} \right)
+  \end{align*}
 
   \subsection{Tied case}
   \label{sec:PowerTied}
+  Ties among the death-censored observations may occur if the exact time of
+  death is not available or if it is deemed irrelvant, e. g. if the time from
+  start of treatment to the assessment of the quantitative endpoint is
+  relatively short.
 
+  For the tied case a different definition of $\widetilde{X}_{ik}$ is needed
+  which again follows Matsouaka and Betensky (2015). Therefore we set
+  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$ with
+	$\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$ and
+	obtain
+	$ \widetilde{U} =(n_0 n_1)^{-1}\sum_{k=1}^{n_0}
+	  \sum_{l=1}^{n_1}\left\{I(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+	  + I(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2 \right\} $
+  as modified Wilcoxon-Mann-Whitney statistic allowing for ties. Matsouaka and
+  Betensky (2015) also derived expectation and variance in the tied case which
+  are as follows:
+
+  \begin{align*}
+    \mu(\widetilde{U}) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+                          + \text{P}(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2
+                          \mbox{ for arbitrary }
+                           \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
+                       &= \frac{p_0 p_1}{2}  + p_0 q_1 + q_0 q_1 \pi_{x1} \\
+                       &= \pi_{\widetilde{U}1} \\
+    \sigma^2(\widetilde{U}) &= (n_0 n_1)^{-1}
+                               \left\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1}) +
+                               (n_0 - 1) \left(\pi_{\widetilde{U}2} - \pi_{\widetilde{U}1}^2  - \frac{p^2_0 p_1}{12} \right)
+                               \right.\\
+                            &\hphantom{(n_0 n_1)^{-1} left\{ }
+                            \left.
+                              + (n_1 - 1) \left(\pi_{\widetilde{U}3} - \pi_{\widetilde{U}1}^2  - \frac{p_0 p^2_1}{12}\right)
+                              - \frac{p_0 p_1}{4}\right\} \\
+    \mbox{with} \\
+    \pi_{\widetilde{U}2} &= p^2_0 q_1 + \frac{p^2_0 p_1}{3} + 2 p_0 q_0 q_1 \pi_{X1} + q^2_0 q_1 \pi_{X2} \\
+    \pi_{\widetilde{U}3} &= p_0 q^2_1 + \frac{p_0 p^2_1}{3} + p_0 p_1 q_1 + q_0 q^2_1 \pi_{X3}
+                            \mbox{, where } \pi_{X1}, \pi_{X2}, \pi_{X3} \mbox{ as in the untied case.}
+  \end{align*}
 
   \section{Application}
   \label{sec:Application}
@@ -488,6 +564,7 @@ of death-censored observations}
 \bibitem[Felker and Maisel(2010) Felker, G. M., Maisel, A. S.]{bib5} Felker, G. M., Maisel, A. S. (2010) A Global Rank End Point for Clinical Trials in Acute Heart Failure. \textit{Circulation: Heart Failure} \textbf{3}, 643 - 646.
 
 \bibitem[Matsouaka and Betensky(2015) Matsouaka, R. A., Betensky, R. A.]{bib6} Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for the Wilcoxon–Mann–Whitney test in the presence of death-censored observations. \textit{Statistics in Medicine} \textbf{34}, 406 – 431.
+
 
 %\bibitem[]{bib} \textit{} \textbf{}, –.
 
