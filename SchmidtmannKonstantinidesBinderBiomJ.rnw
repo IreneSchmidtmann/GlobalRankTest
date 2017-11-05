@@ -1,4 +1,5 @@
 \documentclass[bimj,fleqn]{w-art}
+\usepackage{color}  % included for highlighting (04.11.2107 IS)
 \usepackage{times}
 \usepackage{w-thm}
 \usepackage[authoryear]{natbib}
@@ -158,6 +159,7 @@ of death-censored observations}
 
 
   \section{Introduction}
+  \label{sec:Intro}
 
   In clinical trials for cardiovascular diseases, often the aim of an
   intervention is to improve function, measured by some quantitative endpoint
@@ -169,7 +171,9 @@ of death-censored observations}
   determined. Censoring by death leads to missing values which are most unlikely
   to be missing at random. Therefore, ignoring and excluding this kind of
   missing values from analysis does not only decrease power but may also lead to
-  biased estimates of treatment effect.
+  biased estimates of treatment effect. It also contradicts the
+  intention-to-treat principle when not all patients included in the trial are
+  included in the analysis.
 
   Worst-rank scores have been considered e. g. by Wittes et al (1989) and Lachin
   (1999) to tackle this problem. Without loss of generality we assume that
@@ -183,7 +187,7 @@ of death-censored observations}
   endpoint. Untied worst-rank scores can be obtained, if the time of death is
   taken into account. The lowest rank score is then allocated to the patient
   that has died first, subsequent deceased individuals receive ranks according
-  to their time of death. After the deceased have bean ranked the subsequent
+  to their time of death. After the deceased have been ranked, the subsequent
   ranks are allocated to the surviving patients according to their quantitative
   outcome.
 
@@ -218,18 +222,21 @@ of death-censored observations}
   for the Wilcoxon-Mann-Whitney test for non-inferiority in the presence of
   death-censored observations is available.
 
-  In section 2, we present the application, a clinical trial in pulmonary
-  embolism, that motivated our methodological work. The power formulae are
-  derived in section 3. Section 4 illustrates the application of the derived
-  formula to the planned clinical trial. A discussion and concluding remarks
-  are provided in Section 5.
+  In section section~\ref{sec:ThrombolysisApplication}, we present the
+  application, a clinical trial in pulmonary embolism, that motivated our
+  methodological work. After setting out the notation in section
+  ~\ref{sec:Notation}, the power formulae are derived in section ~\ref{sec:Power}.
+  Section ~\ref{sec:Application} illustrates the application of the derived
+  formulae to the planned clinical trial. A discussion and concluding remarks
+  are provided in Section ~\ref{sec:Discussion}.
 
 
   \section{Thrombolysis application}
-  \textit{Prof. Konstantinides: please change, extend, shorten or generalize as
+  \label{sec:ThrombolysisApplication}
+  \textcolor{cyan}{\textit{Prof. Konstantinides: please change, extend, shorten or generalize as
   you deem fit. I don't want to give away too much information but give sufficient
   background for the reader to appreciate the medical context. If appropriate,
-  please indicate a paper or two that should be referenced.}
+  please indicate a paper or two that should be referenced.}}
 
   The methodological considerations presented in this paper were motivated by
   planning a clinical trial studying treatment of high risk pulmonary embolism
@@ -250,41 +257,101 @@ of death-censored observations}
   non-inferiority and to apply a Wilcoxon-Mann-Whitney test for non-inferiority
   in the presence of death-censored observations.
 
-  \section{Methods}
+  \section{Notation and hypotheses}
+  \label{sec:Notation}
   Let the quantitative endpoint be determined at time $\tau (\tau > 0)$. Let
   further $X_{01}, \ldots, X_{0n_0}$ denote the values of the quantitative endpoint
-  in the reference group with standard treatment (group 0) and $X_{11}, \ldots, X_{1n_1}$
-  the values of the quantitative endpoint in the group with the new experimental
-  treatment (group 1). The event times in group $i$ are given by
-  $T_{i1}, \ldots, T_{in_i}$. Let $D_{ik} = 1$ indicate that subject $k$ in
-  group $i$ dies before the quantitative endpoint $X_{ik}$ can be determined,
-  i. e. $D_{ik} = 1$ if $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival
-  probability in group $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$.
-  Accordingly, the cumulative mortality in group $i$ up to time $\tau$ is given
-  by $p_i = 1 - q_i = P(D_{ik} = 1)$.
+  in the $n_0$ indiviudals in the reference group with standard treatment ($i=0$)
+  and $X_{11}, \ldots, X_{1n_1}$ the values of the quantitative endpoint in the
+  $n_1$ indiviudals in thegroup with the new experimental treatment ($i=1$).
+  The event times in group $i$ are given by $T_{i1}, \ldots, T_{in_i}$. Let
+  $D_{ik} = 1$ indicate that subject $k$ in group $i$ dies before the
+  quantitative endpoint $X_{ik}$ can be determined, i. e. $D_{ik} = 1$ if
+  $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival probability in group
+  $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$. Accordingly, the
+  cumulative mortality in group $i$ up to time $\tau$ is given by
+  $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 
   Here, without loss of generality, we assume that high values of $X_{ik}$ are
   favourable. Otherwise we could consider $-X_{ik}$. We further assume that
   death is worse than any quantitative outcome and - in the untied worst rank
   case - that early death is worse thant later death.
 
-  \subsection{Untied case}
-  Following Matsouka and Betensky (2015), we introduce a new variable
+  Following Matsouaka and Betensky (2015), we introduce a new variable
   $\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
 	$\eta = min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$.
 	This variable is constructed such that all patients who die before time $\tau$
-	have lower values then the patients who survive to have the quantitative
-	endpoint $X_{ik}$ determined. The patient that dies first has the lowest
-	value, then the other deseased patients follow according to their times
-	of death. For those patients who survive, $\widetilde{X}_{ik}$ is the observed
-	value of the quantitative endpoint. The $\widetilde{X}_{ik}$ are used to
+	have lower values then the patients who survive past $\tau$ and are ranked
+	according to their survival times. Patients who survive past $\tau$ are ranked
+	according to their observed	value of the quantitative endpoint as for them
+	$\widetilde{X}_{ik} = {X}_{ik}$ holds.
+
+	The non-inferioriorty hypotheses are
+	$$ H_0: \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+          \leq \frac{1}{2} - \varepsilon $$
+  $$ H_1: \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+          > \frac{1}{2} - \varepsilon    $$
+
+  with non-inferiority margin $\varepsilon > 0$ for any pair (k, l) of observations
+  from the two treatment groups.
+
+  \section{Power calculation}
+  \label{sec:Power}
+  In section~\ref{sec:PowerUntied} the power formula for the untied case is
+  derived, in section~\ref{sec:PowerTied} the power formula for the tied case
+  follows. In order to
+
+  \subsection{Untied case}
+  \label{sec:PowerUntied}
+  The $\widetilde{X}_{ik}$ as defined in section~\ref{sec:Notation} are used to
 	determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic
-	$ U = (\sum_{k=1}^{n_0}
-	  \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{il})) / n_0 n_1  $
+	$ U =(n_0 n_1)^{-1}(\sum_{k=1}^{n_0}
+	  \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{1l})) $.
+
+	In order to evaluate the power of the Wilcoxon-Mann-Whitney test we use the
+  standardised version of U, therefore we need the expectation $\mu(U)$ and
+  variance  $\sigma^2(U)$ of U. They were derived by Matsouaka and Betensky
+  (2015) and are as follows:
+  \begin{eqnarray*}
+  \mu(U) & = & \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})  \mbox{ for arbitrary }
+                 \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
+         & = & p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
+         & = & \pi_{U1}\\
+  \mbox{with}   &   & \\
+  \pi_{X1} & = & \text{P}(X_{0k} < X_{1l}) \\
+  \pi_{T1} & = & \text{P}(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1)
+  \end{eqnarray*}
+
+  \begin{eqnarray*}
+  \sigma^2(U) & = & (n_0 n_1)^{-1} \big[ \pi_{U1} (1 - \pi_{U1}) +
+                                    (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
+                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big] \\
+  \mbox{with} &   & \\
+  \pi_{U2} & = & \text{P}(\widetilde{X}_{0k'} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
+           & = & p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
+  \pi_{X2} & = & P(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
+  \pi_{T2} & = & P(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
+  \pi_{U3} & = & P(\widetilde{X}_{0k} < \widetilde{X}_{1l}, \widetilde{X}_{0k} < \widetilde{X}_{1l'}) \\
+           & = & p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3} \\
+  \pi_{X3} & = & P(X_{0k} < X_{1l}, X_{0k} < X_{1l'}) \\
+  \pi_{T3} & = & P(T_{0k} < T_{1l}, T_{0k} < T_{1l'} | D_{0k} = D_{1l} = D_{1l'} =1)\\
+           &   & \mbox{for arbitrary } \widetilde{X}_{0k}, \widetilde{X}_{0k'}, \widetilde{X}_{1l},
+                                      \widetilde{X}_{1l'}, k \ne k', l \ne l'
+  \end{eqnarray*}
+
+
+  Under the null hypothesis, U asympotically follows a normal distribution with
+  expectation $\mu_0(U)$ and variance $\sigma^2_0(U)$.
+
+  \subsection{Tied case}
+  \label{sec:PowerTied}
+
 
   \section{Application}
+  \label{sec:Application}
 
   \section{Discussion}
+  \label{sec:Discussion}
   \begin{itemize}
   \item interpretation of conflicting results
   \item choice of mortality rate (too high --> rather choose mortality as endpoint)
