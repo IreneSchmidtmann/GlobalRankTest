@@ -422,15 +422,15 @@ of death-censored observations}
   If the specific alternative considered is equivalence of treatments, i. e.
   $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
   we have $\mu_1(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
-  and $\sigma^2_1(U) = (n_0 + n_1)(n_0 + n_1 +1) /(12 n_0 n_1)$. The power is
+  and $\sigma^2_1(U) = (n_0 + n_1 +1) /12 n_0 n_1$. The power is
   then given by
   \begin{align*}
   1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
                               \frac{\varepsilon}{\sigma_1(U)} \right) \\
             &= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{U1} (1 - \pi_{U1}) +
                                     (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
-                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big\}}{(n_0 + n_1)(n_0 + n_1 +1)}} \right.\\
-            &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{(n_0 + n_1)(n_0 + n_1 +1)}} \right)
+                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big\}}{n_0 + n_1 +1}} \right.\\
+            &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{n_0 + n_1 +1}} \right)
   \end{align*}
 
   \subsection{Tied case}
@@ -473,8 +473,80 @@ of death-censored observations}
                             \mbox{, where } \pi_{X1}, \pi_{X2}, \pi_{X3} \mbox{ as in the untied case.}
   \end{align*}
 
+  Analogous to the untied case, the modified Wilcoxon-Mann-Whitney statististic
+  $\widetilde{U}$ follows a normal distribution with expectation
+  $\mu_0(\widetilde{U})$ and variance $\sigma^2_0(\widetilde{U})$.
+  Again, $\mu(\widetilde{U})$ and $\sigma(\widetilde{U})$ under the null
+  hypothesis or under the alternative can be computed if assumptions about the
+  distributions of quantitative endpoint and event time are made.
+
+  As previously, we consider the boundary of the null hypothesis, i. e.
+  $\mu_0(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} <
+  \widetilde{X}_{1l}) = \frac{1}{2} - \varepsilon$ when assessing the power of
+  the test. As before, $H_0$ is rejected at level $\alpha$ if
+  $(\widetilde{U} - \mu_0(\widetilde{U})) / \sigma_0(\widetilde{U})
+  > z_{1 - \alpha}$.
+  The power is given by
+
+  \begin{align*}
+    1 - \beta &= \text{P} \left(\frac{\widetilde{U} - \mu_0(\widetilde{U})}{\sigma_0(\widetilde{U})}  >
+                                   z_{1-\alpha} \mid H_1 \right) \\
+              &= \Phi\left(z_{\alpha}\frac{\sigma_0(\widetilde{U})}{\sigma_1(\widetilde{U})} +
+                              \frac{\mu_1(\widetilde{U}) - \mu_0(\widetilde{U})}{\sigma_1(\widetilde{U})} \right)
+  \end{align*}
+
+  If the specific alternative considered is equivalence of treatments, i. e.
+  $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
+  we have $p_0 = p_1 = p, q_0 = q_1 = q, \pi_{X1} = 1/2,
+  \pi_{X2} = \pi_{X3} = 1/3$ and hence
+  $\pi_{\widetilde{U}1} = 1/2, \pi_{\widetilde{U}2} = \pi_{\widetilde{U}3} = 1/3 $.
+  Consequently, $\mu_1(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
+  and \\
+  $\sigma^2_1(\widetilde{U}) = \left\{ (n_0 + n_1 +1) -
+                p^2 \left[ 3 +(n_0 + n_1 -2) p \right] \right\} / (12 n_0 n_1)$.\\
+The power is then given by
+
+  \begin{align*}
+	  1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(\widetilde{U})}{\sigma_1(\widetilde{U})} +
+                            \frac{\varepsilon}{\sigma_1(\widetilde{U})} \right) \\
+							&= \Phi\left(z_{\alpha}
+							   \sqrt\frac{
+								 \left\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1})
+								       + (n_0 - 1)( \pi_{\widetilde{U}2} - \pi^2_{\widetilde{U}1} - \frac{p_0^2 p_1}{12})
+											 + (n_1 - 1)( \pi_{\widetilde{U}3} - \pi^2_{\widetilde{U}1} - \frac{p_0 p_1^2}{12})
+											 - \frac{p_0 p_1}{4}
+								\right\}}{\left\{ (n_0 + n_1 +1) -
+                p^2 \left[ 3 +(n_0 + n_1 -2) p \right] \right\} / 12 } \right. \\
+							&{\hphantom{= \Phi\bigg(}} + \left.
+							  \varepsilon \sqrt\frac{12}{(n_0 + n_1 +1) -
+                p^2 \left[ 3 +(n_0 + n_1 -2) p \right]} \right)
+							%\varepsilon\sqrt{\frac{12 n_0 n_1}{\left\{ (n_0 + n_1 +1) - p^2 \left[ 3 +(n_0 + n_1 -2) p \right]} \right\}}}
+							%
+              %&= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1}) + \right.
+            %                         (n_0 - 1) (\pi_{\widetilde{U}2} - \pi_{\widetilde{U}1}^2 - p_0^2 p1 / 12) +
+            %                         (n_1 - 1) (\pi_{\widetilde{U}3} - \pi_{\widetilde{U}1}^2 - p_0 p1^2 / 12) - p_0 p_1 / 4 \big\}}{(n_0 + n_1)(n_0 + n_1 +1)}} \right.\\
+            % &{\hphantom{= \Phi\bigg(}} \left.
+            % + \varepsilon \sqrt{\frac{12 n_0 n_1 }{(n_0 + n_1 + 1 - p^2 \left[ 3 +(n_0 + n_1 -2) p \right])}} \right)
+  \end{align*}
+
+
   \section{Application}
   \label{sec:Application}
+	For the clinical application we assume that the RV/LV reduction is approximately normally distributed
+	with common variance for both treatment groups:
+	$X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ), (i = 0, 1)$. Under the standard treatment RV/LV reduction
+	is expected to be $\mu_0 = 0.3$ on average with standard deviation $\sigma= 0.1$. A difference of
+	$\varepsilon^{*} = 0.05 = 0.5 \sigma$ is deemed acceptable. This would be used as non-inferiority
+	margin in a parametric test if no censoring by death occurred. The corresponding parametric hypotheses
+	are $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $ and
+	$H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ with $\mu_0 = 0.3$ and $\sigma = 0.1$.
+	We chose $\alpha = 0.0294$ as one interim analysis is planned in a Pocock group sequential design.
+  We explore the power as a function of sample size, and the probabilities of death in both treatment
+	groups.
+
+	In a first step we determine the non-parametric non-inferiority margin for the case of no censoring
+	by death:
+
 
   \section{Discussion}
   \label{sec:Discussion}
