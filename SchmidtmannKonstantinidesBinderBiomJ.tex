@@ -318,25 +318,30 @@ of death-censored observations}
   $D_{ik} = 1$ indicate that subject $k$ in group $i$ dies before the
   quantitative endpoint $X_{ik}$ can be determined, i. e. $D_{ik} = 1$ if
   $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival probability in group
-  $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$. Accordingly, the
-  cumulative mortality in group $i$ up to time $\tau$ is given by
+  $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where $S(t)$ is the survival function.
+	Accordingly, the cumulative mortality in group $i$ up to time $\tau$ is given by
   $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 
   Here, without loss of generality, we assume that high values of $X_{ik}$ are
   favourable. Otherwise we could consider $-X_{ik}$. We further assume that
-  death is worse than any quantitative outcome and - in the untied worst rank
-  case - that early death is worse thant later death.
+  death is worse than any quantitative outcome and -- in the untied worst rank
+  case -- that early death is worse thant later death.
 
-  As Matsouaka and Betensky (2015), we introduce a new variable
-  $\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
-	$\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$.
-	This variable is constructed such that all patients who die before time $\tau$
-	have lower values than the patients who survive past $\tau$ and are ranked
-	according to their survival times. Patients who survive past $\tau$ are ranked
-	according to their observed	value of the quantitative endpoint as for them
-	$\widetilde{X}_{ik} = {X}_{ik}$ holds.
+  Following Matsouaka and Betensky (2015), we introduce a new variable, on which
+	ranking can be based. This variable is constructed such that all patients who
+	die before time $\tau$ have lower values than the patients who survive past
+	$\tau$ and are ranked according to their survival times. Patients who survive
+	past time $\tau$ are ranked according to their observed	value of the quantitative
+	endpoint. The new variable is defined as
+	$\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
+	$\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$
+	in the untied case.  In the tied case all patients who die before the quantitative endpoint
+	can be determined have the same rank. Hence, a different definition of $\widetilde{X}_{ik}$
+	is needed and we set  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$
+	with $\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$.
+	Note, that  $\widetilde{X}_{ik} = {X}_{ik}$ holds for patient who survive past $\tau$ in both cases.
 
-	The non-inferioriorty hypotheses are
+	The non-inferiority hypotheses are
   \begin{align*}
 	H_0 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
             \leq \frac{1}{2} - \varepsilon \\
@@ -349,10 +354,6 @@ of death-censored observations}
 
   \section{Power calculation}
   \label{sec:Power}
-  In section~\ref{sec:PowerUntied} the power formula for the untied case is
-  derived, in section~\ref{sec:PowerTied} the power formula for the tied case
-  follows.
-
   \subsection{Untied case}
   \label{sec:PowerUntied}
   The $\widetilde{X}_{ik}$ as defined in section~\ref{sec:Notation} are used to
@@ -360,25 +361,30 @@ of death-censored observations}
 	$ U =(n_0 n_1)^{-1}(\sum_{k=1}^{n_0}
 	  \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{1l})) $.
 
-	In order to evaluate the power of the Wilcoxon-Mann-Whitney test we use the
-  standardised version of U, therefore we need expectation $\mu(U)$ and
-  variance  $\sigma^2(U)$ of U. They were derived by Matsouaka and Betensky
-  (2015) and are as follows:
+	In order to evaluate the power of the Wilcoxon-Mann-Whitney test, we use the
+  standardised version of the Wilcoxon-Mann-Whitney U statistic, i. e. the test
+	statistic is given by $U^* =(U - \mu_0(U)) / \sigma_0(U)$, where $\mu_0(U)$ is the
+	expectation and $\sigma^2_0(U)$ the variance of U under the null hypothesis.
+	Then under the null hypothesis $U^*$ asymptotically follows a standard normal
+	distribution. The null hypothesis is rejected at level $\alpha$ if
+	$U^* > z_{1 - \alpha}$ where
+  $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the $(1 - \alpha)$-percentile of the
+  normal distribution.
+
+	Therefore we need expectation $\mu(U)$ and variance $\sigma^2(U)$ of U. They
+	were derived by Matsouaka and Betensky (2015) and are as follows:
   \begin{align*}
   \mu(U) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) \mbox{ for arbitrary }
                  \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
          &= p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
-         &= \pi_{U1}\\
-  \mbox{with}   \\
+         &= \pi_{U1}
+  \intertext{with}
   \pi_{X1} &= \text{P}(X_{0k} < X_{1l}) \\
   \pi_{T1} &= \text{P}(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1) \\
-  % \end{align*}
-  %
-  % \begin{align*}
   \sigma^2(U) &= (n_0 n_1)^{-1} \left\{ \pi_{U1} (1 - \pi_{U1}) +
                                     (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
-                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \right\} \\
-  \mbox{with} \\
+                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \right\}
+  \intertext{with}
   \pi_{U2} &= \text{P}(\widetilde{X}_{0k'} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
            &= p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
   \pi_{X2} &= \text{P}(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
@@ -391,20 +397,10 @@ of death-censored observations}
                                        \widetilde{X}_{1l'}, k \ne k', l \ne l'
   \end{align*}
 
-  Under the null hypothesis, the Wilcoxon-Mann-Whitney statistic $U$
-  asympotically follows a normal distribution with expectation $\mu_0(U)$ and
-  variance $\sigma^2_0(U)$. $\mu(U)$ and $\sigma(U)$ under the null hypothesis
-  or under the alternative can be computed if assumptions about the
-  distributions of quantitative endpoint and event time are made. When
-  determining the power, we consider the boundary of the null hypothesis, i. e.
-  $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-          = \frac{1}{2} - \varepsilon$
-
-  For power calcuation note, that when using the asymptotic distribution of $U$, $H_0$ is rejected at
-  level $\alpha$ if $(U - \mu_0(U)) / \sigma_0(U) > z_{1 - \alpha}$ where
-  $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the $(1 - \alpha)$-percentile of the
-  normal distribution.
-
+  If assumptions about the distribution of quantitative endpoint and event time
+	are made, $\mu(U)$ and $\sigma(U)$ can be computed. When determining the power,
+	we consider the boundary of the null hypothesis, i. e.
+  $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon$.
   The power of the test for a specific alternative, where $\mu(U)) = \mu_1(U))$
   and $\sigma(U) = \sigma_1(U)$, is given by
   \begin{align*}
@@ -416,7 +412,7 @@ of death-censored observations}
               &= \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} -
                               \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
               &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
-                              \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right)
+                              \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right) .
   \end{align*}
 
   If the specific alternative considered is equivalence of treatments, i. e.
@@ -430,26 +426,26 @@ of death-censored observations}
             &= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{U1} (1 - \pi_{U1}) +
                                     (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
                                     (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big\}}{n_0 + n_1 +1}} \right.\\
-            &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{n_0 + n_1 +1}} \right)
+            &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{n_0 + n_1 +1}} \right) .
   \end{align*}
 
   \subsection{Tied case}
   \label{sec:PowerTied}
-  Ties among the death-censored observations may occur if the exact time of
-  death is not available or if it is deemed irrelvant, e. g. if the time from
-  start of treatment to the assessment of the quantitative endpoint is
-  relatively short.
-
-  For the tied case a different definition of $\widetilde{X}_{ik}$ is needed
-  which again follows Matsouaka and Betensky (2015). Therefore we set
-  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$ with
-	$\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$ and
-	obtain
-	$ \widetilde{U} =(n_0 n_1)^{-1}\sum_{k=1}^{n_0}
+  In the tied case we use the modified Wilcoxon-Mann-Whitney statistic $ \widetilde{U}$
+	which allows for ties and is defined as
+  	$ \widetilde{U} =(n_0 n_1)^{-1}\sum_{k=1}^{n_0}
 	  \sum_{l=1}^{n_1}\left\{I(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-	  + I(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2 \right\} $
-  as modified Wilcoxon-Mann-Whitney statistic allowing for ties. Matsouaka and
-  Betensky (2015) also derived expectation and variance in the tied case which
+	  + I(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2 \right\} $.
+	As before, for determining the power the standardised version of the test statistic
+	is used:
+	$\widetilde{U}^* = (\widetilde{U} - \mu_0(\widetilde{U} )) / \sigma_0(\widetilde{U}) $
+	where
+  $\mu_0(\widetilde{U})$ is the expectation and $\sigma^2_0(\widetilde{U})$ the variance
+	of $\widetilde{U}$ under the null hypothesis. Under the null hypothesis $\widetilde{U}^*$
+	also follows a standard normal distribution. Again, the null hypothesis is rejected at
+	if level $\alpha$ if $\widetilde{U}^* > z_(1-\alpha).$
+
+  Matsouaka and Betensky (2015) also derived expectation and variance in the tied case which
   are as follows:
 
   \begin{align*}
@@ -466,27 +462,20 @@ of death-censored observations}
                             &\hphantom{(n_0 n_1)^{-1} left\{ }
                             \left.
                               + (n_1 - 1) \left(\pi_{\widetilde{U}3} - \pi_{\widetilde{U}1}^2  - \frac{p_0 p^2_1}{12}\right)
-                              - \frac{p_0 p_1}{4}\right\} \\
-    \mbox{with} \\
+                              - \frac{p_0 p_1}{4}\right\}
+    \intertext{with}
     \pi_{\widetilde{U}2} &= p^2_0 q_1 + \frac{p^2_0 p_1}{3} + 2 p_0 q_0 q_1 \pi_{X1} + q^2_0 q_1 \pi_{X2} \\
     \pi_{\widetilde{U}3} &= p_0 q^2_1 + \frac{p_0 p^2_1}{3} + p_0 p_1 q_1 + q_0 q^2_1 \pi_{X3}
-                            \mbox{, where } \pi_{X1}, \pi_{X2}, \pi_{X3} \mbox{ as in the untied case.}
+                            \mbox{, where } \pi_{X1}, \pi_{X2}, \pi_{X3} \mbox{ are as in the untied case.}
   \end{align*}
 
-  Analogous to the untied case, the modified Wilcoxon-Mann-Whitney statististic
-  $\widetilde{U}$ follows a normal distribution with expectation
-  $\mu_0(\widetilde{U})$ and variance $\sigma^2_0(\widetilde{U})$.
   Again, $\mu(\widetilde{U})$ and $\sigma(\widetilde{U})$ under the null
   hypothesis or under the alternative can be computed if assumptions about the
-  distributions of quantitative endpoint and event time are made.
-
-  As previously, we consider the boundary of the null hypothesis, i. e.
+  distributions of quantitative endpoint and event time are made. As previously, we
+	consider the boundary of the null hypothesis, i. e.
   $\mu_0(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} <
   \widetilde{X}_{1l}) = \frac{1}{2} - \varepsilon$ when assessing the power of
-  the test. As before, $H_0$ is rejected at level $\alpha$ if
-  $(\widetilde{U} - \mu_0(\widetilde{U})) / \sigma_0(\widetilde{U})
-  > z_{1 - \alpha}$.
-  The power is given by
+  the test. The power is given by
 
   \begin{align*}
     1 - \beta &= \text{P} \left(\frac{\widetilde{U} - \mu_0(\widetilde{U})}{\sigma_0(\widetilde{U})}  >
@@ -541,11 +530,49 @@ The power is then given by
 	are $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $ and
 	$H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ with $\mu_0 = 0.3$ and $\sigma = 0.1$.
 	We chose $\alpha = 0.0294$ as one interim analysis is planned in a Pocock group sequential design.
-  We explore the power as a function of sample size, and the probabilities of death in both treatment
-	groups.
+  We explore the power as a function of sample size and the probabilities of death in
+	both treatment groups for the specific alternative of equivalence of treatments.
+	The ratio of $n_0 : n_1$ is chosen as $1 : 2 $ in our application.
 
-	In a first step we determine the non-parametric non-inferiority margin for the case of no censoring
-	by death:
+	In a first step we determine the non-parametric non-inferiority margin $\tilde{\epsilon}$
+	for the case of no censoring by death such tha $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\epsilon}$ and $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\epsilon}$.
+
+ As $\Phi(x)$ is monotonically increasing and under $H_0$ we have $P(X_0 < X_1) = \Phi((\mu_1 - \mu_0)/\sqrt{2}\sigma) \leq \Phi(\epsilon^{*}/ \sqrt{2}\sigma) = \Phi(-1/\sqrt{8}) $, $\tilde{\epsilon}$ can be chosen such that $1/2 - \tilde{\epsilon} = \Phi(-1/\sqrt{8}) $ and hence $\tilde{\epsilon} = 1/2 - \Phi(-1/\sqrt{8})  \approx 0.1382$ !!! --- compute approximate eps --- !!!
+
+  \subsection{Untied case}
+  \label{sec:AppUntied}
+	For the untied case we assume that the time to death follows an exponential distribution, i. e.
+	$T_i \sim exp(\lambda_i), (i=0,1)$, i. e. $q_i = exp(-\lambda_i \tau)$. To determine the overall
+	non-inferiority margin $\varepsilon$, again consider the margin of the null hypothesis,
+	i. e. $\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) = 1/2 - \varepsilon $
+
+	\begin{align*}
+  \text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 \text{P}(T_{0k} < T_{1l}) + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
+                                    &= p_0 p_1 \frac{\lambda_0}{\lambda_0 + \lambda_1} + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(\frac{1}{2} - \tilde{\epsilon}) \\
+                                    &= \frac{1}{2} - \left( (1-p_0)(1-p_1) \tilde{\epsilon} + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) \right) \mbox{ with } \gamma = \frac{1}{2} - \frac{\lambda_0}{\lambda_0 + \lambda_1} \\
+\intertext{and hence}
+ \varepsilon &= (1-p_0)(1-p_1) (1/2 - \Phi(-1/\sqrt{8})) + \gamma p_0 p_1 + (p_1 - p_0)/2
+\intertext{For $p_0 = p_1 = p$ this simplifies to}
+ \varepsilon &= (1-p)^2 (1 - \Phi(-1/\sqrt{8}))
+\end{align*}
+
+
+  \subsection{Tied case}
+  \label{sec:AppTied}
+	For the tied case it suffices to make an assumption about the probability of death
+	in each group under the null hypothesis. To determine the overall non-inferiority margin
+	we again consider the margin of the null hypothesis $\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) = 1/2 - \varepsilon $
+
+
+	\begin{align*}
+   \text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 / 2 + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
+	    &= p_0 - p_0 p_1/2 + (1 - p_0)(1 - p_1)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}\\
+			&= 1/2 - (p_1 - p_0)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}
+  \intertext{and hence}
+	\varepsilon &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) (1 - \Phi(-1/\sqrt{8}))
+	\intertext{For $p_0 = p_1 = p$ this also simplifies to}
+  \varepsilon &= (1-p)^2 (1 - \Phi(-1/\sqrt{8}))
+	\end{align*}
 
 
   \section{Discussion}

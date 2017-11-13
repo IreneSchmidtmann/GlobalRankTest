@@ -6,9 +6,9 @@
 \setlength{\bibsep}{2pt}
 \setlength{\bibhang}{2em}
 \newcommand{\J}{J\"{o}reskog}
-  \newcommand{\So}{S\"{o}rbom}
+  \newcommand{\So}{S\"{o}rbom}fu
   \newcommand{\bcx}{{\bf X}}
-  \newcommand{\bcy}{{\bf Y}}
+  \newcommand{\bcy}{{\bf Y}}fu
   \newcommand{\bcz}{{\bf Z}}
   \newcommand{\bcu}{{\bf U}}
   \newcommand{\bcv}{{\bf V}}
@@ -491,11 +491,12 @@ The power is then given by
 	are $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $ and
 	$H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ with $\mu_0 = 0.3$ and $\sigma = 0.1$.
 	We chose $\alpha = 0.0294$ as one interim analysis is planned in a Pocock group sequential design.
-  We explore the power as a function of sample size, and the probabilities of death in both treatment
+  We explore the power as a function of sample size and the probabilities of death in both treatment
 	groups.
 
-	In a first step we determine the non-parametric non-inferiority margin for the case of no censoring
-	by death:
+	In a first step we determine the non-parametric non-inferiority margin for the case of
+	no censoring by death
+
 
 
   \section{Discussion}
