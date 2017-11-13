@@ -6,581 +6,719 @@
 \setlength{\bibsep}{2pt}
 \setlength{\bibhang}{2em}
 \newcommand{\J}{J\"{o}reskog}
-  \newcommand{\So}{S\"{o}rbom}fu
-  \newcommand{\bcx}{{\bf X}}
-  \newcommand{\bcy}{{\bf Y}}fu
-  \newcommand{\bcz}{{\bf Z}}
-  \newcommand{\bcu}{{\bf U}}
-  \newcommand{\bcv}{{\bf V}}
-  \newcommand{\bcw}{{\bf W}}
-  \newcommand{\bci}{{\bf I}}
-  \newcommand{\bch}{{\bf H}}
-  \newcommand{\bcb}{{\bf B}}
-  \newcommand{\bcr}{{\bf R}}
-  \newcommand{\bcm}{{\bf M}}
-  \newcommand{\bcf}{{\bf F}}
-  \newcommand{\bcg}{{\bf G}}
-  \newcommand{\bcs}{{\bf S}}
-  \newcommand{\bca}{{\bf A}}
-  \newcommand{\bcd}{{\bf D}}
-  \newcommand{\bcc}{{\bf C}}
-  \newcommand{\bce}{{\bf E}}
-  \newcommand{\ba}{{\bf a}}
-  \newcommand{\bb}{{\bf b}}
-  \newcommand{\bc}{{\bf c}}
-  \newcommand{\bd}{{\bf d}}
-  \newcommand{\bx}{{\bf x}}
-  \newcommand{\by}{{\bf y}}
-  \newcommand{\bz}{{\bf z}}
-  \newcommand{\bu}{{\bf u}}
-  \newcommand{\bv}{{\bf v}}
-  \newcommand{\bh}{{\bf h}}
-  \newcommand{\bl}{{\bf l}}
-  \newcommand{\be}{{\bf e}}
-  \newcommand{\br}{{\bf r}}
-  \newcommand{\bw}{{\bf w}}
-  \newcommand{\de}{\stackrel{D}{=}}
-  \newcommand{\bt}{\bigtriangleup}
-  \newcommand{\bfequiv}{\mbox{\boldmath $\equiv$}}
-  \newcommand{\bmu}{\mbox{\boldmath $\mu$}}
-  \newcommand{\bnu}{\mbox{\boldmath $\nu$}}
-  \newcommand{\bxi}{\mbox{\boldmath $\xi$}}
-  \newcommand{\btau}{\mbox{\boldmath $\tau$}}
-  \newcommand{\bgamma}{\mbox{\boldmath $\Gamma$}}
-  \newcommand{\bphi}{\mbox{\boldmath $\Phi$}}
-  \newcommand{\bfphi}{\mbox{\boldmath $\varphi$}}
-  \newcommand{\bfeta}{\mbox{\boldmath $\eta$}}
-  \newcommand{\bpi}{\mbox{\boldmath $\Pi$}}
-  \newcommand{\bequiv}{\mbox{\boldmath $\equiv$}}
-  \newcommand{\bvarepsilon}{\mbox{\boldmath $\varepsilon$}}
-  \newcommand{\btriangle}{\mbox{\boldmath $\triangle$}}
-  \newcommand{\bdelta}{\mbox{\boldmath $\Delta$}}
-  \newcommand{\beps}{\mbox{\boldmath $\epsilon$}}
-  \newcommand{\btheta}{\mbox{\boldmath $\theta$}}
-  \newcommand{\balpha}{\mbox{\boldmath $\alpha$}}
-  \newcommand{\bsphi}{\mbox{\boldmath $\varphi$}}
-  \newcommand{\bsig}{\mbox{\boldmath $\sigma$}}
-  \newcommand{\bfpsi}{\mbox{\boldmath $\psi$}}
-  \newcommand{\bfdelta}{\mbox{\boldmath $\delta$}}
-  \newcommand{\bsigma}{{\bf \Sigma}}
-  \newcommand{\bzero}{{\bf 0}}
-  \newcommand{\bpsi}{\mbox{\boldmath $\Psi$}}
-  \newcommand{\bep}{\mbox{\boldmath $\epsilon$}}
-  \newcommand{\bomega}{\mbox{\boldmath $\Omega$}}
-  \newcommand{\bfomega}{\mbox{\boldmath $\omega$}}
-  \newcommand{\blambda}{\mbox{\boldmath $\Lambda$}}
-  \newcommand{\bflambda}{\mbox{\boldmath $\lambda$}}
-  \newcommand{\bfsigma}{\mbox{\boldmath $\sigma$}}
-  \newcommand{\bfpi}{{\mbox{\boldmath $\pi$}}}
-  \newcommand{\bupsilon}{\mbox{\boldmath $\upsilon$}}
-  \newcommand{\obs}{{\rm obs}}
-  \newcommand{\mis}{{\rm mis}}
-  \theoremstyle{plain}
-  \newtheorem{criterion}{Criterion}
-  \theoremstyle{definition}
-  \newtheorem{condition}[theorem]{Condition}
-  \usepackage[]{graphicx}
-  \chardef\bslash=`\\ % p. 424, TeXbook
-  \newcommand{\ntt}{\normalfont\ttfamily}
-  \newcommand{\cn}[1]{{\protect\ntt\bslash#1}}
-  \newcommand{\pkg}[1]{{\protect\ntt#1}}
-  \let\fn\pkg
-  \let\env\pkg
-  \let\opt\pkg
-  \hfuzz1pc % Don't bother to report overfull boxes if overage is < 1pc
-  \newcommand{\envert}[1]{\left\lvert#1\right\rvert}
-  \let\abs=\envert
+\newcommand{\So}{S\"{o}rbom}
+\newcommand{\bcx}{{\bf X}}
+\newcommand{\bcy}{{\bf Y}}
+\newcommand{\bcz}{{\bf Z}}
+\newcommand{\bcu}{{\bf U}}
+\newcommand{\bcv}{{\bf V}}
+\newcommand{\bcw}{{\bf W}}
+\newcommand{\bci}{{\bf I}}
+\newcommand{\bch}{{\bf H}}
+\newcommand{\bcb}{{\bf B}}
+\newcommand{\bcr}{{\bf R}}
+\newcommand{\bcm}{{\bf M}}
+\newcommand{\bcf}{{\bf F}}
+\newcommand{\bcg}{{\bf G}}
+\newcommand{\bcs}{{\bf S}}
+\newcommand{\bca}{{\bf A}}
+\newcommand{\bcd}{{\bf D}}
+\newcommand{\bcc}{{\bf C}}
+\newcommand{\bce}{{\bf E}}
+\newcommand{\ba}{{\bf a}}
+\newcommand{\bb}{{\bf b}}
+\newcommand{\bc}{{\bf c}}
+\newcommand{\bd}{{\bf d}}
+\newcommand{\bx}{{\bf x}}
+\newcommand{\by}{{\bf y}}
+\newcommand{\bz}{{\bf z}}
+\newcommand{\bu}{{\bf u}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bh}{{\bf h}}
+\newcommand{\bl}{{\bf l}}
+\newcommand{\be}{{\bf e}}
+\newcommand{\br}{{\bf r}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\de}{\stackrel{D}{=}}
+\newcommand{\bt}{\bigtriangleup}
+\newcommand{\bfequiv}{\mbox{\boldmath $\equiv$}}
+\newcommand{\bmu}{\mbox{\boldmath $\mu$}}
+\newcommand{\bnu}{\mbox{\boldmath $\nu$}}
+\newcommand{\bxi}{\mbox{\boldmath $\xi$}}
+\newcommand{\btau}{\mbox{\boldmath $\tau$}}
+\newcommand{\bgamma}{\mbox{\boldmath $\Gamma$}}
+\newcommand{\bphi}{\mbox{\boldmath $\Phi$}}
+\newcommand{\bfphi}{\mbox{\boldmath $\varphi$}}
+\newcommand{\bfeta}{\mbox{\boldmath $\eta$}}
+\newcommand{\bpi}{\mbox{\boldmath $\Pi$}}
+\newcommand{\bequiv}{\mbox{\boldmath $\equiv$}}
+\newcommand{\bvarepsilon}{\mbox{\boldmath $\varepsilon$}}
+\newcommand{\btriangle}{\mbox{\boldmath $\triangle$}}
+\newcommand{\bdelta}{\mbox{\boldmath $\Delta$}}
+\newcommand{\beps}{\mbox{\boldmath $\epsilon$}}
+\newcommand{\btheta}{\mbox{\boldmath $\theta$}}
+\newcommand{\balpha}{\mbox{\boldmath $\alpha$}}
+\newcommand{\bsphi}{\mbox{\boldmath $\varphi$}}
+\newcommand{\bsig}{\mbox{\boldmath $\sigma$}}
+\newcommand{\bfpsi}{\mbox{\boldmath $\psi$}}
+\newcommand{\bfdelta}{\mbox{\boldmath $\delta$}}
+\newcommand{\bsigma}{{\bf \Sigma}}
+\newcommand{\bzero}{{\bf 0}}
+\newcommand{\bpsi}{\mbox{\boldmath $\Psi$}}
+\newcommand{\bep}{\mbox{\boldmath $\epsilon$}}
+\newcommand{\bomega}{\mbox{\boldmath $\Omega$}}
+\newcommand{\bfomega}{\mbox{\boldmath $\omega$}}
+\newcommand{\blambda}{\mbox{\boldmath $\Lambda$}}
+\newcommand{\bflambda}{\mbox{\boldmath $\lambda$}}
+\newcommand{\bfsigma}{\mbox{\boldmath $\sigma$}}
+\newcommand{\bfpi}{{\mbox{\boldmath $\pi$}}}
+\newcommand{\bupsilon}{\mbox{\boldmath $\upsilon$}}
+\newcommand{\obs}{{\rm obs}}
+\newcommand{\mis}{{\rm mis}}
+\theoremstyle{plain}
+\newtheorem{criterion}{Criterion}
+\theoremstyle{definition}
+\newtheorem{condition}[theorem]{Condition}
+\usepackage[]{graphicx}
+\chardef\bslash=`\\ % p. 424, TeXbook
+\newcommand{\ntt}{\normalfont\ttfamily}
+\newcommand{\cn}[1]{{\protect\ntt\bslash#1}}
+\newcommand{\pkg}[1]{{\protect\ntt#1}}
+\let\fn\pkg
+\let\env\pkg
+\let\opt\pkg
+\hfuzz1pc % Don't bother to report overfull boxes if overage is < 1pc
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
 
-  \begin{document}
-  %\DOIsuffix{bimj.DOIsuffix}
-  \DOIsuffix{bimj.200100000}
-  \Volume{xx}
-  \Issue{xx}
-  \Year{2017}
-  \pagespan{1}{}
-  \keywords{Censoring by death; Global rank test; Non-inferiority; Key word four; Key word five;\\
-  \noindent \hspace*{-4pc} {\small\it (Up to five keywords are allowed and should be given in alphabetical order. Please capitalize the key}\\
-  \hspace*{-4pc} {\small\it words)}\\[1pc]
-  \noindent\hspace*{-4.2pc} Supporting Information for this article is available from the author or on the WWW under\break \hspace*{-4pc} \underline{http://dx.doi.org/10.1022/bimj.XXXXXXX} (please delete if not
-  applicable)
-  }  %%% semicolon and fullpoint added here for keyword style
+\begin{document}
+% initial chunk that load necessary libraries
+<<init, include=FALSE>>=
+# load all libraries
+library(knitr)
+library(xtable)
+library(latex2exp)
+# set global chunk options
+opts_chunk$set(warning = FALSE, message = FALSE)
+@
+%\DOIsuffix{bimj.DOIsuffix}
+\DOIsuffix{bimj.200100000}
+\Volume{52}
+\Issue{61}
+\Year{2010}
+\pagespan{1}{}
+\keywords{Censoring by death; Global rank test; Non-inferiority; Key word four; Key word five;\\
+\noindent \hspace*{-4pc} {\small\it (Up to five keywords are allowed and should be given in alphabetical order. Please capitalize the key}\\
+\hspace*{-4pc} {\small\it words)}\\[1pc]
+\noindent\hspace*{-4.2pc} Supporting Information for this article is available from the author or on the WWW under\break \hspace*{-4pc} \underline{http://dx.doi.org/10.1022/bimj.XXXXXXX} (please delete if not
+applicable)
+}  %%% semicolon and fullpoint added here for keyword style
 
-  \title[Running title]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence
+\title[Running title]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence
 of death-censored observations}
-  %% Information for the first author.
-  \author[Schmidtmann {\it{et al.}}]{Irene Schmidtmann\footnote{Corresponding author: {\sf{e-mail: Irene.Schmidtmann@uni-mainz.de}}, Phone: +49-6131-173951, Fax: +49-6131-172968}\inst{,1}}
-  \address[\inst{1}]{Institute for Medical Biostatistics, Epidemiology and Informatics (IMBEI),
-  University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
-  %%%%    Information for the second author
-  \author[Konstantinides]{Stavros Konstantinides\inst{2}}
-  \address[\inst{2}]{Center for Thrombosis and Hemostasis (CTH), University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
-  %%%%    Information for the third author
-  \author[Binder]{Harald Binder\inst{3}}
-  \address[\inst{3}]{Institute for Medical Biometry and Statistics, University Freiburg, Stefan-Meier-Str. 26, D 79104 Freiburg}
-  %%%%    \dedicatory{This is a dedicatory.}
-  \Receiveddate{zzz} \Reviseddate{zzz} \Accepteddate{zzz}
+%% Information for the first author.
+\author[Schmidtmann {\it{et al.}}]{Irene Schmidtmann\footnote{Corresponding author: {\sf{e-mail: Irene.Schmidtmann@uni-mainz.de}}, Phone: +49-6131-173951, Fax: +49-6131-172968}\inst{,1}}
+\address[\inst{1}]{Institute for Medical Biostatistics, Epidemiology and Informatics (IMBEI),
+University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
+%%%%    Information for the second author
+\author[Konstantinides]{Stavros Konstantinides\inst{2}}
+\address[\inst{2}]{Center for Thrombosis and Hemostasis (CTH), University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
+%%%%    Information for the third author
+\author[Binder]{Harald Binder\inst{3}}
+\address[\inst{3}]{Institute for Medical Biometry and Statistics, University Freiburg, Stefan-Meier-Str. 26, D 79104 Freiburg}
+%%%%    \dedicatory{This is a dedicatory.}
+\Receiveddate{zzz} \Reviseddate{zzz} \Accepteddate{zzz}
 
-  \begin{abstract}
-  Start. This is the abstract. You may use this LaTeX template to write your text.
-  The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-  not be longer than 250 words. This is the abstract. You may use this LaTeX template to write your text.
-  The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-  not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
-  The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-  not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
-  The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-  not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
-  The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-  not be longer than 250 words. Start. This is the abstract. You may use this LaTeX template to write your text.
-  The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-  not be longer than 250 words.
-  Stop.
-  \end{abstract}
-
-
-
-  %% maketitle must follow the abstract.
-  \maketitle                   % Produces the title.
-
-  %% If there is not enough space inside the running head
-  %% for all authors including the title you may provide
-  %% the leftmark in one of the following three forms:
-
-  %% \renewcommand{\leftmark}
-  %% {First Author: A Short Title}
-
-  %% \renewcommand{\leftmark}
-  %% {First Author and Second Author: A Short Title}
-
-  %% \renewcommand{\leftmark}
-  %% {First Author et al.: A Short Title}
-
-  %% \tableofcontents  % Produces the table of contents.
+\begin{abstract}
+Start. This is the abstract. You may use this LaTeX template to write your text.
+The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
+not be longer than 250 words. This is the abstract. You may use this LaTeX template to write your text.
+The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
+not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
+The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
+not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
+The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
+not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
+The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
+not be longer than 250 words. Start. This is the abstract. You may use this LaTeX template to write your text.
+The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
+not be longer than 250 words.
+Stop.
+\end{abstract}
 
 
-  \section{Introduction}
-  \label{sec:Intro}
 
-  In clinical trials for cardiovascular diseases, often the aim of an
-  intervention is to improve function, measured by some quantitative endpoint
-  such as the distance walked in the six minute walk test, a biomarker, or ... .
-  Typically, unfavourable outcomes of the quantitative endpoint are related to a
-  higher risk of cardiovascular death. So, if the patient's condition is severe,
-  there is a non-negligible probability of a fatal outcome. Thus, censoring by
-  death may occur if a patient dies before the quantitative outcome can be
-  determined. Censoring by death leads to missing values which are most unlikely
-  to be missing at random. Therefore, ignoring and excluding this kind of
-  missing values from analysis does not only decrease power but may also lead to
-  biased estimates of treatment effect. It also contradicts the
-  intention-to-treat principle when not all patients included in the trial are
-  included in the analysis.
+%% maketitle must follow the abstract.
+\maketitle                   % Produces the title.
 
-  Worst-rank scores have been considered e. g. by Wittes et al (1989) and Lachin
-  (1999) to tackle this problem. Without loss of generality we assume that
-  higher values of the quantitative outcome are more favourable than lower
-  values. We further assume that any quantitative outcome is better than death
-  and that earlier death is worse than later death. This leads to an obvious
-  ordering of outcomes which motivates the definition of worst-rank scores.
+%% If there is not enough space inside the running head
+%% for all authors including the title you may provide
+%% the leftmark in one of the following three forms:
 
-  Tied worst-rank scores are obtained by allocating a rank score corresponding
-  to a single value below the minimum observed value of the quantitative
-  endpoint. Untied worst-rank scores can be obtained, if the time of death is
-  taken into account. The lowest rank score is then allocated to the patient
-  that has died first, subsequent deceased individuals receive ranks according
-  to their time of death. After the deceased have been ranked, the subsequent
-  ranks are allocated to the surviving patients according to their quantitative
-  outcome.
+%% \renewcommand{\leftmark}
+%% {First Author: A Short Title}
 
-  Lachin (1999) has shown that such an approach is unbiased against a restricted
-  one-sided alternative which states that the new treatment is better with
-  respect to both, mortality and the quantitative endpoint or at least better
-  with respect to one criterion and equal with respect to the other.
+%% \renewcommand{\leftmark}
+%% {First Author and Second Author: A Short Title}
 
-  Another view of this approach is to consider it as a global ranking of
-  multiple endpoints, e. g. some kind of event - such as death - and some
-  quantitative measurement - such as a biomarker. This approach was originally
-  suggested by O'Brien (1984) for multiple endpoints and applied in cardiology
-  e. g. by Felker at al (2008) and Felker and Maisel (2010) combining several
-  binary and quantitative endpoints.
+%% \renewcommand{\leftmark}
+%% {First Author et al.: A Short Title}
 
-  We here consider the situation where a new treatment is compared to a standard
-  treatment and the intention is to show that the new treatment is non-inferior
-  to the standard treatment when comparing a quantitative measurement that may
-  be censored by death. As above this corresponds to a one-sided hypothesis.
-  The alternative hypothesis in this case states that the new treatment is
-  non-inferior to the standard treatment with respect to both the quantitative
-  endpoint and the mortality risk.
-
-  Matsouaka and Bentensky (2015) have derived power and sample size formulae for
-  the one-sided test of the null hypothesis of equality against a restricted
-  alternative as described by Lachin (1999). They present specific formulae for
-  common distributions of quantitative endpoint and time to event, amongst them
-  a normally distributed quantitative endpoint and exponentially distributed
-  time to event.
-
-  However, to the best of our knowledge, so far no power or sample size formula
-  for the Wilcoxon-Mann-Whitney test for non-inferiority in the presence of
-  death-censored observations is available.
-
-  In section section~\ref{sec:ThrombolysisApplication}, we present the
-  application, a clinical trial in pulmonary embolism, that motivated our
-  methodological work. After setting out the notation in section
-  ~\ref{sec:Notation}, the power formulae are derived in section ~\ref{sec:Power}.
-  Section ~\ref{sec:Application} illustrates the application of the derived
-  formulae to the planned clinical trial. A discussion and concluding remarks
-  are provided in Section ~\ref{sec:Discussion}.
+%% \tableofcontents  % Produces the table of contents.
 
 
-  \section{Thrombolysis application}
-  \label{sec:ThrombolysisApplication}
-  \textcolor{cyan}{\textit{Prof. Konstantinides: please change, extend, shorten or generalize as
-  you deem fit. I don't want to give away too much information but give sufficient
-  background for the reader to appreciate the medical context. If appropriate,
-  please indicate a paper or two that should be referenced.}}
+\section{Introduction}
+\label{sec:Intro}
 
-  The methodological considerations presented in this paper were motivated by
-  planning a clinical trial studying treatment of high risk pulmonary embolism
-  patients.
+In clinical trials for cardiovascular diseases, often the aim of an
+intervention is to improve function, measured by some quantitative endpoint
+such as the distance walked in the six minute walk test, a biomarker, or ... .
+Typically, unfavourable outcomes of the quantitative endpoint are related to a
+higher risk of cardiovascular death. So, if the patient's condition is severe,
+there is a non-negligible probability of a fatal outcome. Thus, censoring by
+death may occur if a patient dies before the quantitative outcome can be
+determined. Censoring by death leads to missing values which are most unlikely
+to be missing at random. Therefore, ignoring and excluding this kind of
+missing values from analysis does not only decrease power but may also lead to
+biased estimates of treatment effect. It also contradicts the
+intention-to-treat principle when not all patients included in the trial are
+included in the analysis.
 
-  In this trial, the standard would be to administer standard-dose systemic
-  thrombolytic treatment. The new experimental treatment would be catheter
-  controlled low dose thrombolysis. RV/LV diameter ratio 24 hours after the
-  intervention was considered a suitable primary endpoint. Unfortunately, fatal
-  outcomes do occur within hours after treatment in patients with this condition.
-  This precludes the observation of the RV/LV diameter ratio 24 hours after the
-  intervention. Therefore, taking into account censoring by death of the
-  quantitative endpoint was necessary.
+Worst-rank scores have been considered e. g. by Wittes et al (1989) and Lachin
+(1999) to tackle this problem. Without loss of generality we assume that
+higher values of the quantitative outcome are more favourable than lower
+values. We further assume that any quantitative outcome is better than death
+and that earlier death is worse than later death. This leads to an obvious
+ordering of outcomes which motivates the definition of worst-rank scores.
 
-  While little difference in the primary endpoint and mortality was expected,
-  the potential benefit of the low dose thrombolysis would be lower bleeding
-  risk. Therefore, as primary endpoint analysis, we chose to test for
-  non-inferiority and to apply a Wilcoxon-Mann-Whitney test for non-inferiority
-  in the presence of death-censored observations.
+Tied worst-rank scores are obtained by allocating a rank score corresponding
+to a single value below the minimum observed value of the quantitative
+endpoint. Untied worst-rank scores can be obtained, if the time of death is
+taken into account. The lowest rank score is then allocated to the patient
+that has died first, subsequent deceased individuals receive ranks according
+to their time of death. After the deceased have been ranked, the subsequent
+ranks are allocated to the surviving patients according to their quantitative
+outcome.
 
-  \section{Notation and hypotheses}
-  \label{sec:Notation}
-  Let the quantitative endpoint be determined at time $\tau (\tau > 0)$. Let
-  further $X_{01}, \ldots, X_{0n_0}$ denote the values of the quantitative endpoint
-  in the $n_0$ indiviudals in the reference group with standard treatment ($i=0$)
-  and $X_{11}, \ldots, X_{1n_1}$ the values of the quantitative endpoint in the
-  $n_1$ indiviudals in thegroup with the new experimental treatment ($i=1$).
-  The event times in group $i$ are given by $T_{i1}, \ldots, T_{in_i}$. Let
-  $D_{ik} = 1$ indicate that subject $k$ in group $i$ dies before the
-  quantitative endpoint $X_{ik}$ can be determined, i. e. $D_{ik} = 1$ if
-  $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival probability in group
-  $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$. Accordingly, the
-  cumulative mortality in group $i$ up to time $\tau$ is given by
-  $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
+Lachin (1999) has shown that such an approach is unbiased against a restricted
+one-sided alternative which states that the new treatment is better with
+respect to both, mortality and the quantitative endpoint or at least better
+with respect to one criterion and equal with respect to the other.
 
-  Here, without loss of generality, we assume that high values of $X_{ik}$ are
-  favourable. Otherwise we could consider $-X_{ik}$. We further assume that
-  death is worse than any quantitative outcome and - in the untied worst rank
-  case - that early death is worse thant later death.
+Another view of this approach is to consider it as a global ranking of
+multiple endpoints, e. g. some kind of event - such as death - and some
+quantitative measurement - such as a biomarker. This approach was originally
+suggested by O'Brien (1984) for multiple endpoints and applied in cardiology
+e. g. by Felker at al (2008) and Felker and Maisel (2010) combining several
+binary and quantitative endpoints.
 
-  As Matsouaka and Betensky (2015), we introduce a new variable
+We here consider the situation where a new treatment is compared to a standard
+treatment and the intention is to show that the new treatment is non-inferior
+to the standard treatment when comparing a quantitative measurement that may
+be censored by death. As above this corresponds to a one-sided hypothesis.
+The alternative hypothesis in this case states that the new treatment is
+non-inferior to the standard treatment with respect to both the quantitative
+endpoint and the mortality risk.
+
+Matsouaka and Bentensky (2015) have derived power and sample size formulae for
+the one-sided test of the null hypothesis of equality against a restricted
+alternative as described by Lachin (1999). They present specific formulae for
+common distributions of quantitative endpoint and time to event, amongst them
+a normally distributed quantitative endpoint and exponentially distributed
+time to event.
+
+However, to the best of our knowledge, so far no power or sample size formula
+for the Wilcoxon-Mann-Whitney test for non-inferiority in the presence of
+death-censored observations is available.
+
+In section section~\ref{sec:ThrombolysisApplication}, we present the
+application, a clinical trial in pulmonary embolism, that motivated our
+methodological work. After setting out the notation in section
+~\ref{sec:Notation}, the power formulae are derived in section ~\ref{sec:Power}.
+Section ~\ref{sec:Application} illustrates the application of the derived
+formulae to the planned clinical trial. A discussion and concluding remarks
+are provided in Section ~\ref{sec:Discussion}.
+
+
+\section{Thrombolysis application}
+\label{sec:ThrombolysisApplication}
+\textcolor{cyan}{\textit{Prof. Konstantinides: please change, extend, shorten or generalize as
+you deem fit. I don't want to give away too much information but give sufficient
+background for the reader to appreciate the medical context. If appropriate,
+please indicate a paper or two that should be referenced.}}
+
+The methodological considerations presented in this paper were motivated by
+planning a clinical trial studying treatment of high risk pulmonary embolism
+patients.
+
+In this trial, the standard would be to administer standard-dose systemic
+thrombolytic treatment. The new experimental treatment would be catheter
+controlled low dose thrombolysis. RV/LV diameter ratio 24 hours after the
+intervention was considered a suitable primary endpoint. Unfortunately, fatal
+outcomes do occur within hours after treatment in patients with this condition.
+This precludes the observation of the RV/LV diameter ratio 24 hours after the
+intervention. Therefore, taking into account censoring by death of the
+quantitative endpoint was necessary.
+
+While little difference in the primary endpoint and mortality was expected,
+the potential benefit of the low dose thrombolysis would be lower bleeding
+risk. Therefore, as primary endpoint analysis, we chose to test for
+non-inferiority and to apply a Wilcoxon-Mann-Whitney test for non-inferiority
+in the presence of death-censored observations.
+
+\section{Notation and hypotheses}
+\label{sec:Notation}
+Let the quantitative endpoint be determined at time $\tau (\tau > 0)$. Let
+further $X_{01}, \ldots, X_{0n_0}$ denote the values of the quantitative endpoint
+in the $n_0$ indiviudals in the reference group with standard treatment ($i=0$)
+and $X_{11}, \ldots, X_{1n_1}$ the values of the quantitative endpoint in the
+$n_1$ indiviudals in thegroup with the new experimental treatment ($i=1$).
+The event times in group $i$ are given by $T_{i1}, \ldots, T_{in_i}$. Let
+$D_{ik} = 1$ indicate that subject $k$ in group $i$ dies before the
+quantitative endpoint $X_{ik}$ can be determined, i. e. $D_{ik} = 1$ if
+$T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival probability in group
+$i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where $S(t)$ is the survival function.
+  Accordingly, the cumulative mortality in group $i$ up to time $\tau$ is given by
+$p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
+
+Here, without loss of generality, we assume that high values of $X_{ik}$ are
+favourable. Otherwise we could consider $-X_{ik}$. We further assume that
+death is worse than any quantitative outcome and -- in the untied worst rank
+case -- that early death is worse thant later death.
+
+Following Matsouaka and Betensky (2015), we introduce a new variable, on which
+  ranking can be based. This variable is constructed such that all patients who
+  die before time $\tau$ have lower values than the patients who survive past
+  $\tau$ and are ranked according to their survival times. Patients who survive
+  past time $\tau$ are ranked according to their observed value of the quantitative
+  endpoint. The new variable is defined as
   $\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
-	$\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$.
-	This variable is constructed such that all patients who die before time $\tau$
-	have lower values than the patients who survive past $\tau$ and are ranked
-	according to their survival times. Patients who survive past $\tau$ are ranked
-	according to their observed	value of the quantitative endpoint as for them
-	$\widetilde{X}_{ik} = {X}_{ik}$ holds.
+  $\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$
+  in the untied case.  In the tied case all patients who die before the quantitative endpoint
+  can be determined have the same rank. Hence, a different definition of $\widetilde{X}_{ik}$
+  is needed and we set  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$
+  with $\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$.
+  Note, that  $\widetilde{X}_{ik} = {X}_{ik}$ holds for patient who survive past $\tau$ in both cases.
 
-	The non-inferioriorty hypotheses are
-  \begin{align*}
-	H_0 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-            \leq \frac{1}{2} - \varepsilon \\
-  H_1 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-            > \frac{1}{2} - \varepsilon
-  \end{align*}
+  The non-inferiority hypotheses are
+\begin{align*}
+  H_0 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+          \leq \frac{1}{2} - \varepsilon \\
+H_1 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+          > \frac{1}{2} - \varepsilon
+\end{align*}
 
-  with non-inferiority margin $\varepsilon > 0$ for any pair $(k, l)$ of
-  observations from the two treatment groups.
+with non-inferiority margin $\varepsilon > 0$ for any pair $(k, l)$ of
+observations from the two treatment groups.
 
-  \section{Power calculation}
-  \label{sec:Power}
-  In section~\ref{sec:PowerUntied} the power formula for the untied case is
-  derived, in section~\ref{sec:PowerTied} the power formula for the tied case
-  follows.
+\section{Power calculation}
+\label{sec:Power}
+\subsection{Untied case}
+\label{sec:PowerUntied}
+The $\widetilde{X}_{ik}$ as defined in section~\ref{sec:Notation} are used to
+  determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic
+  $ U =(n_0 n_1)^{-1}(\sum_{k=1}^{n_0}
+    \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{1l})) $.
 
-  \subsection{Untied case}
-  \label{sec:PowerUntied}
-  The $\widetilde{X}_{ik}$ as defined in section~\ref{sec:Notation} are used to
-	determine ranks and to compute the Wilcoxon-Mann-Whitney test statistic
-	$ U =(n_0 n_1)^{-1}(\sum_{k=1}^{n_0}
-	  \sum_{l=1}^{n_1}I(\widetilde{X}_{0k} < \widetilde{X}_{1l})) $.
+  In order to evaluate the power of the Wilcoxon-Mann-Whitney test, we use the
+standardised version of the Wilcoxon-Mann-Whitney U statistic, i. e. the test
+  statistic is given by $U^* =(U - \mu_0(U)) / \sigma_0(U)$, where $\mu_0(U)$ is the
+  expectation and $\sigma^2_0(U)$ the variance of U under the null hypothesis.
+  Then under the null hypothesis $U^*$ asymptotically follows a standard normal
+  distribution. The null hypothesis is rejected at level $\alpha$ if
+  $U^* > z_{1 - \alpha}$ where
+$z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the $(1 - \alpha)$-percentile of the
+normal distribution.
 
-	In order to evaluate the power of the Wilcoxon-Mann-Whitney test we use the
-  standardised version of U, therefore we need expectation $\mu(U)$ and
-  variance  $\sigma^2(U)$ of U. They were derived by Matsouaka and Betensky
-  (2015) and are as follows:
-  \begin{align*}
-  \mu(U) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) \mbox{ for arbitrary }
-                 \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
-         &= p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
-         &= \pi_{U1}\\
-  \mbox{with}   \\
-  \pi_{X1} &= \text{P}(X_{0k} < X_{1l}) \\
-  \pi_{T1} &= \text{P}(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1) \\
-  % \end{align*}
-  %
-  % \begin{align*}
-  \sigma^2(U) &= (n_0 n_1)^{-1} \left\{ \pi_{U1} (1 - \pi_{U1}) +
-                                    (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
-                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \right\} \\
-  \mbox{with} \\
-  \pi_{U2} &= \text{P}(\widetilde{X}_{0k'} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
-           &= p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
-  \pi_{X2} &= \text{P}(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
-  \pi_{T2} &= \text{P}(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
-  \pi_{U3} &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}, \widetilde{X}_{0k} < \widetilde{X}_{1l'}) \\
-           &= p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3} \\
-  \pi_{X3} &= \text{P}(X_{0k} < X_{1l}, X_{0k} < X_{1l'}) \\
-  \pi_{T3} &= \text{P}(T_{0k} < T_{1l}, T_{0k} < T_{1l'} | D_{0k} = D_{1l} = D_{1l'} =1)\\
-           &{\hphantom{=}}  \mbox{ for arbitrary } \widetilde{X}_{0k}, \widetilde{X}_{0k'}, \widetilde{X}_{1l},
-                                       \widetilde{X}_{1l'}, k \ne k', l \ne l'
-  \end{align*}
+  Therefore we need expectation $\mu(U)$ and variance $\sigma^2(U)$ of U. They
+  were derived by Matsouaka and Betensky (2015) and are as follows:
+\begin{align*}
+\mu(U) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) \mbox{ for arbitrary }
+               \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
+       &= p_0 p_1 \pi_{t1} + p_0 q_1 + q_0 q_1 \pi_{x1} \\
+       &= \pi_{U1}
+\intertext{with}
+\pi_{X1} &= \text{P}(X_{0k} < X_{1l}) \\
+\pi_{T1} &= \text{P}(T_{0k} < T_{1l} | D_{0k} = D_{1l} = 1) \\
+\sigma^2(U) &= (n_0 n_1)^{-1} \left\{ \pi_{U1} (1 - \pi_{U1}) +
+                                  (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
+                                  (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \right\}
+\intertext{with}
+\pi_{U2} &= \text{P}(\widetilde{X}_{0k'} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
+         &= p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
+\pi_{X2} &= \text{P}(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
+\pi_{T2} &= \text{P}(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
+\pi_{U3} &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}, \widetilde{X}_{0k} < \widetilde{X}_{1l'}) \\
+         &= p_0 q_1^2 + p_0 p_1^2 \pi_{t3} + 2 p_0 p_1 q_1 \pi_{t1} + q_0 q_1^2 \pi_{x3} \\
+\pi_{X3} &= \text{P}(X_{0k} < X_{1l}, X_{0k} < X_{1l'}) \\
+\pi_{T3} &= \text{P}(T_{0k} < T_{1l}, T_{0k} < T_{1l'} | D_{0k} = D_{1l} = D_{1l'} =1)\\
+         &{\hphantom{=}}  \mbox{ for arbitrary } \widetilde{X}_{0k}, \widetilde{X}_{0k'}, \widetilde{X}_{1l},
+                                     \widetilde{X}_{1l'}, k \ne k', l \ne l'
+\end{align*}
 
-  Under the null hypothesis, the Wilcoxon-Mann-Whitney statistic $U$
-  asympotically follows a normal distribution with expectation $\mu_0(U)$ and
-  variance $\sigma^2_0(U)$. $\mu(U)$ and $\sigma(U)$ under the null hypothesis
-  or under the alternative can be computed if assumptions about the
-  distributions of quantitative endpoint and event time are made. When
-  determining the power, we consider the boundary of the null hypothesis, i. e.
-  $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-          = \frac{1}{2} - \varepsilon$
+If assumptions about the distribution of quantitative endpoint and event time
+are made, $\mu(U)$ and $\sigma(U)$ can be computed. When determining the power,
+we consider the boundary of the null hypothesis, i. e.
+$\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon$.
+The power of the test for a specific alternative, where $\mu(U)) = \mu_1(U))$
+and $\sigma(U) = \sigma_1(U)$, is given by
+\begin{align*}
+  1 - \beta &= \text{P} \left(\frac{U - \mu_0(U)}{\sigma_0(U)}  >
+                                 z_{1-\alpha} \mid H_1 \right) \\
+            &= \text{P} \left(\frac{U - \mu_1(U)}{\sigma_1(U)}  >
+                                 z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
+                                 \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
+            &= \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} -
+                            \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
+            &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
+                            \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right) .
+\end{align*}
 
-  For power calcuation note, that when using the asymptotic distribution of $U$, $H_0$ is rejected at
-  level $\alpha$ if $(U - \mu_0(U)) / \sigma_0(U) > z_{1 - \alpha}$ where
-  $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the $(1 - \alpha)$-percentile of the
-  normal distribution.
+If the specific alternative considered is equivalence of treatments, i. e.
+$\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
+we have $\mu_1(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
+and $\sigma^2_1(U) = (n_0 + n_1 +1) /12 n_0 n_1$. The power is
+then given by
+\begin{align*}
+1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
+                            \frac{\varepsilon}{\sigma_1(U)} \right) \\
+          &= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{U1} (1 - \pi_{U1}) +
+                                  (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
+                                  (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big\}}{n_0 + n_1 +1}} \right.\\
+          &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{n_0 + n_1 +1}} \right) .
+\end{align*}
 
-  The power of the test for a specific alternative, where $\mu(U)) = \mu_1(U))$
-  and $\sigma(U) = \sigma_1(U)$, is given by
-  \begin{align*}
-    1 - \beta &= \text{P} \left(\frac{U - \mu_0(U)}{\sigma_0(U)}  >
-                                   z_{1-\alpha} \mid H_1 \right) \\
-              &= \text{P} \left(\frac{U - \mu_1(U)}{\sigma_1(U)}  >
-                                   z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
-                                   \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
-              &= \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} -
-                              \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
-              &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
-                              \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right)
-  \end{align*}
+\subsection{Tied case}
+\label{sec:PowerTied}
+In the tied case we use the modified Wilcoxon-Mann-Whitney statistic $ \widetilde{U}$
+which allows for ties and is defined as
+$ \widetilde{U} =(n_0 n_1)^{-1}\sum_{k=1}^{n_0}
+  \sum_{l=1}^{n_1}\left\{I(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+  + I(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2 \right\} $.
+As before, for determining the power the standardised version of the test statistic
+is used:
+$\widetilde{U}^* = (\widetilde{U} - \mu_0(\widetilde{U} )) / \sigma_0(\widetilde{U}) $
+where
+$\mu_0(\widetilde{U})$ is the expectation and $\sigma^2_0(\widetilde{U})$ the variance
+of $\widetilde{U}$ under the null hypothesis. Under the null hypothesis $\widetilde{U}^*$
+also follows a standard normal distribution. Again, the null hypothesis is rejected at
+if level $\alpha$ if $\widetilde{U}^* > z_(1-\alpha).$
 
-  If the specific alternative considered is equivalence of treatments, i. e.
-  $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
-  we have $\mu_1(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
-  and $\sigma^2_1(U) = (n_0 + n_1 +1) /12 n_0 n_1$. The power is
-  then given by
-  \begin{align*}
-  1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
-                              \frac{\varepsilon}{\sigma_1(U)} \right) \\
-            &= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{U1} (1 - \pi_{U1}) +
-                                    (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
-                                    (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \big\}}{n_0 + n_1 +1}} \right.\\
-            &{\hphantom{= \Phi\bigg(}} \left. + \varepsilon \sqrt{\frac{12 n_0 n_1 }{n_0 + n_1 +1}} \right)
-  \end{align*}
+Matsouaka and Betensky (2015) also derived expectation and variance in the tied case which
+are as follows:
 
-  \subsection{Tied case}
-  \label{sec:PowerTied}
-  Ties among the death-censored observations may occur if the exact time of
-  death is not available or if it is deemed irrelvant, e. g. if the time from
-  start of treatment to the assessment of the quantitative endpoint is
-  relatively short.
+\begin{align*}
+  \mu(\widetilde{U}) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
+                        + \text{P}(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2
+                        \mbox{ for arbitrary }
+                         \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
+                     &= \frac{p_0 p_1}{2}  + p_0 q_1 + q_0 q_1 \pi_{x1} \\
+                     &= \pi_{\widetilde{U}1} \\
+  \sigma^2(\widetilde{U}) &= (n_0 n_1)^{-1}
+                             \left\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1}) +
+                             (n_0 - 1) \left(\pi_{\widetilde{U}2} - \pi_{\widetilde{U}1}^2  - \frac{p^2_0 p_1}{12} \right)
+                             \right.\\
+                          &\hphantom{(n_0 n_1)^{-1} left\{ }
+                          \left.
+                            + (n_1 - 1) \left(\pi_{\widetilde{U}3} - \pi_{\widetilde{U}1}^2  - \frac{p_0 p^2_1}{12}\right)
+                            - \frac{p_0 p_1}{4}\right\}
+  \intertext{with}
+  \pi_{\widetilde{U}2} &= p^2_0 q_1 + \frac{p^2_0 p_1}{3} + 2 p_0 q_0 q_1 \pi_{X1} + q^2_0 q_1 \pi_{X2} \\
+  \pi_{\widetilde{U}3} &= p_0 q^2_1 + \frac{p_0 p^2_1}{3} + p_0 p_1 q_1 + q_0 q^2_1 \pi_{X3}
+                          \mbox{, where } \pi_{X1}, \pi_{X2}, \pi_{X3} \mbox{ are as in the untied case.}
+\end{align*}
 
-  For the tied case a different definition of $\widetilde{X}_{ik}$ is needed
-  which again follows Matsouaka and Betensky (2015). Therefore we set
-  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$ with
-	$\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$ and
-	obtain
-	$ \widetilde{U} =(n_0 n_1)^{-1}\sum_{k=1}^{n_0}
-	  \sum_{l=1}^{n_1}\left\{I(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-	  + I(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2 \right\} $
-  as modified Wilcoxon-Mann-Whitney statistic allowing for ties. Matsouaka and
-  Betensky (2015) also derived expectation and variance in the tied case which
-  are as follows:
+Again, $\mu(\widetilde{U})$ and $\sigma(\widetilde{U})$ under the null
+hypothesis or under the alternative can be computed if assumptions about the
+distributions of quantitative endpoint and event time are made. As previously, we
+consider the boundary of the null hypothesis, i. e.
+$\mu_0(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} <
+\widetilde{X}_{1l}) = \frac{1}{2} - \varepsilon$ when assessing the power of
+the test. The power is given by
 
-  \begin{align*}
-    \mu(\widetilde{U}) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
-                          + \text{P}(\widetilde{X}_{0k} = \widetilde{X}_{1l}) / 2
-                          \mbox{ for arbitrary }
-                           \widetilde{X}_{0k}, \widetilde{X}_{1l} \\
-                       &= \frac{p_0 p_1}{2}  + p_0 q_1 + q_0 q_1 \pi_{x1} \\
-                       &= \pi_{\widetilde{U}1} \\
-    \sigma^2(\widetilde{U}) &= (n_0 n_1)^{-1}
-                               \left\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1}) +
-                               (n_0 - 1) \left(\pi_{\widetilde{U}2} - \pi_{\widetilde{U}1}^2  - \frac{p^2_0 p_1}{12} \right)
-                               \right.\\
-                            &\hphantom{(n_0 n_1)^{-1} left\{ }
-                            \left.
-                              + (n_1 - 1) \left(\pi_{\widetilde{U}3} - \pi_{\widetilde{U}1}^2  - \frac{p_0 p^2_1}{12}\right)
-                              - \frac{p_0 p_1}{4}\right\} \\
-    \mbox{with} \\
-    \pi_{\widetilde{U}2} &= p^2_0 q_1 + \frac{p^2_0 p_1}{3} + 2 p_0 q_0 q_1 \pi_{X1} + q^2_0 q_1 \pi_{X2} \\
-    \pi_{\widetilde{U}3} &= p_0 q^2_1 + \frac{p_0 p^2_1}{3} + p_0 p_1 q_1 + q_0 q^2_1 \pi_{X3}
-                            \mbox{, where } \pi_{X1}, \pi_{X2}, \pi_{X3} \mbox{ as in the untied case.}
-  \end{align*}
+\begin{align*}
+  1 - \beta &= \text{P} \left(\frac{\widetilde{U} - \mu_0(\widetilde{U})}{\sigma_0(\widetilde{U})}  >
+                                 z_{1-\alpha} \mid H_1 \right) \\
+            &= \Phi\left(z_{\alpha}\frac{\sigma_0(\widetilde{U})}{\sigma_1(\widetilde{U})} +
+                            \frac{\mu_1(\widetilde{U}) - \mu_0(\widetilde{U})}{\sigma_1(\widetilde{U})} \right)
+\end{align*}
 
-  Analogous to the untied case, the modified Wilcoxon-Mann-Whitney statististic
-  $\widetilde{U}$ follows a normal distribution with expectation
-  $\mu_0(\widetilde{U})$ and variance $\sigma^2_0(\widetilde{U})$.
-  Again, $\mu(\widetilde{U})$ and $\sigma(\widetilde{U})$ under the null
-  hypothesis or under the alternative can be computed if assumptions about the
-  distributions of quantitative endpoint and event time are made.
-
-  As previously, we consider the boundary of the null hypothesis, i. e.
-  $\mu_0(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} <
-  \widetilde{X}_{1l}) = \frac{1}{2} - \varepsilon$ when assessing the power of
-  the test. As before, $H_0$ is rejected at level $\alpha$ if
-  $(\widetilde{U} - \mu_0(\widetilde{U})) / \sigma_0(\widetilde{U})
-  > z_{1 - \alpha}$.
-  The power is given by
-
-  \begin{align*}
-    1 - \beta &= \text{P} \left(\frac{\widetilde{U} - \mu_0(\widetilde{U})}{\sigma_0(\widetilde{U})}  >
-                                   z_{1-\alpha} \mid H_1 \right) \\
-              &= \Phi\left(z_{\alpha}\frac{\sigma_0(\widetilde{U})}{\sigma_1(\widetilde{U})} +
-                              \frac{\mu_1(\widetilde{U}) - \mu_0(\widetilde{U})}{\sigma_1(\widetilde{U})} \right)
-  \end{align*}
-
-  If the specific alternative considered is equivalence of treatments, i. e.
-  $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
-  we have $p_0 = p_1 = p, q_0 = q_1 = q, \pi_{X1} = 1/2,
-  \pi_{X2} = \pi_{X3} = 1/3$ and hence
-  $\pi_{\widetilde{U}1} = 1/2, \pi_{\widetilde{U}2} = \pi_{\widetilde{U}3} = 1/3 $.
-  Consequently, $\mu_1(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
-  and \\
-  $\sigma^2_1(\widetilde{U}) = \left\{ (n_0 + n_1 +1) -
-                p^2 \left[ 3 +(n_0 + n_1 -2) p \right] \right\} / (12 n_0 n_1)$.\\
+If the specific alternative considered is equivalence of treatments, i. e.
+$\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
+we have $p_0 = p_1 = p, q_0 = q_1 = q, \pi_{X1} = 1/2,
+\pi_{X2} = \pi_{X3} = 1/3$ and hence
+$\pi_{\widetilde{U}1} = 1/2, \pi_{\widetilde{U}2} = \pi_{\widetilde{U}3} = 1/3 $.
+Consequently, $\mu_1(\widetilde{U}) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2$
+and \\
+$\sigma^2_1(\widetilde{U}) = \left\{ (n_0 + n_1 +1) -
+              p^2 \left[ 3 +(n_0 + n_1 -2) p \right] \right\} / (12 n_0 n_1)$.\\
 The power is then given by
 
-  \begin{align*}
-	  1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(\widetilde{U})}{\sigma_1(\widetilde{U})} +
-                            \frac{\varepsilon}{\sigma_1(\widetilde{U})} \right) \\
-							&= \Phi\left(z_{\alpha}
-							   \sqrt\frac{
-								 \left\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1})
-								       + (n_0 - 1)( \pi_{\widetilde{U}2} - \pi^2_{\widetilde{U}1} - \frac{p_0^2 p_1}{12})
-											 + (n_1 - 1)( \pi_{\widetilde{U}3} - \pi^2_{\widetilde{U}1} - \frac{p_0 p_1^2}{12})
-											 - \frac{p_0 p_1}{4}
-								\right\}}{\left\{ (n_0 + n_1 +1) -
-                p^2 \left[ 3 +(n_0 + n_1 -2) p \right] \right\} / 12 } \right. \\
-							&{\hphantom{= \Phi\bigg(}} + \left.
-							  \varepsilon \sqrt\frac{12}{(n_0 + n_1 +1) -
-                p^2 \left[ 3 +(n_0 + n_1 -2) p \right]} \right)
-							%\varepsilon\sqrt{\frac{12 n_0 n_1}{\left\{ (n_0 + n_1 +1) - p^2 \left[ 3 +(n_0 + n_1 -2) p \right]} \right\}}}
-							%
-              %&= \Phi\left(z_{\alpha} \sqrt{\frac{12 \big\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1}) + \right.
-            %                         (n_0 - 1) (\pi_{\widetilde{U}2} - \pi_{\widetilde{U}1}^2 - p_0^2 p1 / 12) +
-            %                         (n_1 - 1) (\pi_{\widetilde{U}3} - \pi_{\widetilde{U}1}^2 - p_0 p1^2 / 12) - p_0 p_1 / 4 \big\}}{(n_0 + n_1)(n_0 + n_1 +1)}} \right.\\
-            % &{\hphantom{= \Phi\bigg(}} \left.
-            % + \varepsilon \sqrt{\frac{12 n_0 n_1 }{(n_0 + n_1 + 1 - p^2 \left[ 3 +(n_0 + n_1 -2) p \right])}} \right)
-  \end{align*}
+\begin{align*}
+  1 - \beta &= \Phi\left(z_{\alpha}\frac{\sigma_0(\widetilde{U})}{\sigma_1(\widetilde{U})} +
+                          \frac{\varepsilon}{\sigma_1(\widetilde{U})} \right) \\
+            &= \textstyle{\Phi\left(z_{\alpha}
+               \sqrt\frac{
+               \left\{ \pi_{\widetilde{U}1} (1 - \pi_{\widetilde{U}1})
+                     + (n_0 - 1)( \pi_{\widetilde{U}2} - \pi^2_{\widetilde{U}1} - \frac{p_0^2 p_1}{12})
+                     + (n_1 - 1)( \pi_{\widetilde{U}3} - \pi^2_{\widetilde{U}1} - \frac{p_0 p_1^2}{12})
+                     - \frac{p_0 p_1}{4}
+              \right\}}{\left\{ (n_0 + n_1 +1) -
+              p^2 \left[ 3 +(n_0 + n_1 -2) p \right] \right\} / 12 } \right.} \\
+            &{\hphantom{= \Phi\bigg(}} + \left.
+            \varepsilon \sqrt\frac{12}{(n_0 + n_1 +1) -
+              p^2 \left[ 3 +(n_0 + n_1 -2) p \right]} \right)
+\end{align*}
 
 
-  \section{Application}
-  \label{sec:Application}
-	For the clinical application we assume that the RV/LV reduction is approximately normally distributed
-	with common variance for both treatment groups:
-	$X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ), (i = 0, 1)$. Under the standard treatment RV/LV reduction
-	is expected to be $\mu_0 = 0.3$ on average with standard deviation $\sigma= 0.1$. A difference of
-	$\varepsilon^{*} = 0.05 = 0.5 \sigma$ is deemed acceptable. This would be used as non-inferiority
-	margin in a parametric test if no censoring by death occurred. The corresponding parametric hypotheses
-	are $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $ and
-	$H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ with $\mu_0 = 0.3$ and $\sigma = 0.1$.
-	We chose $\alpha = 0.0294$ as one interim analysis is planned in a Pocock group sequential design.
-  We explore the power as a function of sample size and the probabilities of death in both treatment
-	groups.
+\section{Application}
+\label{sec:Application}
+  For the clinical application we assume that the RV/LV reduction is approximately normally distributed
+with common variance for both treatment groups:
+$X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ), (i = 0, 1)$. Under the standard treatment RV/LV reduction
+is expected to be $\mu_0 = 0.3$ on average with standard deviation $\sigma= 0.1$. A difference of
+$\varepsilon^{*} = 0.05 = 0.5 \sigma$ is deemed acceptable. This would be used as non-inferiority
+margin in a parametric test if no censoring by death occurred. The corresponding parametric hypotheses
+are $H_0: \mu_1 \leq \mu_0 - \epsilon^{*}  = \mu_0 - 0.5 \sigma $ and
+$H_1: \mu_1 > \mu_0 - \epsilon^{*} = \mu_0 - 0.5 \sigma $ with $\mu_0 = 0.3$ and $\sigma = 0.1$.
+We chose $\alpha = 0.0294$ as one interim analysis is planned in a Pocock group sequential design.
+We explore the power as a function of sample size and the probabilities of death in
+both treatment groups for the specific alternative of equivalence of treatments.
+The ratio of $n_0 : n_1$ is chosen as $1 : 2 $ in our application.
 
-	In a first step we determine the non-parametric non-inferiority margin for the case of
-	no censoring by death
+In a first step we determine the non-parametric non-inferiority margin $\tilde{\epsilon}$
+for the case of no censoring by death such that
+$H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\epsilon}$ and
+$H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\epsilon}$.
+
+ As $\Phi(x)$ is monotonically increasing and under $H_0$ we have
+ $P(X_0 < X_1) = \Phi((\mu_1 - \mu_0)/\sqrt{2}\sigma) \leq \Phi(\epsilon^{*}/ \sqrt{2}\sigma) = \Phi(-1/\sqrt{8}) $,
+ $\tilde{\epsilon}$ can be chosen such that
+ $1/2 - \tilde{\epsilon} = \Phi(-1/\sqrt{8}) $ and hence
+ $\tilde{\epsilon} = 1/2 - \Phi(-1/\sqrt{8})  \approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}.
+
+\subsection{Untied case}
+\label{sec:AppUntied}
+For the untied case we assume that the time to death follows an exponential distribution, i. e.
+$T_i \sim exp(\lambda_i), (i=0,1)$, i. e. $q_i = exp(-\lambda_i \tau)$. Without
+loss of generality we cane assume that $\tau 0= 1$. To determine the overall
+non-inferiority margin $\varepsilon$, again consider the margin of the null hypothesis,
+i. e. $\text{P}(\tilde{X_{0k}} < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
+
+\begin{align*}
+\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 \text{P}(T_{0k} < T_{1l}) + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
+                                  &= p_0 p_1 \frac{\lambda_0}{\lambda_0 + \lambda_1} + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(\frac{1}{2} - \tilde{\varepsilon}) \\
+                                  &= \frac{1}{2} - \left( (1-p_0)(1-p_1) \tilde{\epsilon} + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) \right) \mbox{ with } \gamma = \frac{1}{2} - \frac{\lambda_0}{\lambda_0 + \lambda_1} \\
+\intertext{and hence}
+ \varepsilon &= (1-p_0)(1-p_1) (1/2 - \Phi(-1/\sqrt{8})) + \gamma p_0 p_1 + (p_1 - p_0)/2
+\intertext{For $p_0 = p_1 = p$ this simplifies to}
+ \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
+\end{align*}
+
+% \begin{figure}[htb]
+% \begin{center}
+
+%  \includegraphics[bb= 0 0 115 87]{empty.eps}
+
+<<powerplot, fig.lp="fig:", fig.cap = 'Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
+source("PowerAndMoments.R") #include functions to compute moments and power
+# explore power for specific situation described above, varying the
+# probabiliy of death
+# sample size in each group
+n_0 <- seq(1:150)
+n_1 <- 2*n_0
+
+# chosen probabilities of death
+chosen_ps <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
+l_chosen_ps <- length(chosen_ps) # number of chosen probabilities of death
+
+# chosen relative risks (treatment(1)  vs control(0) under H0)
+chosen_risks <- c(1, 1.2, 1.75, 2.5)
+l_chosen_risks <- length(chosen_risks) # number of chosen risks
+figure_elements <- LETTERS[1:l_chosen_risks]
+
+# vector to hold sample sizes
+samplesize_80 <- c(rep(NA, l_chosen_ps))
+names(samplesize_80) <- as.character(chosen_ps)
+
+# matrix to hold power for all combinations of probabilities of death and sample size
+MyPower.Matrix <- matrix(rep(NA, length(n_0)*l_chosen_ps), ncol = l_chosen_ps)
+dimnames(MyPower.Matrix)[[2]] <- as.character(chosen_ps)
+
+# vector to hold non-inferiority margins corresponding to chosen situation
+epsilon_ps <- c(rep(NA, l_chosen_ps))
+names(epsilon_ps) <- as.character(chosen_ps)
+
+# vector of datasets to hold combination of chosen p's, computed epsilon's and sample
+# sizes for power 80%
+results <- list()
+
+par(mfrow = c(2, 2)) # construct panel of 2x2 graphs, this only works fine if four graphs are produced
+
+for (RR in seq_along(chosen_risks)) {
+  for (p in chosen_ps) {
+    MyPower <- power_gr(alpha = 0.0294,
+                        p_0_0 = p, p_1_0 = chosen_risks[RR]*p, p_0_1 = p, p_1_1 = p,
+                        mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3,
+                        sigma = 0.1, tau = 1,
+                        n_0 = n_0, n_1 = n_1,
+                        verbose = FALSE)
+     MyPower.Matrix[, as.character(p)] <- MyPower$power
+     epsilon_ps[as.character(p)] <- MyPower$epsilon
+     index <- min(which(MyPower$power >= 0.8))
+     samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
+  }
+  results[[RR]] <- data.frame(chosen_ps, epsilon_ps, samplesize_80)
+
+  # plot power as function of sample size and p
+  # first establish empty plot with axes
+  plot(NULL, xlab = "Total sample size", ylab = "Power", xlim = c(0, max(n_0) + max(n_1)), ylim = c(0, 1))
+  my.lt <- c(1:6)     # define line types for graph
+  my.col <- c(grey.colors(l_chosen_ps, start = 0, end = 0.6, gamma = 2.2))
+                       # define 'colors' for graph
+  # plots for p_0 ^= 0
+  for (i in seq_along(chosen_ps[2:l_chosen_ps])) {
+    lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])],
+          lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
+  }
+  # plots for p_0 = 0 (black line should always be visible)
+  lines(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", lwd = 2, lty = 1, col = "black")
+
+  legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"),
+         legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2,
+         lty = my.lt, col = my.col )
+  legend("topleft", legend = figure_elements[RR], cex = 1.5, inset = -0.05, bty = "n")
+  title(main = paste0("RR = ", as.character(chosen_risks[RR])))
+}
+@
+
+In figure \ref{fig:powerplot} the solid black line is identical in all panels; it
+depicts the situation when no censoring due to death occurs. Figure
+\ref{fig:powerplot}A describes the situation when mortality is the same in both
+treatment groups. For given sample size power decreases with an increase in
+probability of censoring by death. Figure \ref{fig:powerplot}B also exhibits this
+effect, however, here the risk of censoring by death is 20\% higher in the new
+treatment group under null hypothesis and the power is less affected by the risk
+of censoring by death. If $\lambda_0$ and $\lambda_1$ are such that
+$\lambda_0 / (\lambda_0 + \lambda_1) = 1/2 - \tilde{\varepsilon}$ then
+
+\begin{align*}
+\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 (1/2 - \tilde{\varepsilon}) + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(1/2 - \tilde{\varepsilon}) \\
+   &= (1/2 - \tilde{\varepsilon})(1 + p_0 - p_1) - 2 \tilde{\varepsilon}p_0 p_1 \\
+   &\approx 1/2 - \tilde{\varepsilon} \mbox{ if } p_0, p_1 << 1
+\end{align*}
+
+This effect can be seen in figure \ref{fig:powerplot}C where the power for the
+smaller probabilities for death is very similar to the situation where there is
+no censoring by death. In figure \ref{fig:powerplot}D the assumption is that
+under the null hypothesis the risk for death ist 2.5 fold in the new treatment
+group compared to the reference group. In this case the power increases with
+increasing probability of censoring due to death.
+
+\textcolor{magenta}{\textit{Harald: mention power for specific values of sample
+size?}}
+
+\subsection{Tied case}
+\label{sec:AppTied}
+For the tied case it suffices to make an assumption about the probability of death
+in each group under the null hypothesis. To determine the overall non-inferiority margin
+we again consider the margin of the null hypothesis
+$\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
 
 
+\begin{align*}
+ \text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 / 2 + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
+    &= p_0 - p_0 p_1/2 + (1 - p_0)(1 - p_1)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}\\
+    &= 1/2 - (p_1 - p_0)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}
+\intertext{and hence}
+\varepsilon &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) (1/2 - \Phi(-1/\sqrt{8}))
+\intertext{For $p_0 = p_1 = p$ this also simplifies to}
+\varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
+\end{align*}
 
-  \section{Discussion}
-  \label{sec:Discussion}
-  \begin{itemize}
-  \item interpretation of conflicting results
-  \item choice of mortality rate (too high --> rather choose mortality as endpoint)
+\section{Discussion}
+\label{sec:Discussion}
+\begin{itemize}
+\item interpretation of conflicting results
+\item choice of mortality rate (too high --> rather choose mortality as endpoint)
+\item 1D is not a sensible assumption.
 \end{itemize}
 
 
 
-  \subsection{Second level heading}
-  This is normal body text. Please note that the body text must be divided into numbered sections with
-  suitable short verbal titles. Sub-headings are allowed but not sub-subheadings. Please use sentence case in the
-  headings.
+\subsection{Second level heading}
+This is normal body text. Please note that the body text must be divided into numbered sections with
+suitable short verbal titles. Sub-headings are allowed but not sub-subheadings. Please use sentence case in the
+headings.
 
-  This is the body text. Please note that cross-references in the body text should be shown as follows:
-  (Miller, 1900), (Miller and Baker, 1900) or if three or more authors (Miller {\it{et al}}., 1900)
-  \vspace*{12pt}
+This is the body text. Please note that cross-references in the body text should be shown as follows:
+(Miller, 1900), (Miller and Baker, 1900) or if three or more authors (Miller {\it{et al}}., 1900)
+\vspace*{12pt}
 
-  \noindent Bullet lists are not allowed. Always use (i), (ii), etc.
-  \vspace*{12pt}
+\noindent Bullet lists are not allowed. Always use (i), (ii), etc.
+\vspace*{12pt}
 
-  \noindent Sentences should never start with a symbol.
-  \vspace*{12pt}
+\noindent Sentences should never start with a symbol.
+\vspace*{12pt}
 
-  \noindent Names of software packages and website addresses should be written in {\tt{Courier new, i.e. Stata, the R package
-  MASS, http://www.biometrical-journal.com.}}
+\noindent Names of software packages and website addresses should be written in {\tt{Courier new, i.e. Stata, the R package
+MASS, http://www.biometrical-journal.com.}}
 
 
-  \begin{table}[htb]
-  \begin{center}
-  \caption{The caption of a table.}
-  \begin{tabular}{lll}
-  \hline
-  Description 1 & Description 2 & Description 3\\
-  \hline
-  Row 1, Col 1 & Row 1, Col 2 & Row 1, Col 3\\
-  Row 2, Col 1 & Row 2, Col 2 & Row 2, Col 3\\
-  \hline
-  \end{tabular}
-  \end{center}
-  \end{table}
-  \begin{equation}
-  \left({\theta^{0}_{i}}\atop{\theta^{1}_{i}}\right) \sim N(\theta,\Sigma),\quad {\mathrm{with}}\
-  {{\theta}} = \left({\theta_{0}}\atop{\theta_{1}}\right)\ {\mathrm{and}}\ \Sigma =
-  \left(\begin{array}{cc}
-  \sigma^{2}_{0} & \rho\sigma_{0}\sigma_{1}\\
-  \rho\sigma_{0}\sigma_{2} & \sigma^{2}_{1}
-  \end{array}\right).
-  \end{equation}
+\begin{table}[htb]
+\begin{center}
+\caption{The caption of a table.}
+\begin{tabular}{lll}
+\hline
+Description 1 & Description 2 & Description 3\\
+\hline
+Row 1, Col 1 & Row 1, Col 2 & Row 1, Col 3\\
+Row 2, Col 1 & Row 2, Col 2 & Row 2, Col 3\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{equation}
+\left({\theta^{0}_{i}}\atop{\theta^{1}_{i}}\right) \sim N(\theta,\Sigma),\quad {\mathrm{with}}\
+{{\theta}} = \left({\theta_{0}}\atop{\theta_{1}}\right)\ {\mathrm{and}}\ \Sigma =
+\left(\begin{array}{cc}
+\sigma^{2}_{0} & \rho\sigma_{0}\sigma_{1}\\
+\rho\sigma_{0}\sigma_{2} & \sigma^{2}_{1}
+\end{array}\right).
+\end{equation}
 
-  \noindent This is the body text. Only number equations which are referred to in the text body. If equations
-  are numbered, these should be numbered continuously throughout the text. Not section wise! Please
-  carefully follow the rules for mathematical expressions in the ``Instructions to Authors''.
+\noindent This is the body text. Only number equations which are referred to in the text body. If equations
+are numbered, these should be numbered continuously throughout the text. Not section wise! Please
+carefully follow the rules for mathematical expressions in the ``Instructions to Authors''.
 
-  \begin{figure}[htb]
-  \begin{center}
+\begin{figure}[htb]
+\begin{center}
 %  \includegraphics[bb= 0 0 115 87]{empty.eps}
-  \caption{The figure caption ($b_{2}b_{2}a^{n}a^{n}$).}
-  \end{center}
-  \end{figure}
-  \begin{acknowledgement}
-  An acknowledgement may be placed at the end of the article.
-  \end{acknowledgement}
-  \vspace*{1pc}
+\caption{The figure caption ($b_{2}b_{2}a^{n}a^{n}$).}
+\end{center}
+\end{figure}
+\begin{acknowledgement}
+An acknowledgement may be placed at the end of the article.
+\end{acknowledgement}
+\vspace*{1pc}
 
-  \noindent {\bf{Conflict of Interest}}
+\noindent {\bf{Conflict of Interest}}
 
-  \noindent {\it{The authors have declared no conflict of interest. (or please state any conflicts of interest)}}
+\noindent {\it{The authors have declared no conflict of interest. (or please state any conflicts of interest)}}
 
-  \section*{Appendix {\it(please insert here, if applicable)}}
+\section*{Appendix {\it(please insert here, if applicable)}}
 
-  \subsection*{A.1.\enspace Second level heading}
+\subsection*{A.1.\enspace Second level heading}
 
-  Please insert appendices before the references.
+Please insert appendices before the references.
 
-  \begin{thebibliography}{10}
+\begin{thebibliography}{10}
 
-  \bibitem[Lachin(1999)Lachin, J. L]{bib1}Lachin, J. L. (1999) Worst-rank score analysis with informatively missing observations in clinical trials.  \textit{Controlled Clinical Trials} \textbf{20}, 408 – 422.
+\bibitem[Lachin(1999)Lachin, J. L]{bib1}Lachin, J. L. (1999) Worst-rank score analysis with informatively missing observations in clinical trials.  \textit{Controlled Clinical Trials} \textbf{20}, 408 – 422.
 
-  \bibitem[Wittes et al(1989)Wittes, J., Lakatos, E., and Probstfield, J.]{bib2}Wittes, J., Lakatos, E., and Probstfield, J. (1989) Surrogate endpoints in clinical trials: cardiovascular diseases. \textit{Statistics in Medicine} \textbf{8}, 415 – 425.
+\bibitem[Wittes et al(1989)Wittes, J., Lakatos, E., and Probstfield, J.]{bib2}Wittes, J., Lakatos, E., and Probstfield, J. (1989) Surrogate endpoints in clinical trials: cardiovascular diseases. \textit{Statistics in Medicine} \textbf{8}, 415 – 425.
 
-  \bibitem[O'Brien(1984) O'Brien, P. C.]{bib3} O'Brien, P. C. (1984) Procedures for comparing samples with multiple endpoints. \textit{Biometrics} \textbf{40}, 1079 – 1087.
+\bibitem[O'Brien(1984) O'Brien, P. C.]{bib3} O'Brien, P. C. (1984) Procedures for comparing samples with multiple endpoints. \textit{Biometrics} \textbf{40}, 1079 – 1087.
 
 \bibitem[Felker et al(2008) Felker, G. M., Anstrom, K. J., Rogers, J. G.]{bib4} Felker, G. M., Anstrom, K. J., Rogers, J. G. A. (2008) global ranking approach to end points in trials of mechanical circulatory support devices. \textit{Journal of Cardiac Failure} \textbf{14}, 368 – 372.
 
@@ -591,7 +729,7 @@ The power is then given by
 
 %\bibitem[]{bib} \textit{} \textbf{}, –.
 
-  \end{thebibliography}
-  \newpage
-  \phantom{aaaa}
-  \end{document}
+\end{thebibliography}
+\newpage
+\phantom{aaaa}
+\end{document}
