@@ -501,7 +501,7 @@ $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\epsilon}$.
 \label{sec:AppUntied}
 For the untied case we assume that the time to death follows an exponential distribution, i. e.
 $T_i \sim exp(\lambda_i), (i=0,1)$, i. e. $q_i = exp(-\lambda_i \tau)$. Without
-loss of generality we cane assume that $\tau 0= 1$. To determine the overall
+loss of generality we can assume that $\tau = 1$. To determine the overall
 non-inferiority margin $\varepsilon$, again consider the margin of the null hypothesis,
 i. e. $\text{P}(\tilde{X_{0k}} < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
 
