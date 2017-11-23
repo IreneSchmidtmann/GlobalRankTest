@@ -112,10 +112,11 @@ power_gr <- function(alpha,
                      p_0_0 = 0.2, p_1_0 = 0.2, p_0_1 = 0.2, p_1_1 = 0.2,
                      mu_0_0 = 1, mu_1_0 = 1, mu_0_1 = 1, mu_1_1 = 1,
                      sigma = 1, tau = 1,
-                     n_0 = 50, n_1 = 50, verbose = FALSE){
+                     n_0 = 50, n_1 = 50, verbose = FALSE, tied = FALSE){
   # determine moments unter $H_0$
   moments_H_0 <- moments(p_0 = p_0_0, p_1 = p_1_0, mu_0 = mu_0_0, mu_1 = mu_1_0,
-                         sigma = sigma, tau = tau, n_0 = n_0, n_1 = n_1, verbose = verbose)
+                         sigma = sigma, tau = tau, n_0 = n_0, n_1 = n_1,
+                         verbose = verbose, tied = tied)
   # compute effective epsilon, given parameters under $H_0$
   epsilon <- 0.5 - moments_H_0$mu_u
 

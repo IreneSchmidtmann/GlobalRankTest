@@ -502,7 +502,7 @@ $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\epsilon}$.
 For the untied case we assume that the time to death follows an exponential distribution, i. e.
 $T_i \sim exp(\lambda_i), (i=0,1)$, i. e. $q_i = exp(-\lambda_i \tau)$. Without
 loss of generality we can assume that $\tau = 1$. To determine the overall
-non-inferiority margin $\varepsilon$, again consider the margin of the null hypothesis,
+non-inferiority margin $\varepsilon$, again consider the boundary of the null hypothesis,
 i. e. $\text{P}(\tilde{X_{0k}} < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
 
 \begin{align*}
@@ -520,7 +520,7 @@ i. e. $\text{P}(\tilde{X_{0k}} < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
 
 %  \includegraphics[bb= 0 0 115 87]{empty.eps}
 
-<<powerplot, fig.lp="fig:", fig.cap = 'Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
+<<powerplot_untied, fig.lp="fig:", fig.cap = 'Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
 source("PowerAndMoments.R") #include functions to compute moments and power
 # explore power for specific situation described above, varying the
 # probabiliy of death
@@ -562,7 +562,7 @@ for (RR in seq_along(chosen_risks)) {
                         mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3,
                         sigma = 0.1, tau = 1,
                         n_0 = n_0, n_1 = n_1,
-                        verbose = FALSE)
+                        verbose = FALSE, tied = FALSE)
      MyPower.Matrix[, as.character(p)] <- MyPower$power
      epsilon_ps[as.character(p)] <- MyPower$epsilon
      index <- min(which(MyPower$power >= 0.8))
@@ -635,6 +635,79 @@ $\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
 \intertext{For $p_0 = p_1 = p$ this also simplifies to}
 \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
 \end{align*}
+
+<<powerplot_tied, fig.lp="fig:", fig.cap = 'Power and sample size for tied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
+source("PowerAndMoments.R") #include functions to compute moments and power
+# explore power for specific situation described above, varying the
+# probabiliy of death
+# sample size in each group
+n_0 <- seq(1:150)
+n_1 <- 2*n_0
+
+# chosen probabilities of death
+chosen_ps_tied <- c(0, 0.01, 0.02, 0.05, 0.1, 0.2)
+l_chosen_ps_tied <- length(chosen_ps_tied) # number of chosen probabilities of death
+
+# chosen relative risks (treatment(1)  vs control(0) under H0)
+chosen_risks_tied <- c(1, 1.2, 1.75, 2.5)
+l_chosen_risks_tied <- length(chosen_risks_tied) # number of chosen risks
+figure_elements_tied <- LETTERS[1:l_chosen_risks_tied]
+
+# vector to hold sample sizes
+samplesize_80_tied <- c(rep(NA, l_chosen_ps_tied))
+names(samplesize_80_tied) <- as.character(chosen_ps_tied)
+
+# matrix to hold power for all combinations of probabilities of death and sample size
+MyPower.Matrix_tied <- matrix(rep(NA, length(n_0)*l_chosen_ps_tied), ncol = l_chosen_ps_tied)
+dimnames(MyPower.Matrix_tied)[[2]] <- as.character(chosen_ps_tied)
+
+# vector to hold non-inferiority margins corresponding to chosen situation
+epsilon_ps_tied <- c(rep(NA, l_chosen_ps_tied))
+names(epsilon_ps_tied) <- as.character(chosen_ps_tied)
+
+# vector of datasets to hold combination of chosen p's, computed epsilon's and sample
+# sizes for power 80%
+results_tied <- list()
+
+par(mfrow = c(2, 2)) # construct panel of 2x2 graphs, this only works fine if four graphs are produced
+
+for (RR in seq_along(chosen_risks_tied)) {
+  for (p in chosen_ps_tied) {
+    MyPower_tied <- power_gr(alpha = 0.0294,
+                        p_0_0 = p, p_1_0 = chosen_risks[RR]*p, p_0_1 = p, p_1_1 = p,
+                        mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3,
+                        sigma = 0.1, tau = 1,
+                        n_0 = n_0, n_1 = n_1,
+                        verbose = FALSE, tied = TRUE)
+     MyPower.Matrix_tied[, as.character(p)] <- MyPower_tied$power
+     epsilon_ps_tied[as.character(p)] <- MyPower_tied$epsilon
+     index_tied <- min(which(MyPower_tied$power >= 0.8))
+     samplesize_80_tied[as.character(p)] <- n_0[index_tied] + n_1[index_tied]
+  }
+  results_tied[[RR]] <- data.frame(chosen_ps_tied, epsilon_ps_tied, samplesize_80_tied)
+
+  # plot power as function of sample size and p
+  # first establish empty plot with axes
+  plot(NULL, xlab = "Total sample size", ylab = "Power", xlim = c(0, max(n_0) + max(n_1)), ylim = c(0, 1))
+  my.lt <- c(1:6)     # define line types for graph
+  my.col <- c(grey.colors(l_chosen_ps, start = 0, end = 0.6, gamma = 2.2))
+                       # define 'colors' for graph
+  # plots for p_0 ^= 0
+  for (i in seq_along(chosen_ps[2:l_chosen_ps])) {
+    lines(x = n_0 + n_1, y = MyPower.Matrix_tied[, as.character(chosen_ps_tied[i + 1])],
+          lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
+  }
+  # plots for p_0 = 0 (black line should always be visible)
+  lines(x = n_0 + n_1, y = MyPower.Matrix_tied[, "0"], type = "l", lwd = 2, lty = 1, col = "black")
+
+  legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"),
+         legend = as.character(chosen_ps_tied), inset = 0.05, bty = "n", lwd = 2,
+         lty = my.lt, col = my.col )
+  legend("topleft", legend = figure_elements_tied[RR], cex = 1.5, inset = -0.05, bty = "n")
+  title(main = paste0("RR = ", as.character(chosen_risks_tied[RR])))
+}
+@
+
 
 \section{Discussion}
 \label{sec:Discussion}
