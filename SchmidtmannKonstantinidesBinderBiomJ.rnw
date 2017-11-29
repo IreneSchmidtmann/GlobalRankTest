@@ -107,11 +107,10 @@ opts_chunk$set(warning = FALSE, message = FALSE)
 \Issue{61}
 \Year{2010}
 \pagespan{1}{}
-\keywords{Censoring by death; Global rank test; Non-inferiority; Key word four; Key word five;\\
-\noindent \hspace*{-4pc} {\small\it (Up to five keywords are allowed and should be given in alphabetical order. Please capitalize the key}\\
-\hspace*{-4pc} {\small\it words)}\\[1pc]
-\noindent\hspace*{-4.2pc} Supporting Information for this article is available from the author or on the WWW under\break \hspace*{-4pc} \underline{http://dx.doi.org/10.1022/bimj.XXXXXXX} (please delete if not
-applicable)
+\keywords{Censoring by death; Global rank test; Non-inferiority; Combined endpoints; Pulmonary embolism;\\
+% \noindent \hspace*{-4pc} {\small\it (Up to five keywords are allowed and should be given in alphabetical order. Please capitalize the key}\\
+% \hspace*{-4pc} {\small\it words)}\\[1pc]
+\noindent\hspace*{-4.2pc} Supporting Information for this article is available on the WWW under\break \hspace*{-4pc} \underline{https://github.com/IreneSchmidtmann/GlobalRankTest}
 }  %%% semicolon and fullpoint added here for keyword style
 
 \title[Running title]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence
@@ -130,20 +129,20 @@ University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
 \Receiveddate{zzz} \Reviseddate{zzz} \Accepteddate{zzz}
 
 \begin{abstract}
-Start. This is the abstract. You may use this LaTeX template to write your text.
-The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-not be longer than 250 words. This is the abstract. You may use this LaTeX template to write your text.
-The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
-The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
-The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-not be longer than 250 words.  This is the abstract. You may use this LaTeX template to write your text.
-The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-not be longer than 250 words. Start. This is the abstract. You may use this LaTeX template to write your text.
-The abstract should not contain multiple paragraphs, formulae NOR references and should ideally
-not be longer than 250 words.
-Stop.
+We consider a randomized clinical trial comparing a new treatment to a reference
+treatment in which the goal is to demonstrate non-inferiority. A quantitative
+endpoint is to be determined after a period of follow-up. However, patients may
+die before the quantitative endpoint can be measured. As excluding such patients
+would introduce bias, alternative analyses are desirable. This can be achieved
+by ranking the quantitative outcome and assigning “worst rank” scores to the
+patients whose quantitative outcome cannot be determined due to death. While
+power and sample size formulae for the classical one-sided test are available we
+here derive power formulae for a non-inferiority test in the presence of
+death-censored observations. We illustrate the derived theoretical results using
+an example of a clinical trial in pulmonary embolism.
+
+\textcolor{magenta}{\textit{Harald: more? wordcount: 126, 250 words are allowed}}
+
 \end{abstract}
 
 
@@ -172,7 +171,9 @@ Stop.
 
 In clinical trials for cardiovascular diseases, often the aim of an
 intervention is to improve function, measured by some quantitative endpoint
-such as the distance walked in the six minute walk test, a biomarker, or ... .
+such as the distance walked in the six minute walk test, a biomarker, or ...
+\textcolor{cyan}{\textit{Prof. Konstantinides: please add further clinically
+relevant examples if you think it is useful}}.
 Typically, unfavourable outcomes of the quantitative endpoint are related to a
 higher risk of cardiovascular death. So, if the patient's condition is severe,
 there is a non-negligible probability of a fatal outcome. Thus, censoring by
@@ -497,20 +498,23 @@ $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\epsilon}$.
  $1/2 - \tilde{\epsilon} = \Phi(-1/\sqrt{8}) $ and hence
  $\tilde{\epsilon} = 1/2 - \Phi(-1/\sqrt{8})  \approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}.
 
+All calculations were performed using {\tt{R 3.4.2}}, packages {\tt{knitr, xtable, latex2exp}}.
+
 \subsection{Untied case}
 \label{sec:AppUntied}
 For the untied case we assume that the time to death follows an exponential distribution, i. e.
 $T_i \sim exp(\lambda_i), (i=0,1)$, i. e. $q_i = exp(-\lambda_i \tau)$. Without
 loss of generality we can assume that $\tau = 1$. To determine the overall
 non-inferiority margin $\varepsilon$, again consider the boundary of the null hypothesis,
-i. e. $\text{P}(\tilde{X_{0k}} < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
+i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 
 \begin{align*}
-\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 \text{P}(T_{0k} < T_{1l}) + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
+\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) &= p_0 p_1 \text{P}(T_{0k} < T_{1l}) + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
                                   &= p_0 p_1 \frac{\lambda_0}{\lambda_0 + \lambda_1} + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(\frac{1}{2} - \tilde{\varepsilon}) \\
-                                  &= \frac{1}{2} - \left( (1-p_0)(1-p_1) \tilde{\epsilon} + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) \right) \mbox{ with } \gamma = \frac{1}{2} - \frac{\lambda_0}{\lambda_0 + \lambda_1} \\
-\intertext{and hence}
- \varepsilon &= (1-p_0)(1-p_1) (1/2 - \Phi(-1/\sqrt{8})) + \gamma p_0 p_1 + (p_1 - p_0)/2
+                                  &= \frac{1}{2} - \left( (1-p_0)(1-p_1) \tilde{\varepsilon} + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) \right) \mbox{ with } \gamma = \frac{1}{2} - \frac{\lambda_0}{\lambda_0 + \lambda_1} \\
+\intertext{and hence, as $\tilde{\epsilon} = 1/2 - \Phi(-1/\sqrt{8})$,}
+ \varepsilon &= (1-p_0)(1-p_1)\tilde{\varepsilon}  + \gamma p_0 p_1 + (p_1 - p_0)/2 \\
+             &= (1-p_0)(1-p_1) (1/2 - \Phi(-1/\sqrt{8})) + \gamma p_0 p_1 + (p_1 - p_0)/2
 \intertext{For $p_0 = p_1 = p$ this simplifies to}
  \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
 \end{align*}
@@ -592,25 +596,25 @@ for (RR in seq_along(chosen_risks)) {
 }
 @
 
-In figure \ref{fig:powerplot} the solid black line is identical in all panels; it
+In figure \ref{fig:powerplot_untied} the solid black line is identical in all panels; it
 depicts the situation when no censoring due to death occurs. Figure
-\ref{fig:powerplot}A describes the situation when mortality is the same in both
+\ref{fig:powerplot_untied}A describes the situation when mortality is the same in both
 treatment groups. For given sample size power decreases with an increase in
-probability of censoring by death. Figure \ref{fig:powerplot}B also exhibits this
+probability of censoring by death. Figure \ref{fig:powerplot_untied}B also exhibits this
 effect, however, here the risk of censoring by death is 20\% higher in the new
 treatment group under null hypothesis and the power is less affected by the risk
 of censoring by death. If $\lambda_0$ and $\lambda_1$ are such that
 $\lambda_0 / (\lambda_0 + \lambda_1) = 1/2 - \tilde{\varepsilon}$ then
 
 \begin{align*}
-\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 (1/2 - \tilde{\varepsilon}) + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(1/2 - \tilde{\varepsilon}) \\
+\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) &= p_0 p_1 (1/2 - \tilde{\varepsilon}) + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(1/2 - \tilde{\varepsilon}) \\
    &= (1/2 - \tilde{\varepsilon})(1 + p_0 - p_1) - 2 \tilde{\varepsilon}p_0 p_1 \\
-   &\approx 1/2 - \tilde{\varepsilon} \mbox{ if } p_0, p_1 << 1
+   &\approx 1/2 - \tilde{\varepsilon} \mbox{ if } p_0, p_1 \ll 1
 \end{align*}
 
-This effect can be seen in figure \ref{fig:powerplot}C where the power for the
+This effect can be seen in figure \ref{fig:powerplot_untied}C where the power for the
 smaller probabilities for death is very similar to the situation where there is
-no censoring by death. In figure \ref{fig:powerplot}D the assumption is that
+no censoring by death. In figure \ref{fig:powerplot_untied}D the assumption is that
 under the null hypothesis the risk for death ist 2.5 fold in the new treatment
 group compared to the reference group. In this case the power increases with
 increasing probability of censoring due to death.
@@ -622,19 +626,21 @@ size?}}
 \label{sec:AppTied}
 For the tied case it suffices to make an assumption about the probability of death
 in each group under the null hypothesis. To determine the overall non-inferiority margin
-we again consider the margin of the null hypothesis
-$\text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) = 1/2 - \varepsilon $.
+we again consider the boundary of the null hypothesis
+$\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 
 
 \begin{align*}
- \text{P}(\tilde{X_{0k}}  < \tilde{X_{1l}}) &= p_0 p_1 / 2 + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
+ \text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) &= p_0 p_1 / 2 + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
     &= p_0 - p_0 p_1/2 + (1 - p_0)(1 - p_1)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}\\
     &= 1/2 - (p_1 - p_0)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}
-\intertext{and hence}
-\varepsilon &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) (1/2 - \Phi(-1/\sqrt{8}))
+\intertext{and hence, again considering that $\tilde{\epsilon} = 1/2 - \Phi(-1/\sqrt{8})$,}
+\varepsilon &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) \tilde{\varepsilon} \\
+            &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) (1/2 - \Phi(-1/\sqrt{8}))
 \intertext{For $p_0 = p_1 = p$ this also simplifies to}
 \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
 \end{align*}
+
 
 <<powerplot_tied, fig.lp="fig:", fig.cap = 'Power and sample size for tied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
 source("PowerAndMoments.R") #include functions to compute moments and power
@@ -686,104 +692,130 @@ for (RR in seq_along(chosen_risks_tied)) {
   }
   results_tied[[RR]] <- data.frame(chosen_ps_tied, epsilon_ps_tied, samplesize_80_tied)
 
-  # plot power as function of sample size and p
-  # first establish empty plot with axes
-  plot(NULL, xlab = "Total sample size", ylab = "Power", xlim = c(0, max(n_0) + max(n_1)), ylim = c(0, 1))
-  my.lt <- c(1:6)     # define line types for graph
-  my.col <- c(grey.colors(l_chosen_ps, start = 0, end = 0.6, gamma = 2.2))
-                       # define 'colors' for graph
-  # plots for p_0 ^= 0
-  for (i in seq_along(chosen_ps[2:l_chosen_ps])) {
-    lines(x = n_0 + n_1, y = MyPower.Matrix_tied[, as.character(chosen_ps_tied[i + 1])],
-          lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
-  }
-  # plots for p_0 = 0 (black line should always be visible)
-  lines(x = n_0 + n_1, y = MyPower.Matrix_tied[, "0"], type = "l", lwd = 2, lty = 1, col = "black")
-
-  legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"),
-         legend = as.character(chosen_ps_tied), inset = 0.05, bty = "n", lwd = 2,
-         lty = my.lt, col = my.col )
-  legend("topleft", legend = figure_elements_tied[RR], cex = 1.5, inset = -0.05, bty = "n")
-  title(main = paste0("RR = ", as.character(chosen_risks_tied[RR])))
+  # # plot power as function of sample size and p
+  # # first establish empty plot with axes
+  # plot(NULL, xlab = "Total sample size", ylab = "Power", xlim = c(0, max(n_0) + max(n_1)), ylim = c(0, 1))
+  # my.lt <- c(1:6)     # define line types for graph
+  # my.col <- c(grey.colors(l_chosen_ps, start = 0, end = 0.6, gamma = 2.2))
+  #                      # define 'colors' for graph
+  # # plots for p_0 ^= 0
+  # for (i in seq_along(chosen_ps[2:l_chosen_ps])) {
+  #   lines(x = n_0 + n_1, y = MyPower.Matrix_tied[, as.character(chosen_ps_tied[i + 1])],
+  #         lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
+  # }
+  # # plots for p_0 = 0 (black line should always be visible)
+  # lines(x = n_0 + n_1, y = MyPower.Matrix_tied[, "0"], type = "l", lwd = 2, lty = 1, col = "black")
+  #
+  # legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"),
+  #        legend = as.character(chosen_ps_tied), inset = 0.05, bty = "n", lwd = 2,
+  #        lty = my.lt, col = my.col )
+  # legend("topleft", legend = figure_elements_tied[RR], cex = 1.5, inset = -0.05, bty = "n")
+  # title(main = paste0("RR = ", as.character(chosen_risks_tied[RR])))
 }
+@
+
+In table 1 the effective non-inferiority margin $\varepsilon$ for the
+Wilcoxon-Mann-Whitney test for non-inferiority and the total number of cases
+needed to obtain a power of 80\% at signifcance level $\alpha = 0.0294$ are
+shown as function of the probability of death in the reference group $p_0$ and
+the relative risk $RR$ of death in the new treatment group compared to the
+reference group under $H_0$.
+In our example, there is little difference in power between the tied case
+and the untied case for given sample size. Specifically, effective
+non-inferiority margins and sample sizes are identical in the tied and untied
+case if the probability of death is identical in both treatment groups.
+
+
+<<samplesize_table, echo=FALSE, results="asis">>=
+# create dataframe for printing table
+df_table <- data.frame()
+for (RR in seq_along(chosen_risks)) {
+  relrisk <- c(as.character(chosen_risks[RR]), rep(" ", l_chosen_ps - 1))
+  df_temp <- cbind(relrisk, results[[RR]])
+  df_temp <- cbind(df_temp, results_tied[[RR]][, c("epsilon_ps_tied","samplesize_80_tied")])
+  df_table <- rbind(df_table, df_temp)
+}
+# define caption
+strCaption <- "Calculated total sample sizes ($n_{total, untied}$ and
+$n_{total, untied}$) and effective non-inferiority margins
+($\\varepsilon_{untied}$ and $\\varepsilon_{tied}$)
+for given probability of death in reference group (risk $p_0$) and
+relative risk ($RR$) in new treatment compared to the reference group under the
+null hypothesis, allocation ratio reference group
+to new treatment group 1:2."
+
+# define column names
+colnames(df_table) <- c("$RR$", "$p_0$", "$\\varepsilon_{untied}$","$n_{total, untied}$", "$\\varepsilon_{tied}$","$n_{total, tied}$")
+print(xtable(df_table,
+      digits = c(0, 0, 2, 5, 0, 5, 0),
+      caption = strCaption),
+      include.rownames = FALSE,
+#      include.colnames = FALSE,
+      caption.placement = "top",
+      floating = TRUE,
+      sanitize.colnames.function = function(x){x})
 @
 
 
 \section{Discussion}
 \label{sec:Discussion}
-\begin{itemize}
-\item interpretation of conflicting results
-\item choice of mortality rate (too high --> rather choose mortality as endpoint)
-\item 1D is not a sensible assumption.
-\end{itemize}
+In section \ref{sec:Power} we derived power formulae for the Wilcoxon-Mann-Whitney
+test for the situation were observations may be censored due to death, relying
+on the work of Matsouak and Betensky (2015) for the ordinary Wilcoxon-Mann-Whitney
+test in the presence of death censored observations. Both, the untied situation
+in which time of death is considered and the tied situation in which all deaths
+are ranked identically were considered. While the formulae use approximation,
+it can be expected from the simulations by Matsouak and Betensky (2015) that they
+give  sufficiently accurate results for practical applications.
+
+We applied the derived formulae to an example from cardiology and found in this
+situation that there is little to no difference in power for given sample size
+between the tied and untied case.
+
+As expected, power decreases with increasing probability of death -- while the
+relative risk in the new treatment group is not too high compared to the reference
+group. This effect is most pronounced if the probability of death is identical in
+both groups under the non-inferiority null hypothesis.
+It decreases with increasing relative risk in the the new treatment group compared
+to the reference group. We also observed that sample size and power are hardly
+affected by censoring due to death if $\lambda_0/(\lambda_0 + \lambda_1) \approx
+1/2 - P(X_0 < X_1)$ where $\lambda_0, \lambda_1$ are the hazards -- given
+exponential distribution of time to death -- and $P(X_0 < X_1)$ the probability
+that the quantiative outcome tends to smaller values in the reference
+distribution. If the relative risk of death in the new treatment group is much
+higher relative to the reference group the effects are reversed, i. e. power
+increases with increasing probability of death due to censoring. However, allowing
+so much higher risk of death as non-inferior does not seem to be a sensible
+assumption for clinical trials.
+
+As usual with combined endpoints, there may be conflicting results, i. e. there
+may be an advantage of the new treatment with respect to the quantitative outcome
+and a disadvantage with respect to death or vice versa. This possibility needs
+consideration.
+
+It is questionable whether a joint non-inferiority margin for both, the
+probability of death and the quantitative outcome, is appropriate. It is
+possible to use separate margins when deriving the power formula. However, in
+the end the separate margins will be combined into one overall margin.
+
+Another possibility would be to assign different weights to time to death and
+the quantitative outcome such as suggested by Matsouaka et al (2016). This would
+allow to prevent to a certain extent to take too high risks of death when the
+new treatment is beneficial only with respect to the quantitative endpoint.
+
+In the end, clinical judgement is necessary and in a clinical trial the two
+outcomes have to be carefully assessed if the non-inferiority null hypothesis is
+rejected.
+
+% \noindent Names of software packages and website addresses should be written in {\tt{Courier new, i.e. Stata, the R package
+% MASS, http://www.biometrical-journal.com.}}
 
 
-
-\subsection{Second level heading}
-This is normal body text. Please note that the body text must be divided into numbered sections with
-suitable short verbal titles. Sub-headings are allowed but not sub-subheadings. Please use sentence case in the
-headings.
-
-This is the body text. Please note that cross-references in the body text should be shown as follows:
-(Miller, 1900), (Miller and Baker, 1900) or if three or more authors (Miller {\it{et al}}., 1900)
-\vspace*{12pt}
-
-\noindent Bullet lists are not allowed. Always use (i), (ii), etc.
-\vspace*{12pt}
-
-\noindent Sentences should never start with a symbol.
-\vspace*{12pt}
-
-\noindent Names of software packages and website addresses should be written in {\tt{Courier new, i.e. Stata, the R package
-MASS, http://www.biometrical-journal.com.}}
-
-
-\begin{table}[htb]
-\begin{center}
-\caption{The caption of a table.}
-\begin{tabular}{lll}
-\hline
-Description 1 & Description 2 & Description 3\\
-\hline
-Row 1, Col 1 & Row 1, Col 2 & Row 1, Col 3\\
-Row 2, Col 1 & Row 2, Col 2 & Row 2, Col 3\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-\begin{equation}
-\left({\theta^{0}_{i}}\atop{\theta^{1}_{i}}\right) \sim N(\theta,\Sigma),\quad {\mathrm{with}}\
-{{\theta}} = \left({\theta_{0}}\atop{\theta_{1}}\right)\ {\mathrm{and}}\ \Sigma =
-\left(\begin{array}{cc}
-\sigma^{2}_{0} & \rho\sigma_{0}\sigma_{1}\\
-\rho\sigma_{0}\sigma_{2} & \sigma^{2}_{1}
-\end{array}\right).
-\end{equation}
-
-\noindent This is the body text. Only number equations which are referred to in the text body. If equations
-are numbered, these should be numbered continuously throughout the text. Not section wise! Please
-carefully follow the rules for mathematical expressions in the ``Instructions to Authors''.
-
-\begin{figure}[htb]
-\begin{center}
-%  \includegraphics[bb= 0 0 115 87]{empty.eps}
-\caption{The figure caption ($b_{2}b_{2}a^{n}a^{n}$).}
-\end{center}
-\end{figure}
-\begin{acknowledgement}
-An acknowledgement may be placed at the end of the article.
-\end{acknowledgement}
-\vspace*{1pc}
-
-\noindent {\bf{Conflict of Interest}}
-
-\noindent {\it{The authors have declared no conflict of interest. (or please state any conflicts of interest)}}
-
-\section*{Appendix {\it(please insert here, if applicable)}}
-
-\subsection*{A.1.\enspace Second level heading}
-
-Please insert appendices before the references.
+% \section*{Appendix {\it(please insert here, if applicable)}}
+%
+% \subsection*{A.1.\enspace Second level heading}
+%
+% Please insert appendices before the references.
 
 \begin{thebibliography}{10}
 
@@ -799,10 +831,11 @@ Please insert appendices before the references.
 
 \bibitem[Matsouaka and Betensky(2015) Matsouaka, R. A., Betensky, R. A.]{bib6} Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for the Wilcoxon–Mann–Whitney test in the presence of death-censored observations. \textit{Statistics in Medicine} \textbf{34}, 406 – 431.
 
+\bibitem[Matsouaka et al (2015) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7} Matsouaka, R. A., Singhal, A. B.Betensky, R. A. (2016) An optimal Wilcoxon–Mann–Whitney test of mortality and a continuous outcome. \textit{Statistical Methods in Medical Research} \textbf{epub ahead of print},  doi: 10.1177/0962280216680524.
 
 %\bibitem[]{bib} \textit{} \textbf{}, –.
 
 \end{thebibliography}
-\newpage
+%\newpage
 \phantom{aaaa}
 \end{document}
