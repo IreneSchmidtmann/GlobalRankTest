@@ -142,7 +142,7 @@
 \let\abs=\envert
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-% initial chunk that load necessary libraries
+% initial chunk that loads necessary libraries and functions
 
 %\DOIsuffix{bimj.DOIsuffix}
 \DOIsuffix{bimj.200100000}
@@ -151,15 +151,13 @@
 \Year{2010}
 \pagespan{1}{}
 \keywords{Censoring by death; Global rank test; Non-inferiority; Combined endpoints; Pulmonary embolism;\\
-% \noindent \hspace*{-4pc} {\small\it (Up to five keywords are allowed and should be given in alphabetical order. Please capitalize the key}\\
-% \hspace*{-4pc} {\small\it words)}\\[1pc]
 \noindent\hspace*{-4.2pc} Supporting Information for this article is available on the WWW under\break \hspace*{-4pc} \underline{https://github.com/IreneSchmidtmann/GlobalRankTest}
 }  %%% semicolon and fullpoint added here for keyword style
 
-\title[Running title]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence
+\title[Non-inferiority test and censoring by death]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence
 of death-censored observations}
 %% Information for the first author.
-\author[Schmidtmann {\it{et al.}}]{Irene Schmidtmann\footnote{Corresponding author: {\sf{e-mail: Irene.Schmidtmann@uni-mainz.de}}, Phone: +49-6131-173951, Fax: +49-6131-172968}\inst{,1}}
+\author[Schmidtmann]{Irene Schmidtmann\footnote{Corresponding author: {\sf{e-mail: Irene.Schmidtmann@uni-mainz.de}}, Phone: +49-6131-173951, Fax: +49-6131-172968}\inst{,1}}
 \address[\inst{1}]{Institute for Medical Biostatistics, Epidemiology and Informatics (IMBEI),
 University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
 %%%%    Information for the second author
@@ -167,25 +165,33 @@ University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
 \address[\inst{2}]{Center for Thrombosis and Hemostasis (CTH), University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
 %%%%    Information for the third author
 \author[Binder]{Harald Binder\inst{3}}
-\address[\inst{3}]{Institute for Medical Biometry and Statistics, University Freiburg, Stefan-Meier-Str. 26, D 79104 Freiburg}
+\address[\inst{3}]{Institute of Medical Biometry and Statistics, Medical Faculty and Medical Center -- University Freiburg, Stefan-Meier-Str. 26, D 79104 Freiburg}
 %%%%    \dedicatory{This is a dedicatory.}
 \Receiveddate{zzz} \Reviseddate{zzz} \Accepteddate{zzz}
 
 \begin{abstract}
-We consider a randomized clinical trial comparing a new treatment to a reference
-treatment in which the goal is to demonstrate non-inferiority. A quantitative
-endpoint is to be determined after a period of follow-up. However, patients may
-die before the quantitative endpoint can be measured. As excluding such patients
-would introduce bias, alternative analyses are desirable. This can be achieved
-by ranking the quantitative outcome and assigning “worst rank” scores to the
-patients whose quantitative outcome cannot be determined due to death. While
-power and sample size formulae for the classical one-sided test are available we
-here derive power formulae for a non-inferiority test in the presence of
-death-censored observations. We illustrate the derived theoretical results using
-an example of a clinical trial in pulmonary embolism.
-
-\textcolor{magenta}{\textit{Harald: more? wordcount: 126, 250 words are allowed}}
-
+In clinical trials with patients in a critical state, death may preclude
+measurement of a quantitative endpoint of interest, and even early measurements,
+e.g. for intention-to-treat analysis, may not be available. For example, a
+non-negligible proportion of patients with acute risk pulmonary embolism will die,
+before 30 day  measurements on the efficacy of thrombolysis can be obtained. As
+excluding such patients may introduce bias, alternative analyses and
+corresponding means for sample size calculation are needed. We specifically,
+consider power analysis in a randomized clinical trial setting in which the goal
+is to demonstrate non-inferiority of a new treatment as compared to a reference
+treatment. Also, a non-parametric approach is needed due to the distribution of
+the quantitative endpoint of interest. While some approaches have been developed
+in a composite endpoint setting, our focus is on the continuous endpoint, and
+also no approach for non-inferiority is available. We propose a solution based
+on ranking the quantitative outcome and assigning “worst rank” scores to the
+patients whose quantitative outcome cannot be determined due to death. Based on
+this, we derive power formulae for a non-inferiority test in the presence of
+death-censored observations, considering settings with and without ties. The
+approach is illustrated for an examplary clinical trial in pulmonary embolism.
+The results there show a substantial effect of death on power, also depending on
+differential effects in the two trial arms. Therefore, use of the proposed
+formulae is advisable whenever there is death to be expected before measurment
+of a quantiative primary outcome of interest.
 \end{abstract}
 
 
@@ -213,13 +219,13 @@ an example of a clinical trial in pulmonary embolism.
 \label{sec:Intro}
 
 In clinical trials for cardiovascular diseases, often the aim of an
-intervention is to improve function, measured by some quantitative endpoint
-such as the distance walked in the six minute walk test, a biomarker, or ...
-\textcolor{cyan}{\textit{Prof. Konstantinides: please add further clinically
-relevant examples if you think it is useful}}.
+intervention is to improve functional capacity, measured by some quantitative
+surrogate endpoint such as the six minute walking distance, a biomarker levels,
+or echocardiographic parameters of cardiovascular function.
+
 Typically, unfavourable outcomes of the quantitative endpoint are related to a
-higher risk of cardiovascular death. So, if the patient's condition is severe,
-there is a non-negligible probability of a fatal outcome. Thus, censoring by
+higher risk of cardiovascular deat and consequently there is a non-negligible
+probability of an early fatal outcome. Thus, censoring by
 death may occur if a patient dies before the quantitative outcome can be
 determined. Censoring by death leads to missing values which are most unlikely
 to be missing at random. Therefore, ignoring and excluding this kind of
@@ -286,19 +292,18 @@ are provided in Section ~\ref{sec:Discussion}.
 
 \section{Thrombolysis application}
 \label{sec:ThrombolysisApplication}
-\textcolor{cyan}{\textit{Prof. Konstantinides: please change, extend, shorten or generalize as
-you deem fit. I don't want to give away too much information but give sufficient
-background for the reader to appreciate the medical context. If appropriate,
-please indicate a paper or two that should be referenced.}}
-
 The methodological considerations presented in this paper were motivated by
-planning a clinical trial studying treatment of high risk pulmonary embolism
-patients.
+planning a clinical trial studying treatment of patients with
+intermediate-high-risk pulmonary embolism. These are patients who are
+normotensive and appear hemodynamically stable at presentation, but have
+evidence of right ventricular dysfunction on echocardiography in addition to
+elevated cardiac troponin levels in the circulation.
 
 In this trial, the standard would be to administer standard-dose systemic
-thrombolytic treatment. The new experimental treatment would be catheter
-controlled low dose thrombolysis. RV/LV diameter ratio 24 hours after the
-intervention was considered a suitable primary endpoint. Unfortunately, fatal
+thrombolytic treatment. The new experimental treatment would be catheter-directed,
+ultrasound-assisted low dose thrombolysis. The right to left ventricular (RV/LV)
+diameter ratio on echocardiography 24 hours after the intervention was
+considered a suitable primary endpoint. Unfortunately, fatal
 outcomes do occur within hours after treatment in patients with this condition.
 This precludes the observation of the RV/LV diameter ratio 24 hours after the
 intervention. Therefore, taking into account censoring by death of the
@@ -562,11 +567,6 @@ i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
  \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
 \end{align*}
 
-% \begin{figure}[htb]
-% \begin{center}
-
-%  \includegraphics[bb= 0 0 115 87]{empty.eps}
-
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
 \includegraphics[width=0.8\linewidth,height=0.9\linewidth]{figure/powerplot_untied-1} \caption[Power and sample size for untied case with sample size allocation for reference to new treatment 1:2]{Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.}\label{fig:powerplot_untied}
@@ -598,9 +598,6 @@ under the null hypothesis the risk for death ist 2.5 fold in the new treatment
 group compared to the reference group. In this case the power increases with
 increasing probability of censoring due to death.
 
-\textcolor{magenta}{\textit{Harald: mention power for specific values of sample
-size?}}
-
 \subsection{Tied case}
 \label{sec:AppTied}
 For the tied case it suffices to make an assumption about the probability of death
@@ -620,9 +617,6 @@ $\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
 \end{align*}
 
-
-
-
 In table 1 the effective non-inferiority margin $\varepsilon$ for the
 Wilcoxon-Mann-Whitney test for non-inferiority and the total number of cases
 needed to obtain a power of 80\% at signifcance level $\alpha = 0.0294$ are
@@ -634,52 +628,6 @@ and the untied case for given sample size. Specifically, effective
 non-inferiority margins and sample sizes are identical in the tied and untied
 case if the probability of death is identical in both treatment groups.
 
-
-% latex table generated in R 3.4.2 by xtable 1.8-2 package
-% Wed Nov 29 10:12:49 2017
-\begin{table}[ht]
-\centering
-\caption{Calculated total sample sizes ($n_{total, untied}$ and
-$n_{total, untied}$) and effective non-inferiority margins
-($\varepsilon_{untied}$ and $\varepsilon_{tied}$)
-for given probability of death in reference group (risk $p_0$) and
-relative risk ($RR$) in new treatment compared to the reference group under the
-null hypothesis, allocation ratio reference group
-to new treatment group 1:2.} 
-\begin{tabular}{lrrrrr}
-  \hline
-$RR$ & $p_0$ & $\varepsilon_{untied}$ & $n_{total, untied}$ & $\varepsilon_{tied}$ & $n_{total, tied}$ \\ 
-  \hline
-1 & 0.00 & 0.13816 & 138 & 0.13816 & 138 \\ 
-    & 0.01 & 0.13541 & 147 & 0.13541 & 147 \\ 
-    & 0.02 & 0.13269 & 153 & 0.13269 & 153 \\ 
-    & 0.05 & 0.12469 & 177 & 0.12469 & 177 \\ 
-    & 0.10 & 0.11191 & 225 & 0.11191 & 225 \\ 
-    & 0.20 & 0.08842 & 372 & 0.08842 & 369 \\ 
-  1.2 & 0.00 & 0.13816 & 138 & 0.13816 & 138 \\ 
-    & 0.01 & 0.13614 & 144 & 0.13614 & 144 \\ 
-    & 0.02 & 0.13415 & 150 & 0.13415 & 150 \\ 
-    & 0.05 & 0.12838 & 165 & 0.12838 & 165 \\ 
-    & 0.10 & 0.11945 & 195 & 0.11943 & 195 \\ 
-    & 0.20 & 0.10421 & 264 & 0.10400 & 261 \\ 
-  1.75 & 0.00 & 0.13816 & 138 & 0.13816 & 138 \\ 
-    & 0.01 & 0.13814 & 141 & 0.13814 & 141 \\ 
-    & 0.02 & 0.13816 & 141 & 0.13816 & 141 \\ 
-    & 0.05 & 0.13853 & 141 & 0.13852 & 141 \\ 
-    & 0.10 & 0.14021 & 138 & 0.14009 & 138 \\ 
-    & 0.20 & 0.14805 & 123 & 0.14684 & 123 \\ 
-  2.5 & 0.00 & 0.13816 & 138 & 0.13816 & 138 \\ 
-    & 0.01 & 0.14086 & 135 & 0.14086 & 135 \\ 
-    & 0.02 & 0.14363 & 129 & 0.14363 & 129 \\ 
-    & 0.05 & 0.15239 & 114 & 0.15235 & 114 \\ 
-    & 0.10 & 0.16864 & 90 & 0.16826 & 90 \\ 
-    & 0.20 & 0.20915 & 57 & 0.20527 & 60 \\ 
-   \hline
-\end{tabular}
-\end{table}
-
-
-
 \section{Discussion}
 \label{sec:Discussion}
 In section \ref{sec:Power} we derived power formulae for the Wilcoxon-Mann-Whitney
@@ -687,7 +635,7 @@ test for the situation were observations may be censored due to death, relying
 on the work of Matsouak and Betensky (2015) for the ordinary Wilcoxon-Mann-Whitney
 test in the presence of death censored observations. Both, the untied situation
 in which time of death is considered and the tied situation in which all deaths
-are ranked identically were considered. While the formulae use approximation,
+are ranked identically were considered. While the formulae use approximations,
 it can be expected from the simulations by Matsouak and Betensky (2015) that they
 give  sufficiently accurate results for practical applications.
 
@@ -711,10 +659,10 @@ increases with increasing probability of death due to censoring. However, allowi
 so much higher risk of death as non-inferior does not seem to be a sensible
 assumption for clinical trials.
 
-As usual with combined endpoints, there may be conflicting results, i. e. there
-may be an advantage of the new treatment with respect to the quantitative outcome
-and a disadvantage with respect to death or vice versa. This possibility needs
-consideration.
+As usual when using any combination of endpoints, there may be conflicting
+results, i. e. there may be an advantage of the new treatment with respect to
+the quantitative outcome and a disadvantage with respect to death or vice versa.
+This possibility needs consideration.
 
 It is questionable whether a joint non-inferiority margin for both, the
 probability of death and the quantitative outcome, is appropriate. It is
@@ -726,19 +674,10 @@ the quantitative outcome such as suggested by Matsouaka et al (2016). This would
 allow to prevent to a certain extent to take too high risks of death when the
 new treatment is beneficial only with respect to the quantitative endpoint.
 
-In the end, clinical judgement is necessary and in a clinical trial the two
-outcomes have to be carefully assessed if the non-inferiority null hypothesis is
-rejected.
-
-% \noindent Names of software packages and website addresses should be written in {\tt{Courier new, i.e. Stata, the R package
-% MASS, http://www.biometrical-journal.com.}}
-
-
-% \section*{Appendix {\it(please insert here, if applicable)}}
-%
-% \subsection*{A.1.\enspace Second level heading}
-%
-% Please insert appendices before the references.
+However, our focus is on finding an appropriate way of including cases with
+missing quantitative outcome due to death in the analyses. In the end, clinical
+judgement is necessary and in a clinical trial the two outcomes have to be
+carefully assessed if the non-inferiority null hypothesis is rejected.
 
 \begin{thebibliography}{10}
 
