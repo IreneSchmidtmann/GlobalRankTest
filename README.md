@@ -1,3 +1,0 @@
-# GlobalRankTest
-
-doing some edits
