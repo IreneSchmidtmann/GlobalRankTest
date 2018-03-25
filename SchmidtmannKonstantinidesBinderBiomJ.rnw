@@ -283,8 +283,7 @@ opts_chunk$set(warning = FALSE, message = FALSE)
 \noindent\hspace*{-4.2pc} Supporting Information for this article is available on the WWW under\break \hspace*{-4pc} \underline{https://github.com/IreneSchmidtmann/GlobalRankTest}
 }  %%% semicolon and fullpoint added here for keyword style
 
-\title[Non-inferiority test and censoring by death]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence
-of death-censored observations}
+\title[Non-inferiority test death censored]{Power of the Wilcoxon-Mann-Whitney test for non-inferiority in the presence of death-censored observations}
 %% Information for the first author.
 \author[Schmidtmann]{Irene Schmidtmann\footnote{Corresponding author: {\sf{e-mail: Irene.Schmidtmann@uni-mainz.de}}, Phone: +49-6131-173951, Fax: +49-6131-172968}\inst{,1}}
 \address[\inst{1}]{Institute for Medical Biostatistics, Epidemiology and Informatics (IMBEI),
@@ -302,8 +301,8 @@ University Medical Center Johannes Gutenberg University Mainz, D 55101 Mainz}
 In clinical trials with patients in a critical state, death may preclude
 measurement of a quantitative endpoint of interest, and even early measurements,
 e.g. for intention-to-treat analysis, may not be available. For example, a
-non-negligible proportion of patients with acute risk pulmonary embolism will die,
-before 30 day  measurements on the efficacy of thrombolysis can be obtained. As
+non-negligible proportion of patients with acute pulmonary embolism will die,
+before 30 day measurements on the efficacy of thrombolysis can be obtained. As
 excluding such patients may introduce bias, alternative analyses and
 corresponding means for sample size calculation are needed. We specifically,
 consider power analysis in a randomized clinical trial setting in which the goal
@@ -313,7 +312,7 @@ the quantitative endpoint of interest. While some approaches have been developed
 in a composite endpoint setting, our focus is on the continuous endpoint, and
 also no approach for non-inferiority is available. We propose a solution based
 on ranking the quantitative outcome and assigning “worst rank” scores to the
-patients whose quantitative outcome cannot be determined due to death. Based on
+patients without quantitative outcome because of death. Based on
 this, we derive power formulae for a non-inferiority test in the presence of
 death-censored observations, considering settings with and without ties. The
 approach is illustrated for an examplary clinical trial in pulmonary embolism.
