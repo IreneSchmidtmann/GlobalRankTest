@@ -311,17 +311,17 @@ consider power analysis in a randomized clinical trial setting in which the goal
 is to demonstrate non-inferiority of a new treatment as compared to a reference
 treatment. Also, a non-parametric approach is needed due to the distribution of
 the quantitative endpoint of interest. While some approaches have been developed
-in a composite endpoint setting, our focus is on the continuous endpoint, and
-also no approach for non-inferiority is available. We propose a solution based
-on ranking the quantitative outcome and assigning “worst rank” scores to the
-patients without quantitative outcome because of death. Based on
-this, we derive power formulae for a non-inferiority test in the presence of
-death-censored observations, considering settings with and without ties. The
-approach is illustrated for an examplary clinical trial in pulmonary embolism.
-The results there show a substantial effect of death on power, also depending on
-differential effects in the two trial arms. Therefore, use of the proposed
-formulae is advisable whenever there is death to be expected before measurment
-of a quantiative primary outcome of interest.
+in a composite endpoint setting, our focus is on the continuous endpoint affected
+by death-related censoring, for which no approach for non-inferiority is
+available. We propose a solution based on ranking the quantitative outcome and
+assigning “worst rank” scores to the patients without quantitative outcome
+because of death. Based on this, we derive power formulae for a non-inferiority
+test in the presence of death-censored observations, considering settings with
+and without ties. The approach is illustrated for an examplary clinical trial in
+pulmonary embolism. The results there show a substantial effect of death on
+power, also depending on differential effects in the two trial arms. Therefore,
+use of the proposed formulae is advisable whenever there is death to be expected
+before measurement of a quantitative primary outcome of interest.
 \end{abstract}
 
 
@@ -354,7 +354,7 @@ surrogate endpoint such as the six minute walking distance, a biomarker levels,
 or echocardiographic parameters of cardiovascular function.
 
 Typically, unfavourable outcomes of the quantitative endpoint are related to a
-higher risk of cardiovascular deat and consequently there is a non-negligible
+higher risk of cardiovascular death and consequently there is a non-negligible
 probability of an early fatal outcome. Thus, censoring by
 death may occur if a patient dies before the quantitative outcome can be
 determined. Censoring by death leads to missing values which are most unlikely
@@ -447,18 +447,22 @@ in the presence of death-censored observations.
 
 \section{Notation and hypotheses}
 \label{sec:Notation}
-Let the quantitative endpoint be determined at time $\tau (\tau > 0)$. Let
-further $X_{01}, \ldots, X_{0n_0}$ denote the values of the quantitative endpoint
-in the $n_0$ indiviudals in the reference group with standard treatment ($i=0$)
-and $X_{11}, \ldots, X_{1n_1}$ the values of the quantitative endpoint in the
-$n_1$ indiviudals in thegroup with the new experimental treatment ($i=1$).
-The event times in group $i$ are given by $T_{i1}, \ldots, T_{in_i}$. Let
-$D_{ik} = 1$ indicate that subject $k$ in group $i$ dies before the
-quantitative endpoint $X_{ik}$ can be determined, i. e. $D_{ik} = 1$ if
-$T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival probability in group
-$i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where $S(t)$ is the survival function.
-  Accordingly, the cumulative mortality in group $i$ up to time $\tau$ is given by
-$p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
+Let  $\tau (\tau > 0)$ be the time at which the quantitative endpoint is to
+be determined. This is intended to be identical for all patients. All patients
+are observed at least until time $\tau$ unless they die before this time. If patients
+die before time $\tau$ it is assumed that the time of death can be determined
+sufficiently precisely. Let further $X_{01}, \ldots, X_{0n_0}$ denote the values
+of the quantitative endpoint in the $n_0$ indiviudals in the reference group
+with standard treatment ($i=0$) and $X_{11}, \ldots, X_{1n_1}$ the values of the
+quantitative endpoint in the $n_1$ indiviudals in the group with the new
+experimental treatment ($i=1$). The individual event times in group $i$ are
+given by $T_{i1}, \ldots, T_{in_i}$. They may not be observed if patients are
+alive at time $\tau$. Let $D_{ik} = 1$ indicate that subject $k$ in group $i$
+dies before the quantitative endpoint $X_{ik}$ can be determined, i. e.
+$D_{ik} = 1$ if $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival
+probability in group $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where
+$S(t)$ is the survival function. Accordingly, the cumulative mortality in group
+$i$ up to time $\tau$ is given by $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 
 Here, without loss of generality, we assume that high values of $X_{ik}$ are
 favourable. Otherwise we could consider $-X_{ik}$. We further assume that
@@ -699,7 +703,7 @@ i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 
 <<powerplot_untied, fig.lp="fig:", fig.cap = 'Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
 # source("PowerAndMoments.R") #include functions to compute moments and power
-# explore power for specific situation described above, varying the
+# explore power in untied case for specific situation described above, varying the
 # probabiliy of death
 # sample size in each group
 n_0 <- seq(1:150)
@@ -769,6 +773,50 @@ for (RR in seq_along(chosen_risks)) {
 }
 @
 
+<<power_tied, echo=FALSE, eval=TRUE>>=
+# source("PowerAndMoments.R") #include functions to compute moments and power
+# explore power in tied case for specific situation described above, varying the
+# probabiliy of death
+# constants as above
+# sample size in each group: n_0, n_1
+# chosen probabilities of death: chosen_ps and l_chosen_ps
+# chosen relative risks: chosen_risks, l_chosen_risks
+
+# vector to hold sample sizes
+samplesize_80_tied <- c(rep(NA, l_chosen_ps))
+names(samplesize_80_tied) <- as.character(chosen_ps)
+
+# matrix to hold power for all combinations of probabilities of death and sample size
+MyPower.Matrix.Tied <- matrix(rep(NA, length(n_0)*l_chosen_ps), ncol = l_chosen_ps)
+dimnames(MyPower.Matrix.Tied)[[2]] <- as.character(chosen_ps)
+
+# vector to hold non-inferiority margins corresponding to chosen situation
+epsilon_ps_tied <- c(rep(NA, l_chosen_ps))
+names(epsilon_ps_tied) <- as.character(chosen_ps)
+
+# vector of datasets to hold combination of chosen p's, computed epsilon's and sample
+# sizes for power 80%
+results_tied <- list()
+
+for (RR in seq_along(chosen_risks)) {
+  for (p in chosen_ps) {
+    MyPower.Tied <- power_gr(alpha = 0.0294,
+                        p_0_0 = p, p_1_0 = chosen_risks[RR]*p, p_0_1 = p, p_1_1 = p,
+                        mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3,
+                        sigma = 0.1, tau = 1,
+                        n_0 = n_0, n_1 = n_1,
+                        verbose = FALSE, tied = TRUE)
+     MyPower.Matrix.Tied[, as.character(p)] <- MyPower.Tied$power
+     epsilon_ps_tied[as.character(p)] <- MyPower.Tied$epsilon
+     index <- min(which(MyPower.Tied$power >= 0.8))
+     samplesize_80_tied[as.character(p)] <- n_0[index] + n_1[index]
+  }
+  results_tied[[RR]] <- data.frame(chosen_ps, epsilon_ps_tied, samplesize_80_tied)
+}
+@
+
+
+
 In figure \ref{fig:powerplot_untied} the solid black line is identical in all panels; it
 depicts the situation when no censoring due to death occurs. Figure
 \ref{fig:powerplot_untied}A describes the situation when mortality is the same in both
@@ -815,17 +863,23 @@ $\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 results_for_table <- data.frame(
   chosen_ps = double(),
   epsilon_ps = double(),
-  samplesize_80 = double()
+  samplesize_80 = double(),
+  epsilon_ps_tied = double(),
+  samplesize_80_tied = double()
 )
 RR_column <- character()
 for (RR in seq_along(chosen_risks)) {
-  results_for_table <- rbind(results_for_table, results[[RR]])
+  results_for_table <- rbind(results_for_table,
+                             cbind(results[[RR]], results_tied[[RR]]$epsilon_ps_tied, results_tied[[RR]]$samplesize_80_tied))
   RR_column <- c(RR_column, as.character(chosen_risks[RR]), rep(" ", l_chosen_ps - 1))
 }
 results_for_table <- cbind(RR_column, results_for_table)
 
-colnames(results_for_table) <- c("RR", "$p_0$", "$\\varepsilon$","$n_{total}$")
-print(xtable(results_for_table,caption = 'Effective non-inferiority margin and total samples size as function of relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) for given $\\alpha = 0.0294$ and power of 80\\% with sample size allocation for reference to new treatment 1:2.',label = "tab:test",digits = c(0, 0, 2, 3, 0)),
+colnames(results_for_table) <- c("RR", "$p_0$", "$\\varepsilon^{\\text{(untied)}}$",
+                                 "$n^{\\text{(untied)}}_{\\text{total}}$",
+                                 "$\\varepsilon^{\\text{(tied)}}$",
+                                 "$n^{\\text{(tied)}}_{\\text{total}}$")
+print(xtable(results_for_table,caption = 'Effective non-inferiority margin and total samples size as function of relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) for given $\\alpha = 0.0294$ and power of 80\\% with sample size allocation for reference to new treatment 1:2.',label = "tab:test",digits = c(0, 0, 2, 3, 0, 3, 0)),
       include.rownames = FALSE,
       caption.placement = "top",
       sanitize.colnames.function = function(x){x})

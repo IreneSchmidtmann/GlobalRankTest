@@ -182,17 +182,17 @@ consider power analysis in a randomized clinical trial setting in which the goal
 is to demonstrate non-inferiority of a new treatment as compared to a reference
 treatment. Also, a non-parametric approach is needed due to the distribution of
 the quantitative endpoint of interest. While some approaches have been developed
-in a composite endpoint setting, our focus is on the continuous endpoint, and
-also no approach for non-inferiority is available. We propose a solution based
-on ranking the quantitative outcome and assigning “worst rank” scores to the
-patients without quantitative outcome because of death. Based on
-this, we derive power formulae for a non-inferiority test in the presence of
-death-censored observations, considering settings with and without ties. The
-approach is illustrated for an examplary clinical trial in pulmonary embolism.
-The results there show a substantial effect of death on power, also depending on
-differential effects in the two trial arms. Therefore, use of the proposed
-formulae is advisable whenever there is death to be expected before measurment
-of a quantiative primary outcome of interest.
+in a composite endpoint setting, our focus is on the continuous endpoint affected
+by death-related censoring, for which no approach for non-inferiority is
+available. We propose a solution based on ranking the quantitative outcome and
+assigning “worst rank” scores to the patients without quantitative outcome
+because of death. Based on this, we derive power formulae for a non-inferiority
+test in the presence of death-censored observations, considering settings with
+and without ties. The approach is illustrated for an examplary clinical trial in
+pulmonary embolism. The results there show a substantial effect of death on
+power, also depending on differential effects in the two trial arms. Therefore,
+use of the proposed formulae is advisable whenever there is death to be expected
+before measurement of a quantitative primary outcome of interest.
 \end{abstract}
 
 
@@ -225,7 +225,7 @@ surrogate endpoint such as the six minute walking distance, a biomarker levels,
 or echocardiographic parameters of cardiovascular function.
 
 Typically, unfavourable outcomes of the quantitative endpoint are related to a
-higher risk of cardiovascular deat and consequently there is a non-negligible
+higher risk of cardiovascular death and consequently there is a non-negligible
 probability of an early fatal outcome. Thus, censoring by
 death may occur if a patient dies before the quantitative outcome can be
 determined. Censoring by death leads to missing values which are most unlikely
@@ -318,18 +318,22 @@ in the presence of death-censored observations.
 
 \section{Notation and hypotheses}
 \label{sec:Notation}
-Let the quantitative endpoint be determined at time $\tau (\tau > 0)$. Let
-further $X_{01}, \ldots, X_{0n_0}$ denote the values of the quantitative endpoint
-in the $n_0$ indiviudals in the reference group with standard treatment ($i=0$)
-and $X_{11}, \ldots, X_{1n_1}$ the values of the quantitative endpoint in the
-$n_1$ indiviudals in thegroup with the new experimental treatment ($i=1$).
-The event times in group $i$ are given by $T_{i1}, \ldots, T_{in_i}$. Let
-$D_{ik} = 1$ indicate that subject $k$ in group $i$ dies before the
-quantitative endpoint $X_{ik}$ can be determined, i. e. $D_{ik} = 1$ if
-$T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival probability in group
-$i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where $S(t)$ is the survival function.
-  Accordingly, the cumulative mortality in group $i$ up to time $\tau$ is given by
-$p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
+Let  $\tau (\tau > 0)$ be the time at which the quantitative endpoint is to
+be determined. This is intended to be identical for all patients. All patients
+are observed at least until time $\tau$ unless they die before this time. If patients
+die before time $\tau$ it is assumed that the time of death can be determined
+sufficiently precisely. Let further $X_{01}, \ldots, X_{0n_0}$ denote the values
+of the quantitative endpoint in the $n_0$ indiviudals in the reference group
+with standard treatment ($i=0$) and $X_{11}, \ldots, X_{1n_1}$ the values of the
+quantitative endpoint in the $n_1$ indiviudals in the group with the new
+experimental treatment ($i=1$). The individual event times in group $i$ are
+given by $T_{i1}, \ldots, T_{in_i}$. They may not be observed if patients are
+alive at time $\tau$. Let $D_{ik} = 1$ indicate that subject $k$ in group $i$
+dies before the quantitative endpoint $X_{ik}$ can be determined, i. e.
+$D_{ik} = 1$ if $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival
+probability in group $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where
+$S(t)$ is the survival function. Accordingly, the cumulative mortality in group
+$i$ up to time $\tau$ is given by $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 
 Here, without loss of generality, we assume that high values of $X_{ik}$ are
 favourable. Otherwise we could consider $-X_{ik}$. We further assume that
@@ -576,6 +580,10 @@ i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 
 \end{knitrout}
 
+
+
+
+
 In figure \ref{fig:powerplot_untied} the solid black line is identical in all panels; it
 depicts the situation when no censoring due to death occurs. Figure
 \ref{fig:powerplot_untied}A describes the situation when mortality is the same in both
@@ -619,39 +627,39 @@ $\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 \end{align*}
 
 % latex table generated in R 3.4.2 by xtable 1.8-2 package
-% Sun Mar 25 03:27:18 2018
+% Sun Mar 25 16:03:18 2018
 \begin{table}[ht]
 \centering
 \caption{Effective non-inferiority margin and total samples size as function of relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) for given $\alpha = 0.0294$ and power of 80\% with sample size allocation for reference to new treatment 1:2.} 
 \label{tab:test}
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrrr}
   \hline
-RR & $p_0$ & $\varepsilon$ & $n_{total}$ \\ 
+RR & $p_0$ & $\varepsilon^{\text{(untied)}}$ & $n^{\text{(untied)}}_{\text{total}}$ & $\varepsilon^{\text{(tied)}}$ & $n^{\text{(tied)}}_{\text{total}}$ \\ 
   \hline
-1 & 0.00 & 0.138 & 138 \\ 
-    & 0.01 & 0.135 & 147 \\ 
-    & 0.02 & 0.133 & 153 \\ 
-    & 0.05 & 0.125 & 177 \\ 
-    & 0.10 & 0.112 & 225 \\ 
-    & 0.20 & 0.088 & 372 \\ 
-  1.2 & 0.00 & 0.138 & 138 \\ 
-    & 0.01 & 0.136 & 144 \\ 
-    & 0.02 & 0.134 & 150 \\ 
-    & 0.05 & 0.128 & 165 \\ 
-    & 0.10 & 0.119 & 195 \\ 
-    & 0.20 & 0.104 & 264 \\ 
-  1.75 & 0.00 & 0.138 & 138 \\ 
-    & 0.01 & 0.138 & 141 \\ 
-    & 0.02 & 0.138 & 141 \\ 
-    & 0.05 & 0.139 & 141 \\ 
-    & 0.10 & 0.140 & 138 \\ 
-    & 0.20 & 0.148 & 123 \\ 
-  2.5 & 0.00 & 0.138 & 138 \\ 
-    & 0.01 & 0.141 & 135 \\ 
-    & 0.02 & 0.144 & 129 \\ 
-    & 0.05 & 0.152 & 114 \\ 
-    & 0.10 & 0.169 & 90 \\ 
-    & 0.20 & 0.209 & 57 \\ 
+1 & 0.00 & 0.138 & 138 & 0.138 & 138 \\ 
+    & 0.01 & 0.135 & 147 & 0.135 & 147 \\ 
+    & 0.02 & 0.133 & 153 & 0.133 & 153 \\ 
+    & 0.05 & 0.125 & 177 & 0.125 & 177 \\ 
+    & 0.10 & 0.112 & 225 & 0.112 & 225 \\ 
+    & 0.20 & 0.088 & 372 & 0.088 & 369 \\ 
+  1.2 & 0.00 & 0.138 & 138 & 0.138 & 138 \\ 
+    & 0.01 & 0.136 & 144 & 0.136 & 144 \\ 
+    & 0.02 & 0.134 & 150 & 0.134 & 150 \\ 
+    & 0.05 & 0.128 & 165 & 0.128 & 165 \\ 
+    & 0.10 & 0.119 & 195 & 0.119 & 195 \\ 
+    & 0.20 & 0.104 & 264 & 0.104 & 261 \\ 
+  1.75 & 0.00 & 0.138 & 138 & 0.138 & 138 \\ 
+    & 0.01 & 0.138 & 141 & 0.138 & 141 \\ 
+    & 0.02 & 0.138 & 141 & 0.138 & 141 \\ 
+    & 0.05 & 0.139 & 141 & 0.139 & 141 \\ 
+    & 0.10 & 0.140 & 138 & 0.140 & 138 \\ 
+    & 0.20 & 0.148 & 123 & 0.147 & 123 \\ 
+  2.5 & 0.00 & 0.138 & 138 & 0.138 & 138 \\ 
+    & 0.01 & 0.141 & 135 & 0.141 & 135 \\ 
+    & 0.02 & 0.144 & 129 & 0.144 & 129 \\ 
+    & 0.05 & 0.152 & 114 & 0.152 & 114 \\ 
+    & 0.10 & 0.169 & 90 & 0.168 & 90 \\ 
+    & 0.20 & 0.209 & 57 & 0.205 & 60 \\ 
    \hline
 \end{tabular}
 \end{table}
