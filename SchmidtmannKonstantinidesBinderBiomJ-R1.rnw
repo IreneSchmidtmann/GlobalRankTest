@@ -113,11 +113,11 @@ library(latex2exp)
 # it returns $\mu_u$ and $\sigma_u$
 
 # function parameters
-# $p_0 = p_0$, probability of censoring by death in reference group \\
-# $p_1 = p_1$, probability of censoring by death in treatment group\\
-# $\mu_0_0 = \mu_0$, mean in reference group \\
-# $\mu_1_0 = \mu_1$, mean in treatment group \\
-# $\sigma =  var(X_i), i=0, 1$ \\
+# $p_0 = $ probability of censoring by death in reference group \\
+# $p_1 = $ probability of censoring by death in treatment group\\
+# $\mu_0 = $, mean in reference group \\
+# $\mu_1 = $, mean in treatment group \\
+# $\sigma =  SD(X_i), i=0, 1$ \\
 # $\tau$ = time when quantitative endpoint is determined, this is needed to calculate
 # the hazards \\
 # $n_0 = $ sample size in reference group \\
@@ -350,7 +350,7 @@ before measurement of a quantitative primary outcome of interest.
 
 In clinical trials for cardiovascular diseases, often the aim of an
 intervention is to improve functional capacity, measured by some quantitative
-surrogate endpoint such as the six minute walking distance, a biomarker levels,
+surrogate endpoint such as the six minute walking distance, biomarker levels,
 or echocardiographic parameters of cardiovascular function.
 
 Typically, unfavourable outcomes of the quantitative endpoint are related to a
@@ -467,21 +467,22 @@ $i$ up to time $\tau$ is given by $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 Here, without loss of generality, we assume that high values of $X_{ik}$ are
 favourable. Otherwise we could consider $-X_{ik}$. We further assume that
 death is worse than any quantitative outcome and -- in the untied worst rank
-case -- that early death is worse thant later death.
+case -- that early death is worse thant later death.f
 
 Following Matsouaka and Betensky (2015), we introduce a new variable, on which
-  ranking can be based. This variable is constructed such that all patients who
-  die before time $\tau$ have lower values than the patients who survive past
-  $\tau$ and are ranked according to their survival times. Patients who survive
-  past time $\tau$ are ranked according to their observed value of the quantitative
-  endpoint. The new variable is defined as
-  $\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
-  $\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$
-  in the untied case.  In the tied case all patients who die before the quantitative endpoint
-  can be determined have the same rank. Hence, a different definition of $\widetilde{X}_{ik}$
-  is needed and we set  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$
-  with $\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$.
-  Note, that  $\widetilde{X}_{ik} = {X}_{ik}$ holds for patient who survive past $\tau$ in both cases.
+ranking can be based. This variable is constructed such that all patients who
+die before time $\tau$ have lower values than the patients who survive past
+$\tau$ and are ranked according to their survival times. Patients who survive
+past time $\tau$ are ranked according to their observed value of the quantitative
+endpoint. The new variable is defined as
+$\widetilde{X}_{ik} = D_{ik}(\eta  + T_{ik}) + (1 - D_{ik})X_{ik}$ with
+$\eta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1 - \tau$
+in the untied case. In the tied case all patients who die before the quantitative endpoint
+can be determined have the same rank. Hence, a different definition of $\widetilde{X}_{ik}$
+is needed and we set  $\widetilde{X}_{ik} = D_{ik}\zeta   + (1 - D_{ik})X_{ik}$
+with $\zeta = \min(X_{01}, \ldots, X_{0n_0}, X_{11}, \ldots, X_{1n_1}) - 1$.
+In both cases, the minimum is taken over the observed $X_{ik}$.
+Note, that  $\widetilde{X}_{ik} = {X}_{ik}$ holds for patients who survive past $\tau$ in both cases.
 
   The non-inferiority hypotheses are
 \begin{align*}
@@ -584,7 +585,7 @@ $\widetilde{U}^* = (\widetilde{U} - \mu_0(\widetilde{U} )) / \sigma_0(\widetilde
 where
 $\mu_0(\widetilde{U})$ is the expectation and $\sigma^2_0(\widetilde{U})$ the variance
 of $\widetilde{U}$ under the null hypothesis. Under the null hypothesis $\widetilde{U}^*$
-also follows a standard normal distribution. Again, the null hypothesis is rejected at
+also follows asymptotically a standard normal distribution. Again, the null hypothesis is rejected at
 if level $\alpha$ if $\widetilde{U}^* > z_(1-\alpha).$
 
 Matsouaka and Betensky (2015) also derived expectation and variance in the tied case which
