@@ -309,7 +309,7 @@ excluding such patients may introduce bias, alternative analyses and
 corresponding means for sample size calculation are needed. We specifically,
 consider power analysis in a randomized clinical trial setting in which the goal
 is to demonstrate non-inferiority of a new treatment as compared to a reference
-treatment. Also, a non-parametric approach is needed due to the distribution of
+treatment. Also, a non-parametric approach may be needed due to the distribution of
 the quantitative endpoint of interest. While some approaches have been developed
 in a composite endpoint setting, our focus is on the continuous endpoint affected
 by death-related censoring, for which no approach for non-inferiority is
