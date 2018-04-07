@@ -106,42 +106,99 @@ generate_dco <- function(n_0 = 50, n_1 = 50,
 
 # set seed for random number generation for reproducibility
 set.seed(270318)
-no_scenarios <- 3
-n_0 <- c(49, 51, 54)
+# define scenarios
+n_total <- c(147, 153, 162, 186, 237, 390,
+             147, 153, 156, 174, 204, 276,
+             147, 147, 147, 147, 144, 129,
+             147, 141, 135, 120, 96, 60)
+n_0 <- n_total / 3
 n_1 <- 2 * n_0
-p_0 <- c(0.00, 0.01, 0.02)
-RR <- c(1, 1, 1)
+# number of scenarios considered
+no_scenarios <- length(n_total)
+# time at which quantitative endpoint is determined
+tau <- 1
+# risk of death by time \tau in reference group p_0 = 0, 0.01, 0.02, 0.05, 0.1, 0.2
+p_0 <- rep(c(0, 0.01, 0.02, 0.05, 0.1, 0.2), 4)
+# set vector of relative risks
+RR <-  rep(c(1, 1.2, 1.75, 2.5), rep(6, 4))
+# risk of death by time \tau in new treatment group
 p_1 <- RR * p_0
-tied <- FALSE
+# means of quantitative variable under null hypothesis
 mu_0_0 <- 0.3
 mu_1_0 <- 0.25
+# means of quantitative variable under alternative hypothesis
 mu_0_1 <- 0.3
 mu_1_1 <- 0.3
+# variance of quantitative variable
 sigma <- 0.1
-tau <- 1
+# consider untied case
+tied <- FALSE
 verbose <- FALSE
 
-r <- 10
+# number of replicates
+r <- 100
+# define column names for result matrices
+my_colnames <- paste0("RR = ", RR, ", p_0 = ", p_0)
+# matrix to hold test statistics returned by function wilcox.test
 wx <- matrix(nrow = r, ncol = no_scenarios)
+# matrix to hold Mann-Whitney statistics (derived from rank sum)
 mw <- matrix(nrow = r, ncol = no_scenarios)
-for (sc in (1:no_scenarios)) {
-  for (i in seq(1:r)) {
-    results_gen_dco <- generate_dco(n_0 = n_0, n_1 = n_1,
-                                    p_0 = p_0, p_1 = p_1,
-                                    mu_0 = mu_0_1, mu_1 = mu_1_1,
-                                    sigma = sigma,
-                                    tau = 1,
-                                    b_0 = 1, b_1 = 1,
-                                    verbose = verbose, tied = FALSE)
-    wx[i, sc] <- wilcox.test(results_gen_dco$xx_1, results_gen_dco$xx_0)$statistic
+# matrix to hold standardized Mann-Whitney statistics
+mw_standardized <- matrix(nrow = r, ncol = no_scenarios)
+# matrix to hold p-values corresponding to null hypotheses given by parameters
+# n_0, n_1, p_0, p_1, mu_0_0, mu_0_1, sigma, tau
+p_values <- matrix(nrow = r, ncol = no_scenarios)
+# assign column names to result matrices
+colnames(wx) <- my_colnames
+colnames(mw) <- my_colnames
+colnames(p_values) <- my_colnames
+
+# choose shape parameters for log-logistic distribution
+beta <- c(0.8, 1.0, 1.2)
+# matrix to hold power obtained in each scenario (defined by p_0, RR and n_total)
+# for each value of beta
+power_beta <- matrix(nrow = no_scenarios, ncol = length(beta))
+colnames(power_beta) <- beta
+
+# beta_loop
+for (b in seq_along(beta)) {
+  # scenario loop
+  for (sc in seq(1:no_scenarios)) {
+    # replicate loop
+    for (i in seq(1:r)) {
+      # generate death censored observations
+      results_gen_dco <- generate_dco(n_0 = n_0[sc], n_1 = n_1[sc],
+                                      p_0 = p_0[sc], p_1 = p_1[sc],
+                                      mu_0 = mu_0_1, mu_1 = mu_1_1,
+                                      sigma = sigma,
+                                      tau = 1,
+                                      b_0 = beta, b_1 = beta,
+                                      verbose = FALSE, tied = FALSE)
+      # compute rank sum statistics based on $\tilde{X_{0k}}$ and $\tilde{X_{1l}}$
+      wx[i, sc] <- wilcox.test(results_gen_dco$xx_1, results_gen_dco$xx_0)$statistic
+    }
+    # obtain Mann-Whitney statistic
+    mw[ ,sc] <- wx[ ,sc] / (n_0[sc] * n_1[sc])
+    # compute moments under H_0
+    moments_H_0 <- moments(n_0 = n_0[sc], n_1 = n_1[sc],
+                           p_0 = p_0[sc], p_1 = p_1[sc],
+                           mu_0 = mu_0_0, mu_1 = mu_1_0,
+                           sigma = sigma, tau = tau,
+                           verbose = verbose, tied = tied)
+    # obtain standardized Mann-Whitney statistic
+    mw_standardized[ ,sc] <- (mw[ ,sc] - moments_H_0$mu_u) / moments_H_0$sigma_u
   }
+  # compute p_values for each replicate in each scenario
+  print(beta[b])
+  p_values <- pnorm(mw_standardized, lower.tail = FALSE)
+  # obtain power by counting how many time a p-value is <= 0.025
+  power_beta[, b] <- apply(p_values <= 0.025, 2, sum) / r
 }
 
-mw <- wx / (n_0 * n_1)
-
-moments_H_0 <- moments(p_0 = p_0, p_1 = p_1, mu_0 = mu_0_0, mu_1 = mu_1_0,
-                       sigma = sigma, tau = tau, n_0 = n_0, n_1 = n_1,
-                       verbose = verbose, tied = tied)
-mw_standardized <- (mw - moments_H_0$mu_u) / moments_H_0$sigma_u
-p_values <- pnorm(mw_standardized, lower.tail = FALSE)
-table(p_values <= 0.025)
+# data frame to hold power determined in each scenario for each beta
+power_results <- data.frame(
+  RR_column,
+  p_0,
+  n_total,
+  power_beta
+)
