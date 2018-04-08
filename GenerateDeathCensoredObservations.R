@@ -189,7 +189,6 @@ for (b in seq_along(beta)) {
     mw_standardized[ ,sc] <- (mw[ ,sc] - moments_H_0$mu_u) / moments_H_0$sigma_u
   }
   # compute p_values for each replicate in each scenario
-  print(beta[b])
   p_values <- pnorm(mw_standardized, lower.tail = FALSE)
   # obtain power by counting how many time a p-value is <= 0.025
   power_beta[, b] <- apply(p_values <= 0.025, 2, sum) / r
