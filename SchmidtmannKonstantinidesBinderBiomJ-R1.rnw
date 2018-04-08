@@ -1,5 +1,5 @@
 \documentclass[bimj,fleqn]{w-art}
-\usepackage{color}  % included for highlighting (04.11.2107 IS)
+\usepackage{color}  % included for highlighting (04.11.2017 IS)
 \usepackage{times}
 \usepackage{w-thm}
 \usepackage[authoryear]{natbib}
@@ -1221,8 +1221,9 @@ pre-specified probabilities of death at time $\tau = 1$.The shape $\beta$ was
 varied, being identical in both groups, assuming values 0.8, 1.0, and 1.2.
 The probabilities of censoring by death and the relative risks between the
 reference group and new treatment group were chosen as in \ref{sec:AppTied}, the
-total sample size was chosen as determined in table \ref{tab:test}. The results
-of the simualation are shown in table \ref{tab:simresult}.
+total sample size was chosen as determined in table \ref{tab:test}. 1000 datasets
+were generated and evaluated in each scenario. The results of the simualation
+are shown in table \ref{tab:simresult}.
 
 In the simulation, the power was found to be close to the nominal power of 80\%
 when the probability for censoring due to death was identical in both groups.
@@ -1323,10 +1324,12 @@ Also, so far risk of death and underlying values of the quantitative variable
 have been assumed to be independent. This could be relaxed by considering joint
 models that take into account shared or correlated frailty.
 
-\section*{Appendix {\it(Tables corresponding to figure \ref{fig:powerplot_untied})}}
+\section*{Appendix}
 \subsection*{A.1.\enspace Untied case}
 In table \ref{tab:AppendixUntied} an abridged list of values used to obtain
-figure \ref{fig:powerplot_untied} is shown.
+figure \ref{fig:powerplot_untied} is shown. Total sample size is given in steps
+of 30; only sample sizes for which at least one observed power is less than or
+equal to 0.95 are displayed.
 <<xtableC, echo=FALSE, results="asis">>=
 colnames(TableAppendix) <- c("RR", "$n_{\\text{total}}$",
                              "$p_0 = 0$",
@@ -1357,7 +1360,9 @@ print(xtable(TableAppendix,caption = 'Computed power as function of relative ris
 @
 \subsection*{A.2.\enspace Tied case}
 In table \ref{tab:AppendixTied} an abridged list of values for power in the tied
-case is shown.
+case is shown. Again, total sample size is given in steps of 30; only sample
+sizes for which at least one observed power is less than or equal to 0.95 are
+displayed.
 
 <<xtableD, echo=FALSE, results="asis">>=
 colnames(TableAppendix.Tied) <- c("RR", "$n_{\\text{total}}$",
@@ -1386,6 +1391,11 @@ print(xtable(TableAppendix.Tied,caption = 'Computed power as function of relativ
       caption.placement = "top",
       sanitize.colnames.function = function(x){x})
 
+@
+
+<<sessioninfo, echo=FALSE>>=
+# provide session information
+sessionInfo.txt <- sessionInfo()
 @
 
 \begin{thebibliography}{10}
@@ -1417,11 +1427,31 @@ Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for
 the Wilcoxon–-Mann–-Whitney test in the presence of death-censored observations.
 \textit{Statistics in Medicine} \textbf{34}, 406--431.
 
-\bibitem[Matsouaka et al (2015) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7}
+\bibitem[Matsouaka et al (2016) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7}
 Matsouaka, R. A., Singhal, A. B.Betensky, R. A. (2016) An optimal
 Wilcoxon–-Mann–-Whitney test of mortality and a continuous outcome.
 \textit{Statistical Methods in Medical Research}
 \textbf{epub ahead of print},  doi: 10.1177/0962280216680524.
+
+\bibitem[Munzel (2009) Munzel, U.]{bib8}
+Munzel, U. (2009)Nonparametric non‐inferiority analyses in the three--arm design
+with active control and placebos.
+\textit{Statistics in Medicine} \textbf{28}, 3643--3656.
+
+\bibitem[Munzel and Hauschke(2003) Munzel, U., Hauschke, D.]{bib9}
+Munzel, U., Hauschke, D. (2003) Nonparametric test for proving noninferiority in clinical trials with ordered categorical data.
+\textit{Pharmaceutical Statistics} \textbf{2}, 31--37.
+
+\bibitem[Wellek (2010) Wellek, S.]{bib10}
+Wellek, S. (2010) \textit{Testing Statistical Hypotheses of Equivalence and
+Noninferiority, Second Edition}.
+Chapman and Hall / CRC, Boca Raton.
+
+\bibitem[Zhang et al(2015) Zhang, F., Miyaoka, E., Huang, F.,  Tanaka, Y.]{bib11}
+Zhang, F., Miyaoka, E., Huang, F.,  Tanaka, Y. (2015)  Test Statistics and
+Confidence Intervals to Establish Noninferiority between Treatments with Ordinal
+Categorical Data. \textit{Journal of biopharmaceutical statistics} \textbf{5}, 921--938.
+
 
 %\bibitem[]{bib} \textit{} \textbf{}, –.
 
