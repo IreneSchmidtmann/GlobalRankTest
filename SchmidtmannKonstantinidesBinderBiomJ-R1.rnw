@@ -1065,12 +1065,16 @@ n_1 <- 2 * n_0
 no_scenarios <- length(n_total)
 # time at which quantitative endpoint is determined
 tau <- 1
-# risk of death by time \tau in reference group p_0 = 0, 0.01, 0.02, 0.05, 0.1, 0.2
-p_0 <- rep(chosen_ps, 4)
+# risk of death by time \tau under null hypothesis in reference group
+# p_0_0 = 0, 0.01, 0.02, 0.05, 0.1, 0.2
+p_0_0 <- rep(chosen_ps, 4)
 # set vector of relative risks
 RR <-  rep(chosen_risks, rep(6, 4))
-# risk of death by time \tau in new treatment group
-p_1 <- RR * p_0
+# risk of death by time \tau in new treatment group under null hypothesis
+p_1_0 <- RR * p_0_0
+# risks of death by time \tau under alternative hypothesis
+p_0_1 <- p_0_0    # 0, 0.01, 0.02, 0.05, 0.1, 0.2
+p_1_1 <- p_0_1    # 0, 0.01, 0.02, 0.05, 0.1, 0.2
 # means of quantitative variable under null hypothesis
 mu_0_0 <- 0.3
 mu_1_0 <- 0.25
@@ -1086,8 +1090,8 @@ verbose <- FALSE
 # number of replicates
 r <- 1000
 # define column names for result matrices
-my_colnames <- paste0("RR = ", RR, ", p_0 = ", p_0)
-my_colnames_tied <- paste0("RR = ", RR, ", p_0 = ", p_0, " (tied)")
+my_colnames <- paste0("RR = ", RR, ", p_0_0 = ", p_0_0)
+my_colnames_tied <- paste0("RR = ", RR, ", p_0_0 = ", p_0_0, " (tied)")
 # matrix to hold test statistics returned by function wilcox.test (untied and
 # tied case)
 wx <- matrix(nrow = r, ncol = no_scenarios)
@@ -1100,7 +1104,7 @@ mw_tied <- matrix(nrow = r, ncol = no_scenarios)
 mw_standardized <- matrix(nrow = r, ncol = no_scenarios)
 mw_standardized_tied <- matrix(nrow = r, ncol = no_scenarios)
 # matrix to hold p-values corresponding to null hypotheses given by parameters
-# n_0, n_1, p_0, p_1, mu_0_0, mu_0_1, sigma, tau  (untied and tied case)
+# n_0, n_1, p_0_0, p_1_0, mu_0_0, mu_1_0, sigma, tau  (untied and tied case)
 p_values <- matrix(nrow = r, ncol = no_scenarios)
 p_values_tied <- matrix(nrow = r, ncol = no_scenarios)
 # assign column names to result matrices
@@ -1116,7 +1120,7 @@ colnames(p_values_tied) <- my_colnames_tied
 
 # choose shape parameters for log-logistic distribution
 beta <- c(0.8, 1.0, 1.2)
-# matrix to hold power obtained in each scenario (defined by p_0, RR and n_total)
+# matrix to hold power obtained in each scenario (defined by p_0_0, RR and n_total)
 # for each value of beta (untied and tied case)
 power_beta <- matrix(nrow = no_scenarios, ncol = length(beta))
 power_beta_tied <- matrix(nrow = no_scenarios, ncol = length(beta))
@@ -1129,9 +1133,9 @@ for (b in seq_along(beta)) {
   for (sc in seq(1:no_scenarios)) {
     # replicate loop
     for (i in seq(1:r)) {
-      # generate death censored observations - untied
+      # generate death censored observations under alternative hypothesis - untied
       results_gen_dco <- generate_dco(n_0 = n_0[sc], n_1 = n_1[sc],
-                                      p_0 = p_0[sc], p_1 = p_1[sc],
+                                      p_0 = p_0_1[sc], p_1 = p_1_1[sc],
                                       mu_0 = mu_0_1, mu_1 = mu_1_1,
                                       sigma = sigma,
                                       tau = 1,
@@ -1141,7 +1145,7 @@ for (b in seq_along(beta)) {
       wx[i, sc] <- wilcox.test(results_gen_dco$xx_1, results_gen_dco$xx_0)$statistic
       # generate death censored observations - tied
       results_gen_dco_tied <- generate_dco(n_0 = n_0[sc], n_1 = n_1[sc],
-                                           p_0 = p_0[sc], p_1 = p_1[sc],
+                                           p_0 = p_0_1[sc], p_1 = p_1_1[sc],
                                            mu_0 = mu_0_1, mu_1 = mu_1_1,
                                            sigma = sigma,
                                            tau = 1,
@@ -1156,12 +1160,12 @@ for (b in seq_along(beta)) {
     mw_tied[ ,sc] <- wx_tied[ ,sc] / (n_0[sc] * n_1[sc])
     # compute moments under H_0
     moments_H_0 <- moments(n_0 = n_0[sc], n_1 = n_1[sc],
-                           p_0 = p_0[sc], p_1 = p_1[sc],
+                           p_0 = p_0_0[sc], p_1 = p_1_0[sc],
                            mu_0 = mu_0_0, mu_1 = mu_1_0,
                            sigma = sigma, tau = tau,
                            verbose = verbose, tied = tied)
     moments_H_0_tied <- moments(n_0 = n_0[sc], n_1 = n_1[sc],
-                                p_0 = p_0[sc], p_1 = p_1[sc],
+                                p_0 = p_0_0[sc], p_1 = p_1_0[sc],
                                 mu_0 = mu_0_0, mu_1 = mu_1_0,
                                 sigma = sigma, tau = tau,
                                 verbose = verbose, tied = tied)
@@ -1169,7 +1173,7 @@ for (b in seq_along(beta)) {
     mw_standardized[ ,sc] <- (mw[ ,sc] - moments_H_0$mu_u) / moments_H_0$sigma_u
     mw_standardized_tied[ ,sc] <- (mw_tied[ ,sc] - moments_H_0_tied$mu_u) / moments_H_0_tied$sigma_u
   }
-  # compute p_values for each replicate in each scenario
+  # compute p-values for each replicate in each scenario
   p_values <- pnorm(mw_standardized, lower.tail = FALSE)
   p_values_tied <- pnorm(mw_standardized_tied, lower.tail = FALSE)
   # obtain power by counting how many time a p-value is <= 0.025
@@ -1180,7 +1184,7 @@ for (b in seq_along(beta)) {
 # data frame to hold power determined in each scenario for each beta
 power_results <- data.frame(
   RR_column,
-  p_0,
+  p_0_0,
   n_total,
   power_beta,
   power_beta_tied
@@ -1189,7 +1193,7 @@ power_results <- data.frame(
 
 
 <<xtableB, echo=FALSE, results="asis">>=
-colnames(power_results) <- c("RR", "$p_0$",
+colnames(power_results) <- c("RR", "$p_0_0$",
                                  "$n$",
                                  "untied: $\\beta = 0.8$",
                                  "$\\beta = 1.0$",
@@ -1199,10 +1203,11 @@ colnames(power_results) <- c("RR", "$p_0$",
                                  "$\\beta = 1.2$"
                                  )
 print(xtable(power_results,caption = 'Observed power as function of relative risk
-             (RR) of death in the new treatment group (risk $p_1$) compared to
-             the reference group (risk $p_0$), for given $\\alpha =0.025$,
-             total sample size $n$, shape parameter $\\beta$ of the log-logistic time
-             to event distribution. Sample size allocation for reference to new
+             (RR) of death under the null hypothesis in the new treatment group
+             (risk $p_1$) compared to the reference group (risk $p_0$).
+             Significance level $\\alpha =0.025$, total sample size $n$,
+             shape parameter $\\beta$ of the log-logistic time to event
+             distribution. Sample size allocation for reference to new
              treatment 1:2. ',
              label = "tab:simresult",digits = c(0, 0, 2, 0, 2, 2, 2, 2, 2, 2)),
       include.rownames = FALSE,
