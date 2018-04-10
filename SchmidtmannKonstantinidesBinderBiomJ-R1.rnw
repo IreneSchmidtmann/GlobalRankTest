@@ -605,8 +605,9 @@ H_1 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
 \end{align*}
 
 with non-inferiority margin $\varepsilon > 0$ for any pair $(k, l)$ of
-observations from the two treatment groups. In the situation considered by Matsouaka
-and Betensky $\varepsilon = 0 $, so our approach extends their approach.
+observations from the two treatment groups. As $\varepsilon > 0 $ is arbitrary
+in our approach, this is an extention of the suggestion by Matsouaka and
+Betensky $\varepsilon = 0 $.
 
 \section{Power calculation}
 \label{sec:Power}
@@ -699,7 +700,7 @@ where
 $\mu_0(\widetilde{U})$ is the expectation and $\sigma^2_0(\widetilde{U})$ the variance
 of $\widetilde{U}$ under the null hypothesis. Under the null hypothesis $\widetilde{U}^*$
 also follows asymptotically a standard normal distribution. Again, the null hypothesis is rejected at
-if level $\alpha$ if $\widetilde{U}^* > z_{(1-\alpha)}.$
+if level $\alpha$ if $\widetilde{U}^* > z_{1-\alpha}.$
 
 Matsouaka and Betensky (2015) also derived expectation and variance in the tied case which
 are as follows:
@@ -1100,9 +1101,9 @@ wx_tied <- matrix(nrow = r, ncol = no_scenarios)
 # tied case)
 mw <- matrix(nrow = r, ncol = no_scenarios)
 mw_tied <- matrix(nrow = r, ncol = no_scenarios)
-# matrix to hold standardized Mann-Whitney statistics (untied and tied case)
-mw_standardized <- matrix(nrow = r, ncol = no_scenarios)
-mw_standardized_tied <- matrix(nrow = r, ncol = no_scenarios)
+# matrix to hold standardised Mann-Whitney statistics (untied and tied case)
+mw_standardised <- matrix(nrow = r, ncol = no_scenarios)
+mw_standardised_tied <- matrix(nrow = r, ncol = no_scenarios)
 # matrix to hold p-values corresponding to null hypotheses given by parameters
 # n_0, n_1, p_0_0, p_1_0, mu_0_0, mu_1_0, sigma, tau  (untied and tied case)
 p_values <- matrix(nrow = r, ncol = no_scenarios)
@@ -1112,8 +1113,8 @@ colnames(wx) <- my_colnames
 colnames(wx_tied) <- my_colnames_tied
 colnames(mw) <- my_colnames
 colnames(mw_tied) <- my_colnames_tied
-colnames(mw_standardized) <- my_colnames
-colnames(mw_standardized_tied) <- my_colnames_tied
+colnames(mw_standardised) <- my_colnames
+colnames(mw_standardised_tied) <- my_colnames_tied
 colnames(p_values) <- my_colnames
 colnames(p_values_tied) <- my_colnames_tied
 
@@ -1169,13 +1170,13 @@ for (b in seq_along(beta)) {
                                 mu_0 = mu_0_0, mu_1 = mu_1_0,
                                 sigma = sigma, tau = tau,
                                 verbose = verbose, tied = tied)
-    # obtain standardized Mann-Whitney statistic
-    mw_standardized[ ,sc] <- (mw[ ,sc] - moments_H_0$mu_u) / moments_H_0$sigma_u
-    mw_standardized_tied[ ,sc] <- (mw_tied[ ,sc] - moments_H_0_tied$mu_u) / moments_H_0_tied$sigma_u
+    # obtain standardised Mann-Whitney statistic
+    mw_standardised[ ,sc] <- (mw[ ,sc] - moments_H_0$mu_u) / moments_H_0$sigma_u
+    mw_standardised_tied[ ,sc] <- (mw_tied[ ,sc] - moments_H_0_tied$mu_u) / moments_H_0_tied$sigma_u
   }
   # compute p-values for each replicate in each scenario
-  p_values <- pnorm(mw_standardized, lower.tail = FALSE)
-  p_values_tied <- pnorm(mw_standardized_tied, lower.tail = FALSE)
+  p_values <- pnorm(mw_standardised, lower.tail = FALSE)
+  p_values_tied <- pnorm(mw_standardised_tied, lower.tail = FALSE)
   # obtain power by counting how many time a p-value is <= 0.025
   power_beta[, b] <- apply(p_values <= 0.025, 2, sum) / r
   power_beta_tied[, b] <- apply(p_values_tied <= 0.025, 2, sum) / r
@@ -1193,7 +1194,7 @@ power_results <- data.frame(
 
 
 <<xtableB, echo=FALSE, results="asis">>=
-colnames(power_results) <- c("RR", "$p_0_0$",
+colnames(power_results) <- c("RR", "$p_0$",
                                  "$n$",
                                  "untied: $\\beta = 0.8$",
                                  "$\\beta = 1.0$",
@@ -1272,8 +1273,8 @@ to death -- and $P(X_0 < X_1)$ the probability that the quantiative outcome tend
 to smaller values in the reference distribution. If the relative risk of death
 in the new treatment group is much higher relative to the reference group the
 effects are reversed when applying the formuale, i. e. power increases with
-increasing probability of death due to censoring. In contrast, this effect was
-not seen in the simulation.
+increasing probability of death due to censoring. This effect could be
+corroborated in the simulation.
 
 The choice of non-inferiority margin presents an additional challenge when global
 ranks are used to tackle censoring by death. Wellek (2010) gives some general
@@ -1289,7 +1290,7 @@ placebo. This requires either reliable data from a previous study in which the
 reference treatment was shown to be better than placebo or a three-armed trial
 including placebo in addition to the new treatment and the reference treatment.
 The latter is -- as Munzel points out -- clearly unethical in a situation where
-death is a possible threat. The former is not really to the point here, although
+death is a realistic threat. The former is not really to the point here, although
 non-inferiority margins should be chosen sufficiently narrwo that it can at
 least be established that the new treatment is better than placebo.
 
@@ -1297,15 +1298,15 @@ Therefore we chose to derive the non-inferiority margin based on clinical
 considerations about equivalence in outcome of the quantitative parameter. We
 concede that it is questionable whether a joint non-inferiority margin for both,
 the probability of death and the quantitative outcome, is appropriate. It is
-possible to use separate margins when deriving the power formula. However, in
-the end the separate margins will be combined into one overall margin.
+possible to use separate margins when deriving the power formula. However,
+the separate margins will effectively be combined into one overall margin.
 
 In our application we delibarately considered only relatively small probabilities
 of censoring due to death in the reference group and small to moderate relative
 risks in the new treatment group compared to the reference group. If there is a
 substantial proportion of early deaths, mortality is likely to be a more relevant
 primary endpoint than any functional parameter. Also, allowing much higher risk
-of death as non-inferior does not seem to be a sensible assumption for clinical
+of death as non-inferior does not seem to be a reasonable assumption for clinical
 trials, either.
 
 As usual when using any combination of endpoints, there may be conflicting
