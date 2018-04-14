@@ -103,6 +103,7 @@ library(latex2exp)
 library(flexsurv)
 
 
+
 # ------------------------------------------------------------------------------
 # function moments computes mean and variance of Wilcoxon-Mann-Whitney statistic
 # in the presence of death-censored observations
@@ -463,8 +464,8 @@ higher risk of cardiovascular death and consequently there is a non-negligible
 probability of an early fatal outcome. Thus, censoring by
 death may occur if a patient dies before the quantitative outcome can be
 determined. Censoring by death leads to missing values which are most unlikely
-to be missing at random. Therefore, ignoring and excluding this kind of
-missing values from analysis does not only decrease power but may also lead to
+to be missing at random. Therefore, ignoring this kind of missing values and
+excluding them from analysis does not only decrease power but may also lead to
 biased estimates of treatment effect. It also contradicts the
 intention-to-treat principle when not all patients included in the trial are
 included in the analysis.
@@ -522,14 +523,14 @@ However, to the best of our knowledge, so far no power or sample size formula
 for the Wilcoxon-Mann-Whitney test for non-inferiority in the presence of
 death-censored observations is available.
 
-In section section~\ref{sec:ThrombolysisApplication}, we present the
+In section ~\ref{sec:ThrombolysisApplication}, we present the
 application, a clinical trial in pulmonary embolism, that motivated our
 methodological work. After setting out the notation in section
 ~\ref{sec:Notation}, the power formulae are derived in section ~\ref{sec:Power}.
 Section ~\ref{sec:Application} illustrates the application of the derived
 formulae to the planned clinical trial. The validity of the derived formula
 is explored in a small simulation study. A discussion and concluding remarks
-are provided in Section ~\ref{sec:Discussion}.
+are provided in section ~\ref{sec:Discussion}.
 
 
 \section{Thrombolysis application}
@@ -607,7 +608,7 @@ H_1 &:  \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l})
 with non-inferiority margin $\varepsilon > 0$ for any pair $(k, l)$ of
 observations from the two treatment groups. As $\varepsilon > 0 $ is arbitrary
 in our approach, this is an extention of the suggestion by Matsouaka and
-Betensky $\varepsilon = 0 $.
+Betensky in which $\varepsilon = 0 $.
 
 \section{Power calculation}
 \label{sec:Power}
@@ -658,7 +659,7 @@ If assumptions about the distribution of quantitative endpoint and event time
 are made, $\mu(U)$ and $\sigma(U)$ can be computed. When determining the power,
 we consider the boundary of the null hypothesis, i. e.
 $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon$.
-The power of the test for a specific alternative, where $\mu(U)) = \mu_1(U))$
+The power of the test for a specific alternative, where $\mu(U) = \mu_1(U)$
 and $\sigma(U) = \sigma_1(U)$, is given by
 \begin{align*}
   1 - \beta &= \text{P} \left(\frac{U - \mu_0(U)}{\sigma_0(U)}  >
@@ -699,8 +700,7 @@ $\widetilde{U}^* = (\widetilde{U} - \mu_0(\widetilde{U} )) / \sigma_0(\widetilde
 where
 $\mu_0(\widetilde{U})$ is the expectation and $\sigma^2_0(\widetilde{U})$ the variance
 of $\widetilde{U}$ under the null hypothesis. Under the null hypothesis $\widetilde{U}^*$
-also follows asymptotically a standard normal distribution. Again, the null hypothesis is rejected at
-if level $\alpha$ if $\widetilde{U}^* > z_{1-\alpha}.$
+also follows asymptotically a standard normal distribution. Again, the null hypothesis is rejected at level $\alpha$ if $\widetilde{U}^* > z_{1-\alpha}.$
 
 Matsouaka and Betensky (2015) also derived expectation and variance in the tied case which
 are as follows:
@@ -771,15 +771,19 @@ The power is then given by
 
 \section{Application}
 \label{sec:Application}
-  For the clinical application we assume that the RV/LV reduction is approximately normally distributed
+For the clinical application we assume that the RV/LV reduction is approximately normally distributed
 with common variance for both treatment groups:
-$X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ), (i = 0, 1)$. Under the standard treatment RV/LV reduction
-is expected to be $\mu_0 = 0.3$ on average with standard deviation $\sigma= 0.1$. A difference of
-$\varepsilon^{*} = 0.05 = 0.5 \sigma$ is deemed acceptable. This would be used as non-inferiority
-margin in a parametric test if no censoring by death occurred. The corresponding parametric hypotheses
-are $H_0: \mu_1 \leq \mu_0 - \varepsilon^{*}  = \mu_0 - 0.5 \sigma $ and
-$H_1: \mu_1 > \mu_0 - \varepsilon^{*} = \mu_0 - 0.5 \sigma $ with $\mu_0 = 0.3$ and $\sigma = 0.1$.
-We chose $\alpha = 0.025$ for this one-sided test.
+$X_i \sim \mathcal{N} ( \mu_i, \sigma^2 ), (i = 0, 1)$. Under the standard
+treatment RV/LV reduction is expected to be $\mu_0 = 0.3$ on average with
+standard deviation $\sigma= 0.1$. A difference of $\varepsilon^{*} = 0.05$ is
+deemed acceptable. As the quantitative endpoint is assumed to be normally distributed,
+the acceptable difference can be expressed as a multiple $c$
+of the standard deviation, here $c = 0.5$. This would be used as
+non-inferiority margin in a parametric test if no censoring by death occurred.
+The corresponding parametric hypotheses are $H_0:
+\mu_1 \leq \mu_0 - \varepsilon^{*}  = \mu_0 - c \sigma $ and
+$H_1: \mu_1 > \mu_0 - \varepsilon^{*} = \mu_0 - c \sigma $ with $\mu_0 = 0.3$,
+$\sigma = 0.1$ and $c = 0.5$. We chose $\alpha = 0.025$ for this one-sided test.
 We explore the power as a function of sample size and the probabilities of death in
 both treatment groups for the specific alternative of equivalence of treatments.
 The ratio of $n_0 : n_1$ is chosen as $1 : 2 $ in our application.
@@ -789,11 +793,13 @@ for the case of no censoring by death such that
 $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\varepsilon}$ and
 $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\varepsilon}$.
 
- As $\Phi(x)$ is monotonically increasing and under $H_0$ we have
- $P(X_0 < X_1) = \Phi((\mu_1 - \mu_0)/\sqrt{2}\sigma) \leq \Phi(\varepsilon^{*}/ \sqrt{2}\sigma) = \Phi(-1/\sqrt{8}) $,
- $\tilde{\varepsilon}$ can be chosen such that
- $1/2 - \tilde{\varepsilon} = \Phi(-1/\sqrt{8}) $ and hence
- $\tilde{\varepsilon} = 1/2 - \Phi(-1/\sqrt{8})  \approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}.
+As $\Phi(x)$ is monotonically increasing under $H_0$ we have
+$P(X_0 < X_1) = \Phi((\mu_1 - \mu_0)/\sqrt{2}\sigma) \leq
+\Phi(- \varepsilon^{*}/ \sqrt{2}\sigma) = \Phi(-c/\sqrt{2}) $. Therefore, if no
+censoring by death occured, $\tilde{\varepsilon}$ would be chosen such that
+$1/2 - \tilde{\varepsilon} = \Phi(- c/\sqrt{2}) $ and hence with $c = 0.5$ we
+chose  $\tilde{\varepsilon} = 1/2 - \Phi(- 1/\sqrt{8})
+\approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}.
 
 All calculations were performed using {\tt{R 3.4.4}}, packages {\tt{knitr, xtable, latex2exp, }} and
 {\tt{flexsurv}}.
@@ -810,11 +816,11 @@ i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 \text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) &= p_0 p_1 \text{P}(T_{0k} < T_{1l}) + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
                                   &= p_0 p_1 \frac{\lambda_0}{\lambda_0 + \lambda_1} + p_0 (1-p_1)  + (1 - p_0)(1 - p_1)(\frac{1}{2} - \tilde{\varepsilon}) \\
                                   &= \frac{1}{2} - \left( (1-p_0)(1-p_1) \tilde{\varepsilon} + \gamma p_0 p_1 + \frac{1}{2} (p_1 - p_0) \right) \mbox{ with } \gamma = \frac{1}{2} - \frac{\lambda_0}{\lambda_0 + \lambda_1} \\
-\intertext{and hence, as $\tilde{\varepsilon} = 1/2 - \Phi(-1/\sqrt{8})$,}
+\intertext{and hence, as $\tilde{\varepsilon} = 1/2 - \Phi(-c/\sqrt{2})$,}
  \varepsilon &= (1-p_0)(1-p_1)\tilde{\varepsilon}  + \gamma p_0 p_1 + (p_1 - p_0)/2 \\
-             &= (1-p_0)(1-p_1) (1/2 - \Phi(-1/\sqrt{8})) + \gamma p_0 p_1 + (p_1 - p_0)/2
+             &= (1-p_0)(1-p_1) (1/2 - \Phi(-c/\sqrt{2})) + \gamma p_0 p_1 + (p_1 - p_0)/2
 \intertext{For $p_0 = p_1 = p$ this simplifies to}
- \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
+ \varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-c/\sqrt{2})).
 \end{align*}
 
 <<powerplot_untied, fig.lp="fig:", fig.cap = 'Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
@@ -893,6 +899,57 @@ for (RR in seq_along(chosen_risks)) {
   legend("topleft", legend = figure_elements[RR], cex = 1.5, inset = -0.05, bty = "n")
   title(main = paste0("RR = ", as.character(chosen_risks[RR])))
 }
+
+# plot  figure to TIF-file
+tiff(filename = "SchmidtmannKonstantinidesBinder_Figure1.tif",
+     width = 17, height = 17, units = "cm", pointsize = 12,
+     bg = "white", res = 300, family = "", restoreConsole = TRUE,
+     type = c("windows", "cairo"))
+par(mfrow = c(2, 2)) # construct panel of 2x2 graphs, this only works fine if four graphs are produced
+
+for (RR in seq_along(chosen_risks)) {
+  for (p in chosen_ps) {
+    MyPower <- power_gr(alpha = 0.025,
+                        p_0_0 = p, p_1_0 = chosen_risks[RR]*p, p_0_1 = p, p_1_1 = p,
+                        mu_0_0 = 0.3, mu_1_0 = 0.25, mu_0_1 = 0.3, mu_1_1 = 0.3,
+                        sigma = 0.1, tau = 1,
+                        n_0 = n_0, n_1 = n_1,
+                        verbose = FALSE, tied = FALSE)
+     MyPower.Matrix[, as.character(p)] <- MyPower$power
+     epsilon_ps[as.character(p)] <- MyPower$epsilon
+     index <- min(which(MyPower$power >= 0.8))
+     samplesize_80[as.character(p)] <- n_0[index] + n_1[index]
+  }
+  results[[RR]] <- data.frame(chosen_ps, epsilon_ps, samplesize_80)
+  if (RR == 1) {
+    SummaryPower.Matrix <- MyPower.Matrix
+
+  }else{
+    SummaryPower.Matrix <- rbind(SummaryPower.Matrix, MyPower.Matrix)
+  }
+
+  # plot power as function of sample size and p
+  # first establish empty plot with axes
+  plot(NULL, xlab = "Total sample size", ylab = "Power", xlim = c(0, max(n_0) + max(n_1)), ylim = c(0, 1))
+  my.lt <- c(1:6)     # define line types for graph
+  my.col <- c(grey.colors(l_chosen_ps, start = 0, end = 0.6, gamma = 2.2))
+                       # define 'colors' for graph
+  # plots for p_0 ^= 0
+  for (i in seq_along(chosen_ps[2:l_chosen_ps])) {
+    lines(x = n_0 + n_1, y = MyPower.Matrix[, as.character(chosen_ps[i + 1])],
+          lwd = 2, lty = my.lt[i + 1], col = my.col[i + 1])
+  }
+  # plots for p_0 = 0 (black line should always be visible)
+  lines(x = n_0 + n_1, y = MyPower.Matrix[, "0"], type = "l", lwd = 2, lty = 1, col = "black")
+
+  legend("bottomright", title = TeX("$p_1 = $ RR $ \\cdot p_0$"),
+         legend = as.character(chosen_ps), inset = 0.05, bty = "n", lwd = 2,
+         lty = my.lt, col = my.col )
+  legend("topleft", legend = figure_elements[RR], cex = 1.5, inset = -0.05, bty = "n")
+  title(main = paste0("RR = ", as.character(chosen_risks[RR])))
+}
+dev.off()
+
 # selects every 10th element of the sample power matrix
 ii <- seq(10,(4*length(n_0)),10)
 TableAppendix <-  SummaryPower.Matrix[ii, ]
@@ -965,8 +1022,6 @@ TableAppendix.Tied <- data.frame(RR_label,
                             TableAppendix.Tied)
 @
 
-
-
 In figure \ref{fig:powerplot_untied} the solid black line is identical in all panels; it
 depicts the situation when no censoring due to death occurs. Figure
 \ref{fig:powerplot_untied}A describes the situation when mortality is the same in both
@@ -989,7 +1044,7 @@ no censoring by death. In figure \ref{fig:powerplot_untied}D the assumption is t
 under the null hypothesis the risk for death ist 2.5 fold in the new treatment
 group compared to the reference group. In this case the computed power increases
 with increasing probability of censoring due to death. Values displayed in
-figure \ref{fig:powerplot_untied} and are also displayed in table
+figure \ref{fig:powerplot_untied} are also provided in table
 \ref{tab:AppendixTied} in the appendix.
 
 \subsection{Tied case}
@@ -1004,11 +1059,11 @@ $\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
  \text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) &= p_0 p_1 / 2 + p_0 q_1 + q_0 q_1 P(X_{0k} < X_{1l}) \\
     &= p_0 - p_0 p_1/2 + (1 - p_0)(1 - p_1)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}\\
     &= 1/2 - (p_1 - p_0)/2 - (1 - p_0)(1 - p_1) \tilde{\varepsilon}
-\intertext{and hence, again considering that $\tilde{\varepsilon} = 1/2 - \Phi(-1/\sqrt{8})$,}
+\intertext{and hence, again considering that $\tilde{\varepsilon} = 1/2 - \Phi(-c/\sqrt{2})$,}
 \varepsilon &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) \tilde{\varepsilon} \\
-            &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) (1/2 - \Phi(-1/\sqrt{8}))
+            &= (p_1 - p_0)/2 + (1 - p_0)(1 - p_1) (1/2 - \Phi(-c/\sqrt{2}))
 \intertext{For $p_0 = p_1 = p$ this also simplifies to}
-\varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-1/\sqrt{8})).
+\varepsilon &= (1-p)^2 \tilde{\varepsilon} = (1-p)^2 (1/2 - \Phi(-c/\sqrt{2})).
 \end{align*}
 
 
@@ -1044,16 +1099,29 @@ needed to obtain a power of 80\% at signifcance level $\alpha =0.025$ are
 shown as function of the probability of death in the reference group $p_0$ and
 the relative risk $RR$ of death in the new treatment group compared to the
 reference group under $H_0$.
-In our example, there is little difference in power between the tied case
+In our example there is little difference in power between the tied case
 and the untied case for given sample size. Specifically, effective
 non-inferiority margins and sample sizes are identical in the tied and untied
 case if the probability of death is identical in both treatment groups. The
 values are  displayed in table \ref{tab:AppendixTied} in the appendix.
 
+So far we based the choice of the non-inferiority margin on assumptions
+concerning the quantitative endpoint, starting from the assumption of zero
+probability of censoring by death in both groups under the null hypothesis.
+This was extended to investigating several non-zero constellations of probability
+of censoring by death in both treatment groups. An alternative would be to start
+from the assumption of identical distributions of the quantitative endpoint and
+to derive the non-inferiority margin from an acceptable difference in risks of
+death. In this case $c = 0$ and the formula for the non-inferiority margin
+$\varepsilon$ in the tied case simplifies to $\varepsilon = (p_1 - p_0) / 2$.
+In the untied case the formula for the non-inferiority margin is given by
+$\varepsilon = \gamma p_0 p_1 + (p_1 - p_0) / 2$.
+
+
 \subsection{Simulation}
 \label{sec:Sim}
 
-To assess whether the accuracy of the power formula also holds if the time to
+To assess whether the accuracy of the power formula holds if the time to
 death does not follow an exponential distribution we performed a small simulation
 study. In this we assumed that time to event follows a log-logistic distribution
 with hazard $h(t; \alpha, \beta) = \beta t^{\beta - 1} / (\alpha^{\beta} + t^{\beta})$,
@@ -1067,15 +1135,6 @@ reference group and new treatment group were chosen as in \ref{sec:AppTied}, the
 total sample size was chosen as determined in table \ref{tab:test}. 1000 datasets
 were generated and evaluated in each scenario. The results of the simualation
 are shown in table \ref{tab:simresult}.
-
-In the simulation, the power was found to be close to the nominal power of 80\%
-when the probability for censoring due to death was identical in both groups.
-It was also close to the nominal power, if the probability for censoring due to
-death was small, i. e. less than 5\% in the reference group. However, when the
-probability of censoring due to death was higher in the new treatment group than
-in the reference group, the power rapidly decreased With increasing probability
-of censoring due to death. The higher the relative risk, the more pronounced was
-this effect.
 
 <<sim, echo=FALSE, eval=TRUE, cache = TRUE>>=
 # set seed for random number generation for reproducibility
@@ -1230,31 +1289,37 @@ colnames(power_results) <- c("RR", "$p_0$",
                                  )
 print(xtable(power_results,caption = 'Observed power as function of relative risk
              (RR) of death under the null hypothesis in the new treatment group
-             (risk $p_1$) compared to the reference group (risk $p_0$).
-             Significance level $\\alpha =0.025$, total sample size $n$,
+             (risk $p_1$) compared to the reference group (risk $p_0$) and total
+             sample size $n$.
+             Significance level $\\alpha =0.025$, tied and untied case,
              shape parameter $\\beta$ of the log-logistic time to event
-             distribution. Sample size allocation for reference to new
-             treatment 1:2. ',
+             distribution. Sample size allocation for reference to new treatment 1:2. ',
              label = "tab:simresult",digits = c(0, 0, 2, 0, 2, 2, 2, 2, 2, 2)),
       include.rownames = FALSE,
       caption.placement = "top",
       sanitize.colnames.function = function(x){x})
 @
 
+In the simulation, the power was found to be close to the nominal power of 80\%
+in all scenarios studied. In the untied case we found the power to be
+\Sexpr{round(100*mean(power_beta), 1)} \% on average, range
+\Sexpr{round(100*min(power_beta), 1)} \% - \Sexpr{round(100*max(power_beta), 1)} \%.
+In the tied case we observed average power
+\Sexpr{round(100*mean(power_beta_tied), 1)} \%, range
+\Sexpr{round(100*min(power_beta_tied), 1)} \% - \Sexpr{round(100*max(power_beta_tied), 1)} \%.
+
+
 
 
 \section{Discussion}
 \label{sec:Discussion}
 In section \ref{sec:Power} we derived power formulae for the Wilcoxon-Mann-Whitney
-test for the situation were observations may be censored due to death, relying
-on the work of Matsouaka and Betensky (2015) for the ordinary Wilcoxon-Mann-Whitney
-test in the presence of death censored observations. Both, the untied situation
-in which time of death is taken into account for ranking and the tied situation
-in which all deaths are ranked identically were considered. The formulae use
-approximations which seem to give valid results for the power of the test if the
-probability of death before the quantitative parameter can be determined is
-identical in both groups or if this probability is small. Otherwise the power
-found in the simulations is considerably lower than the nominal power.
+test for non-inferiority for the situation were observations may be censored due
+to death, relying on the work of Matsouaka and Betensky (2015) for the ordinary
+Wilcoxon-Mann-Whitney test in the presence of death censored observations. Both,
+the untied situation in which time of death is taken into account for ranking and
+the tied situation in which all deaths are ranked identically were considered.
+The formulae use approximations which seem to give valid results.
 
 We applied the derived formulae to an example from cardiology and found in this
 situation that there is little to no difference in power for given sample size
@@ -1264,9 +1329,7 @@ difference between the tied and untied case.
 As expected, power decreases with increasing probability of death -- while the
 relative risk in the new treatment group is not too high compared to the reference
 group. This effect is most pronounced if the probability of death is identical in
-both groups under the non-inferiority null hypothesis.
-
-In the application of the derived formulae, the power decreases with increasing
+both groups under the non-inferiority null hypothesis. It decreases with increasing
 relative risk in the the new treatment group compared to the reference group . We
 also observed that sample size and power are hardly affected by censoring due to
 death if $\lambda_0/(\lambda_0 + \lambda_1) \approx 1/2 - P(X_0 < X_1)$ where
@@ -1274,7 +1337,7 @@ $\lambda_0, \lambda_1$ are the hazards -- given exponential distribution of time
 to death -- and $P(X_0 < X_1)$ the probability that the quantiative outcome tends
 to smaller values in the reference distribution. If the relative risk of death
 in the new treatment group is much higher relative to the reference group the
-effects are reversed when applying the formuale, i. e. power increases with
+effects are reversed when applying the formulae, i. e. power increases with
 increasing probability of death due to censoring. This effect could be
 corroborated in the simulation.
 
@@ -1288,20 +1351,25 @@ of these approaches can be transferred directly to the problem presented here.
 Furthermore, Munzel (2009) has suggested to choose the non-inferiority margin
 such that establishing non-inferiority of a new treatment to a reference
 treatment would also allow to conclude that the new treatment is better than
-placebo. This requires either reliable data from a previous study in which the
-reference treatment was shown to be better than placebo or a three-armed trial
-including placebo in addition to the new treatment and the reference treatment.
-The latter is -- as Munzel points out -- clearly unethical in a situation where
-death is a realistic threat. The former is not really to the point here, although
-non-inferiority margins should be chosen sufficiently narrwo that it can at
-least be established that the new treatment is better than placebo.
+placebo. This requires either a three-armed trial including placebo in addition
+to the new treatment and the reference treatment or reliable data from a previous
+study in which the reference treatment was shown to be better than placebo.
+The former is -- as Munzel has pointed out clearly -- unethical in a situation where
+death is a realistic threat. The latter would require both information on the
+quantitative endpoint and probability of death for the no treatment option --
+which is not avaible in our context.
 
-Therefore we chose to derive the non-inferiority margin based on clinical
-considerations about equivalence in outcome of the quantitative parameter. We
-concede that it is questionable whether a joint non-inferiority margin for both,
-the probability of death and the quantitative outcome, is appropriate. It is
-possible to use separate margins when deriving the power formula. However,
-the separate margins will effectively be combined into one overall margin.
+Therefore, in our example, we chose to derive the non-inferiority margin based
+on clinical considerations about equivalence in the outcome of the quantitative
+endpoint. As we could assume normality for the quantitative outcome, we used this to
+derive the a joint non-inferiority margin. If normality cannot be assumed
+other criteria would have to be used.
+
+Using a joint non-inferiority margin for both, the probability of death and the
+quantitative outcome, may not always be appropriate. It is possible to use
+separate margins when deriving the power formula or to focus on an acceptable
+non-inferiority margin for the probability of death. However, the separate margins
+will effectively be combined into one overall margin.
 
 In our application we delibarately considered only relatively small probabilities
 of censoring due to death in the reference group and small to moderate relative
