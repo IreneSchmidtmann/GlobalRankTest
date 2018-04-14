@@ -559,8 +559,8 @@ in the presence of death-censored observations.
 
 \section{Notation and hypotheses}
 \label{sec:Notation}
-Let  $\tau (\tau > 0)$ be the time at which the quantitative endpoint is to
-be determined. This is intended to be identical for all patients. All patients
+Let  $\tau (\tau > 0)$ denote the time from treatment to planned determination of the
+quantitative endpoint. This is intended to be identical for all patients. All patients
 are observed at least until time $\tau$ unless they die before this time. If patients
 die before time $\tau$ it is assumed that the time of death can be determined
 sufficiently precisely. Let further $X_{01}, \ldots, X_{0n_0}$ denote the values
@@ -1052,6 +1052,31 @@ values are  displayed in table \ref{tab:AppendixTied} in the appendix.
 
 \subsection{Simulation}
 \label{sec:Sim}
+
+To assess whether the accuracy of the power formula also holds if the time to
+death does not follow an exponential distribution we performed a small simulation
+study. In this we assumed that time to event follows a log-logistic distribution
+with hazard $h(t; \alpha, \beta) = \beta t^{\beta - 1} / (\alpha^{\beta} + t^{\beta})$,
+with scale parameter $\alpha > 0 $ and shape parameter $\beta > 0$. Scale $\alpha$ was
+chosen such that corresponding cumulative incidence functions matched the
+pre-specified probabilities of death at time $\tau = 1$. While the shape $\beta$
+was assumed to be identical in both groups, it was varied between simulation
+scenarios assuming values 0.8, 1.0, and 1.2.
+The probabilities of censoring by death and the relative risks between the
+reference group and new treatment group were chosen as in \ref{sec:AppTied}, the
+total sample size was chosen as determined in table \ref{tab:test}. 1000 datasets
+were generated and evaluated in each scenario. The results of the simualation
+are shown in table \ref{tab:simresult}.
+
+In the simulation, the power was found to be close to the nominal power of 80\%
+when the probability for censoring due to death was identical in both groups.
+It was also close to the nominal power, if the probability for censoring due to
+death was small, i. e. less than 5\% in the reference group. However, when the
+probability of censoring due to death was higher in the new treatment group than
+in the reference group, the power rapidly decreased With increasing probability
+of censoring due to death. The higher the relative risk, the more pronounced was
+this effect.
+
 <<sim, echo=FALSE, eval=TRUE, cache = TRUE>>=
 # set seed for random number generation for reproducibility
 set.seed(270318)
@@ -1217,29 +1242,6 @@ print(xtable(power_results,caption = 'Observed power as function of relative ris
 @
 
 
-To assess whether the accuracy of the power formula also holds if the time to
-death does not follow an exponential distribution we performed a small simulation
-study. In this we assumed that time to event follows a log-logistic distribution
-with hazard $h(t; \alpha, \beta) = \beta t^{\beta - 1} / (\alpha^{\beta} + t^{\beta})$,
-with scale parameter $\alpha > 0 $ and shape parameter $\beta > 0$. Scale $\alpha$ was
-chosen such that corresponding cumulative incidence functions matched the
-pre-specified probabilities of death at time $\tau = 1$.The shape $\beta$ was
-varied, being identical in both groups, assuming values 0.8, 1.0, and 1.2.
-The probabilities of censoring by death and the relative risks between the
-reference group and new treatment group were chosen as in \ref{sec:AppTied}, the
-total sample size was chosen as determined in table \ref{tab:test}. 1000 datasets
-were generated and evaluated in each scenario. The results of the simualation
-are shown in table \ref{tab:simresult}.
-
-In the simulation, the power was found to be close to the nominal power of 80\%
-when the probability for censoring due to death was identical in both groups.
-It was also close to the nominal power, if the probability for censoring due to
-death was small, i. e. less than 5\% in the reference group. However, when the
-probability of censoring due to death was higher in the new treatment group than
-in the reference group, the power rapidly decreased With increasing probability
-of censoring due to death. The higher the relative risk, the more pronounced was
-this effect.
-
 
 \section{Discussion}
 \label{sec:Discussion}
@@ -1325,7 +1327,11 @@ judgement is necessary and in a clinical trial the two outcomes have to be
 carefully assessed when the non-inferiority null hypothesis is rejected.
 
 The presented approach does not allow for inclusion of covariates. If it is
-important to include covariates rank rank regression models could be applied.
+important to include covariates rank regression models could be applied.
+For such an approach the power formulae presented here will at best give a rough
+estimate of required power or sample size. A separate power analysis will be
+needed in this case.
+
 Also, so far risk of death and underlying values of the quantitative variable
 have been assumed to be independent. This could be relaxed by considering joint
 models that take into account shared or correlated frailty.
