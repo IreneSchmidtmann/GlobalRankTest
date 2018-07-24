@@ -104,7 +104,6 @@ library(flexsurv)
 
 # obtain session information
 sessionInfo.txt <- sessionInfo()
-Rversion <- noquote(sessionInfo.txt$R.version$version.string)
 
 
 # ------------------------------------------------------------------------------
@@ -415,7 +414,7 @@ e.g. for intention-to-treat analysis, may not be available. For example, a
 non-negligible proportion of patients with acute pulmonary embolism will die
 before 30 day measurements on the efficacy of thrombolysis can be obtained. As
 excluding such patients may introduce bias, alternative analyses and
-corresponding means for sample size calculation are needed. We specifically,
+corresponding means for sample size calculation are needed. We specifically
 consider power analysis in a randomized clinical trial setting in which the goal
 is to demonstrate non-inferiority of a new treatment as compared to a reference
 treatment. Also, a non-parametric approach may be needed due to the distribution of
@@ -577,7 +576,7 @@ alive at time $\tau$. Let $D_{ik} = 1$ indicate that subject $k$ in group $i$
 dies before the quantitative endpoint $X_{ik}$ can be determined, i. e.
 $D_{ik} = 1$ if $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival
 probability in group $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where
-$S(t)$ is the survival function. Accordingly, the cumulative mortality in group
+$S_{i}(t)$ is the survival function. Accordingly, the cumulative mortality in group
 $i$ up to time $\tau$ is given by $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 
 Here, without loss of generality, we assume that high values of $X_{ik}$ are
@@ -625,14 +624,14 @@ The $\widetilde{X}_{ik}$ as defined in section~\ref{sec:Notation} are used to
   In order to evaluate the power of the Wilcoxon-Mann-Whitney test, we use the
 standardised version of the Wilcoxon-Mann-Whitney U statistic, i. e. the test
   statistic is given by $U^* =(U - \mu_0(U)) / \sigma_0(U)$, where $\mu_0(U)$ is the
-  expectation and $\sigma^2_0(U)$ the variance of U under the null hypothesis.
+  expectation and $\sigma^2_0(U)$ the variance of $U$ under the null hypothesis.
   Then under the null hypothesis $U^*$ asymptotically follows a standard normal
   distribution. The null hypothesis is rejected at level $\alpha$ if
   $U^* > z_{1 - \alpha}$ where
 $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the $(1 - \alpha)$-percentile of the
 normal distribution.
 
-  Therefore we need the expectation $\mu(U)$ and variance $\sigma^2(U)$ of U. They
+  Therefore we need the expectation $\mu(U)$ and variance $\sigma^2(U)$ of $U$. They
   were derived by Matsouaka and Betensky (2015) and are as follows:
 \begin{align*}
 \mu(U) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) \mbox{ for arbitrary }
@@ -658,7 +657,7 @@ normal distribution.
                                      \widetilde{X}_{1l'}, k \ne k', l \ne l'
 \end{align*}
 
-If assumptions about the distribution of teh quantitative endpoint and event time
+If assumptions about the distribution of the quantitative endpoint and event time
 are made, $\mu(U)$ and $\sigma(U)$ can be computed. When determining the power,
 we consider the boundary of the null hypothesis, i. e.
 $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon$.
@@ -673,8 +672,9 @@ and $\sigma(U) = \sigma_1(U)$, is given by
             &= \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} -
                             \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
             &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
-                            \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right) .
+                            \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right) ,
 \end{align*}
+where $\Phi$ denotes the distribution function of the standard normal distribution.
 
 If the specific alternative considered is equivalence of treatments, i. e.
 $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
@@ -796,12 +796,12 @@ for the case of no censoring by death such that
 $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\varepsilon}$ and
 $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\varepsilon}$.
 
-As $\Phi(x)$ is monotonically increasing under $H_0$ we have
+As $\Phi(x)$ is monotonically increasing we have
 $P(X_0 < X_1) = \Phi((\mu_1 - \mu_0)/\sqrt{2}\sigma) \leq
-\Phi(- \varepsilon^{*}/ \sqrt{2}\sigma) = \Phi(-c/\sqrt{2}) $. Therefore, if no
-censoring by death occured, $\tilde{\varepsilon}$ would be chosen such that
-$1/2 - \tilde{\varepsilon} = \Phi(- c/\sqrt{2}) $ and hence with $c = 0.5$ we
-chose  $\tilde{\varepsilon} = 1/2 - \Phi(- 1/\sqrt{8})
+\Phi(- \varepsilon^{*}/ \sqrt{2}\sigma) = \Phi(-c/\sqrt{2}) $ under $H_0$ .
+Therefore, if no censoring by death occured, $\tilde{\varepsilon}$ would be chosen
+such that $1/2 - \tilde{\varepsilon} = \Phi(- c/\sqrt{2}) $ and hence with
+$c = 0.5$ we chose  $\tilde{\varepsilon} = 1/2 - \Phi(- 1/\sqrt{8})
 \approx $ \Sexpr{round(0.5 - pnorm(-1/sqrt(8)), 4)}.
 
 All calculations were performed using \Sexpr{noquote(sessionInfo.txt$R.version$version.string)},
@@ -810,7 +810,7 @@ packages {\tt{knitr, xtable, latex2exp, }} and {\tt{flexsurv}}.
 \subsection{Untied case}
 \label{sec:AppUntied}
 For the untied case we assume that the time to death follows an exponential distribution, i. e.
-$T_i \sim exp(\lambda_i), (i=0,1)$, i. e. $q_i = exp(-\lambda_i \tau)$. Without
+$T_i \sim exp(\lambda_i), (i=0,1)$ and hence $q_i = exp(-\lambda_i \tau)$. Without
 loss of generality we can assume that $\tau = 1$. To determine the overall
 non-inferiority margin $\varepsilon$, again consider the boundary of the null hypothesis,
 i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
@@ -1031,7 +1031,7 @@ depicts the situation when no censoring due to death occurs. Figure
 treatment groups. For given sample size power decreases with an increase in
 probability of censoring by death. Figure \ref{fig:powerplot_untied}B also exhibits this
 effect, however, here the risk of censoring by death is 20\% higher in the new
-treatment group under null hypothesis and the power is less affected by the risk
+treatment group under the null hypothesis and the power is less affected by the risk
 of censoring by death. If $\lambda_0$ and $\lambda_1$ are such that
 $\lambda_0 / (\lambda_0 + \lambda_1) = 1/2 - \tilde{\varepsilon}$ then
 
@@ -1048,7 +1048,7 @@ under the null hypothesis the risk for death ist 2.5 fold in the new treatment
 group compared to the reference group. In this case the computed power increases
 with increasing probability of censoring due to death. Values displayed in
 figure \ref{fig:powerplot_untied} are also provided in table
-\ref{tab:AppendixTied} in the appendix.
+\ref{tab:AppendixUntied} in the appendix.
 
 \subsection{Tied case}
 \label{sec:AppTied}
@@ -1102,11 +1102,13 @@ needed to obtain a power of 80\% at signifcance level $\alpha =0.025$ are
 shown as function of the probability of death in the reference group $p_0$ and
 the relative risk $RR$ of death in the new treatment group compared to the
 reference group under $H_0$.
+
 In our example there is little difference in power between the tied case
 and the untied case for given sample size. Specifically, effective
 non-inferiority margins and sample sizes are identical in the tied and untied
-case if the probability of death is identical in both treatment groups. The
-values are  displayed in table \ref{tab:AppendixTied} in the appendix.
+case if the probability of death is identical in both treatment groups. Values
+corresponding to the situation depicted in \ref{fig:powerplot_untied} are shown in
+table \ref{tab:AppendixTied} in the appendix.
 
 So far we based the choice of the non-inferiority margin on assumptions
 concerning the quantitative endpoint, starting from the assumption of zero
@@ -1126,7 +1128,7 @@ $\varepsilon = \gamma p_0 p_1 + (p_1 - p_0) / 2$.
 
 <<define_number_of_replicates, echo=FALSE, eval=TRUE, cache = TRUE>>=
 # number of replicates
-r <- 1000
+r <- 10000
 @
 To assess whether the accuracy of the power formula holds if the time to
 death does not follow an exponential distribution we performed a small simulation
@@ -1263,7 +1265,7 @@ for (b in seq_along(beta)) {
     mw_standardised[ ,sc] <- (mw[ ,sc] - moments_H_0$mu_u) / moments_H_0$sigma_u
     mw_standardised_tied[ ,sc] <- (mw_tied[ ,sc] - moments_H_0_tied$mu_u) / moments_H_0_tied$sigma_u
   }
-  # compute p-values for each replicate in each scenario
+  # compute p-values for each  in each scenario
   p_values <- pnorm(mw_standardised, lower.tail = FALSE)
   p_values_tied <- pnorm(mw_standardised_tied, lower.tail = FALSE)
   # obtain power by counting how many time a p-value is <= 0.025
@@ -1332,16 +1334,16 @@ between the tied and untied case. In the simulation we also found little
 difference between the tied and untied case.
 
 As expected, power decreases with increasing probability of death -- while the
-relative risk in the new treatment group is not too high compared to the reference
-group. This effect is most pronounced if the probability of death is identical in
+relative risk in the new treatment group compared to the reference group is not
+too high. This effect is most pronounced if the probability of death is identical in
 both groups under the non-inferiority null hypothesis. It decreases with increasing
 relative risk in the the new treatment group compared to the reference group . We
 also observed that sample size and power are hardly affected by censoring due to
 death if $\lambda_0/(\lambda_0 + \lambda_1) \approx 1/2 - P(X_0 < X_1)$ where
 $\lambda_0, \lambda_1$ are the hazards -- given exponential distribution of time
 to death -- and $P(X_0 < X_1)$ the probability that the quantiative outcome tends
-to smaller values in the reference distribution. If the relative risk of death
-in the new treatment group is much higher relative to the reference group the
+to smaller values in the reference distribution. If the risk of death in the new
+treatment group is much higher relative than in the reference group the
 effects are reversed when applying the formulae, i. e. power increases with
 increasing probability of death due to censoring. This effect could be
 corroborated in the simulation.
@@ -1508,10 +1510,9 @@ the Wilcoxon–-Mann–-Whitney test in the presence of death-censored observati
 \textit{Statistics in Medicine} \textbf{34}, 406--431.
 
 \bibitem[Matsouaka et al (2016) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7}
-Matsouaka, R. A., Singhal, A. B.Betensky, R. A. (2016) An optimal
+Matsouaka, R. A., Singhal, A. B.Betensky, R. A. (2018) An optimal
 Wilcoxon–-Mann–-Whitney test of mortality and a continuous outcome.
 \textit{Statistical Methods in Medical Research}
-\textbf{epub ahead of print},  doi: 10.1177/0962280216680524.
 
 \bibitem[Munzel (2009) Munzel, U.]{bib8}
 Munzel, U. (2009)Nonparametric non‐inferiority analyses in the three--arm design
