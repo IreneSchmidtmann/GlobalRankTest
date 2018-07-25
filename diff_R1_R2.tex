@@ -1,4 +1,7 @@
 \documentclass[bimj,fleqn]{w-art}\usepackage[]{graphicx}\usepackage[]{color}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL SchmidtmannKonstantinidesBinderBiomJ-R1.tex   Wed Jul 25 01:26:13 2018
+%DIF ADD SchmidtmannKonstantinidesBinderBiomJ-R2.tex   Wed Jul 25 22:44:27 2018
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -141,10 +144,73 @@
 \newcommand{\envert}[1]{\left\lvert#1\right\rvert}
 \let\abs=\envert
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\begin{document}
-% 2nd revision of paper submitted to Biometrical Journal
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
-% initial chunk that loads necessary libraries
+\begin{document}
+%DIF <  1st revision of paper submitted to Biometrical Journal
+%DIF >  2nd revision of paper submitted to Biometrical Journal
+
+%DIF <  initial chunk that loads necessary libraries and functions
+%DIF >  initial chunk that loads necessary libraries
 
 
 
@@ -155,7 +221,10 @@
 \Issue{61}
 \Year{2010}
 \pagespan{1}{}
-\keywords{Censoring by death; Global rank test; Non-inferiority;
+\DIFdelbegin %DIFDELCMD < \keywords{Censoring by death; Global rank test; Non-inferiority; Combined endpoints; Pulmonary embolism;\\
+%DIFDELCMD < \noindent\hspace*{-4.2pc} Supporting Information for this article is available on the WWW under\break \hspace*{-4pc} \underline{https://github.com/IreneSchmidtmann/GlobalRankTest}
+%DIFDELCMD < }  %%%
+\DIFdelend \DIFaddbegin \keywords{Censoring by death; Global rank test; Non-inferiority;
 Combined endpoints; Pulmonary embolism;\\
 \noindent\hspace*{-4.2pc} Supporting Information for this article is available
 on the WWW under
@@ -163,7 +232,7 @@ on the WWW under
 reproduce the results is available as supporting information on the journal's
 web page \underline{http://onlinelibrary.wiley.com/doi/xxx/
 suppinfo}.
-}  %%% semicolon and fullpoint added here for keyword style
+}  \DIFaddend %%% semicolon and fullpoint added here for keyword style
 
 \title[Non-inferiority test death censored]{Power of the Wilcoxon-Mann-Whitney
 test for non-inferiority in the presence of death-censored observations}
@@ -188,7 +257,8 @@ non-negligible proportion of patients with acute pulmonary embolism will die
 before 30 day measurements on the efficacy of thrombolysis can be obtained. As
 excluding such patients may introduce bias, alternative analyses and
 corresponding means for sample size calculation are needed. We specifically
-consider power analysis in a randomized clinical trial setting in which the goal
+\DIFdelbegin \DIFdel{,
+}\DIFdelend consider power analysis in a randomized clinical trial setting in which the goal
 is to demonstrate non-inferiority of a new treatment as compared to a reference
 treatment. Also, a non-parametric approach may be needed due to the distribution of
 the quantitative endpoint of interest. While some approaches have been developed
@@ -210,7 +280,32 @@ before measurement of a quantitative primary outcome of interest.
 %% maketitle must follow the abstract.
 \maketitle                   % Produces the title.
 
-\section{Introduction}
+%DIF < % If there is not enough space inside the running head
+%DIF < % for all authors including the title you may provide
+%DIF < % the leftmark in one of the following three forms:
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < % \renewcommand{\leftmark}
+%DIF < % {First Author: A Short Title}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < % \renewcommand{\leftmark}
+%DIF < % {First Author and Second Author: A Short Title}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < % \renewcommand{\leftmark}
+%DIF < % {First Author et al.: A Short Title}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < % \tableofcontents  % Produces the table of contents.
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \section{Introduction}
 \label{sec:Intro}
 
 In clinical trials for cardiovascular diseases, often the aim of an
@@ -333,13 +428,13 @@ are alive at time $\tau$. Let $D_{ik} = 1$ indicate that subject $k$ in group
 $i$ dies before the quantitative endpoint $X_{ik}$ can be determined, i. e.
 $D_{ik} = 1$ if $T_{ik} < \tau $, $D_{ik} = 0$ otherwise. The survival
 probability in group $i$ up to time $\tau$ is given by $q_i = S_i(\tau)$, where
-$S_{i}(t)$ is the survival function. Accordingly, the cumulative mortality in
+\DIFdelbegin \DIFdel{$S(t)$ }\DIFdelend \DIFaddbegin \DIFadd{$S_{i}(t)$ }\DIFaddend is the survival function. Accordingly, the cumulative mortality in
 group $i$ up to time $\tau$ is given by $p_i = 1 - q_i = \text{P}(D_{ik} = 1)$.
 
 Here, without loss of generality, we assume that high values of $X_{ik}$ are
 favourable. Otherwise we could consider $-X_{ik}$. We further assume that
 death is worse than any quantitative outcome and -- in the untied worst rank
-case -- that early death is worse than later death.
+case -- that early death is worse \DIFdelbegin \DIFdel{thant }\DIFdelend \DIFaddbegin \DIFadd{than }\DIFaddend later death.
 
 Following Matsouaka and Betensky (2015), we introduce a new variable, on which
 ranking can be based. This variable is constructed such that all patients who
@@ -383,13 +478,13 @@ $ U =(n_0 n_1)^{-1}(\sum_{k=1}^{n_0}
 In order to evaluate the power of the Wilcoxon-Mann-Whitney test, we use the
 standardised version of the Wilcoxon-Mann-Whitney U statistic, i. e. the test
 statistic is given by $U^* =(U - \mu_0(U)) / \sigma_0(U)$, where $\mu_0(U)$ is
-the expectation and $\sigma^2_0(U)$ the variance of $U$ under the null
+the expectation and $\sigma^2_0(U)$ the variance of \DIFdelbegin \DIFdel{U }\DIFdelend \DIFaddbegin \DIFadd{$U$ }\DIFaddend under the null
 hypothesis. Then under the null hypothesis $U^*$ asymptotically follows a
 standard normal distribution. The null hypothesis is rejected at level $\alpha$
 if $U^* > z_{1 - \alpha}$ where $z_{1-\alpha} = \Phi^{-1}({1-\alpha})$ is the
 $(1 - \alpha)$-percentile of the normal distribution.
 
-Therefore we need the expectation $\mu(U)$ and variance $\sigma^2(U)$ of $U$.
+Therefore we need \DIFaddbegin \DIFadd{the }\DIFaddend expectation $\mu(U)$ and variance $\sigma^2(U)$ of \DIFdelbegin \DIFdel{U}\DIFdelend \DIFaddbegin \DIFadd{$U$}\DIFaddend .
 They were derived by Matsouaka and Betensky (2015) and are as follows:
 \begin{align*}
 \mu(U) &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) \mbox{ for arbitrary }
@@ -403,7 +498,7 @@ They were derived by Matsouaka and Betensky (2015) and are as follows:
                                   (n_0 - 1) (\pi_{U2} - \pi_{U1}^2) +
                                   (n_1 - 1) (\pi_{U3} - \pi_{U1}^2) \right\}
 \intertext{with}
-\pi_{U2} &= \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
+\pi_{U2} &= \text{P}(\widetilde{X}\DIFdelbegin \DIFdel{_{0k'} }\DIFdelend \DIFaddbegin \DIFadd{_{0k} }\DIFaddend < \widetilde{X}_{1l}, \widetilde{X}_{0k'} < \widetilde{X}_{1l}) \\
          &= p_0^2 q_1 + p_0^2 p_1 \pi_{t2} + 2 p_0 q_0 q_1 \pi_{x1} + q_0^2 q_1 \pi_{x2} \\
 \pi_{X2} &= \text{P}(X_{0k} < X_{1l}, X_{0k'} < X_{1l}) \\
 \pi_{T2} &= \text{P}(T_{0k} < T_{1l}, T_{0k'} < T_{1l} | D_{0k} = D_{0k'} = D_{1l} = 1) \\
@@ -415,7 +510,7 @@ They were derived by Matsouaka and Betensky (2015) and are as follows:
                                      \widetilde{X}_{1l'}, k \ne k', l \ne l'
 \end{align*}
 
-If assumptions about the distribution of the quantitative endpoint and event time
+If assumptions about the distribution of \DIFaddbegin \DIFadd{the }\DIFaddend quantitative endpoint and event time
 are made, $\mu(U)$ and $\sigma(U)$ can be computed. When determining the power,
 we consider the boundary of the null hypothesis, i. e.
 $\mu_0(U) = \text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon$.
@@ -430,10 +525,12 @@ and $\sigma(U) = \sigma_1(U)$, is given by
             &= \Phi\left(- z_{1-\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} -
                             \frac{\mu_0(U) - \mu_1(U)}{\sigma_1(U)} \right) \\
             &= \Phi\left(z_{\alpha}\frac{\sigma_0(U)}{\sigma_1(U)} +
-                            \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right) ,
-\end{align*}
-where $\Phi$ denotes the distribution function of the standard normal
+                            \frac{\mu_1(U) - \mu_0(U)}{\sigma_1(U)} \right) \DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{,
+}\DIFaddend \end{align*}
+\DIFaddbegin \DIFadd{where $\Phi$ denotes the distribution function of the standard normal
 distribution.
+}\DIFaddend 
 
 If the specific alternative considered is equivalence of treatments, i. e.
 $\widetilde{X}_{0k}$ and $\widetilde{X}_{1l}$ are from the same distribution,
@@ -557,23 +654,24 @@ for the case of no censoring by death such that
 $H_0: P(X_0 < X_1) \leq \frac{1}{2} - \tilde{\varepsilon}$ and
 $H_1: P(X_0 < X_1) >  \frac{1}{2} - \tilde{\varepsilon}$.
 
-As $\Phi(x)$ is monotonically increasing we have
+As $\Phi(x)$ is monotonically increasing \DIFdelbegin \DIFdel{under $H_0$ }\DIFdelend we have
 $P(X_0 < X_1) = \Phi((\mu_1 - \mu_0)/\sqrt{2}\sigma) \leq
-\Phi(- \varepsilon^{*}/ \sqrt{2}\sigma) = \Phi(-c/\sqrt{2}) $ under $H_0$ .
+\Phi(- \varepsilon^{*}/ \sqrt{2}\sigma) = \Phi(-c/\sqrt{2}) $ \DIFaddbegin \DIFadd{under $H_0$ }\DIFaddend .
 Therefore, if no censoring by death occured, $\tilde{\varepsilon}$ would be
 chosen such that $1/2 - \tilde{\varepsilon} = \Phi(- c/\sqrt{2}) $ and hence
 with $c = 0.5$ we chose  $\tilde{\varepsilon} = 1/2 - \Phi(- 1/\sqrt{8})
 \approx $ 0.1382.
 
 All calculations were performed using
-R version 3.5.0 (2018-04-23),
+\DIFdelbegin %DIFDELCMD < {\tt{R 3.4.4}}%%%
+\DIFdelend \DIFaddbegin \DIFadd{R version 3.5.0 (2018-04-23)}\DIFaddend ,
 packages {\tt{knitr, xtable, latex2exp, }} and {\tt{flexsurv}}.
 
 \subsection{Untied case}
 \label{sec:AppUntied}
 For the untied case we assume that the time to death follows an exponential
-distribution, i. e. $T_i \sim exp(\lambda_i), (i=0,1)$ and hence
-$q_i = exp(-\lambda_i \tau)$. Without loss of generality we can assume that
+distribution, i. e. $T_i \sim exp(\lambda_i), (i=0,1)$ \DIFdelbegin \DIFdel{, i. e. }\DIFdelend \DIFaddbegin \DIFadd{and hence
+}\DIFaddend $q_i = exp(-\lambda_i \tau)$. Without loss of generality we can assume that
 $\tau = 1$. To determine the overall non-inferiority margin $\varepsilon$, again
 consider the boundary of the null hypothesis, i. e.
 $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
@@ -595,7 +693,13 @@ $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 \end{figure}
 
 
-\end{knitrout}
+\begin{kframe}\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+\end{kframe}
+%DIFDELCMD < %%%
+\DIFdelend \end{knitrout}
 
 
 
@@ -605,7 +709,7 @@ panels; it depicts the situation when no censoring due to death occurs. Figure
 in both treatment groups. For given sample size power decreases with an increase
 in probability of censoring by death. Figure \ref{fig:powerplot_untied}B also
 exhibits this effect, however, here the risk of censoring by death is 20\%
-higher in the new treatment group under the null hypothesis and the power is
+higher in the new treatment group under \DIFaddbegin \DIFadd{the }\DIFaddend null hypothesis and the power is
 less affected by the risk of censoring by death. If $\lambda_0$ and
 $\lambda_1$ are such that
 $\lambda_0 / (\lambda_0 + \lambda_1) = 1/2 - \tilde{\varepsilon}$ then
@@ -623,7 +727,7 @@ assumption is that under the null hypothesis the risk for death ist 2.5 fold in
 the new treatment group compared to the reference group. In this case the
 computed power increases with increasing probability of censoring due to death.
 Values displayed in figure \ref{fig:powerplot_untied} are also provided in table
-\ref{tab:AppendixUntied} in the appendix.
+\DIFdelbegin \DIFdel{\ref{tab:AppendixTied} }\DIFdelend \DIFaddbegin \DIFadd{\ref{tab:AppendixUntied} }\DIFaddend in the appendix.
 
 \subsection{Tied case}
 \label{sec:AppTied}
@@ -646,7 +750,8 @@ $\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 
 
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 22:44:26 2018
+%DIF <  Wed Jul 25 01:23:14 2018
+%DIF >  Wed Jul 25 22:44:26 2018
 \begin{table}[ht]
 \centering
 \caption{Effective non-inferiority margin and total samples size as function of relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) for given $\alpha =0.025$ and power of 80\% with sample size allocation for reference to new treatment 1:2.} 
@@ -690,13 +795,15 @@ needed to obtain a power of 80\% at signifcance level $\alpha =0.025$ are
 shown as function of the probability of death in the reference group $p_0$ and
 the relative risk $RR$ of death in the new treatment group compared to the
 reference group under $H_0$.
+\DIFaddbegin 
 
-In our example there is little difference in power between the tied case and
+\DIFaddend In our example there is little difference in power between the tied case and
 the untied case for given sample size. Specifically, effective non-inferiority
 margins and sample sizes are identical in the tied and untied case if the
-probability of death is identical in both treatment groups. Values for the tied
+probability of death is identical in both treatment groups. \DIFdelbegin \DIFdel{The
+values are displayed }\DIFdelend \DIFaddbegin \DIFadd{Values for the tied
 case corresponding to the situation depicted in figure \ref{fig:powerplot_untied}
-are shown in table \ref{tab:AppendixTied} in the appendix.
+are shown }\DIFaddend in table \ref{tab:AppendixTied} in the appendix.
 
 So far we based the choice of the non-inferiority margin on assumptions
 concerning the quantitative endpoint, starting from the assumption of zero
@@ -728,15 +835,16 @@ shape $\beta$ was assumed to be identical in both groups, it was varied between
 simulation scenarios assuming values 0.8, 1.0, and 1.2.
 The probabilities of censoring by death and the relative risks between the
 reference group and new treatment group were chosen as in \ref{sec:AppTied}, the
-total sample size was chosen as determined in table \ref{tab:test}. \ensuremath{10^{4}}
-datasets were generated and evaluated in each scenario. The results of the
+total sample size was chosen as determined in table \ref{tab:test}. \DIFdelbegin \DIFdel{1000 }\DIFdelend \DIFaddbegin \ensuremath{10^{4}}
+\DIFaddend datasets were generated and evaluated in each scenario. The results of the
 simualation are shown in table \ref{tab:simresult}.
 
 
 
 
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 22:44:26 2018
+%DIF <  Wed Jul 25 01:26:13 2018
+%DIF >  Wed Jul 25 22:44:26 2018
 \begin{table}[ht]
 \centering
 \caption{Observed power as function of relative risk
@@ -751,30 +859,45 @@ simualation are shown in table \ref{tab:simresult}.
   \hline
 RR & $p_0$ & $n$ & untied: $\beta = 0.8$ & $\beta = 1.0$ & $\beta = 1.2$ & tied: $\beta = 0.8$ & $\beta = 1.0$ & $\beta = 1.2$ \\ 
   \hline
-1 & 0.00 & 147 & 0.81 & 0.80 & 0.80 & 0.81 & 0.80 & 0.81 \\ 
-    & 0.01 & 153 & 0.81 & 0.80 & 0.81 & 0.80 & 0.81 & 0.81 \\ 
-    & 0.02 & 162 & 0.80 & 0.81 & 0.80 & 0.81 & 0.81 & 0.81 \\ 
-    & 0.05 & 186 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 & 0.80 \\ 
-    & 0.10 & 237 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.81 \\ 
-    & 0.20 & 390 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
-  1.2 & 0.00 & 147 & 0.80 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 \\ 
-    & 0.01 & 153 & 0.81 & 0.81 & 0.80 & 0.81 & 0.81 & 0.81 \\ 
-    & 0.02 & 156 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
-    & 0.05 & 174 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
-    & 0.10 & 204 & 0.80 & 0.80 & 0.81 & 0.80 & 0.80 & 0.80 \\ 
-    & 0.20 & 276 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.81 \\ 
-  1.75 & 0.00 & 147 & 0.81 & 0.81 & 0.80 & 0.81 & 0.81 & 0.80 \\ 
-    & 0.01 & 147 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
-    & 0.02 & 147 & 0.80 & 0.80 & 0.81 & 0.80 & 0.81 & 0.80 \\ 
-    & 0.05 & 147 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 & 0.80 \\ 
-    & 0.10 & 144 & 0.81 & 0.81 & 0.80 & 0.80 & 0.80 & 0.81 \\ 
-    & 0.20 & 129 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
-  2.5 & 0.00 & 147 & 0.80 & 0.81 & 0.80 & 0.80 & 0.81 & 0.80 \\ 
-    & 0.01 & 141 & 0.81 & 0.81 & 0.81 & 0.80 & 0.81 & 0.80 \\ 
-    & 0.02 & 135 & 0.81 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 \\ 
-    & 0.05 & 120 & 0.81 & 0.81 & 0.81 & 0.81 & 0.81 & 0.81 \\ 
-    & 0.10 & 96 & 0.81 & 0.81 & 0.80 & 0.81 & 0.80 & 0.81 \\ 
-    & 0.20 & 60 & 0.81 & 0.80 & 0.81 & 0.80 & 0.81 & 0.81 \\ 
+1 & 0.00 & 147 & \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddendFL 0.80 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.81 \DIFdelbeginFL %DIFDELCMD < & %%%
+\DIFdelFL{0.81 }\DIFdelendFL \\ 
+    & 0.01 & 153 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddendFL 0.80 & \DIFdelbeginFL \DIFdelFL{0.83 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL \\ 
+    & 0.02 & 162 & \DIFdelbeginFL \DIFdelFL{0.82 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & \DIFdelbeginFL \DIFdelFL{0.83 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddFL{0.81 }& \DIFaddFL{0.81 }\DIFaddendFL \\ 
+    & 0.05 & 186 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFaddbeginFL \DIFaddFL{0.80 }& \DIFaddendFL 0.81 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.82 }%DIFDELCMD < & %%%
+\DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.10 & 237 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL \\ 
+    & 0.20 & 390 & 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 \\ 
+  1.2 & 0.00 & 147 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & \DIFdelbeginFL \DIFdelFL{0.83 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.01 & 153 & \DIFdelbeginFL \DIFdelFL{0.83 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & 0.81 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.83 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & 0.81 \\ 
+    & 0.02 & 156 & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.05 & 174 & 0.80 & 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.10 & 204 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.78 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & 0.81 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }& \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.20 & 276 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.81 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 \DIFaddbeginFL & \DIFaddFL{0.81 }\DIFaddendFL \\ 
+  1.75 & 0.00 & 147 & \DIFdelbeginFL \DIFdelFL{0.80 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.81 & 0.81 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.01 & 147 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.02 & 147 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.81 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & 0.81 & 0.80 & 0.81 \DIFaddbeginFL & \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.05 & 147 & \DIFdelbeginFL \DIFdelFL{0.81 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & 0.80 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.79 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.81 \DIFaddbeginFL & \DIFaddFL{0.80 }& \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.10 & 144 & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL \\ 
+    & 0.20 & 129 & 0.80 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.81 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL \\ 
+  2.5 & 0.00 & 147 & \DIFdelbeginFL \DIFdelFL{0.81 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.80 & 0.81 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddendFL 0.80 \\ 
+    & 0.01 & 141 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & 0.80 & 0.81 & \DIFdelbeginFL \DIFdelFL{0.79 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.02 & 135 & \DIFdelbeginFL \DIFdelFL{0.80 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.81 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.80 & \DIFdelbeginFL \DIFdelFL{0.78 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.84 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }& \DIFaddFL{0.80 }\DIFaddendFL \\ 
+    & 0.05 & 120 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.83 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & 0.81 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL \\ 
+    & 0.10 & 96 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & 0.81 & \DIFdelbeginFL \DIFdelFL{0.82 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.80 }\DIFaddendFL & 0.81 & 0.80 & 0.81 \\ 
+    & 0.20 & 60 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL & 0.80 & \DIFdelbeginFL \DIFdelFL{0.82 }%DIFDELCMD < & %%%
+\DIFdelendFL 0.81 & \DIFaddbeginFL \DIFaddFL{0.80 }& \DIFaddendFL 0.81 & \DIFdelbeginFL \DIFdelFL{0.80 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.81 }\DIFaddendFL \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -782,16 +905,18 @@ RR & $p_0$ & $n$ & untied: $\beta = 0.8$ & $\beta = 1.0$ & $\beta = 1.2$ & tied:
 
 In the simulation, the power was found to be close to the nominal power of 80\%
 in all scenarios studied. In the untied case we found the power to be
-80.3 \% on average, range
-79.5 \% - 81.3 \%.
+\DIFdelbegin \DIFdel{80.4 }\DIFdelend \DIFaddbegin \DIFadd{80.3 }\DIFaddend \% on average, range
+\DIFdelbegin \DIFdel{77.9 }\DIFdelend \DIFaddbegin \DIFadd{79.5 }\DIFaddend \% - \DIFdelbegin \DIFdel{83.5 }\DIFdelend \DIFaddbegin \DIFadd{81.3 }\DIFaddend \%.
 In the tied case we observed average power
 80.4 \%, range
-79.5 \% - 81.1 \%.
-If the power is 80 \%, i. e. 0.8, with \ensuremath{10^{4}} replicates, the standard error
+\DIFdelbegin \DIFdel{77.6 }\DIFdelend \DIFaddbegin \DIFadd{79.5 }\DIFaddend \% - \DIFdelbegin \DIFdel{83.6 \%.
+}\DIFdelend \DIFaddbegin \DIFadd{81.1 \%.
+If the power is 80 \%, i. e. 0.8, with }\ensuremath{10^{4}} \DIFadd{replicates, the standard error
 of the estimated power is 0.004, i. e.
 0.4 percentage points. This supports the conclusion
 that deviations of the observed power from 80 \% are not substantinal but due to
 random noise.
+}\DIFaddend 
 
 
 \section{Discussion}
@@ -810,8 +935,8 @@ between the tied and untied case. In the simulation we also found little
 difference between the tied and untied case.
 
 As expected, power decreases with increasing probability of death -- while the
-relative risk in the new treatment group compared to the reference group is not
-too high. This effect is most pronounced if the probability of death is identical
+relative risk in the new treatment group \DIFdelbegin \DIFdel{is not too high }\DIFdelend compared to the reference group \DIFaddbegin \DIFadd{is not
+too high}\DIFaddend . This effect is most pronounced if the probability of death is identical
 in both groups under the non-inferiority null hypothesis. It decreases with
 increasing relative risk in the the new treatment group compared to the reference
 group. We also observed that sample size and power are hardly affected by
@@ -819,8 +944,8 @@ censoring due to death if
 $\lambda_0/(\lambda_0 + \lambda_1) \approx 1/2 - P(X_0 < X_1)$ where
 $\lambda_0, \lambda_1$ are the hazards -- given exponential distribution of time
 to death -- and $P(X_0 < X_1)$ the probability that the quantiative outcome tends
-to smaller values in the reference distribution. If the risk of death in the new
-treatment group is much higher  than in the reference group the effects are
+to smaller values in the reference distribution. If the \DIFdelbegin \DIFdel{relative }\DIFdelend risk of death in the new
+treatment group is much higher  \DIFdelbegin \DIFdel{relative to }\DIFdelend \DIFaddbegin \DIFadd{than in }\DIFaddend the reference group the effects are
 reversed when applying the formulae, i. e. power increases with increasing
 probability of death due to censoring. This effect could be corroborated in the
 simulation.
@@ -841,7 +966,7 @@ study in which the reference treatment was shown to be better than placebo.
 The former is -- as Munzel has pointed out clearly -- unethical in a situation
 where death is a realistic threat. The latter would require both information on
 the quantitative endpoint and probability of death for the no treatment option --
-which is not available in our context.
+which is not \DIFdelbegin \DIFdel{avaible }\DIFdelend \DIFaddbegin \DIFadd{available }\DIFaddend in our context.
 
 Therefore, in our example, we chose to derive the non-inferiority margin based
 on clinical considerations about equivalence in the outcome of the quantitative
@@ -895,7 +1020,8 @@ figure \ref{fig:powerplot_untied} is shown. Total sample size is given in steps
 of 30; only sample sizes for which at least one observed power is less than or
 equal to 0.95 are displayed.
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 22:44:26 2018
+%DIF <  Wed Jul 25 01:26:13 2018
+%DIF >  Wed Jul 25 22:44:26 2018
 \begin{table}[ht]
 \centering
 \caption{Computed power as function of relative risk
@@ -965,7 +1091,8 @@ sizes for which at least one observed power is less than or equal to 0.95 are
 displayed.
 
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 22:44:26 2018
+%DIF <  Wed Jul 25 01:26:13 2018
+%DIF >  Wed Jul 25 22:44:26 2018
 \begin{table}[ht]
 \centering
 \caption{Computed power as function of relative risk
@@ -1058,10 +1185,14 @@ Matsouaka, R. A., Betensky, R. A. (2015) Power and sample size calculations for
 the Wilcoxon–-Mann–-Whitney test in the presence of death-censored observations.
 \textit{Statistics in Medicine} \textbf{34}, 406--431.
 
-\bibitem[Matsouaka et al (2018) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7}
-Matsouaka, R. A., Singhal, A. B.Betensky, R. A. (2018) An optimal
+\DIFdelbegin %DIFDELCMD < \bibitem[Matsouaka et al (2016) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \bibitem[Matsouaka et al (2018) Matsouaka, R. A., Singhal, A. B., Betensky, R. A.]{bib7}
+\DIFaddend Matsouaka, R. A., Singhal, A. B.Betensky, R. A. (\DIFdelbegin \DIFdel{2016}\DIFdelend \DIFaddbegin \DIFadd{2018}\DIFaddend ) An optimal
 Wilcoxon–-Mann–-Whitney test of mortality and a continuous outcome.
-\textit{Statistical Methods in Medical Research} 2018 \textbf{27(8)}, 2384–-2400
+\textit{Statistical Methods in Medical Research} \DIFaddbegin \DIFadd{2018 }\DIFaddend \textbf{\DIFdelbegin \DIFdel{epub ahead of print}\DIFdelend \DIFaddbegin \DIFadd{27(8)}\DIFaddend }, \DIFdelbegin \DIFdel{doi: 10.1177/0962280216680524.
+}\DIFdelend \DIFaddbegin \DIFadd{2384–-2400
+}\DIFaddend 
 
 \bibitem[Munzel (2009) Munzel, U.]{bib8}
 Munzel, U. (2009) Nonparametric non‐inferiority analyses in the three--arm design
@@ -1081,6 +1212,11 @@ Chapman and Hall / CRC, Boca Raton.
 Zhang, F., Miyaoka, E., Huang, F.,  Tanaka, Y. (2015)  Test Statistics and
 Confidence Intervals to Establish Noninferiority between Treatments with Ordinal
 Categorical Data. \textit{Journal of biopharmaceutical statistics} \textbf{5}, 921--938.
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+%DIF < \bibitem[]{bib} \textit{} \textbf{}, –.
+\DIFdelend 
 
 
 \end{thebibliography}
