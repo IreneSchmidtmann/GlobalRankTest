@@ -827,7 +827,6 @@ i. e. $\text{P}(\widetilde{X}_{0k} < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 \end{align*}
 
 <<powerplot_untied, fig.lp="fig:", fig.cap = 'Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each panel a  different relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) is assumed under the null hypothesis. The power is computed for the alternative of equivalence of both treatments. Different line types correspond to different risks in the reference group.', echo=FALSE, eval=TRUE, results='hide', out.width='0.8\\linewidth',out.height='0.9\\linewidth'>>=
-# source("PowerAndMoments.R") #include functions to compute moments and power
 # explore power in untied case for specific situation described above, varying the
 # probabiliy of death
 # sample size in each group
@@ -969,7 +968,6 @@ TableAppendix <- data.frame(RR_label,
 @
 
 <<power_tied, echo=FALSE, eval=TRUE>>=
-# source("PowerAndMoments.R") #include functions to compute moments and power
 # explore power in tied case for specific situation described above, varying the
 # probabiliy of death
 # constants as above
@@ -1131,6 +1129,7 @@ $\varepsilon = \gamma p_0 p_1 + (p_1 - p_0) / 2$.
 # number of replicates
 r <- 10000
 @
+
 To assess whether the accuracy of the power formula holds if the time to
 death does not follow an exponential distribution we performed a small simulation
 study. In this we assumed that time to event follows a log-logistic distribution

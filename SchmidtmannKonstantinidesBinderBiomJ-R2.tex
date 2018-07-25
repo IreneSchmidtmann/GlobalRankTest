@@ -142,7 +142,7 @@
 \let\abs=\envert
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-% 1st revision of paper submitted to Biometrical Journal
+% 2nd revision of paper submitted to Biometrical Journal
 
 % initial chunk that loads necessary libraries and functions
 
@@ -645,7 +645,7 @@ $\text{P}(\widetilde{X}_{0k}  < \widetilde{X}_{1l}) = 1/2 - \varepsilon $.
 
 
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 01:21:41 2018
+% Wed Jul 25 07:45:14 2018
 \begin{table}[ht]
 \centering
 \caption{Effective non-inferiority margin and total samples size as function of relative risk (RR) of death in the new treatment group (risk $p_1$) compared to the reference group (risk $p_0$) for given $\alpha =0.025$ and power of 80\% with sample size allocation for reference to new treatment 1:2.} 
@@ -715,6 +715,7 @@ $\varepsilon = \gamma p_0 p_1 + (p_1 - p_0) / 2$.
 \label{sec:Sim}
 
 
+
 To assess whether the accuracy of the power formula holds if the time to
 death does not follow an exponential distribution we performed a small simulation
 study. In this we assumed that time to event follows a log-logistic distribution
@@ -726,7 +727,7 @@ was assumed to be identical in both groups, it was varied between simulation
 scenarios assuming values 0.8, 1.0, and 1.2.
 The probabilities of censoring by death and the relative risks between the
 reference group and new treatment group were chosen as in \ref{sec:AppTied}, the
-total sample size was chosen as determined in table \ref{tab:test}. 100 datasets
+total sample size was chosen as determined in table \ref{tab:test}. \ensuremath{10^{4}} datasets
 were generated and evaluated in each scenario. The results of the simualation
 are shown in table \ref{tab:simresult}.
 
@@ -734,7 +735,7 @@ are shown in table \ref{tab:simresult}.
 
 
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 01:22:19 2018
+% Wed Jul 25 08:23:49 2018
 \begin{table}[ht]
 \centering
 \caption{Observed power as function of relative risk
@@ -749,30 +750,30 @@ are shown in table \ref{tab:simresult}.
   \hline
 RR & $p_0$ & $n$ & untied: $\beta = 0.8$ & $\beta = 1.0$ & $\beta = 1.2$ & tied: $\beta = 0.8$ & $\beta = 1.0$ & $\beta = 1.2$ \\ 
   \hline
-1 & 0.00 & 147 & 0.79 & 0.73 & 0.71 & 0.83 & 0.75 & 0.78 \\ 
-    & 0.01 & 153 & 0.75 & 0.84 & 0.77 & 0.79 & 0.82 & 0.87 \\ 
-    & 0.02 & 162 & 0.78 & 0.84 & 0.77 & 0.76 & 0.79 & 0.81 \\ 
-    & 0.05 & 186 & 0.87 & 0.76 & 0.86 & 0.87 & 0.80 & 0.83 \\ 
-    & 0.10 & 237 & 0.75 & 0.79 & 0.73 & 0.79 & 0.88 & 0.82 \\ 
-    & 0.20 & 390 & 0.73 & 0.72 & 0.80 & 0.80 & 0.85 & 0.80 \\ 
-  1.2 & 0.00 & 147 & 0.78 & 0.78 & 0.80 & 0.84 & 0.86 & 0.76 \\ 
-    & 0.01 & 153 & 0.83 & 0.84 & 0.82 & 0.89 & 0.83 & 0.84 \\ 
-    & 0.02 & 156 & 0.81 & 0.78 & 0.76 & 0.79 & 0.81 & 0.83 \\ 
-    & 0.05 & 174 & 0.87 & 0.74 & 0.75 & 0.79 & 0.81 & 0.82 \\ 
-    & 0.10 & 204 & 0.81 & 0.89 & 0.80 & 0.77 & 0.69 & 0.83 \\ 
-    & 0.20 & 276 & 0.81 & 0.86 & 0.81 & 0.87 & 0.82 & 0.76 \\ 
-  1.75 & 0.00 & 147 & 0.77 & 0.79 & 0.86 & 0.87 & 0.81 & 0.87 \\ 
-    & 0.01 & 147 & 0.83 & 0.84 & 0.81 & 0.75 & 0.82 & 0.84 \\ 
-    & 0.02 & 147 & 0.76 & 0.78 & 0.83 & 0.88 & 0.76 & 0.79 \\ 
-    & 0.05 & 147 & 0.79 & 0.78 & 0.86 & 0.82 & 0.84 & 0.81 \\ 
-    & 0.10 & 144 & 0.79 & 0.81 & 0.83 & 0.75 & 0.78 & 0.80 \\ 
-    & 0.20 & 129 & 0.79 & 0.82 & 0.79 & 0.79 & 0.84 & 0.81 \\ 
-  2.5 & 0.00 & 147 & 0.77 & 0.82 & 0.80 & 0.76 & 0.85 & 0.83 \\ 
-    & 0.01 & 141 & 0.77 & 0.83 & 0.78 & 0.88 & 0.85 & 0.85 \\ 
-    & 0.02 & 135 & 0.72 & 0.78 & 0.87 & 0.82 & 0.88 & 0.78 \\ 
-    & 0.05 & 120 & 0.79 & 0.78 & 0.83 & 0.74 & 0.82 & 0.83 \\ 
-    & 0.10 & 96 & 0.89 & 0.76 & 0.83 & 0.77 & 0.81 & 0.84 \\ 
-    & 0.20 & 60 & 0.86 & 0.82 & 0.81 & 0.78 & 0.76 & 0.80 \\ 
+1 & 0.00 & 147 & 0.81 & 0.80 & 0.80 & 0.81 & 0.80 & 0.81 \\ 
+    & 0.01 & 153 & 0.81 & 0.80 & 0.81 & 0.80 & 0.81 & 0.81 \\ 
+    & 0.02 & 162 & 0.80 & 0.81 & 0.80 & 0.81 & 0.81 & 0.81 \\ 
+    & 0.05 & 186 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 & 0.80 \\ 
+    & 0.10 & 237 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.81 \\ 
+    & 0.20 & 390 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
+  1.2 & 0.00 & 147 & 0.80 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 \\ 
+    & 0.01 & 153 & 0.81 & 0.81 & 0.80 & 0.81 & 0.81 & 0.81 \\ 
+    & 0.02 & 156 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
+    & 0.05 & 174 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
+    & 0.10 & 204 & 0.80 & 0.80 & 0.81 & 0.80 & 0.80 & 0.80 \\ 
+    & 0.20 & 276 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.81 \\ 
+  1.75 & 0.00 & 147 & 0.81 & 0.81 & 0.80 & 0.81 & 0.81 & 0.80 \\ 
+    & 0.01 & 147 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
+    & 0.02 & 147 & 0.80 & 0.80 & 0.81 & 0.80 & 0.81 & 0.80 \\ 
+    & 0.05 & 147 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 & 0.80 \\ 
+    & 0.10 & 144 & 0.81 & 0.81 & 0.80 & 0.80 & 0.80 & 0.81 \\ 
+    & 0.20 & 129 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 & 0.80 \\ 
+  2.5 & 0.00 & 147 & 0.80 & 0.81 & 0.80 & 0.80 & 0.81 & 0.80 \\ 
+    & 0.01 & 141 & 0.81 & 0.81 & 0.81 & 0.80 & 0.81 & 0.80 \\ 
+    & 0.02 & 135 & 0.81 & 0.80 & 0.80 & 0.80 & 0.81 & 0.80 \\ 
+    & 0.05 & 120 & 0.81 & 0.81 & 0.81 & 0.81 & 0.81 & 0.81 \\ 
+    & 0.10 & 96 & 0.81 & 0.81 & 0.80 & 0.81 & 0.80 & 0.81 \\ 
+    & 0.20 & 60 & 0.81 & 0.80 & 0.81 & 0.80 & 0.81 & 0.81 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -780,11 +781,11 @@ RR & $p_0$ & $n$ & untied: $\beta = 0.8$ & $\beta = 1.0$ & $\beta = 1.2$ & tied:
 
 In the simulation, the power was found to be close to the nominal power of 80\%
 in all scenarios studied. In the untied case we found the power to be
-80 \% on average, range
-71 \% - 89 \%.
+80.3 \% on average, range
+79.5 \% - 81.3 \%.
 In the tied case we observed average power
-81.3 \%, range
-69 \% - 89 \%.
+80.4 \%, range
+79.5 \% - 81.1 \%.
 
 
 
@@ -889,7 +890,7 @@ figure \ref{fig:powerplot_untied} is shown. Total sample size is given in steps
 of 30; only sample sizes for which at least one observed power is less than or
 equal to 0.95 are displayed.
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 01:22:19 2018
+% Wed Jul 25 08:23:49 2018
 \begin{table}[ht]
 \centering
 \caption{Computed power as function of relative risk
@@ -959,7 +960,7 @@ sizes for which at least one observed power is less than or equal to 0.95 are
 displayed.
 
 % latex table generated in R 3.5.0 by xtable 1.8-2 package
-% Wed Jul 25 01:22:19 2018
+% Wed Jul 25 08:23:49 2018
 \begin{table}[ht]
 \centering
 \caption{Computed power as function of relative risk
