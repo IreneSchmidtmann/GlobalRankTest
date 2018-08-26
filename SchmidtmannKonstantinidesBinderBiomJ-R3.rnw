@@ -92,7 +92,7 @@
 \let\abs=\envert
 
 \begin{document}
-% 2nd revision of paper submitted to Biometrical Journal
+% 3rd revision of paper submitted to Biometrical Journal
 
 % initial chunk that loads necessary libraries
 <<init, include=FALSE>>=
