@@ -1,0 +1,141 @@
+> library(knitr)
+> 
+> knit2pdf("SchmidtmannKonstantinidesBinderBiomJ-R3.rnw", output = "SchmidtmannKonstantinidesBinderBiomJ-R3.tex")
+
+
+processing file: SchmidtmannKonstantinidesBinderBiomJ-R3.rnw
+  |...                                                              |   5%
+  ordinary text without R code
+
+  |......                                                           |  10%
+label: init (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |.........                                                        |  14%
+  ordinary text without R code
+
+  |............                                                     |  19%
+label: define_functions (with options) 
+List of 3
+ $ echo : logi FALSE
+ $ eval : logi TRUE
+ $ cache: logi TRUE
+
+  |...............                                                  |  24%
+   inline R code fragments
+
+  |...................                                              |  29%
+label: powerplot_untied (with options) 
+List of 7
+ $ fig.lp    : chr "fig:"
+ $ fig.cap   : chr "Power and sample size for untied case with sample size allocation for reference to new treatment 1:2. In each p"| __truncated__
+ $ echo      : logi FALSE
+ $ eval      : logi TRUE
+ $ results   : chr "hide"
+ $ out.width : chr "0.8\\linewidth"
+ $ out.height: chr "0.9\\linewidth"
+
+  |......................                                           |  33%
+  ordinary text without R code
+
+  |.........................                                        |  38%
+label: power_tied (with options) 
+List of 2
+ $ echo: logi FALSE
+ $ eval: logi TRUE
+
+  |............................                                     |  43%
+  ordinary text without R code
+
+  |...............................                                  |  48%
+label: xtableA (with options) 
+List of 2
+ $ echo   : logi FALSE
+ $ results: chr "asis"
+
+  |..................................                               |  52%
+  ordinary text without R code
+
+  |.....................................                            |  57%
+label: define_number_of_replicates (with options) 
+List of 3
+ $ echo : logi FALSE
+ $ eval : logi TRUE
+ $ cache: logi TRUE
+
+  |........................................                         |  62%
+   inline R code fragments
+
+  |...........................................                      |  67%
+label: sim (with options) 
+List of 3
+ $ echo : logi FALSE
+ $ eval : logi TRUE
+ $ cache: logi TRUE
+
+  |..............................................                   |  71%
+   inline R code fragments
+
+  |..................................................               |  76%
+label: xtableC (with options) 
+List of 2
+ $ echo   : logi FALSE
+ $ results: chr "asis"
+
+  |.....................................................            |  81%
+  ordinary text without R code
+
+  |........................................................         |  86%
+label: xtableD (with options) 
+List of 2
+ $ echo   : logi FALSE
+ $ results: chr "asis"
+
+  |...........................................................      |  90%
+  ordinary text without R code
+
+  |..............................................................   |  95%
+label: xtableB (with options) 
+List of 2
+ $ echo   : logi FALSE
+ $ results: chr "asis"
+
+  |.................................................................| 100%
+  ordinary text without R code
+
+
+output file: SchmidtmannKonstantinidesBinderBiomJ-R3.tex
+
+[1] "SchmidtmannKonstantinidesBinderBiomJ-R3.pdf"
+> purl("SchmidtmannKonstantinidesBinderBiomJ-R3.rnw", documentation = 1, output = "GlobalRankTest.R")
+
+
+processing file: SchmidtmannKonstantinidesBinderBiomJ-R3.rnw
+  |.................................................................| 100%
+output file: GlobalRankTest.R
+
+[1] "GlobalRankTest.R"
+> sessionInfo()
+R version 3.5.0 (2018-04-23)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 7 x64 (build 7601) Service Pack 1
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=German_Germany.1252  LC_CTYPE=German_Germany.1252    LC_MONETARY=German_Germany.1252
+[4] LC_NUMERIC=C                    LC_TIME=German_Germany.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] flexsurv_1.1    survival_2.42-3 latex2exp_0.4.0 xtable_1.8-2    knitr_1.20     
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.16       magrittr_1.5       splines_3.5.0      lattice_0.20-35    quadprog_1.5-5     stringr_1.3.1     
+ [7] highr_0.6          tools_3.5.0        grid_3.5.0         xfun_0.3           tinytex_0.7        htmltools_0.3.6   
+[13] yaml_2.1.19        rprojroot_1.3-2    digest_0.6.15      Matrix_1.2-14      RColorBrewer_1.1-2 mstate_0.2.11     
+[19] deSolve_1.21       evaluate_0.10.1    rmarkdown_1.9      stringi_1.1.7      compiler_3.5.0     muhaz_1.2.6       
+[25] backports_1.1.2    mvtnorm_1.0-7 
